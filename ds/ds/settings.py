@@ -126,3 +126,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#For project files
+STATICFILES_DIRS = [
+    ('', 'E:/WebProjects/ds.com/ds/static')
+]
+#For fire server
+#STATIC_ROOT = 'ds.com/static'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'TIMEOUT': None,
+    }
+}
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
+
+MAIN_HOST_SITE = 'http://localhost:8000'
