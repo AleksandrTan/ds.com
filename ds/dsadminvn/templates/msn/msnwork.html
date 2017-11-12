@@ -69,21 +69,14 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label>Name for new {{ slug }}</label>
-                            <input class="form-control" placeholder="Enter name" id="new_name_ctr">
-                         </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label>Link for new {{ slug }}</label>
-                            <input class="form-control" placeholder="Enter link" id="new_link_ctr">
-                            <input id="key_ctr" value="{{ key_slug }}" type="hidden">
+                            <label>Имя новой {{ slug }}</label>
+                            <input class="form-control" placeholder="Имя" id="new_name_msn">
                          </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label>Add</label>
-                            <button type="button" class="btn btn-sm btn-success form-control" id="add_new_ctr">Add new {{ slug }}</button>
+                            <label>Добавить</label>
+                            <button type="button" class="btn btn-sm btn-success form-control" id="add_new_ctr">Добавить новую {{ slug }}</button>
                          </div>
                     </div>
                     <div class="col-lg-12">
@@ -92,15 +85,10 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">№</th>
-                                        <th class="text-center">Name</th>
-                                        <th class="text-center">Is Active</th>
-                                        <th class="text-center">Link name</th>
-                                        {% if key_slug == 'category'%}
-                                            <th class="text-center">Max Num Add</th>
-                                            <th class="text-center">Paid Num(grn)</th>
-                                        {% endif %}
-
-                                        <th class="text-center">Delete</th>
+                                        <th class="text-center">Название</th>
+                                        <th class="text-center">Активен</th>
+                                        <th class="text-center">URL Имя</th>
+                                        <th class="text-center">Удалить</th>
                                     </tr>
                                 </thead>
                                 <tbody id="ctr_list">
@@ -140,5 +128,5 @@
 
             </div>
     </div>
-<script src="{% static "js/ctrwork.js" %}"></script>
+<script src="{% static "js/msnwork.js" %}"></script>
 {% endblock %}

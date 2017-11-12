@@ -4,7 +4,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
 from django.contrib.auth.models import User
-from dsstore.models import MainCategory
+from dsstore.models import MainCategory, NameProduct
 
 #Class MainView  - start page
 
@@ -44,13 +44,13 @@ class UserDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
 
 
 """
-    Work with Msn (MainCategory, Size, NameProduct)
+    Work with Msn (MainCategory, NameProduct)
 """
 
 class MsnWork(LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
-    data_db = {'maincategory':MainCategory}
-    data_slug = {'maincategory': 'Категории'}
+    data_db = {'maincategory':MainCategory,'nameproducts':NameProduct}
+    data_slug = {'maincategory': 'Категории', 'nameproducts':'Название товара'}
     permission_required = "auth.change_user"
     login_url = '/'
     template_name = 'msn/msnwork.html'
