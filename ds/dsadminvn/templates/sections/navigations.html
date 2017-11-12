@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">NV Admin</a>
+                <a class="navbar-brand" href="/adminnv/">NV Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -119,7 +119,7 @@
              {% if user.is_authenticated %}
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="{% url 'home' %}"><i class="glyphicon glyphicon-usd"></i> Главная страница</a>
+                        <a href="{% url 'homeadmin' %}"><i class="glyphicon glyphicon-usd"></i> Главная страница</a>
                     </li>
                     {% if user.is_staff %}
                         <li>
@@ -128,19 +128,16 @@
                     {% endif %}
                     {% if user.is_staff %}
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Sentenses <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Характеристики <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse {% if tab %} in {% endif %}">
                             <li>
-                                <a href="/sentenses/"><i class="fa fa-list-alt"></i> Sentenses{{ perms.mainadmin.mode_sent }}</a>
+                                <a href="/adminnv/msn/maincategory/"><i class="fa fa-th-list"></i> Категории</a>
                             </li>
                             <li>
-                                <a href="/ctr/typesent/"><i class="fa fa-th-list"></i> Type Sentensec</a>
+                                <a href="/msn/nameproducts/"><i class="fa fa-th-list"></i> Названия товаров</a>
                             </li>
                             <li>
-                                <a href="/ctr/category/"><i class="fa fa-th-list"></i> Category</a>
-                            </li>
-                            <li>
-                                <a href="/ctr/regions/"><i class="fa fa-th-list"></i> Regions</a>
+                                <a href="/msn/size/"><i class="fa fa-th-list"></i> Размеры</a>
                             </li>
                         </ul>
                     </li>
