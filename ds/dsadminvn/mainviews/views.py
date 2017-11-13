@@ -10,7 +10,6 @@ from dsstore.models import MainCategory, NameProduct
 
 
 class MainView(LoginRequiredMixin, TemplateView):
-
    template_name = 'index.html'
 
    # def get_context_data(self, **kwargs):
