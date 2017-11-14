@@ -1,15 +1,28 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.views.generic import View
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
+from django.contrib.admin.views.decorators import staff_member_required
+from django.utils.decorators import method_decorator
+
 from django.contrib.auth.models import User
 from dsstore.models import MainCategory, NameProduct
+
+
+class BaseAdminView(View):
+    """
+    Base view for admin views.
+    """
+    @method_decorator(staff_member_required(login_url='login'))
+    def dispatch(self, request, *args, **kwargs):
+        return super(BaseAdminView, self).dispatch(request, *args, **kwargs)
 
 #Class MainView  - start page
 
 
-class MainView(LoginRequiredMixin, TemplateView):
+class MainView(BaseAdminView, LoginRequiredMixin, TemplateView):
    template_name = 'index.html'
 
    # def get_context_data(self, **kwargs):
@@ -23,7 +36,7 @@ class MainView(LoginRequiredMixin, TemplateView):
 
 #Class UsersWork  - All users page
 
-class UsersWork(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+class UsersWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
    permission_required = "auth.change_user"
    template_name = 'users/users.html'
@@ -33,7 +46,7 @@ class UsersWork(LoginRequiredMixin, PermissionRequiredMixin, ListView):
    paginate_by = 10
 
 
-class UserDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+class UserDetailView(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):
 
     login_url = '/'
     permission_required = "auth.change_user"
@@ -46,7 +59,7 @@ class UserDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     Work with Msn (MainCategory, NameProduct)
 """
 
-class MsnWork(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+class MsnWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
     data_db = {'maincategory':MainCategory,'nameproducts':NameProduct}
     data_slug = {'maincategory': 'Категории', 'nameproducts':'Название товара'}
