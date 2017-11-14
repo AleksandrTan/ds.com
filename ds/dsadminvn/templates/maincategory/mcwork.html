@@ -9,10 +9,10 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="fa fa-times" aria-hidden="true">
                     </span></button>
-                    <h4 class="modal-title" id="myModalLabel" style="color: #ff0012">Attention!!!Deleting the {{ slug }}!!!</h4>
+                    <h4 class="modal-title" id="myModalLabel" style="color: #ff0012">Внимание!!!Удаление категории!!!</h4>
                 </div>
                  <div class="modal-body">
-                     <h3 style="color: #ff0012">Do you really want to delete this {{ slug }}???</h3>
+                     <h3 style="color: #ff0012">ВЫ действительно хотите удалить эту категорию???</h3>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-default" id="cancel_type">Cancel</button>
@@ -22,30 +22,6 @@
         </div>
     </div>
 </div>
-{% if key_slug == 'category'%}
-<div class="btn-modal-wrap btn-modal-wrap-1">
-    <!-- Modal New Num Categories-->
-    <div class="modal fade" id="change_max_num_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="fa fa-times" aria-hidden="true">
-                    </span></button>
-                    <h4 class="modal-title" id="myModalLabel1" style="color: green">Enter new value</h4>
-                </div>
-                 <div class="modal-body">
-                     <input class="form-control" placeholder="Enter num" id="new_num_max">
-                     <input id="num_max_id" style="display: none" value="">
-                     <input id="key_field" style="display: none" value="">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-xs btn-danger" id="save_type_chenge" data_id_type="">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-{% endif %}
     <div id="page-wrapper">
         <div class="container-fluid">
                 <!-- Page Heading -->
@@ -104,7 +80,7 @@
                                         <td class="text-center"><a type="button" data_delete="delete"
                                                                    id="{{ mc_l.id }}"
                                                                    class="btn btn-sm btn-danger"
-                                                                   href="">Delete</a>
+                                                                   href="{% url 'delete_mc' mc_l.id %}">Delete</a>
                                         </td>
                                     </tr>
                                 {% endfor %}

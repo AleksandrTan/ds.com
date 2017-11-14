@@ -40,16 +40,13 @@ $(document).ready( function(){
 
   });
 /*
-* Changes 'is_active' field for CTR
+* Changes 'is_active' field for main category
 * */
   $("tbody").on("click", "button", function () {
     if($(this).attr('data_info')){
           var that = $(this)
           $.get(
-              "/ctr/ajaxctr/isactive/"+$(this).attr("data_info")+"/",
-              {
-                 key_ctr: $('#key_ctr').val()
-              },
+              "/adminnv/maincategory/ajax/isactive/"+$(this).attr("data_info")+"/",
               onAjaxIsActive
             );
             function onAjaxIsActive(data)
@@ -66,7 +63,7 @@ $(document).ready( function(){
 
 
 /*
-* Delete CTR data
+* Delete main category
 * */
     $("tbody").on("click", "a", function () {
         if($(this).attr('data_delete')){
@@ -86,7 +83,7 @@ $(document).ready( function(){
 
     $('#delete_type').click(function () {
         $('#is_deleted_ctr').modal('hide');
-        var url = $(this).attr('data_id_type')+'?key_ctr='+$('#key_ctr').val();
+        var url = $(this).attr('data_id_type');
         $(location).attr('href',url);
     });
 });

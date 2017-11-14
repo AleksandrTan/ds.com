@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import View
 from django.views.generic.base import TemplateView
@@ -83,7 +84,7 @@ class MainCategoryWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         context['tab'] = True
         return context
 
-class AjaxMainCategoryNew(LoginRequiredMixin, PermissionRequiredMixin, View):
+class AjaxMainCategoryNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
 
     permission_required = "auth.change_user"
 
@@ -103,3 +104,36 @@ class AjaxMainCategoryNew(LoginRequiredMixin, PermissionRequiredMixin, View):
         import re
         import unidecode
         return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
+
+
+class AjaxMainCategoryActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
+
+    permission_required = "auth.change_user"
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            mc = MainCategory.objects.get(pk=kwargs['pk'])
+            if mc.is_active:
+                mc.is_active = False
+                data = {"status":False}
+            else:
+                mc.is_active = True
+                data = {"status": True}
+        mc.save(using='default')
+        return JsonResponse(data)
+
+
+class MainCategoryDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
+
+    permission_required = "auth.change_user"
+    login_url = '/'
+
+    def get(self, request, *args, **kwargs):
+        MainCategory.objects.get(pk=kwargs['pk']).delete()
+        redirect_url = '/adminnv/maincategory/'
+        return redirect(redirect_url)
+
+    def get_context_data(self, **kwargs):
+        context = super(MainCategoryDelete, self).get_context_data(**kwargs)
+        context['tab'] = True
+        return context
