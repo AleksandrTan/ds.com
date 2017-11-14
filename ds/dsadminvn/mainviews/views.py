@@ -53,7 +53,6 @@ class UsersWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, List
    context_object_name = 'users_list' #or for custom paginate page_obj in template
    paginate_by = 10
 
-
 class UserDetailView(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):
 
     login_url = '/'
@@ -184,7 +183,6 @@ class AjaxNameProductNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMi
         import unidecode
         return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
 
-
 class AjaxNameProductActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
 
     permission_required = "auth.change_user"
@@ -202,7 +200,6 @@ class AjaxNameProductActive(BaseAdminView, LoginRequiredMixin, PermissionRequire
         np.save()
         return JsonResponse(data)
 
-
 class NameProductDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
@@ -210,7 +207,7 @@ class NameProductDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
 
     def get(self, request, *args, **kwargs):
         NameProduct.objects.get(pk=kwargs['pk']).delete()
-        redirect_url = '/adminnv/maincategory/'
+        redirect_url = '/adminnv/nameproduct/'
         return redirect(redirect_url)
 
     def get_context_data(self, **kwargs):

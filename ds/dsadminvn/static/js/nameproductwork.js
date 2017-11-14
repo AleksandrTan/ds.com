@@ -24,7 +24,7 @@ $(document).ready( function(){
                  var new_type = '<tr><td class="text-center">'+new_name+'</td><td class="text-center"><button type="button"'+
                                     'class="btn btn-sm btn-danger" data_info = "'+data.id+'">False</button></td><td class="text-center">'+
                                     ''+data.name_url+'</td><td class="text-center"><a type="button" data_delete="delete" id="'+data.id+'"'+
-                                    'class="btn btn-sm btn-danger" href="/ctr/deletectr/'+data.id+'/">Delete</a></td>';
+                                    'class="btn btn-sm btn-danger" href="/adminnv/nameproduct/deletenp/'+data.id+'/">Delete</a></td>';
 
                   $('#np_list').append(new_type);
                   $('#new_name_np').val('');
