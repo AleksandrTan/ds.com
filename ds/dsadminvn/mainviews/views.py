@@ -31,6 +31,7 @@ class BaseAdminView(View):
 
 class MainView(BaseAdminView, LoginRequiredMixin, TemplateView):
    template_name = 'index.html'
+   login_url = 'login'
 
    # def get_context_data(self, **kwargs):
    #    content = super(MainView, self).get_context_data(**kwargs)
@@ -47,7 +48,7 @@ class UsersWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, List
 
    permission_required = "auth.change_user"
    template_name = 'users/users.html'
-   login_url = '/'
+   login_url = 'login'
    queryset = User.objects.all()
    context_object_name = 'users_list' #or for custom paginate page_obj in template
    paginate_by = 10
@@ -71,7 +72,7 @@ class UserDetailView(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin,
 class MainCategoryWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
     permission_required = "auth.change_user"
-    login_url = '/'
+    login_url = 'login'
     template_name = 'maincategory/mcwork.html'
     context_object_name = 'mc_list'
     paginate_by = 10
@@ -87,6 +88,7 @@ class MainCategoryWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
 class AjaxMainCategoryNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
 
     permission_required = "auth.change_user"
+    login_url = 'login'
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
@@ -108,6 +110,7 @@ class AjaxMainCategoryNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredM
 class AjaxMainCategoryActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
 
     permission_required = "auth.change_user"
+    login_url = 'login'
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
@@ -118,13 +121,13 @@ class AjaxMainCategoryActive(BaseAdminView, LoginRequiredMixin, PermissionRequir
             else:
                 mc.is_active = True
                 data = {"status": True}
-        mc.save(using='default')
+        mc.save()
         return JsonResponse(data)
 
 class MainCategoryDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
-    login_url = '/'
+    login_url = 'login'
 
     def get(self, request, *args, **kwargs):
         MainCategory.objects.get(pk=kwargs['pk']).delete()
@@ -146,10 +149,10 @@ class MainCategoryDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMi
 class NameProductWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
     permission_required = "auth.change_user"
-    login_url = '/'
+    login_url = 'login'
     template_name = 'nameproduct/npwork.html'
     context_object_name = 'np_list'
-    paginate_by = 10
+    paginate_by = 5
 
     def get_queryset(self):
         return NameProduct.objects.all()
@@ -162,18 +165,19 @@ class NameProductWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
 class AjaxNameProductNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
 
     permission_required = "auth.change_user"
+    login_url = 'login'
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
             name_url = self.slugify(request.GET['name'])
-            new_mc =  MainCategory(
+            new_np =  NameProduct(
                 name=self.request.GET['name'],
                 name_url=name_url,
                 is_active=False
             )
-            new_mc.save()
+            new_np.save()
 
-        return JsonResponse({"status": True, 'id':new_mc.id, 'name_url':name_url})
+        return JsonResponse({"status": True, 'id':new_np.id, 'name_url':name_url})
 
     def slugify(swlf, str):
         import re
@@ -184,31 +188,32 @@ class AjaxNameProductNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMi
 class AjaxNameProductActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
 
     permission_required = "auth.change_user"
+    login_url = 'login'
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
-            mc = MainCategory.objects.get(pk=kwargs['pk'])
-            if mc.is_active:
-                mc.is_active = False
+            np = NameProduct.objects.get(pk=kwargs['pk'])
+            if np.is_active:
+                np.is_active = False
                 data = {"status":False}
             else:
-                mc.is_active = True
+                np.is_active = True
                 data = {"status": True}
-        mc.save(using='default')
+        np.save()
         return JsonResponse(data)
 
 
 class NameProductDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
-    login_url = '/'
+    login_url = 'login'
 
     def get(self, request, *args, **kwargs):
-        MainCategory.objects.get(pk=kwargs['pk']).delete()
+        NameProduct.objects.get(pk=kwargs['pk']).delete()
         redirect_url = '/adminnv/maincategory/'
         return redirect(redirect_url)
 
     def get_context_data(self, **kwargs):
-        context = super(MainCategoryDelete, self).get_context_data(**kwargs)
+        context = super(NameProductDelete, self).get_context_data(**kwargs)
         context['tab'] = True
         return context

@@ -60,27 +60,26 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">№</th>
                                         <th class="text-center">Название</th>
                                         <th class="text-center">Активен</th>
                                         <th class="text-center">URL Имя</th>
                                         <th class="text-center">Удалить</th>
                                     </tr>
                                 </thead>
-                                <tbody id="mc_list">
-                                {% for mc_l in mc_list %}
+                                <tbody id="np_list">
+                                {% for np_l in np_list %}
                                     <tr>
-                                        <td>{{ forloop.counter }}</td>
-                                        <td class="text-center">{{ mc_l.name }}</td>
+{#                                        <td>{{ forloop.counter }}</td>#}
+                                        <td class="text-center">{{ np_l.name }}</td>
                                         <td class="text-center"><button type="button"
-                                                                        class="btn btn-sm {% if mc_l.is_active %}btn-success{% else %}btn-danger{% endif %}"
-                                                                        data_info = "{{ mc_l.id }}">{{ mc_l.is_active }}</button>
+                                                                        class="btn btn-sm {% if np_l.is_active %}btn-success{% else %}btn-danger{% endif %}"
+                                                                        data_info = "{{ np_l.id }}">{{ np_l.is_active }}</button>
                                         </td>
-                                        <td class="text-center">{{ mc_l.name_url }}</td>
+                                        <td class="text-center">{{ np_l.name_url }}</td>
                                         <td class="text-center"><a type="button" data_delete="delete"
-                                                                   id="{{ mc_l.id }}"
+                                                                   id="{{ np_l.id }}"
                                                                    class="btn btn-sm btn-danger"
-                                                                   href="{% url 'delete_mc' mc_l.id %}">Delete</a>
+                                                                   href="{% url 'delete_np' np_l.id %}">Delete</a>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -94,5 +93,28 @@
 
             </div>
     </div>
+<!--Pagination-->
+    {% if is_paginated %}
+    <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="/adminnv/nameproduct/page/{{ page_obj.previous_page_number }}/">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="/adminnv/nameproduct/page/{{ i }}/">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="/adminnv/nameproduct/page/{{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+    </ul>
+{% endif %}
+
 <script src="{% static "js/nameproductwork.js" %}"></script>
 {% endblock %}

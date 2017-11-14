@@ -25,10 +25,10 @@ mc_patterns = [
     URL`s for Name Product
 """
 np_patterns = [
-     #url(r'^ajax/isactive/(?P<pk>[0-9]+)/$', views.AjaxMainCategoryActive.as_view(), name='ajax_mc_is_active'),
-     #url(r'^ajax/addnew/$', views.AjaxMainCategoryNew.as_view(), name='ajax_mc_new'),
-     #url(r'^deletemc/(?P<pk>[0-9]+)/$', views.MainCategoryDelete.as_view(), name='delete_mc'),
-     url(r'^$', views.NameProductWork.as_view(), name='nameproduct'),
+     url(r'^ajax/isactivenp/(?P<pk>[0-9]+)/$', views.AjaxNameProductActive.as_view(), name='ajax_np_is_active'),
+     url(r'^ajax/addnewproduct/$', views.AjaxNameProductNew.as_view(), name='ajax_np_new'),
+     url(r'^deletenp/(?P<pk>[0-9]+)/$', views.NameProductDelete.as_view(), name='delete_np'),
+     url(r'^(?:page/(?P<page>\d+)/)?$', views.NameProductWork.as_view(), name='nameproduct'),
 ]
 
 

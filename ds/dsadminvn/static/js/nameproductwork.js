@@ -2,16 +2,16 @@ $(document).ready( function(){
 /*
 * Add new main category data
 * */
-  $('#add_new_mc').click(function () {
+  $('#add_new_np').click(function () {
 
-          var new_name = $('#new_name_mс').val();
+          var new_name = $('#new_name_np').val();
 
           if(new_name == ''){
               alert('Enter correct data for new type!!!');
               return false;
           }
           $.get(
-              "/adminnv/maincategory/ajax/addnew/",
+              "/adminnv/nameproduct/ajax/addnewproduct/",
               {
                   name: new_name,
 
@@ -21,20 +21,13 @@ $(document).ready( function(){
             function onAjaxSuccess(data)
             {
               if (data.status){
-                  if ($('#mc_list tr:last-child td:first-child').text() == ''){
-                      var num_n = 1;
-                  }
-                  else{
-                      var num_n = +$('#mc_list tr:last-child td:first-child').text() + 1;
-                  }
-
-                  var new_type = '<tr><td>'+num_n+'</td><td class="text-center">'+new_name+'</td><td class="text-center"><button type="button"'+
+                 var new_type = '<tr><td class="text-center">'+new_name+'</td><td class="text-center"><button type="button"'+
                                     'class="btn btn-sm btn-danger" data_info = "'+data.id+'">False</button></td><td class="text-center">'+
                                     ''+data.name_url+'</td><td class="text-center"><a type="button" data_delete="delete" id="'+data.id+'"'+
                                     'class="btn btn-sm btn-danger" href="/ctr/deletectr/'+data.id+'/">Delete</a></td>';
 
-                  $('#mc_list').append(new_type);
-                  $('#new_name_mс').val('');
+                  $('#np_list').append(new_type);
+                  $('#new_name_np').val('');
               }
             }
 
@@ -46,7 +39,7 @@ $(document).ready( function(){
     if($(this).attr('data_info')){
           var that = $(this)
           $.get(
-              "/adminnv/maincategory/ajax/isactive/"+$(this).attr("data_info")+"/",
+              "/adminnv/nameproduct/ajax/isactivenp/"+$(this).attr("data_info")+"/",
               onAjaxIsActive
             );
             function onAjaxIsActive(data)
