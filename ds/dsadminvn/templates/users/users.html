@@ -30,11 +30,10 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">№</th>
-                                        <th class="text-center">Username</th>
-                                        <th class="text-center">Date joined</th>
-                                        <th class="text-center">Last login</th>
-                                        <th class="text-center">Is Active</th>
-                                        <th class="text-center">Count Sentence</th>
+                                        <th class="text-center">Имя</th>
+                                        <th class="text-center">Дата создания</th>
+                                        <th class="text-center">Последний вход</th>
+                                        <th class="text-center">Активен</th>
                                         <th class="text-center">In detail</th>
                                     </tr>
                                 </thead>
@@ -46,7 +45,6 @@
                                         <td class="text-center">{{ user_l.date_joined }}</td>
                                         <td class="text-center">{{ user_l.last_login }}</td>
                                         <td class="text-center">{{ user_l.is_active }}</td>
-                                        <td class="text-center">{{ user_l.profile.favorite_num }}</td>
                                         <td class="text-center"><a type="button" class="btn btn-sm btn-info" href="{% url 'detail' user_l.id %}">In detail</a></td>
                                     </tr>
                                 {% endfor %}

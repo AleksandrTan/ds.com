@@ -3,17 +3,23 @@ from django.views.generic import View
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.http import JsonResponse
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
-
 from django.contrib.auth.models import User
+
 from dsstore.models import MainCategory, NameProduct
 
 
 class BaseAdminView(View):
     """
     Base view for admin views.
+    Decorator for views that checks that the user is logged in and is a staff
+    member, redirecting to the login page if necessary.
+    Look in Python3\Lib\site-packages\django\contrib\admin\views\decorators.py
+            Python3\Lib\site-packages\django\contrib\auth\decorators.py
+            Python3\Lib\site-packages\django\contrib\admindocs\views.py
     """
     @method_decorator(staff_member_required(login_url='login'))
     def dispatch(self, request, *args, **kwargs):
@@ -56,25 +62,44 @@ class UserDetailView(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin,
 
 
 """
-    Work with Msn (MainCategory, NameProduct)
+    Work with MainCategory
 """
 
-class MsnWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
+#Class MainCategoryWork  - All categories page
 
-    data_db = {'maincategory':MainCategory,'nameproducts':NameProduct}
-    data_slug = {'maincategory': 'Категории', 'nameproducts':'Название товара'}
+class MainCategoryWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
+
     permission_required = "auth.change_user"
     login_url = '/'
-    template_name = 'msn/msnwork.html'
-    context_object_name = 'msn_list'
+    template_name = 'maincategory/mcwork.html'
+    context_object_name = 'mc_list'
     paginate_by = 10
 
     def get_queryset(self):
-        return self.data_db[self.kwargs['type_slug']].objects.all()
+        return MainCategory.objects.all()
 
     def get_context_data(self, **kwargs):
-        context = super(MsnWork, self).get_context_data(**kwargs)
+        context = super(MainCategoryWork, self).get_context_data(**kwargs)
         context['tab'] = True
-        context['slug'] = self.data_slug[self.kwargs['type_slug']]
-        context['key_slug'] = self.kwargs['type_slug']
         return context
+
+class AjaxMainCategoryNew(LoginRequiredMixin, PermissionRequiredMixin, View):
+
+    permission_required = "auth.change_user"
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            name_url = self.slugify(request.GET['name'])
+            new_mc =  MainCategory(
+                name=self.request.GET['name'],
+                name_url=name_url,
+                is_active=False
+            )
+            new_mc.save()
+
+        return JsonResponse({"status": True, 'id':new_mc.id, 'name_url':name_url})
+
+    def slugify(swlf, str):
+        import re
+        import unidecode
+        return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())

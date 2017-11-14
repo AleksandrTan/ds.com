@@ -1,42 +1,33 @@
 $(document).ready( function(){
 /*
-* Add new CTR data
+* Add new main category data
 * */
-  $('#add_new_ctr').click(function () {
+  $('#add_new_mc').click(function () {
 
-          var new_name = $('#new_name_ctr').val();
-          var new_link = $('#new_link_ctr').val();
-          if(new_name == '' || new_link == '' ){
+          var new_name = $('#new_name_mс').val();
+
+          if(new_name == ''){
               alert('Enter correct data for new type!!!');
               return false;
           }
           $.get(
-              "/ctr/ajaxctr/addnew/",
+              "/adminnv/maincategory/ajax/addnew/",
               {
                   name: new_name,
-                  link: new_link,
-                  key_ctr: $('#key_ctr').val()
+
               },
               onAjaxSuccess
             );
             function onAjaxSuccess(data)
             {
               if (data.status){
-                  if (data.type){
-                      var new_type = '<tr><td></td><td class="text-center">'+new_name+'</td><td class="text-center"><button type="button"'+
+                  var new_type = '<tr><td></td><td class="text-center">'+new_name+'</td><td class="text-center"><button type="button"'+
                                     'class="btn btn-sm btn-danger" data_info = "'+data.id+'">False</button></td><td class="text-center">'+
-                                    ''+new_link+'</td><td class="text-center"><button type="button" data-change="'+data.id+'" class="btn btn-sm btn-success"'+
-                                    'id="cat_'+data.id+'">1</button></td><td class="text-center"><button type="button" data-change-num="'+data.id+'" '+
-                                    'class="btn btn-sm btn-success" id="paid_'+data.id+'">5</button></td><td class="text-center"><a type="button" data_delete="delete" id="'+data.id+'"'+
+                                    ''+data.name_url+'</td><td class="text-center"><a type="button" data_delete="delete" id="'+data.id+'"'+
                                     'class="btn btn-sm btn-danger" href="/ctr/deletectr/'+data.id+'/">Delete</a></td>';
-                  }
-                  else{
-                      var new_type = '<tr><td></td><td class="text-center">'+new_name+'</td><td class="text-center"><button type="button"'+
-                                    'class="btn btn-sm btn-danger" data_info = "'+data.id+'">False</button></td><td class="text-center">'+
-                                    ''+new_link+'</td><td class="text-center"><a type="button" data_delete="delete" id="'+data.id+'"'+
-                                    'class="btn btn-sm btn-danger" href="/ctr/deletectr/'+data.id+'/">Delete</a></td>';
-                  }
-                  $('#ctr_list').append(new_type);
+
+                  $('#mc_list').append(new_type);
+                  $('#new_name_mс').val('');
               }
             }
 
