@@ -142,7 +142,7 @@
                         </ul>
                     </li>
                     {% endif %}
-                    {% if user.is_staff %}
+                    {% if user.is_staff and user.is_superuser %}
                         <li>
                             <a href="/statistics/"><i class="fa fa-hand-o-right"></i> Statistics</a>
                         </li>

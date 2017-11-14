@@ -28,7 +28,6 @@ class BaseAdminView(View):
 
 #Class MainView  - start page
 
-
 class MainView(BaseAdminView, LoginRequiredMixin, TemplateView):
    template_name = 'index.html'
    login_url = 'login'
@@ -41,8 +40,6 @@ class MainView(BaseAdminView, LoginRequiredMixin, TemplateView):
 """
     Work with users site
 """
-
-#Class UsersWork  - All users page
 
 class UsersWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
@@ -65,8 +62,6 @@ class UserDetailView(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin,
 """
     Work with MainCategory
 """
-
-#Class MainCategoryWork  - All categories page
 
 class MainCategoryWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
@@ -142,8 +137,6 @@ class MainCategoryDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMi
 """
     Work with Name Product
 """
-
-#Class NameProductWork  - All products page
 
 class NameProductWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
