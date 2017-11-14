@@ -9,10 +9,10 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="fa fa-times" aria-hidden="true">
                     </span></button>
-                    <h4 class="modal-title" id="myModalLabel" style="color: #ff0012">Внимание!!!Удаление категории!!!</h4>
+                    <h4 class="modal-title" id="myModalLabel" style="color: #ff0012">Внимание!!!Удаление товара!!!</h4>
                 </div>
                  <div class="modal-body">
-                     <h3 style="color: #ff0012">ВЫ действительно хотите удалить эту категорию???</h3>
+                     <h3 style="color: #ff0012">ВЫ действительно хотите удалить этот товар???</h3>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-xs btn-default" id="cancel_type">Cancel</button>
@@ -28,14 +28,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Категории
+                            Товары
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Категории
+                                <i class="fa fa-table"></i> Товары
                             </li>
                         </ol>
                     </div>
@@ -45,14 +45,14 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label>Название новой категории</label>
-                            <input class="form-control" placeholder="Имя" id="new_name_mс">
+                            <label>Название нового товара</label>
+                            <input class="form-control" placeholder="Товар" id="new_name_np">
                          </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Добавить</label>
-                            <button type="button" class="btn btn-sm btn-success form-control" id="add_new_mc">Добавить новую категорию</button>
+                            <button type="button" class="btn btn-sm btn-success form-control" id="add_new_np">Добавить новый товар</button>
                          </div>
                     </div>
                     <div class="col-lg-12">
@@ -94,5 +94,5 @@
 
             </div>
     </div>
-<script src="{% static "js/maincategorywork.js" %}"></script>
+<script src="{% static "js/nameproductwork.js" %}"></script>
 {% endblock %}

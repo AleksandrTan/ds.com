@@ -87,3 +87,56 @@ $(document).ready( function(){
         $(location).attr('href',url);
     });
 });
+
+/*
+* Form Change max_num/paid_num add free sentence for 'max_num'/'paid_num' field Category
+* */
+
+$("tbody").on("click", "button", function () {
+        if($(this).attr('data-change')) {
+            $('#num_max_id').val($(this).attr('data-change'));
+            $('#key_field').val('max_num');
+            $('#change_max_num_modal').modal();
+        }
+        else if ($(this).attr('data-change-num')){
+            $('#num_max_id').val($(this).attr('data-change-num'));
+            $('#key_field').val('paid_num');
+            $('#change_max_num_modal').modal();
+        }
+    });
+
+/*
+* Change max_num/paid_num
+* */
+  $('#save_type_chenge').click(function () {
+          var new_num = $('#new_num_max').val();
+          var id = $('#num_max_id').val();
+          var name_field = $('#key_field').val();
+          //console.log(/^\d+$/.test(new_num));return false;
+          //console.log(new_num.match(/^[-\+]?\d+/));return false;
+          if(new_num == '' || new_num.match(/^[-\+]?\d+/) == null){
+              alert('Enter correct data for new num!!!');
+              return false;
+          }
+          $.get(
+              "/ctr/ajaxctr/newnum/",
+              {
+                  num: new_num,
+                  id:id,
+                  name_field:name_field
+              },
+              onAjaxSuccess
+            );
+            function onAjaxSuccess(data)
+            {
+              if (data.status){
+                    $('#change_max_num_modal').modal('hide');
+                    if (name_field == 'max_num'){
+                        $('#cat_'+id).text(new_num);
+                    }
+                    else {
+                        $('#paid_'+id).text(new_num);
+                    }
+             }
+            }
+});

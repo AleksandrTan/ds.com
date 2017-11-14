@@ -12,18 +12,25 @@ users_patterns = [
 
 
 """
-    URL`s for Msn (MainCategory, Size, NameProduct)
+    URL`s for Main Category
 """
 mc_patterns = [
      url(r'^ajax/isactive/(?P<pk>[0-9]+)/$', views.AjaxMainCategoryActive.as_view(), name='ajax_mc_is_active'),
      url(r'^ajax/addnew/$', views.AjaxMainCategoryNew.as_view(), name='ajax_mc_new'),
      url(r'^deletemc/(?P<pk>[0-9]+)/$', views.MainCategoryDelete.as_view(), name='delete_mc'),
-    # url(r'^ajaxctr/newnum/$', views.AjaxNumNewCategories.as_view(), name='ajax_new_num'),
-    # url(r'^ajax/newsentcount/$', views.AjaxNewSentencesView.as_view(), name='get_new_count'),
-    # url(r'^modesentence/$', views.ModerateNewSentence.as_view(), name='mode_new_sentence'),
-    # url(r'^moderesult/(?P<status>[0-9]{1})/(?P<pk>[0-9]+)/$', views.ModeResult.as_view(), name='moderesult'),
-    url(r'^$', views.MainCategoryWork.as_view(), name='maincategory'),
+     url(r'^$', views.MainCategoryWork.as_view(), name='maincategory'),
 ]
+
+"""
+    URL`s for Name Product
+"""
+np_patterns = [
+     #url(r'^ajax/isactive/(?P<pk>[0-9]+)/$', views.AjaxMainCategoryActive.as_view(), name='ajax_mc_is_active'),
+     #url(r'^ajax/addnew/$', views.AjaxMainCategoryNew.as_view(), name='ajax_mc_new'),
+     #url(r'^deletemc/(?P<pk>[0-9]+)/$', views.MainCategoryDelete.as_view(), name='delete_mc'),
+     url(r'^$', views.NameProductWork.as_view(), name='nameproduct'),
+]
+
 
 urlpatterns = [
     url(r'^loginadmin/$', auth_views.login, name='login'),
@@ -31,5 +38,6 @@ urlpatterns = [
     url(r'^adminnv/$', views.MainView.as_view(), name='homeadmin'),
     url(r'^adminnv/users/', include(users_patterns)),
     url(r'^adminnv/maincategory/', include(mc_patterns)),
+    url(r'^adminnv/nameproduct/', include(np_patterns)),
 ]
 
