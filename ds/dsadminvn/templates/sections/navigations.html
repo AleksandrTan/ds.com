@@ -131,13 +131,13 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Характеристики <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse {% if tab %} in {% endif %}">
                             <li>
-                                <a href="/adminnv/maincategory/"><i class="fa fa-th-list"></i> Категории</a>
+                                <a href="{% url 'maincategory' %}"><i class="fa fa-th-list"></i> Категории</a>
                             </li>
                             <li>
-                                <a href="/adminnv/nameproduct/"><i class="fa fa-th-list"></i> Товары</a>
+                                <a href="{% url 'nameproduct' %}"><i class="fa fa-th-list"></i> Товары</a>
                             </li>
                             <li>
-                                <a href="/msn/size/"><i class="fa fa-th-list"></i> Размеры</a>
+                                <a href="{% url 'sizetable' %}"><i class="fa fa-th-list"></i> Таблица размеров</a>
                             </li>
                         </ul>
                     </li>

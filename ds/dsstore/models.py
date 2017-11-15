@@ -27,3 +27,12 @@ class NameProduct(models.Model):
 
     def __str__(self):
         return self.name
+
+"""------------ SizeTable Model-------------------------------"""
+
+class SizeTable(models.Model):
+    maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE)
+    age = models.CharField(max_length=100)
+    height = models.SmallIntegerField()
+    chest = models.SmallIntegerField()
+    waist = models.SmallIntegerField()

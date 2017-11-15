@@ -31,6 +31,15 @@ np_patterns = [
      url(r'^(?:page/(?P<page>\d+)/)?$', views.NameProductWork.as_view(), name='nameproduct'),
 ]
 
+"""
+    URL`s for Size Table
+"""
+st_patterns = [
+     # url(r'^ajax/isactive/(?P<pk>[0-9]+)/$', views.AjaxMainCategoryActive.as_view(), name='ajax_mc_is_active'),
+     # url(r'^ajax/addnew/$', views.AjaxMainCategoryNew.as_view(), name='ajax_mc_new'),
+     # url(r'^deletemc/(?P<pk>[0-9]+)/$', views.MainCategoryDelete.as_view(), name='delete_mc'),
+     url(r'^$', views.SizeTableWork.as_view(), name='sizetable'),
+]
 
 urlpatterns = [
     url(r'^loginadmin/$', auth_views.login, name='login'),
@@ -39,5 +48,6 @@ urlpatterns = [
     url(r'^adminnv/users/', include(users_patterns)),
     url(r'^adminnv/maincategory/', include(mc_patterns)),
     url(r'^adminnv/nameproduct/', include(np_patterns)),
+    url(r'^adminnv/sizetable/', include(st_patterns)),
 ]
 

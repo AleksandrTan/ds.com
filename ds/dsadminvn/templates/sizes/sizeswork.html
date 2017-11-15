@@ -1,0 +1,98 @@
+{% extends "main.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="btn-modal-wrap btn-modal-wrap-1">
+    <!-- Modal Deleted -->
+    <div class="modal fade" id="is_deleted_ctr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="fa fa-times" aria-hidden="true">
+                    </span></button>
+                    <h4 class="modal-title" id="myModalLabel" style="color: #ff0012">Внимание!!!Удаление категории!!!</h4>
+                </div>
+                 <div class="modal-body">
+                     <h3 style="color: #ff0012">ВЫ действительно хотите удалить эту категорию???</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs btn-default" id="cancel_type">Cancel</button>
+                    <button type="button" class="btn btn-xs btn-danger" id="delete_type" data_id_type="">Deleted</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Категории
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-table"></i> Таблица размеров
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Название новой категории</label>
+                            <input class="form-control" placeholder="Имя" id="new_name_mс">
+                         </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Добавить</label>
+                            <button type="button" class="btn btn-sm btn-success form-control" id="add_new_mc">Добавить новую категорию</button>
+                         </div>
+                    </div>
+                    <div class="col-lg-12">
+                       <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">№</th>
+                                        <th class="text-center">Название</th>
+                                        <th class="text-center">Активен</th>
+                                        <th class="text-center">URL Имя</th>
+                                        <th class="text-center">Удалить</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mc_list">
+                                {% for mc_l in mc_list %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td class="text-center">{{ mc_l.name }}</td>
+                                        <td class="text-center"><button type="button"
+                                                                        class="btn btn-sm {% if mc_l.is_active %}btn-success{% else %}btn-danger{% endif %}"
+                                                                        data_info = "{{ mc_l.id }}">{{ mc_l.is_active }}</button>
+                                        </td>
+                                        <td class="text-center">{{ mc_l.name_url }}</td>
+                                        <td class="text-center"><a type="button" data_delete="delete"
+                                                                   id="{{ mc_l.id }}"
+                                                                   class="btn btn-sm btn-danger"
+                                                                   href="{% url 'delete_mc' mc_l.id %}">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+    </div>
+<script src="{% static "js/maincategorywork.js" %}"></script>
+{% endblock %}

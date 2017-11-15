@@ -8,9 +8,9 @@ from django.http import JsonResponse
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
-from django.contrib.auth.models import User
 
-from dsstore.models import MainCategory, NameProduct
+from django.contrib.auth.models import User
+from dsstore.models import MainCategory, NameProduct, SizeTable
 
 
 class BaseAdminView(View):
@@ -205,5 +205,22 @@ class NameProductDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
 
     def get_context_data(self, **kwargs):
         context = super(NameProductDelete, self).get_context_data(**kwargs)
+        context['tab'] = True
+        return context
+
+"""----------------Work with Size Table---------------------------"""
+class SizeTableWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
+
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    template_name = 'sizes/sizeswork.html'
+    context_object_name = 'sp_list'
+    paginate_by = 5
+
+    def get_queryset(self):
+        return SizeTable.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(SizeTableWork, self).get_context_data(**kwargs)
         context['tab'] = True
         return context
