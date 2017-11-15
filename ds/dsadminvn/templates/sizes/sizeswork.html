@@ -43,6 +43,8 @@
                 <!-- /.row -->
 
                 <div class="row">
+                <form class="form form-offer" method="post" name="add_new_size" action="/"
+                  id="add_new_size" enctype="multipart/form-data">{% csrf_token %}
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Категория</label>
@@ -54,34 +56,34 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Возраст</label>
-                            <input class="form-control" placeholder="Возраст" id="age">
+                            <input class="form-control" placeholder="Возраст" id="age" name="age" type="text">
                          </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Рост</label>
-                            <input class="form-control" placeholder="Рост" id="height">
+                            <input class="form-control" placeholder="Рост" id="height" name="height">
                          </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Обхват груди</label>
-                            <input class="form-control" placeholder="Обхват груди" id="chest">
+                            <input class="form-control" placeholder="Обхват груди" id="chest" name="chest">
                          </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Обхват талии</label>
-                            <input class="form-control" placeholder="Обхват талии" id="waist">
+                            <input class="form-control" placeholder="Обхват талии" id="waist" name="waist">
                          </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Добавить</label>
-                            <button type="button" class="btn btn-sm btn-success form-control" id="add_new_size">Добавить</button>
+                            <button type="submit" class="btn btn-sm btn-success form-control">Добавить</button>
                          </div>
                     </div>
-
+                </form>
                     <div class="col-lg-12">
                        <div class="table-responsive">
                             <table class="table table-bordered table-hover">
@@ -121,5 +123,6 @@
 
             </div>
     </div>
-<script src="{% static "js/maincategorywork.js" %}"></script>
+<script type="text/javascript" src="{% static 'js/validator/jquery.validate.js' %}"></script>
+<script src="{% static "js/addnewsize.js" %}"></script>
 {% endblock %}
