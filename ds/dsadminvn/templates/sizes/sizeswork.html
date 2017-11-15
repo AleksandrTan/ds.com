@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Категории
+                            Таблица размеров
                         </h1>
                         <ol class="breadcrumb">
                             <li>
@@ -43,18 +43,45 @@
                 <!-- /.row -->
 
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <div class="form-group">
-                            <label>Название новой категории</label>
-                            <input class="form-control" placeholder="Имя" id="new_name_mс">
+                            <label>Категория</label>
+                                <select class="form-control" name="maincategory_type">
+                                    <option name="">5</option>
+                                </select>
+                            </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Возраст</label>
+                            <input class="form-control" placeholder="Возраст" id="age">
+                         </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Рост</label>
+                            <input class="form-control" placeholder="Рост" id="height">
+                         </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Обхват груди</label>
+                            <input class="form-control" placeholder="Обхват груди" id="chest">
+                         </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Обхват талии</label>
+                            <input class="form-control" placeholder="Обхват талии" id="waist">
                          </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Добавить</label>
-                            <button type="button" class="btn btn-sm btn-success form-control" id="add_new_mc">Добавить новую категорию</button>
+                            <button type="button" class="btn btn-sm btn-success form-control" id="add_new_size">Добавить</button>
                          </div>
                     </div>
+
                     <div class="col-lg-12">
                        <div class="table-responsive">
                             <table class="table table-bordered table-hover">
