@@ -49,7 +49,9 @@
                         <div class="form-group">
                             <label>Категория</label>
                                 <select class="form-control" name="maincategory_type">
-                                    <option name="">5</option>
+                                    {% for mcl in main_category_list %}
+                                        <option name="{{ mcl.id }}">{{ mcl.name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                     </div>

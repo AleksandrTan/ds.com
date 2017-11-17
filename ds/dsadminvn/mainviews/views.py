@@ -209,18 +209,17 @@ class NameProductDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
         return context
 
 """----------------Work with Size Table---------------------------"""
+
 class SizeTableWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
     permission_required = "auth.change_user"
     login_url = 'login'
     template_name = 'sizes/sizeswork.html'
     context_object_name = 'sp_list'
-    paginate_by = 5
-
-    def get_queryset(self):
-        return SizeTable.objects.all()
+    model = SizeTable
 
     def get_context_data(self, **kwargs):
         context = super(SizeTableWork, self).get_context_data(**kwargs)
         context['tab'] = True
+        context['main_category_list'] = MainCategory.objects.get_active_categories()
         return context

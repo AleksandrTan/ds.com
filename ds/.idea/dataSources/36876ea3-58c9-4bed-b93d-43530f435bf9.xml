@@ -490,28 +490,41 @@ model</ColNames>
     </column>
     <column id="119" parent="24" name="age">
       <Position>2</Position>
-      <DataType>char(1)|0</DataType>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
     <column id="120" parent="24" name="height">
       <Position>3</Position>
       <DataType>smallint(6)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
     <column id="121" parent="24" name="chest">
       <Position>4</Position>
       <DataType>smallint(6)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
     <column id="122" parent="24" name="waist">
       <Position>5</Position>
       <DataType>smallint(6)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
     <column id="123" parent="24" name="maincategory_id">
       <Position>6</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="124" parent="24" name="PRIMARY">
+    <index id="124" parent="24" name="dsstore_size_maincategory_id_cdead9f2_fk_dsstore_maincategory_id">
+      <ColNames>maincategory_id</ColNames>
+    </index>
+    <key id="125" parent="24" name="PRIMARY">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
+    <foreign-key id="126" parent="24" name="dsstore_size_maincategory_id_cdead9f2_fk_dsstore_maincategory_id">
+      <ColNames>maincategory_id</ColNames>
+      <RefSchemaName>dsdb</RefSchemaName>
+      <RefTableName>dsstore_maincategory</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>
