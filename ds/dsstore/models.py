@@ -3,17 +3,18 @@ from django.forms import ModelForm
 
 
 """-------------Main Category model--------------------"""
-class ManadgerMainCategories(models.Manager):
+
+class ManagerMainCategories(models.Manager):
 #Get active Categories
     def get_active_categories(self):
-        return self.get_queryset().filter(is_active__exact = True)
+        return MainCategory.objects.filter(is_active__exact = True)
 
 
 class MainCategory(models.Model):
     name = models.CharField(max_length=100)
     name_url = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
-    objects = ManadgerMainCategories()
+    objects = ManagerMainCategories()
 
     def get_absolute_url(self):
         return "/%s/" % self.name_url
