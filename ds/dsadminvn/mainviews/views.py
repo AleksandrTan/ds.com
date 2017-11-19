@@ -11,7 +11,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 
 from django.contrib.auth.models import User
-from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm)
+from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm, Brends)
 
 
 class BaseAdminView(View):
@@ -251,3 +251,90 @@ class SizeTableAddNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
 
     def get_success_url(self):
         return self.succes_url
+
+class SizeTableDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
+
+    permission_required = "auth.change_user"
+    login_url = 'login'
+
+    def get(self, request, *args, **kwargs):
+        SizeTable.objects.get(pk=kwargs['pk']).delete()
+        redirect_url = '/adminnv/sizetable/'
+        return redirect(redirect_url)
+
+    def get_context_data(self, **kwargs):
+        context = super(NameProductDelete, self).get_context_data(**kwargs)
+        context['tab'] = True
+        return context
+
+"""---------------Work with Brends -------------------------------"""
+
+class BrendsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
+
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    template_name = 'brends/brwork.html'
+    context_object_name = 'br_list'
+
+    def get_queryset(self):
+        return Brends.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(BrendsWork, self).get_context_data(**kwargs)
+        context['tab'] = True
+        return context
+
+class AjaxBrendNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
+
+    permission_required = "auth.change_user"
+    login_url = 'login'
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            name_url = self.slugify(request.GET['name'])
+            new_br =  Brends(
+                name=self.request.GET['name'],
+                name_url=name_url,
+                is_active=False
+            )
+            new_br.save()
+
+        return JsonResponse({"status": True, 'id':new_br.id, 'name_url':name_url})
+
+    def slugify(swlf, str):
+        import re
+        import unidecode
+        return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
+
+class AjaxBrendActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
+
+    permission_required = "auth.change_user"
+    login_url = 'login'
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            br = Brends.objects.get(pk=kwargs['pk'])
+            if br.is_active:
+                br.is_active = False
+                data = {"status":False}
+            else:
+                br.is_active = True
+                data = {"status": True}
+        br.save()
+        return JsonResponse(data)
+
+class BrendDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
+
+    permission_required = "auth.change_user"
+    login_url = 'login'
+
+    def get(self, request, *args, **kwargs):
+        Brends.objects.get(pk=kwargs['pk']).delete()
+        redirect_url = '/adminnv/brends/'
+        return redirect(redirect_url)
+
+    def get_context_data(self, **kwargs):
+        context = super(BrendDelete, self).get_context_data(**kwargs)
+        context['tab'] = True
+        return context
+

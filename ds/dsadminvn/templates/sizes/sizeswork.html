@@ -100,7 +100,7 @@
                                         <th class="text-center">Рост</th>
                                         <th class="text-center">Обхват груди</th>
                                         <th class="text-center">Обхват талии</th>
-                                        <th class="text-center">Редактировать</th>
+{#                                        <th class="text-center">Редактировать</th>#}
                                         <th class="text-center">Удалить</th>
                                     </tr>
                                 </thead>
@@ -112,18 +112,18 @@
                                         <td class="text-center">{{ stl.height }}</td>
                                         <td class="text-center">{{ stl.chest }}</td>
                                         <td class="text-center">{{ stl.waist }}</td>
-                                        <td class="text-center"><button type="button"
-                                                                        class="btn btn-sm {% if stl.id %}btn-success{% else %}btn-danger{% endif %}"
-                                                                        data_info = "{{ stl.id }}">{{ stl.id }}</button>
-                                        </td>
+{#                                        <td class="text-center"><button type="button"#}
+{#                                                                        class="btn btn-sm {% if stl.id %}btn-success{% else %}btn-danger{% endif %}"#}
+{#                                                                        data_info = "{{ stl.id }}">Редактировать</button>#}
+{#                                        </td>#}
                                         <td class="text-center"><a type="button" data_delete="delete"
                                                                    id="{{ stl.id }}"
                                                                    class="btn btn-sm btn-danger"
-                                                                   href="{% url 'delete_mc' stl.id %}">Delete</a>
+                                                                   href="{% url 'delete_st' stl.id %}">Delete</a>
                                         </td>
                                     </tr>
                                 {% empty %}
-                                    <tr><td>Нет данных</td></tr>
+                                    <tr><td style="color: red">Нет данных</td></tr>
                                 {% endfor %}
                                 {% endwith %}
                                 </tbody>
