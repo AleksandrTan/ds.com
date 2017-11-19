@@ -48,7 +48,7 @@ class SizeTable(models.Model):
 class SizeTableForm(ModelForm):
     class Meta:
         model = SizeTable
-        fields = ['age', 'height', 'chest', 'waist']
+        fields = ['age', 'height', 'chest', 'waist', 'maincategory']
         error_messages = {
                             'age': {'required': "Пожалуйста введите возраст",
                                     'max_length': "Не более 10 символов"

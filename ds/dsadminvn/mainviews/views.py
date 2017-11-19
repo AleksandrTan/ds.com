@@ -216,7 +216,7 @@ class SizeTableWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
     permission_required = "auth.change_user"
     login_url = 'login'
     template_name = 'sizes/sizeswork.html'
-    context_object_name = 'sp_list'
+    context_object_name = 'st_list'
     model = SizeTable
 
     def get_context_data(self, **kwargs):
@@ -230,10 +230,10 @@ class SizeTableAddNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
     login_url = 'login'
     form_class = SizeTableForm
     template_name = 'sizes/sizeswork.html'
-    succes_url = 'sizetable'
+    succes_url = '/adminnv/sizetable/'
 
     def form_valid(self, form):
-        instance = form.save(commit=False)
+        instance = form.save()
 
         return super(SizeTableAddNew, self).form_valid(form)
 
