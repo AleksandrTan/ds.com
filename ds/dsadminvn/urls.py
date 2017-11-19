@@ -45,7 +45,7 @@ st_patterns = [
 br_patterns = [
      url(r'^ajax/isactive/(?P<pk>[0-9]+)/$', views.AjaxBrendActive.as_view(), name='ajax_br_is_active'),
      url(r'^ajax/addnew/$', views.AjaxBrendNew.as_view(), name='ajax_br_new'),
-     url(r'^deletebr/(?P<pk>[0-9]+)/$', views.BrendDelete.as_view(), name='delete_mc'),
+     url(r'^deletebr/(?P<pk>[0-9]+)/$', views.BrendDelete.as_view(), name='delete_br'),
      url(r'^$', views.BrendsWork.as_view(), name='brends'),
 ]
 

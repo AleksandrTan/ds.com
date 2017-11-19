@@ -43,6 +43,9 @@
                 <!-- /.row -->
 
                 <div class="row">
+                {% if not main_category_list %}
+                    <p>Нет категорий для отображения</p>
+                {% else %}
                 <form class="form form-offer" method="post" name="add_new_size" action="{% url 'st_add_new' %}"
                   id="add_new_size" enctype="multipart/form-data">{% csrf_token %}
                     <div class="col-lg-2">
@@ -131,6 +134,7 @@
                         </div>
                     {% endfor %}
                     </div>
+                {% endif %}
                 </div>
                 <!-- /.row -->
             </div>

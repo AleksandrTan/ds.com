@@ -59,7 +59,6 @@ class UserDetailView(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin,
     context_object_name = 'user_detail'
     template_name = 'users/user_detail.html'
 
-
 """
     Work with MainCategory
 """
@@ -133,7 +132,6 @@ class MainCategoryDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMi
         context = super(MainCategoryDelete, self).get_context_data(**kwargs)
         context['tab'] = True
         return context
-
 
 """
     Work with Name Product
