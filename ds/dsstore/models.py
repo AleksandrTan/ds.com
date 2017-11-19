@@ -41,9 +41,9 @@ class NameProduct(models.Model):
 class SizeTable(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE)
     age = models.CharField(max_length=10, blank=False)
-    height = models.SmallIntegerField(max_length=10, blank=False)
-    chest = models.SmallIntegerField(max_length=10, blank=False)
-    waist = models.SmallIntegerField(max_length=10,  blank=False)
+    height = models.SmallIntegerField(blank=False)
+    chest = models.SmallIntegerField(blank=False)
+    waist = models.SmallIntegerField(blank=False)
 
 class SizeTableForm(ModelForm):
     class Meta:

@@ -4,13 +4,14 @@ from django.views.generic import View
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
 from django.http import JsonResponse
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 
 from django.contrib.auth.models import User
-from dsstore.models import MainCategory, NameProduct, SizeTable
+from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm)
 
 
 class BaseAdminView(View):
@@ -223,3 +224,30 @@ class SizeTableWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
         context['tab'] = True
         context['main_category_list'] = MainCategory.objects.get_active_categories()
         return context
+
+class SizeTableAddNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    form_class = SizeTableForm
+    template_name = 'sizes/sizeswork.html'
+    succes_url = 'sizetable'
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+
+        return super(SizeTableAddNew, self).form_valid(form)
+
+    def form_invalid(self, form):
+        context = self.get_context_data()
+        context['data'] = self.request.POST
+
+        return self.render_to_response(context)
+
+    def get_context_data(self, **kwargs):
+        context = super(SizeTableAddNew, self).get_context_data(**kwargs)
+        context['tab'] = True
+        context['main_category_list'] = MainCategory.objects.get_active_categories()
+        return context
+
+    def get_success_url(self):
+        return self.succes_url

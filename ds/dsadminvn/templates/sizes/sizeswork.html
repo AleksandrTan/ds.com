@@ -43,10 +43,10 @@
                 <!-- /.row -->
 
                 <div class="row">
-                <form class="form form-offer" method="post" name="add_new_size" action="/"
+                <form class="form form-offer" method="post" name="add_new_size" action="{% url 'st_add_new' %}"
                   id="add_new_size" enctype="multipart/form-data">{% csrf_token %}
                     <div class="col-lg-2">
-                        <div class="form-group">
+                        <div class="form-group ">
                             <label>Категория</label>
                                 <select class="form-control" name="maincategory_type">
                                     {% for mcl in main_category_list %}
@@ -56,27 +56,31 @@
                             </div>
                     </div>
                     <div class="col-lg-2">
-                        <div class="form-group">
+                        <div class="form-group {% if form.errors.age %}has-error{% endif %}">
                             <label>Возраст</label>
-                            <input class="form-control" placeholder="Возраст" id="age" name="age" type="text">
-                         </div>
+                            <input class="form-control" placeholder="Возраст" id="age" name="age" type="text" value="{{ data.age }}">
+                            {% if form.errors.age %}<label id="age-error" class="error" for="age">{{ form.errors.age.0 }}</label>{% endif %}
+                        </div>
                     </div>
                     <div class="col-lg-2">
-                        <div class="form-group">
+                        <div class="form-group {% if form.errors.height %}has-error{% endif %}">
                             <label>Рост</label>
-                            <input class="form-control" placeholder="Рост" id="height" name="height">
+                            <input class="form-control" placeholder="Рост" id="height" name="height" value="{{ data.height }}">
+                            {% if form.errors.height %}<label id="height-error" class="error" for="height">{{ form.errors.height.0 }}</label>{% endif %}
                          </div>
                     </div>
                     <div class="col-lg-2">
-                        <div class="form-group">
+                        <div class="form-group {% if form.errors.chest %}has-error{% endif %}">
                             <label>Обхват груди</label>
-                            <input class="form-control" placeholder="Обхват груди" id="chest" name="chest">
+                            <input class="form-control" placeholder="Обхват груди" id="chest" name="chest" value="{{ data.chest }}">
+                            {% if form.errors.chest %}<label id="chest-error" class="error" for="chest">{{ form.errors.chest.0 }}</label>{% endif %}
                          </div>
                     </div>
                     <div class="col-lg-2">
-                        <div class="form-group">
+                        <div class="form-group {% if form.errors.waist %}has-error{% endif %}">
                             <label>Обхват талии</label>
-                            <input class="form-control" placeholder="Обхват талии" id="waist" name="waist">
+                            <input class="form-control" placeholder="Обхват талии" id="waist" name="waist" value="{{ data.waist }}">
+                            {% if form.errors.waist %}<label id="waist-error" class="error" for="waist">{{ form.errors.waist.0 }}</label>{% endif %}
                          </div>
                     </div>
                     <div class="col-lg-2">

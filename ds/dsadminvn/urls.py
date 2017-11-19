@@ -36,7 +36,7 @@ np_patterns = [
 """
 st_patterns = [
      # url(r'^ajax/isactive/(?P<pk>[0-9]+)/$', views.AjaxMainCategoryActive.as_view(), name='ajax_mc_is_active'),
-     # url(r'^ajax/addnew/$', views.AjaxMainCategoryNew.as_view(), name='ajax_mc_new'),
+      url(r'^addnew/$', views.SizeTableAddNew.as_view(), name='st_add_new'),
      # url(r'^deletemc/(?P<pk>[0-9]+)/$', views.MainCategoryDelete.as_view(), name='delete_mc'),
      url(r'^$', views.SizeTableWork.as_view(), name='sizetable'),
 ]
