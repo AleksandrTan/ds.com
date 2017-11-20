@@ -107,11 +107,35 @@ class SizeTableForm(ModelForm):
                         }
 
 """-------------------Brends Model ------------------------------------"""
+class ManagerBrends(models.Manager):
+
+    def get_active_brends(self):
+        return Brends.objects.filter(is_active__exact = True)
+
+    def get_all_brends(self):
+        return Brends.objects.all()
+
+    def save_new_brend(self, name, name_url):
+        new_br = Brends(name=name, name_url=name_url)
+        new_br.save()
+        return new_br
+
+    def change_active_status(self, pk):
+        br = Brends.objects.get(pk=pk)
+        if br.is_active:
+            br.is_active = False
+            data = {"status": False}
+        else:
+            br.is_active = True
+            data = {"status": True}
+        br.save()
+        return data
 
 class Brends(models.Model):
     name = models.CharField(max_length=100)
     name_url = models.CharField(max_length=100)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
+    objects = ManagerBrends()
 
     def get_absolute_url(self):
         return "/%s/" % self.name_url

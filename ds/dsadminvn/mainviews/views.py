@@ -79,7 +79,7 @@ class MainCategoryWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         context['tab'] = True
         return context
 
-class AjaxMainCategoryNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
+class AjaxMainCategoryNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
     login_url = 'login'
@@ -95,7 +95,7 @@ class AjaxMainCategoryNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredM
         import unidecode
         return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
 
-class AjaxMainCategoryActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
+class AjaxMainCategoryActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
     login_url = 'login'
@@ -140,7 +140,7 @@ class NameProductWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
         context['tab'] = True
         return context
 
-class AjaxNameProductNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
+class AjaxNameProductNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
     login_url = 'login'
@@ -157,7 +157,7 @@ class AjaxNameProductNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMi
         import unidecode
         return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
 
-class AjaxNameProductActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
+class AjaxNameProductActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
     login_url = 'login'
@@ -208,7 +208,6 @@ class SizeTableAddNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
 
     def form_valid(self, form):
         instance = form.save()
-
         return super(SizeTableAddNew, self).form_valid(form)
 
     def form_invalid(self, form):
@@ -251,14 +250,14 @@ class BrendsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Lis
     context_object_name = 'br_list'
 
     def get_queryset(self):
-        return Brends.objects.all()
+        return Brends.objects.get_all_brends()
 
     def get_context_data(self, **kwargs):
         context = super(BrendsWork, self).get_context_data(**kwargs)
         context['tab'] = True
         return context
 
-class AjaxBrendNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
+class AjaxBrendNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
     login_url = 'login'
@@ -266,13 +265,7 @@ class AjaxBrendNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, V
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
             name_url = self.slugify(request.GET['name'])
-            new_br =  Brends(
-                name=self.request.GET['name'],
-                name_url=name_url,
-                is_active=False
-            )
-            new_br.save()
-
+            new_br =  Brends.objects.save_new_brend(name=self.request.GET['name'], name_url=name_url)
         return JsonResponse({"status": True, 'id':new_br.id, 'name_url':name_url})
 
     def slugify(swlf, str):
@@ -280,21 +273,14 @@ class AjaxBrendNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, V
         import unidecode
         return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
 
-class AjaxBrendActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, View):
+class AjaxBrendActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
     login_url = 'login'
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
-            br = Brends.objects.get(pk=kwargs['pk'])
-            if br.is_active:
-                br.is_active = False
-                data = {"status":False}
-            else:
-                br.is_active = True
-                data = {"status": True}
-        br.save()
+            data = Brends.objects.change_active_status(kwargs['pk'])
         return JsonResponse(data)
 
 class BrendDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
