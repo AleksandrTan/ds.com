@@ -72,7 +72,7 @@ class MainCategoryWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
     paginate_by = 10
 
     def get_queryset(self):
-        return MainCategory.objects.all()
+        return MainCategory.objects.get_all_categories()
 
     def get_context_data(self, **kwargs):
         context = super(MainCategoryWork, self).get_context_data(**kwargs)
@@ -87,13 +87,7 @@ class AjaxMainCategoryNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredM
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
             name_url = self.slugify(request.GET['name'])
-            new_mc =  MainCategory(
-                name=self.request.GET['name'],
-                name_url=name_url,
-                is_active=False
-            )
-            new_mc.save()
-
+            new_mc = MainCategory.objects.save_new_category(self.request.GET['name'], self.slugify(request.GET['name']))
         return JsonResponse({"status": True, 'id':new_mc.id, 'name_url':name_url})
 
     def slugify(swlf, str):
@@ -108,14 +102,7 @@ class AjaxMainCategoryActive(BaseAdminView, LoginRequiredMixin, PermissionRequir
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
-            mc = MainCategory.objects.get(pk=kwargs['pk'])
-            if mc.is_active:
-                mc.is_active = False
-                data = {"status":False}
-            else:
-                mc.is_active = True
-                data = {"status": True}
-        mc.save()
+            data = MainCategory.objects.change_active_status(kwargs['pk'])
         return JsonResponse(data)
 
 class MainCategoryDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
@@ -146,7 +133,7 @@ class NameProductWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
     paginate_by = 5
 
     def get_queryset(self):
-        return NameProduct.objects.all()
+        return NameProduct.objects.get_all_products()
 
     def get_context_data(self, **kwargs):
         context = super(NameProductWork, self).get_context_data(**kwargs)
@@ -161,12 +148,7 @@ class AjaxNameProductNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMi
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
             name_url = self.slugify(request.GET['name'])
-            new_np =  NameProduct(
-                name=self.request.GET['name'],
-                name_url=name_url,
-                is_active=False
-            )
-            new_np.save()
+            new_np =  NameProduct.objects.save_new_nameproduct(request.GET['name'], name_url)
 
         return JsonResponse({"status": True, 'id':new_np.id, 'name_url':name_url})
 
@@ -182,14 +164,8 @@ class AjaxNameProductActive(BaseAdminView, LoginRequiredMixin, PermissionRequire
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
-            np = NameProduct.objects.get(pk=kwargs['pk'])
-            if np.is_active:
-                np.is_active = False
-                data = {"status":False}
-            else:
-                np.is_active = True
-                data = {"status": True}
-        np.save()
+            data = NameProduct.objects.change_active_status(kwargs['pk'])
+
         return JsonResponse(data)
 
 class NameProductDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):

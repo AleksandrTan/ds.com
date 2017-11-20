@@ -9,6 +9,24 @@ class ManagerMainCategories(models.Manager):
     def get_active_categories(self):
         return MainCategory.objects.filter(is_active__exact = True)
 
+    def get_all_categories(self):
+        return MainCategory.objects.all()
+
+    def save_new_category(self, name, name_url):
+        new_mc = MainCategory(name=name, name_url=name_url)
+        new_mc.save()
+        return new_mc
+
+    def change_active_status(self, pk):
+        mc = MainCategory.objects.get(pk=pk)
+        if mc.is_active:
+            mc.is_active = False
+            data = {"status": False}
+        else:
+            mc.is_active = True
+            data = {"status": True}
+        mc.save()
+        return data
 
 class MainCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -24,11 +42,35 @@ class MainCategory(models.Model):
 
 
 """----------- Name Producn model -----------------------"""
+class ManagerNameProducts(models.Manager):
+#Get active Categories
+    def get_active_products(self):
+        return NameProduct.objects.filter(is_active__exact = True)
+
+    def get_all_products(self):
+        return NameProduct.objects.all()
+
+    def save_new_nameproduct(self, name, name_url):
+        new_np = NameProduct(name=name, name_url=name_url)
+        new_np.save()
+        return new_np
+
+    def change_active_status(self, pk):
+        np = NameProduct.objects.get(pk=pk)
+        if np.is_active:
+            np.is_active = False
+            data = {"status": False}
+        else:
+            np.is_active = True
+            data = {"status": True}
+        np.save()
+        return data
 
 class NameProduct(models.Model):
     name = models.CharField(max_length=100)
     name_url = models.CharField(max_length=100)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
+    objects = ManagerNameProducts()
 
     def get_absolute_url(self):
         return "/%s/" % self.name_url
