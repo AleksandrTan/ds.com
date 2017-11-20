@@ -147,12 +147,12 @@
                     {% endif %}
                     {% if user.is_staff and user.is_superuser %}
                         <li>
-                            <a href="/statistics/"><i class="fa fa-hand-o-right"></i> Продукты</a>
+                            <a href="{% url 'products' %}"><i class="fa fa-hand-o-right"></i> Продукты</a>
                         </li>
                     {% endif %}
                     {% if user.is_staff %}
                         <li>
-                            <a href="/settings/"><i class="fa fa-cog"></i> Settings</a>
+                            <a href="{% url 'showform_for_add' %}"><i class="fa fa-cog"></i> Добавить продукт</a>
                         </li>
                     {% endif %}
                     {% if user.is_staff %}

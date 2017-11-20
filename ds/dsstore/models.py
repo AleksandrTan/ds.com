@@ -142,3 +142,12 @@ class Brends(models.Model):
 
     def __str__(self):
         return self.name
+
+"""--------------Products Model-------------------------"""
+
+class ManageProductsModel(models.Manager):
+    pass
+
+class Products(models.Model):
+
+    objects = ManagerNameProducts()

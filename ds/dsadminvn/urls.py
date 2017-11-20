@@ -49,6 +49,16 @@ br_patterns = [
      url(r'^$', views.BrendsWork.as_view(), name='brends'),
 ]
 
+"""
+    URL`s for Products
+"""
+pr_patterns = [
+   url(r'^$', views.ProductsWork.as_view(), name='products'),
+   url(r'^addproduct/$', views.ShowFormProductView.as_view(), name='showform_for_add'),
+   url(r'^createproduct/$', views.CreateNewProduct.as_view(), name='createproduct'),
+]
+
+
 urlpatterns = [
     url(r'^loginadmin/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/loginadmin'}, name='logout'),
@@ -58,5 +68,6 @@ urlpatterns = [
     url(r'^adminnv/nameproduct/', include(np_patterns)),
     url(r'^adminnv/sizetable/', include(st_patterns)),
     url(r'^adminnv/brends/', include(br_patterns)),
+    url(r'^adminnv/products/', include(pr_patterns)),
 ]
 

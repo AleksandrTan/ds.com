@@ -298,3 +298,12 @@ class BrendDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
         context['tab'] = True
         return context
 
+"""---------------Work with Products-------------------------------"""
+class ProductsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    pass
+
+class ShowFormProductView(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
+    pass
+
+class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    pass
