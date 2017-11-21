@@ -50,6 +50,16 @@ br_patterns = [
 ]
 
 """
+    URL`s for Seasons
+"""
+se_patterns = [
+     url(r'^ajax/isactive/(?P<pk>[0-9]+)/$', views.AjaxSeasonActive.as_view(), name='ajax_se_is_active'),
+     url(r'^ajax/addnew/$', views.AjaxSeasonNew.as_view(), name='ajax_se_new'),
+     url(r'^deletese/(?P<pk>[0-9]+)/$', views.SeasonDelete.as_view(), name='delete_se'),
+     url(r'^$', views.SeasonsWork.as_view(), name='seasons'),
+]
+
+"""
     URL`s for Products
 """
 pr_patterns = [
@@ -69,5 +79,6 @@ urlpatterns = [
     url(r'^adminnv/sizetable/', include(st_patterns)),
     url(r'^adminnv/brends/', include(br_patterns)),
     url(r'^adminnv/products/', include(pr_patterns)),
+    url(r'^adminnv/seasons/', include(se_patterns)),
 ]
 

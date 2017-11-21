@@ -143,11 +143,49 @@ class Brends(models.Model):
     def __str__(self):
         return self.name
 
+"""--------------------Seasons Model--------------------"""
+
+class ManagerSeasons(models.Manager):
+    def get_active_seasons(self):
+        return Seasons.objects.filter(is_active__exact = True)
+
+    def get_all_seasons(self):
+        return Seasons.objects.all()
+
+    def save_new_season(self, name, name_url):
+        new_se = Seasons(name=name, name_url=name_url)
+        new_se.save()
+        return new_se
+
+    def change_active_status(self, pk):
+        se = Seasons.objects.get(pk=pk)
+        if se.is_active:
+            se.is_active = False
+            data = {"status": False}
+        else:
+            se.is_active = True
+            data = {"status": True}
+        se.save()
+        return data
+
+class Seasons(models.Model):
+    name = models.CharField(max_length=100)
+    name_url = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=False)
+    objects = ManagerSeasons()
+
+    def get_absolute_url(self):
+        return "/%s/" % self.name_url
+
+    def __str__(self):
+        return self.name
+
+
 """--------------Products Model-------------------------"""
 
-class ManageProductsModel(models.Manager):
-    pass
-
-class Products(models.Model):
-
-    objects = ManagerNameProducts()
+# class ManageProductsModel(models.Manager):
+#     pass
+#
+# class Products(models.Model):
+#
+#     objects = ManagerNameProducts()

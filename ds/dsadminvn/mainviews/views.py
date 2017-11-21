@@ -11,7 +11,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 
 from django.contrib.auth.models import User
-from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm, Brends)
+from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm, Brends, Seasons)
 
 
 class BaseAdminView(View):
@@ -297,6 +297,66 @@ class BrendDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
         context = super(BrendDelete, self).get_context_data(**kwargs)
         context['tab'] = True
         return context
+
+"""----------------Wprk with seasons---------------------------------"""
+
+class SeasonsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
+
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    template_name = 'seasons/seasonswork.html'
+    context_object_name = 'se_list'
+
+    def get_queryset(self):
+        return Seasons.objects.get_all_seasons()
+
+    def get_context_data(self, **kwargs):
+        context = super(SeasonsWork, self).get_context_data(**kwargs)
+        context['tab'] = True
+        return context
+
+class AjaxSeasonNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
+
+    permission_required = "auth.change_user"
+    login_url = 'login'
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            name_url = self.slugify(request.GET['name'])
+            new_se =  Seasons.objects.save_new_season(name=self.request.GET['name'], name_url=name_url)
+        return JsonResponse({"status": True, 'id':new_se.id, 'name_url':name_url})
+
+    def slugify(swlf, str):
+        import re
+        import unidecode
+        return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
+
+class AjaxSeasonActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
+
+    permission_required = "auth.change_user"
+    login_url = 'login'
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            data = Seasons.objects.change_active_status(kwargs['pk'])
+        return JsonResponse(data)
+
+class SeasonDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
+
+    permission_required = "auth.change_user"
+    login_url = 'login'
+
+    def get(self, request, *args, **kwargs):
+        Seasons.objects.get(pk=kwargs['pk']).delete()
+        redirect_url = '/adminnv/seasons/'
+        return redirect(redirect_url)
+
+    def get_context_data(self, **kwargs):
+        context = super(SeasonDelete, self).get_context_data(**kwargs)
+        context['tab'] = True
+        return context
+
+
 
 """---------------Work with Products-------------------------------"""
 class ProductsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
