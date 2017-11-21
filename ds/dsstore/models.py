@@ -183,9 +183,21 @@ class Seasons(models.Model):
 
 """--------------Products Model-------------------------"""
 
-# class ManageProductsModel(models.Manager):
-#     pass
-#
-# class Products(models.Model):
-#
-#     objects = ManagerNameProducts()
+class ManageProductsModel(models.Manager):
+    pass
+
+class Products(models.Model):
+    maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE)
+    articul = models.CharField(max_length=100)
+    nameproduct = models.ForeignKey(NameProduct, on_delete=models.CASCADE)
+
+    objects = ManagerNameProducts()
+
+
+"""--------------SizeCount Model--------------------------"""
+
+class ManagerProfileProduct(models.Manager):
+    pass
+
+class ProfileProduct(models.Model):
+    pass

@@ -298,7 +298,7 @@ class BrendDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
         context['tab'] = True
         return context
 
-"""----------------Wprk with seasons---------------------------------"""
+"""----------------Work with seasons---------------------------------"""
 
 class SeasonsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
@@ -359,6 +359,7 @@ class SeasonDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
 
 """---------------Work with Products-------------------------------"""
+
 class ProductsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
     pass
 
