@@ -13,7 +13,6 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm, Brends, Seasons)
 
-
 class BaseAdminView(View):
     """
     Base view for admin views.
@@ -355,8 +354,6 @@ class SeasonDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
         context = super(SeasonDelete, self).get_context_data(**kwargs)
         context['tab'] = True
         return context
-
-
 
 """---------------Work with Products-------------------------------"""
 
