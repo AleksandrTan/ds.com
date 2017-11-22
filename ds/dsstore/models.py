@@ -1,7 +1,7 @@
 from datetime import timedelta
 from django.utils.timezone import now
 
-from django.conf import settings
+#from django.conf import settings
 from django.db import models
 from django.forms import ModelForm
 
