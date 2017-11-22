@@ -134,7 +134,7 @@
                                 <a href="{% url 'maincategory' %}"><i class="fa fa-th-list"></i> Категории</a>
                             </li>
                             <li>
-                                <a href="{% url 'nameproduct' %}"><i class="fa fa-th-list"></i> Товары</a>
+                                <a href="{% url 'nameproduct' %}"><i class="fa fa-th-list"></i> Названия товаров</a>
                             </li>
                             <li>
                                 <a href="{% url 'sizetable' %}"><i class="fa fa-th-list"></i> Таблица размеров</a>
@@ -148,14 +148,18 @@
                         </ul>
                     </li>
                     {% endif %}
+
                     {% if user.is_staff and user.is_superuser %}
                         <li>
-                            <a href="{% url 'products' %}"><i class="fa fa-hand-o-right"></i> Продукты</a>
-                        </li>
-                    {% endif %}
-                    {% if user.is_staff %}
-                        <li>
-                            <a href="{% url 'showform_for_add' %}"><i class="fa fa-cog"></i> Добавить продукт</a>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#products"><i class="fa fa-fw fa-arrows-v"></i> Товары <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="products" class="collapse {% if tab_products %} in {% endif %}">
+                                <li>
+                                    <a href="{% url 'products' %}"><i class="fa fa-hand-o-right"></i> Все товары</a>
+                                </li>
+                                 <li>
+                                    <a href="{% url 'showform_for_add' %}"><i class="fa fa-cog"></i> Добавить Товар</a>
+                                </li>
+                            </ul>
                         </li>
                     {% endif %}
                     {% if user.is_staff %}

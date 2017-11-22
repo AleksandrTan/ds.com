@@ -149,3 +149,5 @@ LOGIN_REDIRECT_URL = 'homeadmin'
 LOGIN_URL = 'login'
 
 MAIN_HOST_SITE = 'http://localhost:8000'
+
+#Site settings

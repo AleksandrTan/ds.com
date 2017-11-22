@@ -1,3 +1,7 @@
+from datetime import timedelta
+from django.utils.timezone import now
+
+from django.conf import settings
 from django.db import models
 from django.forms import ModelForm
 
@@ -195,8 +199,8 @@ class Products(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)
     articul = models.CharField(max_length=100, blank=False)
     nameproduct = models.ForeignKey(NameProduct, on_delete=models.CASCADE, blank=False)
-    brends = models.ForeignKey(Brends, on_delete=models.SET_DEFAULT(), default=0, blank=True)
-    season = models.ForeignKey(Seasons, on_delete=models.SET_DEFAULT(), default=0, blank=True)
+    brends = models.ForeignKey(Brends, on_delete=models.SET_DEFAULT, default=0, blank=True)
+    season = models.ForeignKey(Seasons, on_delete=models.SET_DEFAULT, default=0, blank=True)
     price = models.FloatField(blank=True)
     wholesale_price = models.FloatField(blank=True)
     purshase_price = models.FloatField(blank=True)
@@ -204,12 +208,17 @@ class Products(models.Model):
                                           content_types=['image/jpg', 'image/png', 'image/jpeg'],
                                           max_upload_size=5000000, blank=True, default='nophoto.png')
     description = models.TextField(blank=False)
-    color = models.CharField(blank=True)
+    color = models.CharField(max_length=100, blank=True)
     discount = models.SmallIntegerField(blank=True)
     price_down = models.SmallIntegerField(blank=True)
+    sale = models.BooleanField(default=False)
+    sale_price = models.FloatField(default=0, blank=True)
+    empty_count = models.BooleanField(default=False)
     seo_attributes = models.TextField(blank=False)
     is_belarus = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_new = models.BooleanField(default=False)
+    is_new_date_end = models.DateField(default=now() - timedelta(days=1))
     date_create = models.DateTimeField(auto_now_add=True)
     objects = ManagerNameProducts()
 
@@ -220,4 +229,8 @@ class ManagerSizeCount(models.Manager):
     pass
 
 class SizeCount(models.Model):
-    pass
+    products = models.ForeignKey(Products, on_delete=models.CASCADE)
+    size = models.SmallIntegerField(default=0)
+    count_num = models.SmallIntegerField(default=0)
+
+    objects = ManagerSizeCount()
