@@ -1,6 +1,8 @@
 from django.db import models
 from django.forms import ModelForm
 
+from dsstore.mainhelpers import MainImgTypeField as MI
+
 
 """-------------Main Category model--------------------"""
 
@@ -183,21 +185,39 @@ class Seasons(models.Model):
 
 """--------------Products Model-------------------------"""
 
+def custom_directory_path(instance, filename):
+    return 'images/{0}/{1}'.format(instance.dirname_img, filename)
+
 class ManageProductsModel(models.Manager):
     pass
 
 class Products(models.Model):
-    maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE)
-    articul = models.CharField(max_length=100)
-    nameproduct = models.ForeignKey(NameProduct, on_delete=models.CASCADE)
-
+    maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)
+    articul = models.CharField(max_length=100, blank=False)
+    nameproduct = models.ForeignKey(NameProduct, on_delete=models.CASCADE, blank=False)
+    brends = models.ForeignKey(Brends, on_delete=models.SET_DEFAULT(), default=0, blank=True)
+    season = models.ForeignKey(Seasons, on_delete=models.SET_DEFAULT(), default=0, blank=True)
+    price = models.FloatField(blank=True)
+    wholesale_price = models.FloatField(blank=True)
+    purshase_price = models.FloatField(blank=True)
+    main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
+                                          content_types=['image/jpg', 'image/png', 'image/jpeg'],
+                                          max_upload_size=5000000, blank=True, default='nophoto.png')
+    description = models.TextField(blank=False)
+    color = models.CharField(blank=True)
+    discount = models.SmallIntegerField(blank=True)
+    price_down = models.SmallIntegerField(blank=True)
+    seo_attributes = models.TextField(blank=False)
+    is_belarus = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_create = models.DateTimeField(auto_now_add=True)
     objects = ManagerNameProducts()
 
 
 """--------------SizeCount Model--------------------------"""
 
-class ManagerProfileProduct(models.Manager):
+class ManagerSizeCount(models.Manager):
     pass
 
-class ProfileProduct(models.Model):
+class SizeCount(models.Model):
     pass

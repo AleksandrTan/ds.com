@@ -1,7 +1,6 @@
 from django.db.models import FileField
 from django.forms import forms
 
-
 """
     Custom type for field 'main_img' in table Sentence
     https://blog.bixly.com/accept-only-specific-file-types-in-django-file-upload
