@@ -219,8 +219,18 @@ class Products(models.Model):
     is_active = models.BooleanField(default=True)
     is_new = models.BooleanField(default=False)
     is_new_date_end = models.DateField(default=now() - timedelta(days=1))
+    link_name = models.CharField(max_length=550)
+    identifier = models.CharField(max_length=20)
+    dirname_img = models.CharField(max_length=25, default='', blank=True)
     date_create = models.DateTimeField(auto_now_add=True)
     objects = ManagerNameProducts()
+
+    def get_absolute_url(self):
+        return "sentence/%s" % self.link_name
+
+
+    def __str__(self):
+        return self.link_name
 
 
 """--------------SizeCount Model--------------------------"""
@@ -234,3 +244,15 @@ class SizeCount(models.Model):
     count_num = models.SmallIntegerField(default=0)
 
     objects = ManagerSizeCount()
+
+
+"""------------------Images Model---------------------------"""
+
+class Image(models.Model):
+
+    sentence = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='image')
+    img_path = models.CharField(max_length=250, blank=True)
+
+
+    def get_absolute_url(self):
+        return self.img_path

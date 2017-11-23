@@ -151,3 +151,8 @@ LOGIN_URL = 'login'
 MAIN_HOST_SITE = 'http://localhost:8000'
 
 #Site settings
+TEST_MEDIA_IMAGES = 'media/images/'
+#Type for upload files
+CONTENT_TYPES_FILE = ['image/jpeg', 'image/jpg', 'image/png']
+#Max size for upload files
+MAX_SIZE_UPLOAD = 5000000
