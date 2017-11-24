@@ -1,6 +1,3 @@
-from datetime import timedelta
-from django.utils.timezone import now
-
 #from django.conf import settings
 from django.db import models
 from django.forms import ModelForm
@@ -201,24 +198,25 @@ class Products(models.Model):
     nameproduct = models.ForeignKey(NameProduct, on_delete=models.CASCADE, blank=False)
     brends = models.ForeignKey(Brends, on_delete=models.SET_DEFAULT, default=0, blank=True)
     season = models.ForeignKey(Seasons, on_delete=models.SET_DEFAULT, default=0, blank=True)
-    price = models.FloatField(blank=True)
-    wholesale_price = models.FloatField(blank=True)
-    purshase_price = models.FloatField(blank=True)
+    price = models.FloatField(blank=True, default=0)
+    wholesale_price = models.FloatField(blank=True, default=0)
+    purshase_price = models.FloatField(blank=True, default=0)
+    # main_photo_path = models.ImageField(blank=True, upload_to='images/')
     main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
                                           content_types=['image/jpg', 'image/png', 'image/jpeg'],
                                           max_upload_size=5000000, blank=True, default='nophoto.png')
-    description = models.TextField(blank=False)
-    color = models.CharField(max_length=100, blank=True)
-    discount = models.SmallIntegerField(blank=True)
-    price_down = models.SmallIntegerField(blank=True)
+    description = models.TextField(blank=True, default='')
+    color = models.CharField(max_length=100, blank=True, default='')
+    discount = models.SmallIntegerField(blank=True, default=0)
+    price_down = models.SmallIntegerField(blank=True, default=0)
     sale = models.BooleanField(default=False)
     sale_price = models.FloatField(default=0, blank=True)
     empty_count = models.BooleanField(default=False)
-    seo_attributes = models.TextField(blank=False)
+    seo_attributes = models.TextField(blank=True, default='')
     is_belarus = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     is_new = models.BooleanField(default=False)
-    is_new_date_end = models.DateField(default=now() - timedelta(days=1))
+    is_new_date_end = models.DateField(auto_now_add=True)
     link_name = models.CharField(max_length=550)
     identifier = models.CharField(max_length=20)
     dirname_img = models.CharField(max_length=25, default='', blank=True)
@@ -232,6 +230,17 @@ class Products(models.Model):
     def __str__(self):
         return self.link_name
 
+class ProductsForm(ModelForm):
+    class Meta:
+        model = Products
+        fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season', 'price', 'wholesale_price', 'purshase_price', 'description',
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new',]
+
+        error_messages = {
+                             'articul': {'required': "Пожалуйста введите артикул",
+                                         'max_length':"Не более 30 символов"
+                              },
+                         }
 
 """--------------SizeCount Model--------------------------"""
 

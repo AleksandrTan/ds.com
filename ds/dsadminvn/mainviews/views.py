@@ -4,14 +4,14 @@ from django.views.generic import View
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.http import JsonResponse
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 
 from django.contrib.auth.models import User
-from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm, Brends, Seasons)
+from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm, Brends, Seasons, Products)
 
 class BaseAdminView(View):
     """
@@ -358,10 +358,22 @@ class SeasonDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 """---------------Work with Products-------------------------------"""
 
 class ProductsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
-    pass
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    model = Products
+    template_name = 'products/productswork.html'
+    context_object_name = 'products_list'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductsWork, self).get_context_data(**kwargs)
+        context['tab_products'] = True
+        return context
 
 class ShowFormProductView(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
     pass
 
 class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    pass
+
+class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     pass

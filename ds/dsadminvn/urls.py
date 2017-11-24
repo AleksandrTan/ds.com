@@ -34,38 +34,39 @@ np_patterns = [
     URL`s for Size Table
 """
 st_patterns = [
-     url(r'^addnew/$', views.SizeTableAddNew.as_view(), name='st_add_new'),
-     url(r'^delete/(?P<pk>[0-9]+)/$', views.SizeTableDelete.as_view(), name='delete_st'),
-     url(r'^$', views.SizeTableWork.as_view(), name='sizetable'),
+    url(r'^addnew/$', views.SizeTableAddNew.as_view(), name='st_add_new'),
+    url(r'^delete/(?P<pk>[0-9]+)/$', views.SizeTableDelete.as_view(), name='delete_st'),
+    url(r'^$', views.SizeTableWork.as_view(), name='sizetable'),
 ]
 
 """
     URL`s for Brends
 """
 br_patterns = [
-     url(r'^ajax/isactive/(?P<pk>[0-9]+)/$', views.AjaxBrendActive.as_view(), name='ajax_br_is_active'),
-     url(r'^ajax/addnew/$', views.AjaxBrendNew.as_view(), name='ajax_br_new'),
-     url(r'^deletebr/(?P<pk>[0-9]+)/$', views.BrendDelete.as_view(), name='delete_br'),
-     url(r'^$', views.BrendsWork.as_view(), name='brends'),
+    url(r'^ajax/isactive/(?P<pk>[0-9]+)/$', views.AjaxBrendActive.as_view(), name='ajax_br_is_active'),
+    url(r'^ajax/addnew/$', views.AjaxBrendNew.as_view(), name='ajax_br_new'),
+    url(r'^deletebr/(?P<pk>[0-9]+)/$', views.BrendDelete.as_view(), name='delete_br'),
+    url(r'^$', views.BrendsWork.as_view(), name='brends'),
 ]
 
 """
     URL`s for Seasons
 """
 se_patterns = [
-     url(r'^ajax/isactive/(?P<pk>[0-9]+)/$', views.AjaxSeasonActive.as_view(), name='ajax_se_is_active'),
-     url(r'^ajax/addnew/$', views.AjaxSeasonNew.as_view(), name='ajax_se_new'),
-     url(r'^deletese/(?P<pk>[0-9]+)/$', views.SeasonDelete.as_view(), name='delete_se'),
-     url(r'^$', views.SeasonsWork.as_view(), name='seasons'),
+    url(r'^ajax/isactive/(?P<pk>[0-9]+)/$', views.AjaxSeasonActive.as_view(), name='ajax_se_is_active'),
+    url(r'^ajax/addnew/$', views.AjaxSeasonNew.as_view(), name='ajax_se_new'),
+    url(r'^deletese/(?P<pk>[0-9]+)/$', views.SeasonDelete.as_view(), name='delete_se'),
+    url(r'^$', views.SeasonsWork.as_view(), name='seasons'),
 ]
 
 """
     URL`s for Products
 """
 pr_patterns = [
-   url(r'^$', views.ProductsWork.as_view(), name='products'),
-   url(r'^addproduct/$', views.ShowFormProductView.as_view(), name='showform_for_add'),
-   url(r'^createproduct/$', views.CreateNewProduct.as_view(), name='createproduct'),
+    url(r'^(?:page/(?P<page>\d+)/)?$', views.ProductsWork.as_view(), name='products'),
+    url(r'^addproduct/$', views.ShowFormProductView.as_view(), name='showform_for_add_product'),
+    url(r'^createproduct/$', views.CreateNewProduct.as_view(), name='createproduct'),
+    url(r'^edit/(?P<pk>\d+)/$', views.EditProduct.as_view(), name='editproduct'),
 ]
 
 
