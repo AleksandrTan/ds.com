@@ -1,0 +1,107 @@
+{% extends "main.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="btn-modal-wrap btn-modal-wrap-1">
+    <!-- Modal Deleted -->
+    <div class="modal fade" id="is_deleted_ctr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="fa fa-times" aria-hidden="true">
+                    </span></button>
+                    <h4 class="modal-title" id="myModalLabel" style="color: #ff0012">Внимание!!!Удаление Товара!!!</h4>
+                </div>
+                 <div class="modal-body">
+                     <h3 style="color: #ff0012">ВЫ действительно хотите удалить этот товар???</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs btn-default" id="cancel_type">Cancel</button>
+                    <button type="button" class="btn btn-xs btn-danger" id="delete_type" data_id_type="">Deleted</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Добавление продукта
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-table"></i> <a href="{% url 'products' %}">Товары</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-table"></i> Добавить товар
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                {% if not maincategorys or not nameproducts %}
+                    <p>Нет категорий или названий для отображения.Добавте данные!</p>
+                {% else %}
+                <form class="form form-offer" method="post" name="add_new_product" action="{% url 'createproduct' %}"
+                  id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="col-lg-2">
+                        <div class="form-group ">
+                            <label>Категория</label>
+                                <select class="form-control" name="maincategory">
+                                    {% for mcl in maincategorys %}
+                                        <option name="{{ mcl.id }}" value="{{ mcl.id }}">{{ mcl.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
+                            <label>Артикул</label>
+                            <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" value="{{ data.articul }}">
+                            {% if form.errors.articul %}<label id="articul-error" class="error" for="articul">{{ form.errors.articul.0 }}</label>{% endif %}
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group {% if form.errors.height %}has-error{% endif %}">
+                            <label>Рост</label>
+                            <input class="form-control" placeholder="Рост" id="height" name="height" value="{{ data.height }}">
+                            {% if form.errors.height %}<label id="height-error" class="error" for="height">{{ form.errors.height.0 }}</label>{% endif %}
+                         </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group {% if form.errors.chest %}has-error{% endif %}">
+                            <label>Обхват груди</label>
+                            <input class="form-control" placeholder="Обхват груди" id="chest" name="chest" value="{{ data.chest }}">
+                            {% if form.errors.chest %}<label id="chest-error" class="error" for="chest">{{ form.errors.chest.0 }}</label>{% endif %}
+                         </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group {% if form.errors.waist %}has-error{% endif %}">
+                            <label>Обхват талии</label>
+                            <input class="form-control" placeholder="Обхват талии" id="waist" name="waist" value="{{ data.waist }}">
+                            {% if form.errors.waist %}<label id="waist-error" class="error" for="waist">{{ form.errors.waist.0 }}</label>{% endif %}
+                         </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Добавить</label>
+                            <button type="submit" class="btn btn-sm btn-success form-control">Добавить</button>
+                         </div>
+                    </div>
+                </form>
+
+                {% endif %}
+                </div>
+                <!-- /.row -->
+            </div>
+    </div>
+<script type="text/javascript" src="{% static 'js/validator/jquery.validate.js' %}"></script>
+<script src="{% static "js/products/fileupload.js" %}"></script>
+<script src="{% static "js/products/addnewproduct.js" %}"></script>
+{% endblock %}

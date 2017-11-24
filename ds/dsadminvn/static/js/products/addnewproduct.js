@@ -11,50 +11,50 @@ $.validator.setDefaults( {
      		}
 		} );
 $(document).ready(function () {
-//Show/hide help block for input tags
-    $('input').on('click', function () {
-        $(this).parent().parent().next().show()
-    });
-
-    $('input').blur(function(){
-        $(this).parent().parent().next().hide()
-    });
-//Show count entered simbols for input tags
-    $("input").keyup(function() {
-        $(this).next('[data-num = count_simbols]').next('span').css('display', 'block').children('em').text(this.value.length);
-        if (this.value.length > parseInt($(this).next('[data-num = count_simbols]').data( "count" ))){
-            $(this).next('[data-num = count_simbols]').next('span').css('color', 'red').children('em').text(this.value.length);
-        }
-        else{
-            $(this).next('[data-num = count_simbols]').next('span').css('color', 'green').children('em').text(this.value.length);
-        }
-        if(this.value.length == 0){
-            $(this).next('[data-num = count_simbols]').next('span').css('display', 'none');
-        }
-    });
-//Show count entered simbols for textarea tag
-    $("textarea").keyup(function() {
-        $(this).next('[data-num = count_simbols]').next('span').css('display', 'block').children('em').text(this.value.length);
-        if (this.value.length > parseInt($(this).next('[data-num = count_simbols]').data( "count" ))){
-            $(this).next('[data-num = count_simbols]').next('span').css('color', 'red').children('em').text(this.value.length);
-        }
-        else{
-            $(this).next('[data-num = count_simbols]').next('span').css('color', 'green').children('em').text(this.value.length);
-        }
-
-        if(this.value.length == 0){
-            $(this).next('[data-num = count_simbols]').next('span').css('display', 'none');
-        }
-    });
-
-//Show count entered simbols for fotos block
-    $('#fotos_div').mousemove(function(){
-      $('#fotos_info').show();
-    });
-
-    $('#fotos_div').mouseleave(function(){
-      $('#fotos_info').hide();
-    });
+// //Show/hide help block for input tags
+//     $('input').on('click', function () {
+//         $(this).parent().parent().next().show()
+//     });
+//
+//     $('input').blur(function(){
+//         $(this).parent().parent().next().hide()
+//     });
+// //Show count entered simbols for input tags
+//     $("input").keyup(function() {
+//         $(this).next('[data-num = count_simbols]').next('span').css('display', 'block').children('em').text(this.value.length);
+//         if (this.value.length > parseInt($(this).next('[data-num = count_simbols]').data( "count" ))){
+//             $(this).next('[data-num = count_simbols]').next('span').css('color', 'red').children('em').text(this.value.length);
+//         }
+//         else{
+//             $(this).next('[data-num = count_simbols]').next('span').css('color', 'green').children('em').text(this.value.length);
+//         }
+//         if(this.value.length == 0){
+//             $(this).next('[data-num = count_simbols]').next('span').css('display', 'none');
+//         }
+//     });
+// //Show count entered simbols for textarea tag
+//     $("textarea").keyup(function() {
+//         $(this).next('[data-num = count_simbols]').next('span').css('display', 'block').children('em').text(this.value.length);
+//         if (this.value.length > parseInt($(this).next('[data-num = count_simbols]').data( "count" ))){
+//             $(this).next('[data-num = count_simbols]').next('span').css('color', 'red').children('em').text(this.value.length);
+//         }
+//         else{
+//             $(this).next('[data-num = count_simbols]').next('span').css('color', 'green').children('em').text(this.value.length);
+//         }
+//
+//         if(this.value.length == 0){
+//             $(this).next('[data-num = count_simbols]').next('span').css('display', 'none');
+//         }
+//     });
+//
+// //Show count entered simbols for fotos block
+//     $('#fotos_div').mousemove(function(){
+//       $('#fotos_info').show();
+//     });
+//
+//     $('#fotos_div').mouseleave(function(){
+//       $('#fotos_info').hide();
+//     });
 
 //Validations form
 

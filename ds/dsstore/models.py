@@ -190,7 +190,8 @@ def custom_directory_path(instance, filename):
     return 'images/{0}/{1}'.format(instance.dirname_img, filename)
 
 class ManageProductsModel(models.Manager):
-    pass
+    def get_list_products(self):
+        return Products.objects.only('id', 'articul', 'price', 'is_active').filter(is_active=True)
 
 class Products(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)
@@ -221,7 +222,7 @@ class Products(models.Model):
     identifier = models.CharField(max_length=20)
     dirname_img = models.CharField(max_length=25, default='', blank=True)
     date_create = models.DateTimeField(auto_now_add=True)
-    objects = ManagerNameProducts()
+    objects = ManageProductsModel()
 
     def get_absolute_url(self):
         return "sentence/%s" % self.link_name

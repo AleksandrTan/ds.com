@@ -1,4 +1,10 @@
+import os
+import shutil
+from datetime import datetime, timedelta
+
+from django.conf import settings
 from django.shortcuts import redirect
+from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import View
 from django.views.generic.base import TemplateView
@@ -11,7 +17,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 
 from django.contrib.auth.models import User
-from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm, Brends, Seasons, Products)
+from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm, Brends, Seasons, Products, ProductsForm)
 
 class BaseAdminView(View):
     """
@@ -69,9 +75,7 @@ class MainCategoryWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
     template_name = 'maincategory/mcwork.html'
     context_object_name = 'mc_list'
     paginate_by = 10
-
-    def get_queryset(self):
-        return MainCategory.objects.get_all_categories()
+    model = MainCategory
 
     def get_context_data(self, **kwargs):
         context = super(MainCategoryWork, self).get_context_data(**kwargs)
@@ -130,9 +134,7 @@ class NameProductWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
     template_name = 'nameproduct/npwork.html'
     context_object_name = 'np_list'
     paginate_by = 5
-
-    def get_queryset(self):
-        return NameProduct.objects.get_all_products()
+    model = NameProduct
 
     def get_context_data(self, **kwargs):
         context = super(NameProductWork, self).get_context_data(**kwargs)
@@ -247,9 +249,7 @@ class BrendsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Lis
     login_url = 'login'
     template_name = 'brends/brwork.html'
     context_object_name = 'br_list'
-
-    def get_queryset(self):
-        return Brends.objects.get_all_brends()
+    model = Brends
 
     def get_context_data(self, **kwargs):
         context = super(BrendsWork, self).get_context_data(**kwargs)
@@ -305,9 +305,7 @@ class SeasonsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Li
     login_url = 'login'
     template_name = 'seasons/seasonswork.html'
     context_object_name = 'se_list'
-
-    def get_queryset(self):
-        return Seasons.objects.get_all_seasons()
+    model = Seasons
 
     def get_context_data(self, **kwargs):
         context = super(SeasonsWork, self).get_context_data(**kwargs)
@@ -360,7 +358,7 @@ class SeasonDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 class ProductsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
     permission_required = "auth.change_user"
     login_url = 'login'
-    model = Products
+    queryset = Products.objects.get_list_products()
     template_name = 'products/productswork.html'
     context_object_name = 'products_list'
 
@@ -370,10 +368,84 @@ class ProductsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, L
         return context
 
 class ShowFormProductView(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
-    pass
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    template_name = 'products/createnewproduct.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ShowFormProductView, self).get_context_data(**kwargs)
+        context['maincategorys'] = MainCategory.objects.get_active_categories()
+        context['nameproducts'] = NameProduct.objects.get_active_products()
+        context['brends'] = Brends.objects.get_active_brends()
+        context['seasons'] = Seasons.objects.get_active_seasons()
+        context['tab_products'] = True
+
+        return context
 
 class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
-    pass
+    login_url = 'login'
+    form_class = ProductsForm
+    template_name = 'products/createnewproduct.html'
+    succes_url = '/adminnv/products/'
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.user = self.request.user
+        instance.stop_time = datetime.now() + timedelta(days=30)
+        instance.type_img_s = self.type_img_s[form.cleaned_data['type_id']]
+        instance.identifier = self.uuid_sentece()
+        instance.dirname_img = self.uuid_sentece_user()
+        instance.link_name = self.slugify(form.cleaned_data['caption']) + '#' + instance.identifier
+        instance.save()
+        self.save_oter_files(instance, form)
+
+        return super(CreateNewProduct, self).form_valid(form)
+
+    def form_invalid(self, form):
+        context = self.get_context_data()
+        context['data'] = self.request.POST
+
+        return self.render_to_response(context)
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateNewProduct, self).get_context_data(**kwargs)
+
+        return context
+
+    def get_success_url(self):
+        return self.succes_url
+
+    def slugify(swlf, str):
+        import re
+        import unidecode
+        return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
+
+    def uuid_sentece_user(self):
+        import uuid
+        return 'user_' + str(uuid.uuid4())[:10]
+
+    def uuid_sentece(self):
+        import uuid
+        return str(uuid.uuid4())[:10]
+
+    def save_oter_files(self, instance, form):
+        if not os.path.isdir(settings.TEST_MEDIA_IMAGES + instance.dirname_img) and self.request.FILES.getlist(
+                'other_img[]'):
+            os.mkdir(settings.TEST_MEDIA_IMAGES + instance.dirname_img, mode=0o777)
+        # https://docs.djangoproject.com/ja/1.11/_modules/django/utils/datastructures/ - look for MultiValueDict(getlist)
+        if self.request.FILES.getlist('other_img[]'):
+            for ifile in self.request.FILES.getlist('other_img[]'):
+                if ifile.size < settings.MAX_SIZE_UPLOAD and ifile.content_type in settings.CONTENT_TYPES_FILE:
+                    fs = FileSystemStorage(location=settings.TEST_MEDIA_IMAGES + instance.dirname_img,
+                                           base_url=settings.TEST_MEDIA_IMAGES + instance.dirname_img)
+                    filename = fs.save(ifile.name, ifile)
+                    i = Image(sentence=instance,
+                              img_path=fs.url(filename))
+                    i.save()
+                else:
+                    # messages.info(self.request, 'Three credits remain in your account.')
+                    continue
+        return True
 
 class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     pass

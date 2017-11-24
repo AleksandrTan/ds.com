@@ -1,28 +1,7 @@
 {% extends "main.html" %}
 {% load staticfiles %}
 {% block content %}
-<div class="btn-modal-wrap btn-modal-wrap-1">
-    <!-- Modal Deleted -->
-    <div class="modal fade" id="is_deleted_ctr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="fa fa-times" aria-hidden="true">
-                    </span></button>
-                    <h4 class="modal-title" id="myModalLabel" style="color: #ff0012">Внимание!!!Удаление категории!!!</h4>
-                </div>
-                 <div class="modal-body">
-                     <h3 style="color: #ff0012">ВЫ действительно хотите удалить эту категорию???</h3>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-xs btn-default" id="cancel_type">Cancel</button>
-                    <button type="button" class="btn btn-xs btn-danger" id="delete_type" data_id_type="">Deleted</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-    <div id="page-wrapper">
+<div id="page-wrapper">
         <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="row">
@@ -70,14 +49,13 @@
                                         <td class="text-center">{{ product_data.nameproduct.name }}</td>
                                         <td class="text-center">{{ product_data.price }}</td>
                                         <td class="text-center">{{ product_data.is_active }}</td>
-                                        <td class="text-center"><a type="button" data_delete="delete"
-                                                                   id="{{ product_data.id }}"
-                                                                   class="btn btn-sm btn-danger"
-                                                                   href="{% url 'edit_product' product_data.id %}">Редакторовать</a>
+                                        <td class="text-center"><a type="button"
+                                                                   сlass="btn btn-sm btn-danger"
+                                                                   href="{% url 'edit_product' product_data.id %}">Редактировать</a>
                                         </td>
                                     </tr>
                                 {% empty %}
-                                    <tr><td style="color: red">Нет данных</td></tr>
+                                    <tr><td style="color: red">Нет данных для отображения</td></tr>
                                 {% endfor %}
                                 </tbody>
                             </table>
@@ -88,5 +66,4 @@
 
             </div>
     </div>
-<script src="{% static "js/maincategorywork.js" %}"></script>
 {% endblock %}
