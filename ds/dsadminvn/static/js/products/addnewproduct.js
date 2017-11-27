@@ -1,21 +1,20 @@
 /*
 * Identifier for debug mode(if true - form submited on server)
 * */
-var is_validate_js = true;
+var is_validate_js = false;
 $.validator.setDefaults( {
 			submitHandler: function () {
 			    if (is_validate_js){
-			    	$('#hellopreloader_preload').css({'display':'block', 'opacity': '0.5'});
-                    $( "#add_new_s" ).submit();
+			    	$( "#add_new_product" ).submit();
                 }
      		}
 		} );
 $(document).ready(function () {
-// //Show/hide help block for input tags
-//     $('input').on('click', function () {
-//         $(this).parent().parent().next().show()
-//     });
-//
+//Change sizes for select maincategory
+    $('#maincategory' ).change(function () {
+        alert($(this).val());
+    });
+
 //     $('input').blur(function(){
 //         $(this).parent().parent().next().hide()
 //     });

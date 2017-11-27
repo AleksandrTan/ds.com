@@ -50,25 +50,20 @@
                 {% else %}
                 <form class="form form-offer" method="post" name="add_new_product" action="{% url 'createproduct' %}"
                   id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
-                    <div class="col-lg-2">
+                    <div class="col-lg-6">
                         <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
                             <label>Артикул</label>
                             <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" value="{{ data.articul }}">
                             {% if form.errors.articul %}<label id="articul-error" class="error" for="articul">{{ form.errors.articul.0 }}</label>{% endif %}
                         </div>
-                    </div>
-                    <div class="col-lg-2">
                         <div class="form-group ">
                             <label>Категория</label>
-                                <select class="form-control" name="maincategory">
+                                <select class="form-control" name="maincategory" id="maincategory">
                                     {% for mcl in maincategorys %}
                                         <option name="{{ mcl.id }}" value="{{ mcl.id }}">{{ mcl.name }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
-                    </div>
-
-                    <div class="col-lg-2">
                         <div class="form-group ">
                             <label>Название</label>
                                 <select class="form-control" name="nameproducts">
@@ -77,49 +72,75 @@
                                     {% endfor %}
                                 </select>
                             </div>
-                    </div>
-
-                    {% if brends %}
-                    <div class="col-lg-2">
-                        <div class="form-group ">
+                       {% if brends %}
+                       <div class="form-group ">
                             <label>Бренд</label>
                                 <select class="form-control" name="brends">
                                     {% for brend in brends %}
+                                        <option name="0" value="">Выберите бренд</option>
                                         <option name="{{ brend.id }}" value="{{ brend.id }}">{{ brend.name }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
-                    </div>
                     {% endif %}
-
                     {% if seasons %}
-                    <div class="col-lg-2">
-                        <div class="form-group ">
+                         <div class="form-group ">
                             <label>Сезон</label>
                                 <select class="form-control" name="seasons">
                                     {% for season in seasons %}
+                                        <option name="" value="">Выберите сезон</option>
                                         <option name="{{ season.id }}" value="{{ season.id }}">{{ season.name }}</option>
                                     {% endfor %}
                                 </select>
-                            </div>
+                          </div>
                     </div>
                     {% endif %}
-                    <div class="col-lg-2">
-                        <div class="form-group {% if form.errors.height %}has-error{% endif %}">
-                            <label>Рост</label>
-                            <input class="form-control" placeholder="Рост" id="height" name="height" value="{{ data.height }}">
-                            {% if form.errors.height %}<label id="height-error" class="error" for="height">{{ form.errors.height.0 }}</label>{% endif %}
-                         </div>
-                         <div class="form-group {% if form.errors.count_height %}has-error{% endif %}">
-                            <label>Колличество</label>
-                            <input class="form-control" placeholder="Колличество" id="count_height" name="count_height" value="{{ data.count_height }}">
-                            {% if form.errors.count_height %}<label id="chest-error" class="error" for="count_height">{{ form.errors.count_height.0 }}</label>{% endif %}
+                    <div class="col-lg-6">
+                        <h2>Размеры</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Размер</th>
+                                        <th>Колличество</th>
+                                        <th>Удалить</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="height_size_id">
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <select class="form-control" name="height[]">
+                                                    {% for height_list in maincategorys.0.sizetable_set.all %}
+                                                        <option name="{{ height_list.height }}" value="{{ height_list.height }}">{{ height_list.height }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                               <input class="form-control" placeholder="Колличество" id="count_height" name="count_height[]" value="">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-sm btn-danger form-control">Удалить Размер</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Добавить Размер</label>
+                            <button type="button" class="btn btn-sm btn-success form-control">Добавить Размер</button>
                          </div>
                     </div>
-                    <div class="col-lg-2">
+                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label>Добавить</label>
-                            <button type="submit" class="btn btn-sm btn-success form-control">Добавить</button>
+                            <label>Добавить Товар</label>
+                            <button type="submit" class="btn btn-sm btn-success form-control">Добавить Товар</button>
                          </div>
                     </div>
                 </form>
