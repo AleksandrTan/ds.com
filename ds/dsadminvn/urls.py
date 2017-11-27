@@ -14,10 +14,10 @@ users_patterns = [
     URL`s for Main Category
 """
 mc_patterns = [
-     url(r'^ajax/isactive/(?P<pk>[0-9]+)/$', views.AjaxMainCategoryActive.as_view(), name='ajax_mc_is_active'),
-     url(r'^ajax/addnew/$', views.AjaxMainCategoryNew.as_view(), name='ajax_mc_new'),
-     url(r'^deletemc/(?P<pk>[0-9]+)/$', views.MainCategoryDelete.as_view(), name='delete_mc'),
-     url(r'^$', views.MainCategoryWork.as_view(), name='maincategory'),
+    url(r'^ajax/isactive/(?P<pk>[0-9]+)/$', views.AjaxMainCategoryActive.as_view(), name='ajax_mc_is_active'),
+    url(r'^ajax/addnew/$', views.AjaxMainCategoryNew.as_view(), name='ajax_mc_new'),
+    url(r'^deletemc/(?P<pk>[0-9]+)/$', views.MainCategoryDelete.as_view(), name='delete_mc'),
+    url(r'^$', views.MainCategoryWork.as_view(), name='maincategory'),
 ]
 
 """
@@ -34,6 +34,7 @@ np_patterns = [
     URL`s for Size Table
 """
 st_patterns = [
+    url(r'^ajax/getsizes/(?P<pk>[0-9]+)/$', views.AjaxGetSizes.as_view(), name='ajax_st_get'),
     url(r'^addnew/$', views.SizeTableAddNew.as_view(), name='st_add_new'),
     url(r'^delete/(?P<pk>[0-9]+)/$', views.SizeTableDelete.as_view(), name='delete_st'),
     url(r'^$', views.SizeTableWork.as_view(), name='sizetable'),

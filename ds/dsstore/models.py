@@ -82,6 +82,10 @@ class NameProduct(models.Model):
         return self.name
 
 """------------ SizeTable Model-------------------------------"""
+class ManageSizeTable(models.Manager):
+
+    def get_category_data(self, pk):
+        return SizeTable.objects.filter(maincategory_id=pk).values('height')
 
 class SizeTable(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE)
@@ -89,6 +93,7 @@ class SizeTable(models.Model):
     height = models.SmallIntegerField(blank=False)
     chest = models.SmallIntegerField(blank=False)
     waist = models.SmallIntegerField(blank=False)
+    objects = ManageSizeTable()
 
 class SizeTableForm(ModelForm):
     class Meta:

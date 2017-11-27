@@ -241,6 +241,16 @@ class SizeTableDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
         context['tab'] = True
         return context
 
+class AjaxGetSizes(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
+
+    permission_required = "auth.change_user"
+    login_url = 'login'
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            data = SizeTable.objects.get_category_data(kwargs['pk'])
+        return JsonResponse(list(data), safe=False)
+
 """---------------Work with Brends -------------------------------"""
 
 class BrendsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
