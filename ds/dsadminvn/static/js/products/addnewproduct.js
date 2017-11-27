@@ -16,25 +16,29 @@ $(document).ready(function () {
               "/adminnv/sizetable/ajax/getsizes/"+$(this).val()+"/",
               onAjaxSuccess
             );
-            function onAjaxSuccess(data)
-            {alert(data);
-              // if (data.status){
-              //     if ($('#mc_list tr:last-child td:first-child').text() == ''){
-              //         var num_n = 1;
-              //     }
-              //     else{
-              //         var num_n = +$('#mc_list tr:last-child td:first-child').text() + 1;
-              //     }
-              //
-              //     var new_type = '<tr><td>'+num_n+'</td><td class="text-center">'+new_name+'</td><td class="text-center"><button type="button"'+
-              //                       'class="btn btn-sm btn-danger" data_info = "'+data.id+'">False</button></td><td class="text-center">'+
-              //                       ''+data.name_url+'</td><td class="text-center"><a type="button" data_delete="delete" id="'+data.id+'"'+
-              //                       'class="btn btn-sm btn-danger" href="/adminnv/maincategory/deletemc/'+data.id+'/">Delete</a></td>';
-              //
-              //     $('#mc_list').append(new_type);
-              //     $('#new_name_mс').val('');
-              // }
+    	var parentElementTable = $('#height_size_id');
+        function onAjaxSuccess(data)
+        {
+            if (data.length == 0){
+                parentElementTable.empty();
+                var trElem = '<tr><td style="color: red;">Нет размеров для отображения!</td></tr>';
+                parentElementTable.append(trElem);
             }
+            else {
+                parentElementTable.empty();
+                optionsElement = '';
+
+                for(var i = 0; i <= data.length - 1; i++){
+                    optionsElement = optionsElement + '<option name="'+data[i].height+'" value="'+data[i].height+'">'+data[i].height+'</option>';
+                }
+                //alert(optoinsElement);return false;
+                var new_size = '<tr><td><div class="form-group"><select class="form-control" name="height[]">'+optionsElement+'</select></div></td><td><div class="form-group">' +
+                    '<input class="form-control" placeholder="Колличество" id="count_height" name="count_height[]" value=""></div></td><td><div class="form-group">'+
+                    '<button type="button" class="btn btn-sm btn-danger form-control">Удалить Размер</button></div></td></tr>';
+
+                parentElementTable.append(new_size);
+            }
+        }
     });
 
 //     $('input').blur(function(){

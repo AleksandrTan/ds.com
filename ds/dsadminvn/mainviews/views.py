@@ -248,7 +248,7 @@ class AjaxGetSizes(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
-            data = SizeTable.objects.get_category_data(kwargs['pk'])
+            data = SizeTable.objects.get_size_data(kwargs['pk'])
         return JsonResponse(list(data), safe=False)
 
 """---------------Work with Brends -------------------------------"""

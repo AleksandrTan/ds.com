@@ -84,7 +84,7 @@ class NameProduct(models.Model):
 """------------ SizeTable Model-------------------------------"""
 class ManageSizeTable(models.Manager):
 
-    def get_category_data(self, pk):
+    def get_size_data(self, pk):
         return SizeTable.objects.filter(maincategory_id=pk).values('height')
 
 class SizeTable(models.Model):
