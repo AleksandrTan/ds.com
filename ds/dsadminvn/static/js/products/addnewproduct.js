@@ -26,20 +26,31 @@ $(document).ready(function () {
             }
             else {
                 parentElementTable.empty();
-                optionsElement = '';
+                var optionsElement = '';
 
                 for(var i = 0; i <= data.length - 1; i++){
                     optionsElement = optionsElement + '<option name="'+data[i].height+'" value="'+data[i].height+'">'+data[i].height+'</option>';
                 }
-                //alert(optoinsElement);return false;
+
                 var new_size = '<tr><td><div class="form-group"><select class="form-control" name="height[]">'+optionsElement+'</select></div></td><td><div class="form-group">' +
                     '<input class="form-control" placeholder="Колличество" id="count_height" name="count_height[]" value=""></div></td><td><div class="form-group">'+
-                    '<button type="button" class="btn btn-sm btn-danger form-control">Удалить Размер</button></div></td></tr>';
+                    '<button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить Размер</button></div></td></tr>';
 
                 parentElementTable.append(new_size);
             }
         }
     });
+//Add sizes fields
+    $('#add_size_fields').click(function () {
+        $('#height_size_id tr:last-child').clone(true).appendTo($('#height_size_id'));
+    });
+//Remove size field
+    $('#height_size_id').on('click', '[data-deletes=delete_size]', function () {
+        if ($('#height_size_id').children('tr').length == 1){
+            return false;
+        }
+        $(this).parents('tr').remove();
+    })
 
 //     $('input').blur(function(){
 //         $(this).parent().parent().next().hide()
@@ -72,14 +83,6 @@ $(document).ready(function () {
 //         }
 //     });
 //
-// //Show count entered simbols for fotos block
-//     $('#fotos_div').mousemove(function(){
-//       $('#fotos_info').show();
-//     });
-//
-//     $('#fotos_div').mouseleave(function(){
-//       $('#fotos_info').hide();
-//     });
 
 //Validations form
 
