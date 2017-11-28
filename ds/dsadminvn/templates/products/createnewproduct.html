@@ -92,7 +92,34 @@
                                         <option name="{{ season.id }}" value="{{ season.id }}">{{ season.name }}</option>
                                     {% endfor %}
                                 </select>
-                          </div>
+                         </div>
+                         <div class="form-group">
+                            <label>Цвет</label>
+                            <input class="form-control" placeholder="Цвет" id="color" name="color" type="text" value="{{ data.color }}">
+                         </div>
+                         <div class="form-group {% if form.errors.price %}has-error{% endif %}">
+                            <label>Цена(В формате 23.56)</label>
+                            <input class="form-control" placeholder="Цена" id="price" name="price" type="text" value="{{ data.price }}">
+                            {% if form.errors.price %}<label id="price-error" class="error" for="price">{{ form.errors.price.0 }}</label>{% endif %}
+                         </div>
+                         <div class="form-group {% if form.errors.wholesale_price %}has-error{% endif %}">
+                            <label>Оптовая Цена(В формате 23.56)</label>
+                            <input class="form-control" placeholder="Оптовая Цена" id="wholesale_price" name="wholesale_price" type="text" value="{{ data.wholesale_price }}">
+                            {% if form.errors.wholesale_price %}<label id="wholesale_price-error" class="error" for="wholesale_price">{{ form.errors.wholesale_price.0 }}</label>{% endif %}
+                         </div>
+                         <div class="form-group {% if form.errors.purshase_price %}has-error{% endif %}">
+                            <label>Цена закупки(В формате 23.56)</label>
+                            <input class="form-control" placeholder="Цена закупки" id="purshase_price" name="purshase_price" type="text" value="{{ data.purshase_price }}">
+                            {% if form.errors.purshase_price %}<label id="purshase_price-error" class="error" for="purshase_price">{{ form.errors.purshase_price.0 }}</label>{% endif %}
+                         </div>
+                         <div class="form-group">
+                                <label>Описание товара</label>
+                                <textarea class="form-control" rows="3" id="description" name="description"></textarea>
+                         </div>
+                         <div class="form-group">
+                                <label>Аттрибуты SEO(Для продвижения страницы в поисковых системах)</label>
+                                <textarea class="form-control" rows="3" id="seo_attributes" name="seo_attributes"></textarea>
+                         </div>
                     </div>
                     {% endif %}
                     <div class="col-lg-6">

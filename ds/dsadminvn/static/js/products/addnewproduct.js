@@ -88,21 +88,22 @@ $(document).ready(function () {
 
     $( "#add_new_s" ).validate( {
 				rules: {
-					autor: {
+					articul: {
 						required: true,
 						maxlength: 30
 					},
-					caption: {
-						required: true,
+					price: {
+						//required: true,
+						number: true,
 						maxlength: 50
 					},
-					description: {
-						required: true,
-						maxlength: 1000
+					wholesale_price: {
+						number: true,
+						maxlength: 50
 					},
-					full_adress: {
-					    required: false,
-						maxlength: 100
+					purshase_price: {
+					    number: true,
+						maxlength: 50
 					},
 					meta_info: {
 					    required: false,
