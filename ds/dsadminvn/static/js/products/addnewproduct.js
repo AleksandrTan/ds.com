@@ -86,7 +86,7 @@ $(document).ready(function () {
 
 //Validations form
 
-    $( "#add_new_s" ).validate( {
+    $( "#add_new_product" ).validate( {
 				rules: {
 					articul: {
 						required: true,
@@ -112,57 +112,33 @@ $(document).ready(function () {
 
 				},
 				messages: {
-					autor: {
+					articul: {
 						required: "Пожалуйста введите автора",
 						maxlength: "Не более 30 символов"
 					},
-					caption: {
-						required: "Пожалуйста введите заголовок",
+					price: {
+						number: 'Должно быть числом!',
 						maxlength: "Не более 50 символов"
 					},
-					description: {
-						required: "Пожалуйста введите описание",
-						maxlength: "Не более 1000 символов"
+					wholesale_price: {
+						number: 'Должно быть числом!',
+						maxlength: "Не более 50 символов"
 					},
-                    full_adress: {
-					   maxlength: "Не более 100 символов"
+                    purshase_price: {
+					   number: 'Должно быть числом!',
+					   maxlength: "Не более 50 символов"
 					},
 					meta_info: {
 					    maxlength: "Не более 500 символов"
 					},
 				},
-				errorElement: "em",
-				errorPlacement: function ( error, element ) {
-					// Add the `help-block` class to the error element
-					error.addClass( "help-block" );
-
-					// Add `has-feedback` class to the parent div.form-group
-					// in order to add icons to inputs
-					element.parents( ".form-control-wrap" ).addClass( "has-feedback" );
-
-					if ( element.prop( "type" ) === "checkbox" ) {
-						error.insertBefore( element.parent( "label" ) );
-					} else {
-						error.insertBefore( element );
-					}
-
-					// Add the span element, if doesn't exists, and apply the icon classes to it.
-					if ( !element.next( "span" )[ 0 ] ) {
-						$( "<span class='glyphicon glyphicon-remove form-control-feedback'></span>" ).insertBefore( element );
-					}
-				},
-				success: function ( label, element ) {
-					// Add the span element, if doesn't exists, and apply the icon classes to it.
-					if ( !$( element ).next( "span" )[ 0 ] ) {
-						$( "<span class='glyphicon glyphicon-ok form-control-feedback'></span>" ).insertBefore( $( element ) );
-					}
-				},
+                errorClass: "alert-danger",
 				highlight: function ( element, errorClass, validClass ) {
-					$( element ).parents( ".form-control-wrap" ).addClass( "has-error" ).removeClass( "has-success" );
-					$( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+					$( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
+					$( element ).next( "label" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
 				},
 				unhighlight: function ( element, errorClass, validClass ) {
-					$( element ).parents( ".form-control-wrap" ).addClass( "has-success" ).removeClass( "has-error" );
+					$( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
 					$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
 				}
 			} );

@@ -120,6 +120,23 @@
                                 <label>Аттрибуты SEO(Для продвижения страницы в поисковых системах)</label>
                                 <textarea class="form-control" rows="3" id="seo_attributes" name="seo_attributes"></textarea>
                          </div>
+                         <div class="form-group">
+                              <div class="checkbox">
+                                  <label>
+                                      <input type="checkbox" value="1" name="is_belarus">Товар из Беларуси
+                                  </label>
+                              </div>
+                              <div class="checkbox">
+                                  <label>
+                                       <input type="checkbox" value="1" name="is_active">Сделать активным(Будет отображен на сайте)
+                                  </label>
+                              </div>
+                              <div class="checkbox">
+                                  <label>
+                                     <input type="checkbox" value="1" name="is_new">Пометить как новый товар
+                                  </label>
+                              </div>
+                         </div>
                     </div>
                     {% endif %}
                     <div class="col-lg-6">
@@ -157,7 +174,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-
                         </div>
                         <div class="form-group">
                             <label>Добавить Размер</label>
