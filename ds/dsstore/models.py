@@ -233,7 +233,7 @@ class Products(models.Model):
     objects = ManageProductsModel()
 
     def get_absolute_url(self):
-        return "sentence/%s" % self.link_name
+        return "products/%s" % self.articul
 
 
     def __str__(self):

@@ -14,12 +14,13 @@ function handleMainFileImg(files){
         var img = document.createElement("img");
         img.style.width="106px";
         img.style.height = "90px";
-        document.getElementById('main_file_select').insertBefore(img, document.getElementById('before_img'));
+        //document.getElementById('main_file_select').insertBefore(img, document.getElementById('before_img'));
         var reader = new FileReader();
     //download file
         reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
     //read file in string base64
         reader.readAsDataURL(files[0]);
+        console.log(files.value);
         // $('#before_img').css({'font-size':'23px', 'top':'22px', 'left':'12px', 'color':'red'})
         //                 .removeClass('fa-plus-circle')
         //                 .addClass('fa-minus-circle')
