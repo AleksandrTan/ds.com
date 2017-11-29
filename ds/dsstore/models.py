@@ -43,6 +43,9 @@ class MainCategory(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['id']
+
 
 """----------- Name Producn model -----------------------"""
 class ManagerNameProducts(models.Manager):

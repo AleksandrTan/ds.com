@@ -193,14 +193,21 @@
                                     <tr>
                                         <td>
                                             <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="1">
+                                                   name="main_photo_path"
+                                                   onchange="handleMainFileImg(this.files)" id="main_photo_path" style="display: none;">
+                                            <button type="button" class="btn btn-sm btn-success form-control" id="add_main_file_img">Добавить фото</button>
                                         </td>
-                                        <td></td>
-                                        <td><button type="button" class="btn btn-sm btn-danger form-control" id="add_size_fields">Удалить фото</button></td>
+                                        <td><img src="/media/nophoto.png" width="100px;" height="100px;" alt=""></td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-danger form-control" id="add_size_fields">Удалить фото</button>
+                                        </td>
 
                                     </tr>
                                     <tr>
-                                        <td>/about.html</td>
+                                        <td>
+                                            <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
+                                                   data-images="imgages-product" name="img_product[]" data-num-img="2">
+                                        </td>
                                         <td>261</td>
                                         <td>33.3%</td>
 
