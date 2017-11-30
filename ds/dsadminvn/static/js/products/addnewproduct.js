@@ -52,38 +52,6 @@ $(document).ready(function () {
         $(this).parents('tr').remove();
     })
 
-//     $('input').blur(function(){
-//         $(this).parent().parent().next().hide()
-//     });
-// //Show count entered simbols for input tags
-//     $("input").keyup(function() {
-//         $(this).next('[data-num = count_simbols]').next('span').css('display', 'block').children('em').text(this.value.length);
-//         if (this.value.length > parseInt($(this).next('[data-num = count_simbols]').data( "count" ))){
-//             $(this).next('[data-num = count_simbols]').next('span').css('color', 'red').children('em').text(this.value.length);
-//         }
-//         else{
-//             $(this).next('[data-num = count_simbols]').next('span').css('color', 'green').children('em').text(this.value.length);
-//         }
-//         if(this.value.length == 0){
-//             $(this).next('[data-num = count_simbols]').next('span').css('display', 'none');
-//         }
-//     });
-// //Show count entered simbols for textarea tag
-//     $("textarea").keyup(function() {
-//         $(this).next('[data-num = count_simbols]').next('span').css('display', 'block').children('em').text(this.value.length);
-//         if (this.value.length > parseInt($(this).next('[data-num = count_simbols]').data( "count" ))){
-//             $(this).next('[data-num = count_simbols]').next('span').css('color', 'red').children('em').text(this.value.length);
-//         }
-//         else{
-//             $(this).next('[data-num = count_simbols]').next('span').css('color', 'green').children('em').text(this.value.length);
-//         }
-//
-//         if(this.value.length == 0){
-//             $(this).next('[data-num = count_simbols]').next('span').css('display', 'none');
-//         }
-//     });
-//
-
 //Validations form
 
     $( "#add_new_product" ).validate( {
@@ -113,7 +81,7 @@ $(document).ready(function () {
 				},
 				messages: {
 					articul: {
-						required: "Пожалуйста введите автора",
+						required: "Пожалуйста введите артикул",
 						maxlength: "Не более 30 символов"
 					},
 					price: {
