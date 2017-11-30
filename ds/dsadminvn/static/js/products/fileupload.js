@@ -11,21 +11,12 @@ function handleMainFileImg(files){
         return false;
     }
     if (files[0].type == 'image/jpg' || files[0].type == 'image/png' || files[0].type == 'image/jpeg'){
-        var img = document.createElement("img");
-        img.style.width="106px";
-        img.style.height = "90px";
-        //document.getElementById('main_file_select').insertBefore(img, document.getElementById('before_img'));
         var reader = new FileReader();
     //download file
-        reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+        reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(document.getElementById('main_photo'));
+        $('#del_main_photo').show();
     //read file in string base64
         reader.readAsDataURL(files[0]);
-        console.log(files.value);
-        // $('#before_img').css({'font-size':'23px', 'top':'22px', 'left':'12px', 'color':'red'})
-        //                 .removeClass('fa-plus-circle')
-        //                 .addClass('fa-minus-circle')
-        //                 .attr('title', 'Удалить фото');
-        // $('#main_img_isset').val(1);
     }
     else{
         alert('Неправильное расширение файла');
@@ -37,21 +28,18 @@ $('#add_main_file_img').on("click", function (e) {
     e.preventDefault(); // prevent navigation to "#"
 });
 
+$('#del_main_photo').click(function () {
+    //clear FileList
+    var $el = $('#main_photo_path');
+    $el.wrap('<form>').closest('form').get(0).reset();
+    $el.unwrap();
+    $(this).hide();
+    $('#main_photo').attr('src', '/media/nophoto.png');
+});
+
 /*
 * Download another images
 * */
-
-// $('[data-images=imgages-product]').on("click", function (e) {
-//    $(this).children('img').remove();
-//    var data_json_img = $.parseJSON($('#othe_img_isset').val());
-//    var num_img = parseInt($(this).next().attr('data-num-img'));
-//    data_json_img[num_img] = 0;
-//    $('#othe_img_isset').val(JSON.stringify(data_json_img));
-//    console.log(data_json_img);
-//    $(this).next().click();
-//    e.preventDefault(); // prevent navigation to "#"
-// });
-
 $('input[data-images=imgages-product]').change(function () {
     if ($(this)[0].files[0].size > 5000000){
         alert('Максимальный размер файла 5 МБ');
@@ -71,54 +59,9 @@ $('input[data-images=imgages-product]').change(function () {
     //read file in string base64
         reader.readAsDataURL($(this)[0].files[0]);
         console.log(this.files);
-        // var data_json_img = $.parseJSON($('#othe_img_isset').val());
-        // var num_img = parseInt($(this).attr('data-num-img'));
-        // data_json_img[num_img] = 1;
-        // $('#othe_img_isset').val(JSON.stringify(data_json_img));
-        // console.log(data_json_img);
     }
     else{
         alert('Неправильное расширение файла');
         return false;
     }
 });
-// var SomeCl = {
-// 	count: 0,
-//   init: function(){
-//   	$('#images').change(this.onInputChange);
-//   },
-//   onInputChange: function() {
-//   	SomeCl.addM(this.files);
-//   },
-//   addM: function(files) {
-// 		for(var i=0;i<4;i++) {
-//
-//
-//       if(files[i].type.substr(0,5) == 'image') {
-//       (function(file) {
-// 					var reader = new FileReader();
-//           var info = {
-// 					name: files[i].name,
-// 					size: files[i].size,
-// 					type: files[i].type,
-// 					preview: '/newtest/resources/images/dvlogo.png'
-// 				};
-// 					reader.onload = function(e) {
-//           	SomeCl.count++;
-// 						info.preview = e.target.result;
-// 						console.log(SomeCl.count + " -")
-// 						SomeCl.processM(info);
-// 					};
-// 					reader.readAsDataURL(files[i]);
-//           })(files[i]);
-// 				}else{
-// 					this.processFile(info);
-// 				}
-//     }
-//   },
-//   processM: function(file) {
-//   	console.log(file);
-//     $('.container').append('11111111111111111<br>');
-//   },
-// }
-// SomeCl.init();

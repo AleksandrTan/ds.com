@@ -198,12 +198,12 @@
                                         <td>
                                             <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
                                                    name="main_photo_path"
-                                                   onchange="handleMainFileImg(this.files)" id="main_photo_path" style="display: none;">
+                                                   onchange="handleMainFileImg(this.files)" id="main_photo_path" style="display: none;" value="">
                                             <button type="button" class="btn btn-sm btn-success form-control" id="add_main_file_img">Добавить фото</button>
                                         </td>
-                                        <td><img src="/media/nophoto.png" width="100px;" height="100px;" alt=""></td>
+                                        <td><img src="/media/nophoto.png" width="100px;" height="100px;" alt="" id="main_photo"></td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" id="add_size_fields">Удалить фото</button>
+                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo" style="display: none;">Удалить фото</button>
                                         </td>
 
                                     </tr>
