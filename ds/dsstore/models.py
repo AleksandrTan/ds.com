@@ -228,7 +228,7 @@ class Products(models.Model):
                                           content_types=['image/jpg', 'image/png', 'image/jpeg'],
                                           max_upload_size=5000000, blank=True, default='nophoto.png')
     description = models.TextField(blank=True, default='')
-    caption = models.CharField(blank=True, default='', max_length=200)
+    caption = models.CharField(blank=False, default='', max_length=200)
     color = models.CharField(max_length=100, blank=True, default='')
     discount = models.SmallIntegerField(blank=True, default=0)
     price_down = models.SmallIntegerField(blank=True, default=0)

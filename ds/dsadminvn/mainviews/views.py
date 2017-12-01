@@ -17,7 +17,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 
 from django.contrib.auth.models import User
-from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm, Brends, Seasons, Products, ProductsForm, Image)
+from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm, Brends, Seasons, Products, ProductsForm, Image, SizeCount)
 
 class BaseAdminView(View):
     """
@@ -407,12 +407,12 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '#' + instance.identifier
         instance.save()
         #self.save_oter_files(instance, form)
-
+        self.saved_sizes_count(instance)
         return super(CreateNewProduct, self).form_valid(form)
 
     def form_invalid(self, form):
         context = self.get_context_data()
-        context['data'] = self.request.POST
+        context['data'] = self.request.POST.getlist('height[]')
         context['maincategorys'] = MainCategory.objects.get_active_categories()
         context['nameproducts'] = NameProduct.objects.get_active_products()
         context['brends'] = Brends.objects.get_active_brends()
@@ -420,10 +420,6 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         context['tab_products'] = True
 
         return self.render_to_response(context)
-
-    def get_context_data(self, **kwargs):
-        context = super(CreateNewProduct, self).get_context_data(**kwargs)
-        return context
 
     def get_success_url(self):
         return self.succes_url
@@ -459,6 +455,15 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
                     # messages.info(self.request, 'Three credits remain in your account.')
                     continue
         return True
+
+    def saved_sizes_count(self, instance):
+        # data_list = zip(self.request.POST.getlist('height[]'), self.request.POST.getlist('count_height[]'))
+        # map(lambda x: x.save(),
+        #     [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list])
+        data_list  = zip(self.request.POST.getlist('height[]'), self.request.POST.getlist('count_height[]'))
+        d = [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list]
+        for sizes in d:
+            sizes.save()
 
 class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     pass
