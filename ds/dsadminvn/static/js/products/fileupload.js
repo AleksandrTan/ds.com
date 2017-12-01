@@ -39,12 +39,14 @@ $('#del_main_photo').click(function () {
 /*
 * Download another images
 * */
+
+//Show window for add file
 $('[data-anothe=anothe_img]').on("click", function (e) {
    $(this).prev().click();
    e.preventDefault(); // prevent navigation to "#"
 });
 
-
+//Load file
 $('input[data-images=imgages-product]').change(function () {
     if ($(this)[0].files[0].size > 5000000){
         alert('Максимальный размер файла 5 МБ');
@@ -64,7 +66,7 @@ $('input[data-images=imgages-product]').change(function () {
     }
 });
 
-//Deleteone of another photo
+//Delete one of another photo
 $('[data-delete-imgs=delete-imgs]').click(function () {
     //clear FileList
     alert(1000);

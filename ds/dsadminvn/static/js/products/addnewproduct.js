@@ -1,7 +1,7 @@
 /*
 * Identifier for debug mode(if true - form submited on server)
 * */
-var is_validate_js = false;
+var is_validate_js = true;
 $.validator.setDefaults( {
 			submitHandler: function () {
 			    if (is_validate_js){

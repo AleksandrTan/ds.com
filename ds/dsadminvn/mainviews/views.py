@@ -17,7 +17,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 
 from django.contrib.auth.models import User
-from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm, Brends, Seasons, Products, ProductsForm)
+from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm, Brends, Seasons, Products, ProductsForm, Image)
 
 class BaseAdminView(View):
     """
@@ -394,22 +394,26 @@ class ShowFormProductView(BaseAdminView, LoginRequiredMixin, PermissionRequiredM
 
 class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     login_url = 'login'
+    permission_required = "auth.change_user"
     form_class = ProductsForm
     template_name = 'products/createnewproduct.html'
     succes_url = '/adminnv/products/'
 
     def form_valid(self, form):
-        instance = form.save(commit=False)
-        instance.user = self.request.user
-        instance.stop_time = datetime.now() + timedelta(days=30)
-        instance.type_img_s = self.type_img_s[form.cleaned_data['type_id']]
-        instance.identifier = self.uuid_sentece()
-        instance.dirname_img = self.uuid_sentece_user()
-        instance.link_name = self.slugify(form.cleaned_data['caption']) + '#' + instance.identifier
-        instance.save()
-        self.save_oter_files(instance, form)
 
-        return super(CreateNewProduct, self).form_valid(form)
+        # instance = form.save(commit=False)
+        # instance.user = self.request.user
+        # instance.stop_time = datetime.now() + timedelta(days=30)
+        # instance.type_img_s = self.type_img_s[form.cleaned_data['type_id']]
+        # instance.identifier = self.uuid_sentece()
+        # instance.dirname_img = self.uuid_sentece_user()
+        # instance.link_name = self.slugify(form.cleaned_data['caption']) + '#' + instance.identifier
+        # instance.save()
+        # self.save_oter_files(instance, form)
+
+        # return super(CreateNewProduct, self).form_valid(form)
+        context = self.get_context_data()
+        context['data'] = self.request.POST
 
     def form_invalid(self, form):
         context = self.get_context_data()

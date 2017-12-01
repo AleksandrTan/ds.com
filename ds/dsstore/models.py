@@ -205,15 +205,15 @@ class Products(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)
     articul = models.CharField(max_length=100, blank=False)
     nameproduct = models.ForeignKey(NameProduct, on_delete=models.CASCADE, blank=False)
-    brends = models.ForeignKey(Brends, on_delete=models.SET_DEFAULT, default=0, blank=True)
-    season = models.ForeignKey(Seasons, on_delete=models.SET_DEFAULT, default=0, blank=True)
+    brends = models.ForeignKey(Brends, on_delete=models.SET_DEFAULT, default=0, blank=True, null=True)
+    season = models.ForeignKey(Seasons, on_delete=models.SET_DEFAULT, default=0, blank=True, null=True)
     price = models.FloatField(blank=True, default=0)
     wholesale_price = models.FloatField(blank=True, default=0)
     purshase_price = models.FloatField(blank=True, default=0)
-    main_photo_path = models.ImageField(blank=True, upload_to='images/')
-    # main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
-    #                                       content_types=['image/jpg', 'image/png', 'image/jpeg'],
-    #                                       max_upload_size=5000000, blank=True, default='nophoto.png')
+    ##main_photo_path = models.ImageField(blank=True, upload_to='images/')
+    main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
+                                          content_types=['image/jpg', 'image/png', 'image/jpeg'],
+                                          max_upload_size=5000000, blank=True, default='nophoto.png')
     description = models.TextField(blank=True, default='')
     caption = models.CharField(blank=True, default='', max_length=200)
     color = models.CharField(max_length=100, blank=True, default='')
