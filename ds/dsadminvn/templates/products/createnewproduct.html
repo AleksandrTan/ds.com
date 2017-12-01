@@ -114,30 +114,30 @@
                          </div>
                          <div class="form-group">
                                 <label>Описание товара</label>
-                                <textarea class="form-control" rows="3" id="description" name="description"></textarea>
+                                <textarea class="form-control" rows="3" id="description" name="description">{{ data.description }}</textarea>
                          </div>
                          <div class="form-group">
                                 <label>Заголовок товара</label>
-                                <input class="form-control" id="caption" name="caption" placeholder="Заголовок"></input>
+                                <input class="form-control" id="caption" name="caption" placeholder="Заголовок" value="{{ data.caption }}">
                          </div>
                          <div class="form-group">
                                 <label>Аттрибуты SEO(Для продвижения страницы в поисковых системах)</label>
-                                <textarea class="form-control" rows="3" id="seo_attributes" name="seo_attributes"></textarea>
+                                <textarea class="form-control" rows="3" id="seo_attributes" name="seo_attributes">{{ data.seo_attributes }}</textarea>
                          </div>
                          <div class="form-group">
                               <div class="checkbox">
                                   <label>
-                                      <input type="checkbox" value="1" name="is_belarus">Товар из Беларуси
+                                      <input type="checkbox" value="1" name="is_belarus" {% if data.is_belarus %} checked {% endif %}>Товар из Беларуси
                                   </label>
                               </div>
                               <div class="checkbox">
                                   <label>
-                                       <input type="checkbox" value="1" name="is_active">Сделать активным(Будет отображен на сайте)
+                                       <input type="checkbox" value="1" name="is_active" {% if data.is_active %} checked {% endif %}>Сделать активным(Будет отображен на сайте)
                                   </label>
                               </div>
                               <div class="checkbox">
                                   <label>
-                                     <input type="checkbox" value="1" name="is_new">Пометить как новый товар
+                                     <input type="checkbox" value="1" name="is_new" {% if data.is_new %} checked {% endif %}>Пометить как новый товар
                                   </label>
                               </div>
                          </div>
@@ -199,7 +199,7 @@
                                             <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
                                                    name="main_photo_path"
                                                    onchange="handleMainFileImg(this.files)" id="main_photo_path" style="display: none;" value="">
-                                            <button type="button" class="btn btn-sm btn-success form-control" id="add_main_file_img">Добавить фото</button>
+                                            <button type="button" class="btn btn-sm btn-success form-control" id="add_main_file_img">Добавить заглавное фото</button>
                                         </td>
                                         <td><img src="/media/nophoto.png" width="100px;" height="100px;" alt="" id="main_photo"></td>
                                         <td>
@@ -210,65 +210,67 @@
                                     <tr>
                                         <td>
                                             <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="1">
-                                            <button type="button" class="btn btn-sm btn-success form-control" id="add_main_file_img">Добавить фото</button>
-                                        </td>
-                                        <td><img src="/media/nophoto.png" width="100px;" height="100px;" alt=""></td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo" style="display: none;">Удалить фото</button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="1">
-                                            <button type="button" class="btn btn-sm btn-success form-control" id="add_main_file_img">Добавить фото</button>
+                                                   data-images="imgages-product" name="img_product[]" data-num-img="1" style="display: none;">
+                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото</button>
                                         </td>
                                         <td>
                                             <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo" style="display: none;">Удалить фото</button>
+                                            <button type="button" class="btn btn-sm btn-danger form-control"  style="display: none;" data-delete-imgs='delete-imgs' >Удалить фото</button>
                                         </td>
 
                                     </tr>
                                     <tr>
                                         <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="1">
-                                            <button type="button" class="btn btn-sm btn-success form-control" id="add_main_file_img">Добавить фото</button>
+                                                   data-images="imgages-product" name="img_product[]" data-num-img="2" style="display: none;">
+                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото</button>
                                         </td>
                                         <td>
                                             <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo" style="display: none;">Удалить фото</button>
+                                            <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;" data-delete-imgs='delete-imgs' >Удалить фото</button>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
+                                                   data-images="imgages-product" name="img_product[]" data-num-img="3" style="display: none;">
+                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото</button>
+                                        </td>
+                                        <td>
+                                            <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-danger form-control"  style="display: none;" data-delete-imgs='delete-imgs'>Удалить фото</button>
                                         </td>
 
                                     </tr>
                                     <tr>
                                         <td>
                                             <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="1">
-                                            <button type="button" class="btn btn-sm btn-success form-control" id="add_main_file_img">Добавить фото</button>
+                                                   data-images="imgages-product" name="img_product[]" data-num-img="4" style="display: none;">
+                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото</button>
                                         </td>
                                         <td>
                                             <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo" style="display: none;">Удалить фото</button>
+                                            <button type="button" class="btn btn-sm btn-danger form-control"  style="display: none;" data-delete-imgs='delete-imgs'>Удалить фото</button>
                                         </td>
 
                                     </tr>
                                     <tr>
                                         <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="1">
-                                            <button type="button" class="btn btn-sm btn-success form-control" id="add_main_file_img">Добавить фото</button>
+                                                   data-images="imgages-product" name="img_product[]" data-num-img="5" style="display: none;">
+                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото</button>
                                         </td>
                                         <td>
                                             <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo" style="display: none;">Удалить фото</button>
+                                            <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;" data-delete-imgs='delete-imgs'>Удалить фото</button>
                                         </td>
 
                                     </tr>

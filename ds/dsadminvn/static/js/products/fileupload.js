@@ -7,7 +7,6 @@ window.URL = window.URL || window.webkitURL;
 function handleMainFileImg(files){
     if (files[0].size > 5000000){
         alert('Максимальный размер файла 5 МБ');
-        console.log(files);
         return false;
     }
     if (files[0].type == 'image/jpg' || files[0].type == 'image/png' || files[0].type == 'image/jpeg'){
@@ -27,7 +26,7 @@ $('#add_main_file_img').on("click", function (e) {
     $('#main_photo_path').click();
     e.preventDefault(); // prevent navigation to "#"
 });
-
+//Delete main photo
 $('#del_main_photo').click(function () {
     //clear FileList
     var $el = $('#main_photo_path');
@@ -40,28 +39,38 @@ $('#del_main_photo').click(function () {
 /*
 * Download another images
 * */
+$('[data-anothe=anothe_img]').on("click", function (e) {
+   $(this).prev().click();
+   e.preventDefault(); // prevent navigation to "#"
+});
+
+
 $('input[data-images=imgages-product]').change(function () {
     if ($(this)[0].files[0].size > 5000000){
         alert('Максимальный размер файла 5 МБ');
-        //console.log(files);
         return false;
     }
     if ($(this)[0].files[0].type == 'image/jpg' || $(this)[0].files[0].type == 'image/png' || $(this)[0].files[0].type == 'image/jpeg'){
-        var img = document.createElement("img");
-        img.style.width="106px";
-        img.style.height = "90px";
-        $(this).prev('a').removeAttr("data-anothe").children('span').removeClass('fa-plus-circle');
-        $(this).prev('a').prepend(img);
-        //$(this).unbind();
         var reader = new FileReader();
     //download file
-        reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+        reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })($(this).parent().next().children()[0]);
     //read file in string base64
         reader.readAsDataURL($(this)[0].files[0]);
-        console.log(this.files);
+        $(this).parent().next().next().children().show();
     }
     else{
         alert('Неправильное расширение файла');
         return false;
     }
+});
+
+//Deleteone of another photo
+$('[data-delete-imgs=delete-imgs]').click(function () {
+    //clear FileList
+    alert(1000);
+    $(this).parent().prev().children().attr('src', '/media/nophoto.png');
+    var $el = $(this).parent().prev().prev().children('input');
+    $el.wrap('<form>').closest('form').get(0).reset();
+    $el.unwrap();
+    $(this).hide();
 });
