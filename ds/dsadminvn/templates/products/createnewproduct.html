@@ -38,7 +38,7 @@
                                 <i class="fa fa-table"></i> <a href="{% url 'products' %}">Товары</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Добавить товар {{ data }}
+                                <i class="fa fa-table"></i> Добавить товар {{ data }}{{ form.errors }}
                             </li>
                         </ol>
                     </div>
@@ -52,7 +52,7 @@
                   id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
                     <div class="col-lg-6">
                         <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
-                            <label>Артикул</label>
+                            <label>Артикул</label><span style="color: red;">*</span>
                             <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" value="{{ data.articul }}">
                             {% if form.errors.articul %}<label id="articul-error" class="error" for="articul">{{ form.errors.articul.0 }}</label>{% endif %}
                         </div>
@@ -66,7 +66,7 @@
                             </div>
                         <div class="form-group ">
                             <label>Название</label>
-                                <select class="form-control" name="nameproducts">
+                                <select class="form-control" name="nameproduct">
                                     {% for name_product in nameproducts %}
                                         <option name="{{ name_product.id }}" value="{{ name_product.id }}">{{ name_product.name }}</option>
                                     {% endfor %}
@@ -77,7 +77,7 @@
                             <label>Бренд</label>
                                 <select class="form-control" name="brends">
                                     {% for brend in brends %}
-                                        <option name="0" value="">Выберите бренд</option>
+                                        <option name="0" value="0">Выберите бренд</option>
                                         <option name="{{ brend.id }}" value="{{ brend.id }}">{{ brend.name }}</option>
                                     {% endfor %}
                                 </select>
@@ -86,9 +86,9 @@
                     {% if seasons %}
                          <div class="form-group ">
                             <label>Сезон</label>
-                                <select class="form-control" name="seasons">
+                                <select class="form-control" name="season_id">
                                     {% for season in seasons %}
-                                        <option name="" value="">Выберите сезон</option>
+                                        <option name="0" value="0">Выберите сезон</option>
                                         <option name="{{ season.id }}" value="{{ season.id }}">{{ season.name }}</option>
                                     {% endfor %}
                                 </select>
@@ -99,17 +99,17 @@
                          </div>
                          <div class="form-group {% if form.errors.price %}has-error{% endif %}">
                             <label>Цена(В формате 23.56)</label>
-                            <input class="form-control" placeholder="Цена" id="price" name="price" type="text" value="{{ data.price }}">
+                            <input class="form-control" placeholder="Цена" id="price" name="price" type="number" value="{{ data.price }}">
                             {% if form.errors.price %}<label id="price-error" class="error" for="price">{{ form.errors.price.0 }}</label>{% endif %}
                          </div>
                          <div class="form-group {% if form.errors.wholesale_price %}has-error{% endif %}">
                             <label>Оптовая Цена(В формате 23.56)</label>
-                            <input class="form-control" placeholder="Оптовая Цена" id="wholesale_price" name="wholesale_price" type="text" value="{{ data.wholesale_price }}">
+                            <input class="form-control" placeholder="Оптовая Цена" id="wholesale_price" name="wholesale_price" type="number" value="{{ data.wholesale_price }}">
                             {% if form.errors.wholesale_price %}<label id="wholesale_price-error" class="error" for="wholesale_price">{{ form.errors.wholesale_price.0 }}</label>{% endif %}
                          </div>
                          <div class="form-group {% if form.errors.purshase_price %}has-error{% endif %}">
                             <label>Цена закупки(В формате 23.56)</label>
-                            <input class="form-control" placeholder="Цена закупки" id="purshase_price" name="purshase_price" type="text" value="{{ data.purshase_price }}">
+                            <input class="form-control" placeholder="Цена закупки" id="purshase_price" name="purshase_price" type="number" value="{{ data.purshase_price }}">
                             {% if form.errors.purshase_price %}<label id="purshase_price-error" class="error" for="purshase_price">{{ form.errors.purshase_price.0 }}</label>{% endif %}
                          </div>
                          <div class="form-group">
@@ -117,7 +117,7 @@
                                 <textarea class="form-control" rows="3" id="description" name="description">{{ data.description }}</textarea>
                          </div>
                          <div class="form-group">
-                                <label>Заголовок товара</label>
+                                <label>Заголовок товара</label><span style="color: red;">*</span>
                                 <input class="form-control" id="caption" name="caption" placeholder="Заголовок" value="{{ data.caption }}">
                          </div>
                          <div class="form-group">

@@ -401,29 +401,28 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
 
     def form_valid(self, form):
 
-        # instance = form.save(commit=False)
-        # instance.user = self.request.user
-        # instance.stop_time = datetime.now() + timedelta(days=30)
-        # instance.type_img_s = self.type_img_s[form.cleaned_data['type_id']]
-        # instance.identifier = self.uuid_sentece()
-        # instance.dirname_img = self.uuid_sentece_user()
-        # instance.link_name = self.slugify(form.cleaned_data['caption']) + '#' + instance.identifier
-        # instance.save()
-        # self.save_oter_files(instance, form)
+        instance = form.save(commit=False)
+        instance.identifier = self.uuid_sentece()
+        instance.dirname_img = self.uuid_sentece_user()
+        instance.link_name = self.slugify(form.cleaned_data['caption']) + '#' + instance.identifier
+        instance.save()
+        #self.save_oter_files(instance, form)
 
-        # return super(CreateNewProduct, self).form_valid(form)
-        context = self.get_context_data()
-        context['data'] = self.request.POST
+        return super(CreateNewProduct, self).form_valid(form)
 
     def form_invalid(self, form):
         context = self.get_context_data()
         context['data'] = self.request.POST
+        context['maincategorys'] = MainCategory.objects.get_active_categories()
+        context['nameproducts'] = NameProduct.objects.get_active_products()
+        context['brends'] = Brends.objects.get_active_brends()
+        context['seasons'] = Seasons.objects.get_active_seasons()
+        context['tab_products'] = True
 
         return self.render_to_response(context)
 
     def get_context_data(self, **kwargs):
         context = super(CreateNewProduct, self).get_context_data(**kwargs)
-
         return context
 
     def get_success_url(self):
@@ -436,7 +435,7 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
 
     def uuid_sentece_user(self):
         import uuid
-        return 'user_' + str(uuid.uuid4())[:10]
+        return 'product_' + str(uuid.uuid4())[:10]
 
     def uuid_sentece(self):
         import uuid

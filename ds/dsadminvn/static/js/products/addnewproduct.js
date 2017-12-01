@@ -77,6 +77,10 @@ $(document).ready(function () {
 					    required: false,
 						maxlength: 500
 					},
+					caption:{
+						required: true,
+						maxlength: 200
+					}
 
 				},
 				messages: {
@@ -98,6 +102,10 @@ $(document).ready(function () {
 					},
 					meta_info: {
 					    maxlength: "Не более 500 символов"
+					},
+					caption: {
+						required: "Пожалуйста введите заголовок",
+						maxlength: "Не более 200 символов"
 					},
 				},
                 errorClass: "alert-danger",

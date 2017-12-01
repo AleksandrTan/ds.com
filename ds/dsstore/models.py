@@ -84,6 +84,9 @@ class NameProduct(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['id']
+
 """------------ SizeTable Model-------------------------------"""
 class ManageSizeTable(models.Manager):
 
@@ -97,6 +100,9 @@ class SizeTable(models.Model):
     chest = models.SmallIntegerField(blank=False)
     waist = models.SmallIntegerField(blank=False)
     objects = ManageSizeTable()
+
+    class Meta:
+        ordering = ['id']
 
 class SizeTableForm(ModelForm):
     class Meta:
@@ -154,6 +160,9 @@ class Brends(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['id']
+
 """--------------------Seasons Model--------------------"""
 
 class ManagerSeasons(models.Manager):
@@ -191,6 +200,9 @@ class Seasons(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['id']
+
 
 """--------------Products Model-------------------------"""
 
@@ -198,6 +210,7 @@ def custom_directory_path(instance, filename):
     return 'images/{0}/{1}'.format(instance.dirname_img, filename)
 
 class ManageProductsModel(models.Manager):
+
     def get_list_products(self):
         return Products.objects.only('id', 'articul', 'price', 'is_active').filter(is_active=True)
 
@@ -205,12 +218,12 @@ class Products(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)
     articul = models.CharField(max_length=100, blank=False)
     nameproduct = models.ForeignKey(NameProduct, on_delete=models.CASCADE, blank=False)
-    brends = models.ForeignKey(Brends, on_delete=models.SET_DEFAULT, default=0, blank=True, null=True)
-    season = models.ForeignKey(Seasons, on_delete=models.SET_DEFAULT, default=0, blank=True, null=True)
-    price = models.FloatField(blank=True, default=0)
+    brends = models.SmallIntegerField(blank=True, default=0)
+    season_id = models.SmallIntegerField(blank=True, default=0)
+    price = models.FloatField(blank=True, default=0.0)
     wholesale_price = models.FloatField(blank=True, default=0)
     purshase_price = models.FloatField(blank=True, default=0)
-    ##main_photo_path = models.ImageField(blank=True, upload_to='images/')
+    #main_photo_path = models.ImageField(blank=True, upload_to='images/')
     main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
                                           content_types=['image/jpg', 'image/png', 'image/jpeg'],
                                           max_upload_size=5000000, blank=True, default='nophoto.png')
@@ -243,7 +256,7 @@ class Products(models.Model):
 class ProductsForm(ModelForm):
     class Meta:
         model = Products
-        fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season', 'price', 'wholesale_price', 'purshase_price', 'description',
+        fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
                   'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption']
 
         error_messages = {
@@ -271,7 +284,6 @@ class Image(models.Model):
 
     sentence = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='image')
     img_path = models.CharField(max_length=250, blank=True)
-
 
     def get_absolute_url(self):
         return self.img_path
