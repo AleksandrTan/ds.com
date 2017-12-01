@@ -33,7 +33,7 @@ $(document).ready(function () {
                 }
 
                 var new_size = '<tr><td><div class="form-group"><select class="form-control" name="height[]">'+optionsElement+'</select></div></td><td><div class="form-group">' +
-                    '<input class="form-control" placeholder="Колличество" id="count_height" name="count_height[]" value=""></div></td><td><div class="form-group">'+
+                    '<input class="form-control" placeholder="Колличество" name="count_height[]" value=""></div></td><td><div class="form-group">'+
                     '<button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить Размер</button></div></td></tr>';
 
                 parentElementTable.append(new_size);
