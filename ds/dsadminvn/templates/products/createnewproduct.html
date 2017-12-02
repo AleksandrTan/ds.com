@@ -146,6 +146,7 @@
 
                     <div class="col-lg-6">
                         <h2>Размеры</h2>
+                    {% if maincategorys.0.sizetable_set.all %}
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead>
@@ -185,6 +186,9 @@
                             <label>Добавить Размер</label>
                             <button type="button" class="btn btn-sm btn-success form-control" id="add_size_fields">Добавить Размер</button>
                         </div>
+                    {% else %}
+                        <span style="color: red;">Нет размеров для данной категории </span>
+                    {% endif %}
                          <h2>Изображения</h2>Допустимые форматы jpeg, png, jpg.Максимальный размер 5МБ.
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
