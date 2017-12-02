@@ -3,11 +3,15 @@
 * */
 var is_validate_js = true;
 $.validator.setDefaults( {
-			submitHandler: function () {
-			    if (is_validate_js){
-			    	$( "#add_new_product" ).submit();
-                }
-     		}
+    submitHandler: function () {
+	       		       if (is_validate_js){
+			               $( "#add_new_product" ).submit(function (e) {
+			                                            $('#hellopreloader_preload').css({'display':'block', 'opacity': '0.5'});
+			                                            var form = this;
+                                                        form.submit();
+                            });
+                    }
+     		 }
 		} );
 $(document).ready(function () {
 //Change sizes for select maincategory
@@ -40,6 +44,7 @@ $(document).ready(function () {
             }
         }
     });
+
 //Add sizes fields
     $('#add_size_fields').click(function () {
         $('#height_size_id tr:last-child').clone(true).appendTo($('#height_size_id'));

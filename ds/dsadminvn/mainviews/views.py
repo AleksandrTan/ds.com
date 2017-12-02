@@ -371,6 +371,7 @@ class ProductsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, L
     queryset = Products.objects.get_list_products()
     template_name = 'products/productswork.html'
     context_object_name = 'products_list'
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(ProductsWork, self).get_context_data(**kwargs)

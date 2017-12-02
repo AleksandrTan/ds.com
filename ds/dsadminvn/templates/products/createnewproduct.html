@@ -1,6 +1,7 @@
 {% extends "main.html" %}
 {% load staticfiles %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
 <div class="btn-modal-wrap btn-modal-wrap-1">
     <!-- Modal Deleted -->
     <div class="modal fade" id="isset_articul" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -281,7 +282,7 @@
                      <div class="col-lg-12">
                         <div class="form-group">
                             <label>Добавить Товар</label>
-                            <button type="submit" class="btn btn-sm btn-success form-control">Добавить Товар</button>
+                            <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">Добавить Товар</button>
                          </div>
                     </div>
                 </form>
@@ -291,6 +292,31 @@
                 <!-- /.row -->
             </div>
     </div>
+<!--Pagination-->
+{#    {% if is_paginated %}#}
+{#    <ul class="pagination">#}
+{#    {% if page_obj.has_previous %}#}
+{#      <li><a href="/adminnv/nameproduct/page/{{ page_obj.previous_page_number }}/">&laquo;</a></li>#}
+{#    {% else %}#}
+{#      <li class="disabled"><span>&laquo;</span></li>#}
+{#    {% endif %}#}
+{#    {% for i in paginator.page_range %}#}
+{#      {% if page_obj.number == i %}#}
+{#        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>#}
+{#      {% else %}#}
+{#        <li><a href="/adminnv/nameproduct/page/{{ i }}/">{{ i }}</a></li>#}
+{#      {% endif %}#}
+{#    {% endfor %}#}
+{#    {% if page_obj.has_next %}#}
+{#      <li><a href="/adminnv/nameproduct/page/{{ page_obj.next_page_number }}">&raquo;</a></li>#}
+{#    {% else %}#}
+{#      <li class="disabled"><span>&raquo;</span></li>#}
+{#    {% endif %}#}
+{#    </ul>#}
+{#{% endif %}    #}
+<div class="hellopreloader">
+    <div class="hellopreloader_preload" id="hellopreloader_preload"></div>
+</div>
 <script type="text/javascript" src="{% static 'js/validator/jquery.validate.js' %}"></script>
 <script src="{% static "js/products/fileupload.js" %}"></script>
 <script src="{% static "js/products/addnewproduct.js" %}"></script>
