@@ -555,14 +555,17 @@ model</ColNames>
     <column id="136" parent="26" name="price">
       <Position>3</Position>
       <DataType>double|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
     <column id="137" parent="26" name="wholesale_price">
       <Position>4</Position>
       <DataType>double|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
     <column id="138" parent="26" name="purshase_price">
       <Position>5</Position>
       <DataType>double|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
     <column id="139" parent="26" name="main_photo_path">
       <Position>6</Position>
@@ -662,6 +665,7 @@ model</ColNames>
     <column id="158" parent="26" name="season_id">
       <Position>26</Position>
       <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
     <column id="159" parent="26" name="caption">
       <Position>27</Position>

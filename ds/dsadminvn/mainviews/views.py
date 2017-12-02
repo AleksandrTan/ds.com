@@ -467,3 +467,12 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
 
 class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     pass
+
+class CheckIssetArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+           product_result = Products.objects.check_iset_articul(kwargs['articul'])
+        return JsonResponse({"status": product_result})

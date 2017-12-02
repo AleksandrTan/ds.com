@@ -3,20 +3,19 @@
 {% block content %}
 <div class="btn-modal-wrap btn-modal-wrap-1">
     <!-- Modal Deleted -->
-    <div class="modal fade" id="is_deleted_ctr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="isset_articul" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="fa fa-times" aria-hidden="true">
                     </span></button>
-                    <h4 class="modal-title" id="myModalLabel" style="color: #ff0012">Внимание!!!Удаление Товара!!!</h4>
+                    <h4 class="modal-title" id="myModalLabel" style="color: #ff0012">Внимание!!!</h4>
                 </div>
                  <div class="modal-body">
-                     <h3 style="color: #ff0012">ВЫ действительно хотите удалить этот товар???</h3>
+                     <h3 style="color: #ff0012">Введенный артикул уже существует!Выберите другой</h3>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-xs btn-default" id="cancel_type">Cancel</button>
-                    <button type="button" class="btn btn-xs btn-danger" id="delete_type" data_id_type="">Deleted</button>
+{#                    <button type="button" class="btn btn-xs btn-default" id="cancel_type">Cancel</button>#}
                 </div>
             </div>
         </div>
@@ -53,7 +52,7 @@
                     <div class="col-lg-6">
                         <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
                             <label>Артикул</label><span style="color: red;">*</span>
-                            <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" value="{{ data.articul }}">
+                            <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" value="{{ data.articul }}" maxlength="6">
                             {% if form.errors.articul %}<label id="articul-error" class="error" for="articul">{{ form.errors.articul.0 }}</label>{% endif %}
                         </div>
                         <div class="form-group ">
@@ -95,7 +94,7 @@
                          </div>
                          <div class="form-group">
                             <label>Цвет</label>
-                            <input class="form-control" placeholder="Цвет" id="color" name="color" type="text" value="{{ data.color }}">
+                            <input class="form-control" placeholder="Цвет" id="color" name="color" type="text" value="{{ data.color }}" maxlength="50">
                          </div>
                          <div class="form-group {% if form.errors.price %}has-error{% endif %}">
                             <label>Цена(В формате 23.56)</label>
@@ -118,7 +117,7 @@
                          </div>
                          <div class="form-group">
                                 <label>Заголовок товара</label><span style="color: red;">*</span>
-                                <input class="form-control" id="caption" name="caption" placeholder="Заголовок" value="{{ data.caption }}">
+                                <input class="form-control" id="caption" name="caption" placeholder="Заголовок" value="{{ data.caption }}" maxlength="100">
                          </div>
                          <div class="form-group">
                                 <label>Аттрибуты SEO(Для продвижения страницы в поисковых системах)</label>
@@ -167,7 +166,8 @@
                                         </td>
                                         <td>
                                             <div class="form-group">
-                                               <input class="form-control" placeholder="Колличество" name="count_height[]" value="">
+                                               <input class="form-control"
+                                                      placeholder="Колличество" name="count_height[]" value="1" maxlength="5" type="number">
                                             </div>
                                         </td>
                                         <td>

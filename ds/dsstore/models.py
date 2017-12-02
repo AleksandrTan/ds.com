@@ -214,9 +214,16 @@ class ManageProductsModel(models.Manager):
     def get_list_products(self):
         return Products.objects.only('id', 'articul', 'price', 'is_active').filter(is_active=True)
 
+    def check_iset_articul(self, articul):
+        try:
+            Products.objects.get(articul=articul)
+            return True
+        except Products.DoesNotExist:
+            return False
+
 class Products(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)
-    articul = models.CharField(max_length=100, blank=False)
+    articul = models.CharField(unique=True, max_length=10, blank=False)
     nameproduct = models.ForeignKey(NameProduct, on_delete=models.CASCADE, blank=False)
     brends = models.SmallIntegerField(blank=True, default=0)
     season_id = models.SmallIntegerField(blank=True, default=0)
@@ -261,7 +268,8 @@ class ProductsForm(ModelForm):
 
         error_messages = {
                              'articul': {'required': "Пожалуйста введите артикул",
-                                         'max_length':"Не более 30 символов"
+                                         'max_length':"Не более 30 символов",
+                                         'unique': "Этот артикул уже используетсяб введите другой"
                               },
                          }
 
