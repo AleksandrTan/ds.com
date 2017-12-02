@@ -69,7 +69,6 @@ $('input[data-images=imgages-product]').change(function () {
 //Delete one of another photo
 $('[data-delete-imgs=delete-imgs]').click(function () {
     //clear FileList
-    alert(1000);
     $(this).parent().prev().children().attr('src', '/media/nophoto.png');
     var $el = $(this).parent().prev().prev().children('input');
     $el.wrap('<form>').closest('form').get(0).reset();

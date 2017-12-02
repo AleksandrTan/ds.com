@@ -51,7 +51,7 @@
                   id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
                     <div class="col-lg-6">
                         <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
-                            <label>Артикул</label><span style="color: red;">*</span>
+                            <label style="color: red;">Артикул</label><span style="color: red;">*</span>
                             <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" value="{{ data.articul }}" maxlength="6">
                             {% if form.errors.articul %}<label id="articul-error" class="error" for="articul">{{ form.errors.articul.0 }}</label>{% endif %}
                         </div>
@@ -116,7 +116,7 @@
                                 <textarea class="form-control" rows="3" id="description" name="description">{{ data.description }}</textarea>
                          </div>
                          <div class="form-group">
-                                <label>Заголовок товара</label><span style="color: red;">*</span>
+                                <label style="color: red;">Заголовок товара</label><span style="color: red;">*</span>
                                 <input class="form-control" id="caption" name="caption" placeholder="Заголовок" value="{{ data.caption }}" maxlength="100">
                          </div>
                          <div class="form-group">

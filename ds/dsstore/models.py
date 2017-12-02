@@ -212,7 +212,7 @@ def custom_directory_path(instance, filename):
 class ManageProductsModel(models.Manager):
 
     def get_list_products(self):
-        return Products.objects.only('id', 'articul', 'price', 'is_active').filter(is_active=True)
+        return Products.objects.only('id', 'articul', 'price', 'is_active')
 
     def check_iset_articul(self, articul):
         try:
@@ -290,7 +290,7 @@ class SizeCount(models.Model):
 
 class Image(models.Model):
 
-    sentence = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='image')
+    products = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='image')
     img_path = models.CharField(max_length=250, blank=True)
 
     def get_absolute_url(self):
