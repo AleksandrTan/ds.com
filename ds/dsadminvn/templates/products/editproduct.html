@@ -168,20 +168,18 @@
                                     </tr>
                                 </thead>
                                 <tbody id="height_size_id">
-                                {% with size_count=data_product_edit.sizecount.all %}
+                                {% with size_count=data_product_edit.sizecount.all mc=data_product_edit.maincategory.sizetable_set.all %}
                                     {% for sc in size_count %}
                                     <tr>
                                         <td>
                                             <div class="form-group">
                                                 <select class="form-control" name="height[]">
-                                                {% with mc=data_product_edit.maincategory %}
-                                                    {% for height_list in mc.sizetable_set.all %}
+                                                    {% for height_list in mc %}
                                                         <option name="{{ height_list.height }}" value="{{ height_list.height }}"
                                                                 {% if height_list.height == sc.size %} selected {% endif %}>
                                                             {{ height_list.height }}
                                                         </option>
                                                     {% endfor %}
-                                                {% endwith %}
                                                 </select>
                                             </div>
                                         </td>
