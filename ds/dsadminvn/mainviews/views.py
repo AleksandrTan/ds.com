@@ -406,7 +406,7 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         instance = form.save(commit=False)
         instance.identifier = self.uuid_sentece()
         instance.dirname_img = self.uuid_sentece_user()
-        instance.link_name = self.slugify(form.cleaned_data['caption']) + '#' + instance.identifier
+        instance.link_name = self.slugify(form.cleaned_data['caption']) + '-' + instance.identifier + '#' + form.cleaned_data['articul']
         instance.save()
         self.save_oter_files(instance, form)
         self.saved_sizes_count(instance)
@@ -467,10 +467,31 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
             sizes.save()
 
 class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
-    pass
+    login_url = 'login'
+    permission_required = "auth.change_user"
+    model = Products
+    form_class = ProductsForm
+    context_object_name = 'product_edit'
+    template_name = 'products/editproduct.html'
+    succes_url = '/adminnv/products/'
+
+    def get_context_data(self, **kwargs):
+        context = super(EditProduct, self).get_context_data(**kwargs)
+        context['tab_products'] = True
+        return context
+
 
 class ViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):
-    pass
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    model = Products
+    template_name = 'products/detailview.html'
+    context_object_name = 'product_data'
+
+    def get_context_data(self, **kwargs):
+        context = super(ViewProduct, self).get_context_data(**kwargs)
+        context['tab_products'] = True
+        return context
 
 class CheckIssetArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
     permission_required = "auth.change_user"
