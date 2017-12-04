@@ -6,7 +6,8 @@ window.URL = window.URL || window.webkitURL;
 //Add main imgage
 function handleMainFileImg(files){
     if (files[0].size > 5000000){
-        alert('Максимальный размер файла 5 МБ');
+        $('#modal_content').text('').text('Максимально допустимый размер файла 5 МБ');
+        $('#modal_alarm').modal();
         return false;
     }
     if (files[0].type == 'image/jpg' || files[0].type == 'image/png' || files[0].type == 'image/jpeg'){
@@ -18,7 +19,8 @@ function handleMainFileImg(files){
         reader.readAsDataURL(files[0]);
     }
     else{
-        alert('Неправильное расширение файла');
+        $('#modal_content').text('').text('Неверное расширение файла!!!Допустимые расширения  jpeg, png, jpg');
+        $('#modal_alarm').modal();
     }
 }
 //Show window for download file/Delete selected image
@@ -49,7 +51,8 @@ $('[data-anothe=anothe_img]').on("click", function (e) {
 //Load file
 $('input[data-images=imgages-product]').change(function () {
     if ($(this)[0].files[0].size > 5000000){
-        alert('Максимальный размер файла 5 МБ');
+        $('#modal_content').text('').text('Максимально допустимый размер файла 5 МБ');
+        $('#modal_alarm').modal();
         return false;
     }
     if ($(this)[0].files[0].type == 'image/jpg' || $(this)[0].files[0].type == 'image/png' || $(this)[0].files[0].type == 'image/jpeg'){
@@ -61,7 +64,8 @@ $('input[data-images=imgages-product]').change(function () {
         $(this).parent().next().next().children().show();
     }
     else{
-        alert('Неправильное расширение файла');
+        $('#modal_content').text('').text('Неверное расширение файла!!!Допустимые расширения  jpeg, png, jpg');
+        $('#modal_alarm').modal();
         return false;
     }
 });

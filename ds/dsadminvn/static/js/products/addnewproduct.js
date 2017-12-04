@@ -65,10 +65,25 @@ $('#articul').blur(function () {
    );
    function onAjaxSuccess(data) {
        if(data.status){
-           $('#isset_articul').modal();
+       	   $('#modal_content').text('').text('Введенный артикул уже существует!Выберите другой');
+           $('#modal_alarm').modal();
        }
    };
 });
+
+//Show count entered simbols for input tags
+    $("input").keyup(function() {
+        $(this).next('[data-num = count_simbols]').next('span').css('display', 'block').children('em').text(this.value.length);
+        if (this.value.length > parseInt($(this).next('[data-num = count_simbols]').data( "count" ))){
+            $(this).next('[data-num = count_simbols]').next('span').css('color', 'red').children('em').text(this.value.length);
+        }
+        else{
+            $(this).next('[data-num = count_simbols]').next('span').css('color', 'green').children('em').text(this.value.length);
+        }
+        if(this.value.length == 0){
+            $(this).next('[data-num = count_simbols]').next('span').css('display', 'none');
+        }
+    });
 
 //Validations form
 
