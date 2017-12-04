@@ -96,7 +96,8 @@ class AjaxMainCategoryNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredM
     def slugify(swlf, str):
         import re
         import unidecode
-        return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
+        string = re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
+        return re.sub(r"'", '', string)
 
 class AjaxMainCategoryActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
@@ -428,7 +429,8 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
     def slugify(swlf, str):
         import re
         import unidecode
-        return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
+        string = re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
+        return re.sub(r"'", '', string)
 
     def uuid_sentece_user(self):
         import uuid
@@ -465,6 +467,9 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
             sizes.save()
 
 class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    pass
+
+class ViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     pass
 
 class CheckIssetArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):

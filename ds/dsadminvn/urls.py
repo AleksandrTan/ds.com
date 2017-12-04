@@ -67,6 +67,7 @@ pr_patterns = [
     url(r'^(?:page/(?P<page>\d+)/)?$', views.ProductsWork.as_view(), name='products'),
     url(r'^addproduct/$', views.ShowFormProductView.as_view(), name='showform_for_add_product'),
     url(r'^createproduct/$', views.CreateNewProduct.as_view(), name='createproduct'),
+    url(r'viewproduct/(?P<pk>\d+)/$', views.ViewProduct.as_view(), name="viewproduct"),
     url(r'^edit/(?P<pk>\d+)/$', views.EditProduct.as_view(), name='editproduct'),
     url(r'^checkarticul/(?P<articul>\w+)/$', views.CheckIssetArticul.as_view())
 ]

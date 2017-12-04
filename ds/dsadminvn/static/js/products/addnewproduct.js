@@ -59,16 +59,19 @@ $(document).ready(function () {
 
 //Check isset articul
 $('#articul').blur(function () {
-   $.get(
+   if ($(this).val() != ''){
+       $.get(
         "/adminnv/products/checkarticul/"+$(this).val()+"/",
         onAjaxSuccess
-   );
-   function onAjaxSuccess(data) {
-       if(data.status){
-       	   $('#modal_content').text('').text('Введенный артикул уже существует!Выберите другой');
-           $('#modal_alarm').modal();
-       }
-   };
+       );
+       function onAjaxSuccess(data) {
+           if(data.status){
+               $('#modal_content').text('').text('Введенный артикул уже существует!Выберите другой');
+               $('#modal_alarm').modal();
+           }
+       };
+   }
+
 });
 
 //Show count entered simbols for input tags
