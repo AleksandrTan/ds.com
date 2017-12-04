@@ -466,23 +466,23 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         for sizes in d:
             sizes.save()
 
-# class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
-#     login_url = 'login'
-#     permission_required = "auth.change_user"
-#     model = Products
-#     form_class = ProductsForm
-#     context_object_name = 'data_product_edit'
-#     template_name = 'products/editproduct.html'
-#     succes_url = '/adminnv/products/'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(EditProduct, self).get_context_data(**kwargs)
-#         context['maincategorys'] = MainCategory.objects.get_active_categories()
-#         context['nameproducts'] = NameProduct.objects.get_active_products()
-#         context['brends'] = Brends.objects.get_active_brends()
-#         context['seasons'] = Seasons.objects.get_active_seasons()
-#         context['tab_products'] = True
-#         return context
+class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    login_url = 'login'
+    permission_required = "auth.change_user"
+    model = Products
+    form_class = ProductsForm
+    context_object_name = 'data_product_edit'
+    template_name = 'products/editproduct.html'
+    succes_url = '/adminnv/products/'
+
+    def get_context_data(self, **kwargs):
+        context = super(EditProduct, self).get_context_data(**kwargs)
+        context['maincategorys'] = MainCategory.objects.get_active_categories()
+        context['nameproducts'] = NameProduct.objects.get_active_products()
+        context['brends'] = Brends.objects.get_active_brends()
+        context['seasons'] = Seasons.objects.get_active_seasons()
+        context['tab_products'] = True
+        return context
 
 
 class ViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):

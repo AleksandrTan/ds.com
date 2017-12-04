@@ -76,8 +76,8 @@
                        <div class="form-group ">
                             <label>Бренд</label>
                                 <select class="form-control" name="brends">
+                                    <option name="0" value="0">Выберите бренд</option>
                                     {% for brend in brends %}
-                                        <option name="0" value="0">Выберите бренд</option>
                                         <option name="{{ brend.id }}" value="{{ brend.id }}">{{ brend.name }}</option>
                                     {% endfor %}
                                 </select>

@@ -38,7 +38,7 @@
                                 <i class="fa fa-table"></i> <a href="{% url 'products' %}">Товары</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Редактирование товара {{ data_product_edit }}{{ form.errors }}
+                                <i class="fa fa-table"></i> Редактирование товара {{ form.errors }}
                             </li>
                         </ol>
                     </div>
@@ -68,10 +68,11 @@
                                 </select>
                             </div>
                         <div class="form-group ">
-                            <label>Название</label>{{ data_product_edit.caption }}
+                            <label>Название</label>
                                 <select class="form-control" name="nameproduct">
                                     {% for name_product in nameproducts %}
-                                        <option name="{{ name_product.id }}" value="{{ name_product.id }}" {% if name_product.id == data_product_edit.nameproduct_id %} selected {% endif %}>
+                                        <option name="{{ name_product.id }}" value="{{ name_product.id }}"
+                                            {% if name_product.id == data_product_edit.nameproduct_id %} selected {% endif %}>
                                             {{ name_product.name }}
                                         </option>
                                     {% endfor %}
@@ -81,9 +82,11 @@
                        <div class="form-group ">
                             <label>Бренд</label>
                                 <select class="form-control" name="brends">
+                                    <option name="0" value="0">Выберите бренд</option>
                                     {% for brend in brends %}
-                                        <option name="0" value="0">Выберите бренд</option>
-                                        <option name="{{ brend.id }}" value="{{ brend.id }}">{{ brend.name }}</option>
+                                        <option name="{{ brend.id }}" value="{{ brend.id }}" {% if brend.id == data_product_edit.brends %} selected {% endif %}>
+                                            {{ brend.name }}
+                                        </option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -92,59 +95,61 @@
                          <div class="form-group ">
                             <label>Сезон</label>
                                 <select class="form-control" name="season_id">
+                                    <option name="0" value="0">Выберите сезон</option>
                                     {% for season in seasons %}
-                                        <option name="0" value="0">Выберите сезон</option>
-                                        <option name="{{ season.id }}" value="{{ season.id }}">{{ season.name }}</option>
+                                        <option name="{{ season.id }}" value="{{ season.id }}" {% if season.id == data_product_edit.season_id %} selected {% endif %}>
+                                            {{ season.name }}
+                                        </option>
                                     {% endfor %}
                                 </select>
                          </div>
                      {% endif %}
                          <div class="form-group">
                             <label>Цвет</label>
-                            <input class="form-control" placeholder="Цвет" id="color" name="color" type="text" value="{{ data.color }}" maxlength="50">
+                            <input class="form-control" placeholder="Цвет" id="color" name="color" type="text" value="{{ data_product_edit.color }}" maxlength="50">
                          </div>
                          <div class="form-group {% if form.errors.price %}has-error{% endif %}">
                             <label>Цена(В формате 23.56)</label>
-                            <input class="form-control" placeholder="Цена" id="price" name="price" type="number" value="{{ data.price }}">
+                            <input class="form-control" placeholder="Цена" id="price" name="price" type="number" value="{{ data_product_edit.price }}">
                             {% if form.errors.price %}<label id="price-error" class="error" for="price">{{ form.errors.price.0 }}</label>{% endif %}
                          </div>
                          <div class="form-group {% if form.errors.wholesale_price %}has-error{% endif %}">
                             <label>Оптовая Цена(В формате 23.56)</label>
-                            <input class="form-control" placeholder="Оптовая Цена" id="wholesale_price" name="wholesale_price" type="number" value="{{ data.wholesale_price }}">
+                            <input class="form-control" placeholder="Оптовая Цена" id="wholesale_price" name="wholesale_price" type="number" value="{{ data_product_edit.wholesale_price }}">
                             {% if form.errors.wholesale_price %}<label id="wholesale_price-error" class="error" for="wholesale_price">{{ form.errors.wholesale_price.0 }}</label>{% endif %}
                          </div>
                          <div class="form-group {% if form.errors.purshase_price %}has-error{% endif %}">
                             <label>Цена закупки(В формате 23.56)</label>
-                            <input class="form-control" placeholder="Цена закупки" id="purshase_price" name="purshase_price" type="number" value="{{ data.purshase_price }}">
+                            <input class="form-control" placeholder="Цена закупки" id="purshase_price" name="purshase_price" type="number" value="{{ data_product_edit.purshase_price }}">
                             {% if form.errors.purshase_price %}<label id="purshase_price-error" class="error" for="purshase_price">{{ form.errors.purshase_price.0 }}</label>{% endif %}
                          </div>
                          <div class="form-group">
                                 <label>Описание товара</label>
-                                <textarea class="form-control" rows="3" id="description" name="description">{{ data.description }}</textarea>
+                                <textarea class="form-control" rows="3" id="description" name="description">{{ data_product_edit.description }}</textarea>
                          </div>
                          <div class="form-group">
                                 <label style="color: red;">Заголовок товара(Не более 100 символов)</label><span style="color: red;">*</span>
-                                <input class="form-control" id="caption" name="caption" placeholder="Заголовок" value="{{ data.caption }}" maxlength="100">
+                                <input class="form-control" id="caption" name="caption" placeholder="Заголовок" value="{{ data_product_edit.caption }}" maxlength="100">
                                 <span data-num="count_simbols" data-count="100"></span><span style="display: none">  - Введено <em></em> символов</span>
                          </div>
                          <div class="form-group">
                                 <label>Аттрибуты SEO(Для продвижения страницы в поисковых системах)</label>
-                                <textarea class="form-control" rows="3" id="seo_attributes" name="seo_attributes">{{ data.seo_attributes }}</textarea>
+                                <textarea class="form-control" rows="3" id="seo_attributes" name="seo_attributes">{{ data_product_edit.seo_attributes }}</textarea>
                          </div>
                          <div class="form-group">
                               <div class="checkbox">
                                   <label>
-                                      <input type="checkbox" value="1" name="is_belarus" {% if data.is_belarus %} checked {% endif %}>Товар из Беларуси
+                                      <input type="checkbox" value="1" name="is_belarus" {% if data_product_edit.is_belarus %} checked {% endif %}>Товар из Беларуси
                                   </label>
                               </div>
                               <div class="checkbox">
                                   <label>
-                                       <input type="checkbox" value="1" name="is_active" {% if data.is_active %} checked {% endif %}>Сделать активным(Будет отображен на сайте)
+                                       <input type="checkbox" value="1" name="is_active" {% if data_product_edit.is_active %} checked {% endif %}>Сделать активным(Будет отображен на сайте)
                                   </label>
                               </div>
                               <div class="checkbox">
                                   <label>
-                                     <input type="checkbox" value="1" name="is_new" {% if data.is_new %} checked {% endif %}>Пометить как новый товар
+                                     <input type="checkbox" value="1" name="is_new" {% if data_product_edit.is_new %} checked {% endif %}>Пометить как новый товар
                                   </label>
                               </div>
                          </div>
