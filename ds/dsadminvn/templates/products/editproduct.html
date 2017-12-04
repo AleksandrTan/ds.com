@@ -168,20 +168,27 @@
                                     </tr>
                                 </thead>
                                 <tbody id="height_size_id">
+                                {% with size_count=data_product_edit.sizecount.all %}
+                                    {% for sc in size_count %}
                                     <tr>
                                         <td>
                                             <div class="form-group">
                                                 <select class="form-control" name="height[]">
-                                                    {% for height_list in maincategorys.0.sizetable_set.all %}
-                                                        <option name="{{ height_list.height }}" value="{{ height_list.height }}">{{ height_list.height }}</option>
+                                                {% with mc=data_product_edit.maincategory %}
+                                                    {% for height_list in mc.sizetable_set.all %}
+                                                        <option name="{{ height_list.height }}" value="{{ height_list.height }}"
+                                                                {% if height_list.height == sc.size %} selected {% endif %}>
+                                                            {{ height_list.height }}
+                                                        </option>
                                                     {% endfor %}
+                                                {% endwith %}
                                                 </select>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="form-group">
                                                <input class="form-control"
-                                                      placeholder="Колличество" name="count_height[]" value="1" maxlength="5" type="number">
+                                                      placeholder="Колличество" name="count_height[]" value="{{ sc.count_num }}" maxlength="5" type="number">
                                             </div>
                                         </td>
                                         <td>
@@ -190,6 +197,8 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    {% endfor %}
+                                {% endwith %}
                                 </tbody>
                             </table>
                         </div>
