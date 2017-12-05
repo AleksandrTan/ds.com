@@ -1,6 +1,5 @@
 import os
 import shutil
-from datetime import datetime, timedelta
 
 from django.conf import settings
 from django.shortcuts import redirect
@@ -517,6 +516,15 @@ class DeleteProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
         context = super(DeleteProduct, self).get_context_data(**kwargs)
         context['tab_products'] = True
         return context
+
+    def delete(self, request, *args, **kwargs):
+        self.delete_images_dir()
+        return super(DeleteProduct, self).delete(self, request, *args, **kwargs)
+
+    def delete_images_dir(self):
+        obj = self.get_object()
+        path = settings.MEDIA_ROOT + '\\images\\' + obj.dirname_img
+        shutil.rmtree(path, ignore_errors=True)
 
 class CheckIssetArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
     permission_required = "auth.change_user"
