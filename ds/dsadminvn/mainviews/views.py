@@ -10,8 +10,9 @@ from django.views.generic import View
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import JsonResponse
+from django.core.urlresolvers import reverse_lazy
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
@@ -494,6 +495,23 @@ class ViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, De
 
     def get_context_data(self, **kwargs):
         context = super(ViewProduct, self).get_context_data(**kwargs)
+        context['tab_products'] = True
+        return context
+
+class DeleteProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    model = Products
+    success_url = reverse_lazy('products')
+    context_object_name = 'data_product_delete'
+    template_name = 'products/deleteproduct.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DeleteProduct, self).get_context_data(**kwargs)
+        context['maincategorys'] = MainCategory.objects.get_active_categories()
+        context['nameproducts'] = NameProduct.objects.get_active_products()
+        context['brends'] = Brends.objects.get_active_brends()
+        context['seasons'] = Seasons.objects.get_active_seasons()
         context['tab_products'] = True
         return context
 
