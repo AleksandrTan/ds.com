@@ -544,11 +544,9 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         # map(lambda x: x.save(),
         #     [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list])
         data_list  = zip(self.request.POST.getlist('height[]'), self.request.POST.getlist('count_height[]'))
-        d = [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list]
-        #instance.sizecount_set = d
-        instance.sizecount.set(d, clear=True, bulk=False)
-        # for sizes in d:
-        #     sizes.save()
+        edit_data = [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list]
+        instance.sizecount.set(edit_data, clear=True, bulk=False)
+        SizeCount.objects.filter(products_id=None).delete()
 
 class ViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     permission_required = "auth.change_user"
