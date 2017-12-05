@@ -13,6 +13,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import JsonResponse
 from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
@@ -476,6 +477,9 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
     template_name = 'products/editproduct.html'
     succes_url = '/adminnv/products/'
 
+    def get_success_url(self):
+        return reverse('products')
+
     def get_context_data(self, **kwargs):
         context = super(EditProduct, self).get_context_data(**kwargs)
         context['maincategorys'] = MainCategory.objects.get_active_categories()
@@ -483,6 +487,9 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         context['brends'] = Brends.objects.get_active_brends()
         context['seasons'] = Seasons.objects.get_active_seasons()
         context['tab_products'] = True
+        context['action'] = reverse('editproduct',
+                                    kwargs={'pk': self.get_object().id})
+
         return context
 
 
@@ -508,10 +515,6 @@ class DeleteProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
 
     def get_context_data(self, **kwargs):
         context = super(DeleteProduct, self).get_context_data(**kwargs)
-        context['maincategorys'] = MainCategory.objects.get_active_categories()
-        context['nameproducts'] = NameProduct.objects.get_active_products()
-        context['brends'] = Brends.objects.get_active_brends()
-        context['seasons'] = Seasons.objects.get_active_seasons()
         context['tab_products'] = True
         return context
 

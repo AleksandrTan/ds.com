@@ -48,7 +48,7 @@
                 {% if not maincategorys or not nameproducts %}
                     <p>Нет категорий или названий для отображения.Добавте данные!</p>
                 {% else %}
-                <form class="form form-offer" method="post" name="edit_product" action="{% url 'editproduct' data_product_edit.id %}"
+                <form class="form form-offer" method="post" name="edit_product" action="{{ action }}"
                   id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
                 <input type="hidden" id="articul_product_hidden" value="{{ data_product_edit.articul }}">
                     <div class="col-lg-6">
@@ -304,12 +304,11 @@
                     </div>
                      <div class="col-lg-12">
                         <div class="form-group">
-                            <label>Добавить Товар</label>
-                            <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">Добавить Товар</button>
+                            <label>Обновить Товар</label>
+                            <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">Обновить Товар</button>
                          </div>
                     </div>
                 </form>
-
                 {% endif %}
                 </div>
                 <!-- /.row -->
