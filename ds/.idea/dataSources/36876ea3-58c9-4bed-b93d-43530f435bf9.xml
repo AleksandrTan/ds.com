@@ -751,7 +751,6 @@ model</ColNames>
     <column id="176" parent="28" name="products_id">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
     </column>
     <index id="177" parent="28" name="dsstore_sizecount_products_id_a050be6b_fk_dsstore_products_id">
       <ColNames>products_id</ColNames>

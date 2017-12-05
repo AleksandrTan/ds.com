@@ -279,7 +279,7 @@ class ManagerSizeCount(models.Manager):
     pass
 
 class SizeCount(models.Model):
-    products = models.ForeignKey(Products, on_delete=models.CASCADE, null=True, related_name='sizecount')
+    products = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='sizecount', null=True)
     size = models.SmallIntegerField(default=0)
     count_num = models.SmallIntegerField(default=0)
 

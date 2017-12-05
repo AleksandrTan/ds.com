@@ -474,10 +474,7 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
     form_class = ProductsForm
     context_object_name = 'data_product_edit'
     template_name = 'products/editproduct.html'
-    succes_url = '/adminnv/products/'
-
-    def get_success_url(self):
-        return reverse('products')
+    success_url = '/adminnv/products/'
 
     def get_context_data(self, **kwargs):
         context = super(EditProduct, self).get_context_data(**kwargs)
@@ -491,6 +488,67 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
 
         return context
 
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.link_name = self.slugify(form.cleaned_data['caption']) + '-' + instance.identifier + '#' + form.cleaned_data['articul']
+        instance.save()
+        self.save_oter_files(instance, form)
+        self.saved_sizes_count(instance)
+        return super(EditProduct, self).form_valid(form)
+
+    def form_invalid(self, form):
+        context = self.get_context_data()
+        context['data'] = self.request.POST.getlist('height[]')
+        context['maincategorys'] = MainCategory.objects.get_active_categories()
+        context['nameproducts'] = NameProduct.objects.get_active_products()
+        context['brends'] = Brends.objects.get_active_brends()
+        context['seasons'] = Seasons.objects.get_active_seasons()
+        context['action'] = reverse('editproduct', kwargs={'pk': self.get_object().id})
+        context['tab_products'] = True
+
+        return self.render_to_response(context)
+
+    def slugify(swlf, str):
+        import re
+        import unidecode
+        string = re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
+        return re.sub(r"'", '', string)
+
+    def uuid_sentece_user(self):
+        import uuid
+        return 'product_' + str(uuid.uuid4())[:10]
+
+    def uuid_sentece(self):
+        import uuid
+        return str(uuid.uuid4())[:10]
+
+    def save_oter_files(self, instance, form):
+        if not os.path.isdir(settings.TEST_MEDIA_IMAGES + instance.dirname_img) and self.request.FILES.getlist('other_img[]'):
+            os.mkdir(settings.TEST_MEDIA_IMAGES + instance.dirname_img, mode=0o777)
+        # https://docs.djangoproject.com/ja/1.11/_modules/django/utils/datastructures/ - look for MultiValueDict(getlist)
+        if self.request.FILES.getlist('img_product[]'):
+            for ifile in self.request.FILES.getlist('img_product[]'):
+                if ifile.size < settings.MAX_SIZE_UPLOAD and ifile.content_type in settings.CONTENT_TYPES_FILE:
+                    fs = FileSystemStorage(location=settings.TEST_MEDIA_IMAGES + instance.dirname_img,
+                                           base_url=settings.TEST_MEDIA_IMAGES + instance.dirname_img)
+                    filename = fs.save(ifile.name, ifile)
+                    i = Image(products=instance,
+                              img_path=fs.url(filename))
+                    i.save()
+                else:
+                    # messages.info(self.request, 'Three credits remain in your account.')
+                    continue
+        return True
+
+    def saved_sizes_count(self, instance):
+        # map(lambda x: x.save(),
+        #     [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list])
+        data_list  = zip(self.request.POST.getlist('height[]'), self.request.POST.getlist('count_height[]'))
+        d = [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list]
+        #instance.sizecount_set = d
+        instance.sizecount.set(d, clear=True, bulk=False)
+        # for sizes in d:
+        #     sizes.save()
 
 class ViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     permission_required = "auth.change_user"
