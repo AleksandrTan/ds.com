@@ -39,12 +39,12 @@
                                         <th class="text-center">Цена</th>
                                         <th class="text-center">Активен</th>
                                         <th class="text-center">Добавлен</th>
-                                        <th class="text-center">Просмотр</th>
+                                        <th class="text-center">Фото</th>
                                         <th class="text-center">Редактировать</th>
                                     </tr>
                                 </thead>
                                 <tbody id="mc_list">
-                                {% for product_data in products_list %}
+
                                     <tr>
                                         <td class="text-center">{{ product_data.articul }}</td>
                                         <td class="text-center">{{ product_data.maincategory.name }}</td>
@@ -52,18 +52,13 @@
                                         <td class="text-center">{{ product_data.price }}</td>
                                         <td class="text-center">{% if product_data.is_active %} ДА {% else %} НЕТ {% endif %}</td>
                                         <td class="text-center">{{ product_data.date_create|date:"d-m-Y" }}</td>
-                                        <td class="text-center"><a type="button"
-                                                                   class="btn btn-sm btn-primary"
-                                                                   href="{% url 'viewproduct' product_data.id %}">Просмотр</a>
-                                        </td>
+                                        <td class="text-center"><img src="{{MEDIA_URL}}{{ product_data.main_photo_path }}" width="150px;" height="150px;"></td>
                                         <td class="text-center"><a type="button"
                                                                    class="btn btn-sm btn-success"
                                                                    href="{% url 'editproduct' product_data.id %}">Редактировать</a>
                                         </td>
                                     </tr>
-                                {% empty %}
-                                    <tr><td style="color: red">Нет данных для отображения</td></tr>
-                                {% endfor %}
+
                                 </tbody>
                             </table>
                         </div>
