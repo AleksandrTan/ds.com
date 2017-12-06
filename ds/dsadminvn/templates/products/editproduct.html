@@ -208,56 +208,46 @@
                         <span style="color: red;">Нет размеров для данной категории </span>
                     {% endif %}
                      <div class="table-responsive">
+                     <h2>Изображения</h2>
+                     {% with reletad_images=data_product_edit.image.all %}
                             <table class="table table-bordered table-hover">
                                  <thead>
                                     <tr>
                                         <th>Заглавное фото</th>
-                                        <th>Фото 1</th>
-                                        <th>Фото 2</th>
-                                        <th>Фото 3</th>
-                                        <th>Фото 4</th>
-                                        <th>Фото 5</th>
-
+                                        {% for photo in reletad_images %}
+                                            <th>Фото {{ forloop.counter }}</th>
+                                        {% endfor %}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>
-                                            <img src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}" width="100px;" height="100px;" id="main_photo">
+                                        <td class="text-center">
+                                            <img {% if data_product_edit.main_photo_path %} src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}"
+                                                 {% else %} src="/media/nophoto.png" {% endif %}
+                                                 width="100px;" height="100px;" id="main_photo_show">
                                         </td>
-                                        <td>
-                                            <img src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}" width="100px;" height="100px;" id="main_photo">
+                                    {% for photo in reletad_images %}
+                                        <td class="text-center">
+                                            <img src="/{{ photo.img_path }}" width="100px;" height="100px;" data-photo-number="{{ photo.id }}">
                                         </td>
-                                        <td>
-                                            <img src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}" width="100px;" height="100px;" id="main_photo">
-                                        </td>
-                                        <td>
-                                            <img src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}" width="100px;" height="100px;" id="main_photo">
-                                        </td>
-                                        <td>
-                                            <img src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}" width="100px;" height="100px;" id="main_photo">
-                                        </td>
+                                    {% endfor %}
                                     </tr>
+
                                     <tr>
-                                         <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo" >Удалить фото</button>
+                                         <td class="text-center">
+                                            <button type="button" class="btn btn-sm btn-danger form-control" id="main_photo_show_delete" >Удалить фото</button>
                                         </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo" >Удалить фото</button>
+                                    {% for photo in reletad_images %}
+                                         <td class="text-center">
+                                            <button type="button" class="btn btn-sm btn-danger form-control" data-photo-number-del="{{ photo.id }}" >Удалить фото</button>
                                         </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo">Удалить фото</button>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo" >Удалить фото</button>
-                                        </td>
-
+                                     {% endfor %}
                                     </tr>
-
                                 </tbody>
+                                {% endwith %}
                             </table>
                         </div>
-                        <h2>Изображения</h2>Допустимые форматы jpeg, png, jpg.Максимальный размер 5МБ.
+                        <h2>Добавить Изображения</h2>Допустимые форматы jpeg, png, jpg.Максимальный размер 5МБ.
                     <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead>
