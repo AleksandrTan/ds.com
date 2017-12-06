@@ -207,8 +207,58 @@
                     {% else %}
                         <span style="color: red;">Нет размеров для данной категории </span>
                     {% endif %}
-                         <h2>Изображения</h2>Допустимые форматы jpeg, png, jpg.Максимальный размер 5МБ.
-                        <div class="table-responsive">
+                     <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                 <thead>
+                                    <tr>
+                                        <th>Заглавное фото</th>
+                                        <th>Фото 1</th>
+                                        <th>Фото 2</th>
+                                        <th>Фото 3</th>
+                                        <th>Фото 4</th>
+                                        <th>Фото 5</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}" width="100px;" height="100px;" id="main_photo">
+                                        </td>
+                                        <td>
+                                            <img src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}" width="100px;" height="100px;" id="main_photo">
+                                        </td>
+                                        <td>
+                                            <img src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}" width="100px;" height="100px;" id="main_photo">
+                                        </td>
+                                        <td>
+                                            <img src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}" width="100px;" height="100px;" id="main_photo">
+                                        </td>
+                                        <td>
+                                            <img src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}" width="100px;" height="100px;" id="main_photo">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                         <td>
+                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo" >Удалить фото</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo" >Удалить фото</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo">Удалить фото</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo" >Удалить фото</button>
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <h2>Изображения</h2>Допустимые форматы jpeg, png, jpg.Максимальный размер 5МБ.
+                    <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -302,12 +352,13 @@
                             </table>
                         </div>
                     </div>
-                     <div class="col-lg-12">
+                    <div class="col-lg-12">
                         <div class="form-group">
                             <label>Обновить Товар</label>
                             <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">Обновить Товар</button>
                          </div>
                     </div>
+                    <input type="hidden" id="is_del_mainphoto" value=""/>
                 </form>
                 {% endif %}
                 </div>

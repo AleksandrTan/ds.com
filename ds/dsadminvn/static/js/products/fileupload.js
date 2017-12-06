@@ -17,6 +17,7 @@ function handleMainFileImg(files){
         $('#del_main_photo').show();
     //read file in string base64
         reader.readAsDataURL(files[0]);
+        $('#add_main_file_img').hide();
     }
     else{
         $('#modal_content').text('').text('Неверное расширение файла!!!Допустимые расширения  jpeg, png, jpg');
@@ -36,6 +37,7 @@ $('#del_main_photo').click(function () {
     $el.unwrap();
     $(this).hide();
     $('#main_photo').attr('src', '/media/nophoto.png');
+    $('#add_main_file_img').show();
 });
 
 /*
@@ -62,6 +64,7 @@ $('input[data-images=imgages-product]').change(function () {
     //read file in string base64
         reader.readAsDataURL($(this)[0].files[0]);
         $(this).parent().next().next().children().show();
+        $(this).next().hide();
     }
     else{
         $('#modal_content').text('').text('Неверное расширение файла!!!Допустимые расширения  jpeg, png, jpg');
@@ -78,4 +81,5 @@ $('[data-delete-imgs=delete-imgs]').click(function () {
     $el.wrap('<form>').closest('form').get(0).reset();
     $el.unwrap();
     $(this).hide();
+    $el.next().show();
 });
