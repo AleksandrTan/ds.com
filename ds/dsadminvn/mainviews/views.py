@@ -592,3 +592,4 @@ class CheckIssetArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
         if request.is_ajax():
            product_result = Products.objects.check_iset_articul(kwargs['articul'])
         return JsonResponse({"status": product_result})
+
