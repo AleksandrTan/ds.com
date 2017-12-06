@@ -20,6 +20,8 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm, Brends, Seasons, Products, ProductsForm, Image, SizeCount)
 
+
+
 class BaseAdminView(View):
     """
     Base view for admin views.
