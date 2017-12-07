@@ -42,6 +42,7 @@ $('#del_main_photo').click(function () {
     $(this).hide();
     $('#main_photo').attr('src', '/media/nophoto.png');
     $('#add_main_file_img').show();
+    $('#is_del_mainphoto').val(0);
 });
 
 /*

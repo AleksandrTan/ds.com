@@ -493,6 +493,10 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
     def form_valid(self, form):
         path_maiin_image = settings.MEDIA_ROOT + '\\' + str(self.get_object().main_photo_path)
         instance = form.save(commit=False)
+        if int(self.request.POST['is_del_mainphoto']) == 0:
+            instance.main_photo_path = ''
+            # fs = FileSystemStorage()
+            # fs.delete(path_maiin_image)
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '-' + instance.identifier + '#' + form.cleaned_data['articul']
         instance.save()
         self.save_oter_files(instance, form)
@@ -550,15 +554,16 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         #     [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list])
         data_list  = zip(self.request.POST.getlist('height[]'), self.request.POST.getlist('count_height[]'))
         edit_data = [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list]
+        #update sizecount data(poducts_id set null in table field) inserted new data
         instance.sizecount.set(edit_data, clear=True, bulk=False)
+        #delete old data
         SizeCount.objects.filter(products_id=None).delete()
 
     def delete_main_photo(self, file_name):
-        os.remove(file_name)
-        # try:
-        #     os.remove(file_name)
-        # except OSError:
-        #     pass
+        try:
+            os.remove(file_name)
+        except OSError:
+           pass
 
 
 class ViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):
