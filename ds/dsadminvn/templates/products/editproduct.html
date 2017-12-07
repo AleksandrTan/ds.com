@@ -51,6 +51,7 @@
                 <form class="form form-offer" method="post" name="edit_product" action="{{ action }}"
                   id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
                 <input type="hidden" id="articul_product_hidden" value="{{ data_product_edit.articul }}">
+                <input type="hidden" id="is_del_mainphoto" {% if data_product_edit.main_photo_path %} value="1" {% else %} value="0" {% endif %} name="is_del_mainphoto"/>
                     <div class="col-lg-6">
                         <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
                             <label style="color: red;">Артикул</label><span style="color: red;">*</span>
@@ -213,7 +214,7 @@
                             <table class="table table-bordered table-hover">
                                  <thead>
                                     <tr>
-                                        <th>Заглавное фото</th>
+                                        <th id="main_photo_th">Заглавное фото</th>
                                         {% for photo in reletad_images %}
                                             <th>Фото {{ forloop.counter }}</th>
                                         {% endfor %}
@@ -221,7 +222,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-center">
+                                        <td class="text-center" id="main_photo_td">
                                             <img {% if data_product_edit.main_photo_path %} src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}"
                                                  {% else %} src="/media/nophoto.png" {% endif %}
                                                  width="100px;" height="100px;" id="main_photo_show">
@@ -239,7 +240,7 @@
                                         </td>
                                     {% for photo in reletad_images %}
                                          <td class="text-center">
-                                            <button type="button" class="btn btn-sm btn-danger form-control" data-photo-number-del="{{ photo.id }}" >Удалить фото</button>
+                                            <button type="button" class="btn btn-sm btn-danger form-control" data-photo-id="{{ photo.id }}" data-num-tr="{{ forloop.counter }}">Удалить фото</button>
                                         </td>
                                      {% endfor %}
                                     </tr>
@@ -258,7 +259,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr {% if data_product_edit.main_photo_path %} style="display: none;" {% endif %} id="main_photo_tr">
                                         <td>
                                             <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
                                                    name="main_photo_path"
@@ -271,6 +272,7 @@
                                         </td>
 
                                     </tr>
+
                                     <tr>
                                         <td>
                                             <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
@@ -348,7 +350,7 @@
                             <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">Обновить Товар</button>
                          </div>
                     </div>
-                    <input type="hidden" id="is_del_mainphoto" value=""/>
+
                 </form>
                 {% endif %}
                 </div>
@@ -359,6 +361,6 @@
     <div class="hellopreloader_preload" id="hellopreloader_preload"></div>
 </div>
 <script type="text/javascript" src="{% static 'js/validator/jquery.validate.js' %}"></script>
-<script src="{% static "js/products/fileupload.js" %}"></script>
+<script src="{% static "js/products/editpfileupload.js" %}"></script>
 <script src="{% static "js/products/editproduct.js" %}"></script>
 {% endblock %}
