@@ -88,8 +88,7 @@ $('[data-delete-imgs=delete-imgs]').click(function () {
     $el.next().show();
 });
 
-//Delete isset main photo
-
+//Delete isset main photo and show fields for add new
 $('#main_photo_show_delete').click(function () {
     $('#is_del_mainphoto').val(0);
     $('#main_photo_td').hide();

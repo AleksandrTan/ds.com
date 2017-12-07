@@ -253,8 +253,8 @@ class Products(models.Model):
     date_create = models.DateTimeField(auto_now_add=True)
     objects = ManageProductsModel()
 
-    # def get_absolute_url(self):
-    #     return "products/%s" % self.link_name
+    def get_absolute_url(self):
+         return "products/%s" % self.link_name
 
 
     def __str__(self):
@@ -272,6 +272,8 @@ class ProductsForm(ModelForm):
                                          'unique': "Этот артикул уже используетсяб введите другой"
                               },
                          }
+
+
 
 """--------------SizeCount Model--------------------------"""
 

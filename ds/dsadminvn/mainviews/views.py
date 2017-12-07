@@ -491,11 +491,14 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         return context
 
     def form_valid(self, form):
+        path_maiin_image = settings.MEDIA_ROOT + '\\' + str(self.get_object().main_photo_path)
         instance = form.save(commit=False)
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '-' + instance.identifier + '#' + form.cleaned_data['articul']
         instance.save()
         self.save_oter_files(instance, form)
         self.saved_sizes_count(instance)
+        if int(self.request.POST['is_del_mainphoto']) == 0:
+            self.delete_main_photo(path_maiin_image)
         return super(EditProduct, self).form_valid(form)
 
     def form_invalid(self, form):
@@ -549,6 +552,14 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         edit_data = [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list]
         instance.sizecount.set(edit_data, clear=True, bulk=False)
         SizeCount.objects.filter(products_id=None).delete()
+
+    def delete_main_photo(self, file_name):
+        os.remove(file_name)
+        # try:
+        #     os.remove(file_name)
+        # except OSError:
+        #     pass
+
 
 class ViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     permission_required = "auth.change_user"
