@@ -214,7 +214,9 @@
                             <table class="table table-bordered table-hover">
                                  <thead>
                                     <tr>
+                                    {% if data_product_edit.main_photo_path %}
                                         <th id="main_photo_th">Заглавное фото</th>
+                                    {% endif %}
                                         {% for photo in reletad_images %}
                                             <th>Фото {{ forloop.counter }}</th>
                                         {% endfor %}
@@ -222,11 +224,13 @@
                                 </thead>
                                 <tbody>
                                     <tr>
+                                    {% if data_product_edit.main_photo_path %}
                                         <td class="text-center" id="main_photo_td">
                                             <img {% if data_product_edit.main_photo_path %} src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}"
                                                  {% else %} src="/media/nophoto.png" {% endif %}
                                                  width="100px;" height="100px;" id="main_photo_show">
                                         </td>
+                                    {% endif %}
                                     {% for photo in reletad_images %}
                                         <td class="text-center">
                                             <img src="/{{ photo.img_path }}" width="100px;" height="100px;" data-photo-number="{{ photo.id }}">
@@ -235,9 +239,11 @@
                                     </tr>
 
                                     <tr>
+                                    {% if data_product_edit.main_photo_path %}
                                          <td class="text-center">
                                             <button type="button" class="btn btn-sm btn-danger form-control" id="main_photo_show_delete" >Удалить фото</button>
                                         </td>
+                                    {% endif %}
                                     {% for photo in reletad_images %}
                                          <td class="text-center">
                                             <button type="button" class="btn btn-sm btn-danger form-control" data-photo-id="{{ photo.id }}" data-num-tr="{{ forloop.counter }}">Удалить фото</button>

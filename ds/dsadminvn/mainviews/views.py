@@ -494,7 +494,7 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         path_maiin_image = settings.MEDIA_ROOT + '\\' + str(self.get_object().main_photo_path)
         instance = form.save(commit=False)
         if int(self.request.POST['is_del_mainphoto']) == 0:
-            instance.main_photo_path = ''
+            instance.main_photo_path.delete()
             # fs = FileSystemStorage()
             # fs.delete(path_maiin_image)
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '-' + instance.identifier + '#' + form.cleaned_data['articul']

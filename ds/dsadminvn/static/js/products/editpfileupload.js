@@ -22,6 +22,7 @@ function handleMainFileImg(files){
     //read file in string base64
         reader.readAsDataURL(files[0]);
         $('#add_main_file_img').hide();
+        $('#is_del_mainphoto').val(1);
     }
     else{
         $('#modal_content').text('').text('Неверное расширение файла!!!Допустимые расширения  jpeg, png, jpg');
