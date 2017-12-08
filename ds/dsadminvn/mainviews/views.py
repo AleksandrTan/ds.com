@@ -18,8 +18,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 
 from django.contrib.auth.models import User
-from dsstore.models import (MainCategory, NameProduct, SizeTable, SizeTableForm, Brends, Seasons, Products, ProductsForm, Image, SizeCount)
-
+from dsstore.models import (MainCategory, NameProduct, SizeTable,
+                            SizeTableForm, Brends, Seasons, Products,
+                            ProductsForm, Image, SizeCount)
 
 
 class BaseAdminView(View):
@@ -417,7 +418,7 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
 
     def form_invalid(self, form):
         context = self.get_context_data()
-        context['data'] = self.request.POST.getlist('height[]')
+        context['data'] = self.request.POST
         context['maincategorys'] = MainCategory.objects.get_active_categories()
         context['nameproducts'] = NameProduct.objects.get_active_products()
         context['brends'] = Brends.objects.get_active_brends()
@@ -491,8 +492,8 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         return context
 
     def form_valid(self, form):
-        path_maiin_image = settings.MEDIA_ROOT + '\\' + str(self.get_object().main_photo_path)
         instance = form.save(commit=False)
+        #delete main file photo
         if int(self.request.POST['is_del_mainphoto']) == 0:
             instance.main_photo_path.delete()
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '-' + instance.identifier + '#' + form.cleaned_data['articul']
@@ -504,7 +505,7 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
 
     def form_invalid(self, form):
         context = self.get_context_data()
-        context['data'] = self.request.POST.getlist('height[]')
+        context['data'] = self.request.POST
         context['maincategorys'] = MainCategory.objects.get_active_categories()
         context['nameproducts'] = NameProduct.objects.get_active_products()
         context['brends'] = Brends.objects.get_active_brends()
