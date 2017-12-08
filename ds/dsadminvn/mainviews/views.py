@@ -495,14 +495,11 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         instance = form.save(commit=False)
         if int(self.request.POST['is_del_mainphoto']) == 0:
             instance.main_photo_path.delete()
-            # fs = FileSystemStorage()
-            # fs.delete(path_maiin_image)
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '-' + instance.identifier + '#' + form.cleaned_data['articul']
         instance.save()
         self.save_oter_files(instance, form)
         self.saved_sizes_count(instance)
-        if int(self.request.POST['is_del_mainphoto']) == 0:
-            self.delete_main_photo(path_maiin_image)
+
         return super(EditProduct, self).form_valid(form)
 
     def form_invalid(self, form):
