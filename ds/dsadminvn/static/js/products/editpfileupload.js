@@ -46,6 +46,15 @@ $('#del_main_photo').click(function () {
     $('#is_del_mainphoto').val(0);
 });
 
+//Delete isset main photo and show fields for add new
+$('#main_photo_show_delete').click(function () {
+    $('#is_del_mainphoto').val(0);
+    $('#main_photo_td').hide();
+    $('#main_photo_tr').show();
+    $('#main_photo_th').hide();
+    $(this).parent().hide();
+});
+
 /*
 * Download another images
 * */
@@ -88,13 +97,10 @@ $('[data-delete-imgs=delete-imgs]').click(function () {
     $el.unwrap();
     $(this).hide();
     $el.next().show();
-});
-
-//Delete isset main photo and show fields for add new
-$('#main_photo_show_delete').click(function () {
-    $('#is_del_mainphoto').val(0);
-    $('#main_photo_td').hide();
-    $('#main_photo_tr').show();
-    $('#main_photo_th').hide();
-    $(this).parent().hide();
+    $('#is_del_other_photo').val(1);
+    var data_json_img = $.parseJSON($('#list_del_other_photo').val());
+    var num_img = parseInt($(this).attr('data-photo-id'));
+    data_json_img[num_img] = num_img;
+    $('#list_del_other_photo').val(JSON.stringify(data_json_img));
+    console.log(data_json_img);
 });

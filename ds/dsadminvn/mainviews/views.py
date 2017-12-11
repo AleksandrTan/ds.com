@@ -486,7 +486,7 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         context['brends'] = Brends.objects.get_active_brends()
         context['seasons'] = Seasons.objects.get_active_seasons()
         context['tab_products'] = True
-        context['image_num'] = range(7)
+        context['image_num'] = range(5)
         context['action'] = reverse('editproduct',
                                     kwargs={'pk': self.get_object().id})
 
@@ -497,6 +497,8 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         #delete main file photo
         if int(self.request.POST['is_del_mainphoto']) == 0:
             instance.main_photo_path.delete()
+        if int(self.request.POST['is_del_other_photo']) == 1:
+            self.delete_related_photo(instance, self.request.POST['list_del_other_photo'])
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '-' + instance.identifier + '#' + form.cleaned_data['articul']
         instance.save()
         self.save_oter_files(instance, form)
@@ -558,11 +560,16 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         #delete old data
         SizeCount.objects.filter(products_id=None).delete()
 
-    def delete_main_photo(self, file_name):
-        try:
-            os.remove(file_name)
-        except OSError:
-           pass
+    def delete_related_photo(self, instance, file_list):
+        import json
+        data = json.loads(file_list)
+        for imaje in data:
+            img = Image.objects.filter(id=imaje).get()
+            try:
+                os.remove(settings.BASE_DIR +'/'+ img.img_path)
+                img.delete()
+            except OSError:
+               pass
 
 
 class ViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):
