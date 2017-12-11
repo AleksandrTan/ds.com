@@ -292,8 +292,8 @@
 
                                     </tr>
                                 {% for num in image_num %}
-                                    {% if reletad_images.num != '' %}
-                                        {% with df=reletad_images|strint:num %}
+                                    {% with df=reletad_images|strint:num %}
+                                    {% if df %}
                                     <tr>
                                         <td>
                                             <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
@@ -301,32 +301,33 @@
                                             <button type="button"
                                                     class="btn btn-sm btn-success form-control"
                                                     data-anothe="anothe_img" style="display: none;">
-                                                    Добавить фото 1</button>
+                                                    Добавить фото {{ forloop.counter }}</button>
                                         </td>
                                         <td>
-                                            <img src="/{{ df.img_path }}" width="100px;" height="100px;" alt="{{ df }}">
+                                            <img src="/{{ df.img_path }}" width="100px;" height="100px;" alt="">
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control"  style="display: block;" data-delete-imgs='delete-imgs' >Удалить фото {{ num }}</button>
+                                            <button type="button" class="btn btn-sm btn-danger form-control"  style="display: block;" data-delete-imgs='delete-imgs' >
+                                                Удалить фото {{ forloop.counter }} </button>
                                         </td>
 
                                     </tr>
-                                    {% endwith %}
                                     {% else %}
                                     <tr>
                                         <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
                                                    data-images="imgages-product" name="img_product[]" data-num-img="2" style="display: none;">
-                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото {{ num }}</button>
+                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото {{ forloop.counter }}</button>
                                         </td>
                                         <td>
-                                            <img src="/media/nophoto.png" width="100px;" height="100px;" alt="{{ reletad_images.0.img_path }}">
+                                            <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;" data-delete-imgs='delete-imgs' >Удалить фото {{ num }}</button>
+                                            <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;" data-delete-imgs='delete-imgs' >Удалить фото {{ forloop.counter }}</button>
                                         </td>
 
                                     </tr>
                                     {% endif %}
+                                    {% endwith %}
                                 {% endfor %}
                                 {% endwith %}
                                 </tbody>
