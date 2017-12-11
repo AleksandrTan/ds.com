@@ -39,273 +39,286 @@
                                 <i class="fa fa-table"></i> <a href="{% url 'products' %}">Товары</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Редактирование товара {{ form.errors }} {{ image_num }}
+                                <i class="fa fa-table"></i> Редактирование товара
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
                 <div class="row">
-                {% if not maincategorys or not nameproducts %}
-                    <p>Нет категорий или названий для отображения.Добавте данные!</p>
-                {% else %}
-                <form class="form form-offer" method="post" name="edit_product" action="{{ action }}"
-                  id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
-                <input type="hidden" id="articul_product_hidden" value="{{ data_product_edit.articul }}">
-                <input type="hidden" id="is_del_mainphoto" {% if data_product_edit.main_photo_path %} value="1" {% else %} value="0" {% endif %} name="is_del_mainphoto"/>
-                <input type="hidden" name="is_del_other_photo" value="0" id="is_del_other_photo"/>
-                <input type="hidden" name="list_del_other_photo" value="{}" id="list_del_other_photo"/>
-                    <div class="col-lg-6">
-                        <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
-                            <label style="color: red;">Артикул</label><span style="color: red;">*</span>
-                            <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" value="{{ data_product_edit.articul }}" maxlength="6">
-                            {% if form.errors.articul %}<label id="articul-error" class="error" for="articul">{{ form.errors.articul.0 }}</label>{% endif %}
-                        </div>
-                        <div class="form-group ">
-                            <label>Категория</label>
-                                <select class="form-control" name="maincategory" id="maincategory">
-                                    {% for mcl in maincategorys %}
-                                        <option name="{{ mcl.id }}" value="{{ mcl.id }}" {% if mcl.id == data_product_edit.maincategory_id %} selected {% endif %}>
-                                            {{ mcl.name }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        <div class="form-group ">
-                            <label>Название</label>
-                                <select class="form-control" name="nameproduct">
-                                    {% for name_product in nameproducts %}
-                                        <option name="{{ name_product.id }}" value="{{ name_product.id }}"
-                                            {% if name_product.id == data_product_edit.nameproduct_id %} selected {% endif %}>
-                                            {{ name_product.name }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                       {% if brends %}
-                       <div class="form-group ">
-                            <label>Бренд</label>
-                                <select class="form-control" name="brends">
-                                    <option name="0" value="0">Выберите бренд</option>
-                                    {% for brend in brends %}
-                                        <option name="{{ brend.id }}" value="{{ brend.id }}" {% if brend.id == data_product_edit.brends %} selected {% endif %}>
-                                            {{ brend.name }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                    {% endif %}
-                    {% if seasons %}
-                         <div class="form-group ">
-                            <label>Сезон</label>
-                                <select class="form-control" name="season_id">
-                                    <option name="0" value="0">Выберите сезон</option>
-                                    {% for season in seasons %}
-                                        <option name="{{ season.id }}" value="{{ season.id }}" {% if season.id == data_product_edit.season_id %} selected {% endif %}>
-                                            {{ season.name }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                         </div>
-                     {% endif %}
-                         <div class="form-group">
-                            <label>Цвет</label>
-                            <input class="form-control" placeholder="Цвет" id="color" name="color" type="text" value="{{ data_product_edit.color }}" maxlength="50">
-                         </div>
-                         <div class="form-group {% if form.errors.price %}has-error{% endif %}">
-                            <label>Цена(В формате 23.56)</label>
-                            <input class="form-control" placeholder="Цена" id="price" name="price" type="number" value="{{ data_product_edit.price }}">
-                            {% if form.errors.price %}<label id="price-error" class="error" for="price">{{ form.errors.price.0 }}</label>{% endif %}
-                         </div>
-                         <div class="form-group {% if form.errors.wholesale_price %}has-error{% endif %}">
-                            <label>Оптовая Цена(В формате 23.56)</label>
-                            <input class="form-control" placeholder="Оптовая Цена" id="wholesale_price" name="wholesale_price" type="number" value="{{ data_product_edit.wholesale_price }}">
-                            {% if form.errors.wholesale_price %}<label id="wholesale_price-error" class="error" for="wholesale_price">{{ form.errors.wholesale_price.0 }}</label>{% endif %}
-                         </div>
-                         <div class="form-group {% if form.errors.purshase_price %}has-error{% endif %}">
-                            <label>Цена закупки(В формате 23.56)</label>
-                            <input class="form-control" placeholder="Цена закупки" id="purshase_price" name="purshase_price" type="number" value="{{ data_product_edit.purshase_price }}">
-                            {% if form.errors.purshase_price %}<label id="purshase_price-error" class="error" for="purshase_price">{{ form.errors.purshase_price.0 }}</label>{% endif %}
-                         </div>
-                         <div class="form-group">
-                                <label>Описание товара</label>
-                                <textarea class="form-control" rows="3" id="description" name="description">{{ data_product_edit.description }}</textarea>
-                         </div>
-                         <div class="form-group">
-                                <label style="color: red;">Заголовок товара(Не более 100 символов)</label><span style="color: red;">*</span>
-                                <input class="form-control" id="caption" name="caption" placeholder="Заголовок" value="{{ data_product_edit.caption }}" maxlength="100">
-                                <span data-num="count_simbols" data-count="100"></span><span style="display: none">  - Введено <em></em> символов</span>
-                         </div>
-                         <div class="form-group">
-                                <label>Аттрибуты SEO(Для продвижения страницы в поисковых системах)</label>
-                                <textarea class="form-control" rows="3" id="seo_attributes" name="seo_attributes">{{ data_product_edit.seo_attributes }}</textarea>
-                         </div>
-                         <div class="form-group">
-                              <div class="checkbox">
-                                  <label>
-                                      <input type="checkbox" value="1" name="is_belarus" {% if data_product_edit.is_belarus %} checked {% endif %}>Товар из Беларуси
-                                  </label>
-                              </div>
-                              <div class="checkbox">
-                                  <label>
-                                       <input type="checkbox" value="1" name="is_active" {% if data_product_edit.is_active %} checked {% endif %}>Сделать активным(Будет отображен на сайте)
-                                  </label>
-                              </div>
-                              <div class="checkbox">
-                                  <label>
-                                     <input type="checkbox" value="1" name="is_new" {% if data_product_edit.is_new %} checked {% endif %}>Пометить как новый товар
-                                  </label>
-                              </div>
-                         </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <h2>Размеры</h2>
-                    {% if maincategorys.0.sizetable_set.all %}
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Размер</th>
-                                        <th>Колличество</th>
-                                        <th>Удалить</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="height_size_id">
-                                {% with size_count=data_product_edit.sizecount.all mc=data_product_edit.maincategory.sizetable_set.all %}
-                                    {% for sc in size_count %}
-                                    <tr>
-                                        <td>
-                                            <div class="form-group">
-                                                <select class="form-control" name="height[]">
-                                                    {% for height_list in mc %}
-                                                        <option name="{{ height_list.height }}" value="{{ height_list.height }}"
-                                                                {% if height_list.height == sc.size %} selected {% endif %}>
-                                                            {{ height_list.height }}
-                                                        </option>
-                                                    {% endfor %}
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-group">
-                                               <input class="form-control"
-                                                      placeholder="Колличество" name="count_height[]" value="{{ sc.count_num }}" maxlength="5" type="number">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-group">
-                                                <button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить Размер</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                {% endwith %}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="form-group">
-                            <label>Добавить Размер</label>
-                            <button type="button" class="btn btn-sm btn-success form-control" id="add_size_fields">Добавить Размер</button>
-                        </div>
+                    {% if not maincategorys or not nameproducts %}
+                        <p>Нет категорий или названий для отображения.Добавте данные!</p>
                     {% else %}
-                        <span style="color: red;">Нет размеров для данной категории </span>
+                    <form class="form form-offer" method="post" name="edit_product" action="{{ action }}"
+                      id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
+                        <input type="hidden" id="articul_product_hidden" value="{{ data_product_edit.articul }}">
+                        <input type="hidden" id="is_del_mainphoto" {% if data_product_edit.main_photo_path %} value="1" {% else %} value="0" {% endif %} name="is_del_mainphoto"/>
+                        <input type="hidden" name="is_del_other_photo" value="0" id="is_del_other_photo"/>
+                        <input type="hidden" name="list_del_other_photo" value="{}" id="list_del_other_photo"/>
+                        <div class="col-lg-6">
+                                <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
+                                    <label style="color: red;">Артикул</label><span style="color: red;">*</span>
+                                    <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" value="{{ data_product_edit.articul }}" maxlength="6">
+                                    {% if form.errors.articul %}<label id="articul-error" class="error" for="articul">{{ form.errors.articul.0 }}</label>{% endif %}
+                                </div>
+                                <div class="form-group ">
+                                    <label>Категория</label>
+                                        <select class="form-control" name="maincategory" id="maincategory">
+                                            {% for mcl in maincategorys %}
+                                                <option name="{{ mcl.id }}" value="{{ mcl.id }}" {% if mcl.id == data_product_edit.maincategory_id %} selected {% endif %}>
+                                                    {{ mcl.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                <div class="form-group ">
+                                    <label>Название</label>
+                                        <select class="form-control" name="nameproduct">
+                                            {% for name_product in nameproducts %}
+                                                <option name="{{ name_product.id }}" value="{{ name_product.id }}"
+                                                    {% if name_product.id == data_product_edit.nameproduct_id %} selected {% endif %}>
+                                                    {{ name_product.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                               {% if brends %}
+                               <div class="form-group ">
+                                    <label>Бренд</label>
+                                        <select class="form-control" name="brends">
+                                            <option name="0" value="0">Выберите бренд</option>
+                                            {% for brend in brends %}
+                                                <option name="{{ brend.id }}" value="{{ brend.id }}" {% if brend.id == data_product_edit.brends %} selected {% endif %}>
+                                                    {{ brend.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                            {% endif %}
+                            {% if seasons %}
+                                 <div class="form-group ">
+                                    <label>Сезон</label>
+                                        <select class="form-control" name="season_id">
+                                            <option name="0" value="0">Выберите сезон</option>
+                                            {% for season in seasons %}
+                                                <option name="{{ season.id }}" value="{{ season.id }}" {% if season.id == data_product_edit.season_id %} selected {% endif %}>
+                                                    {{ season.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                 </div>
+                             {% endif %}
+                                 <div class="form-group">
+                                    <label>Цвет</label>
+                                    <input class="form-control" placeholder="Цвет" id="color" name="color" type="text" value="{{ data_product_edit.color }}" maxlength="50">
+                                 </div>
+                                 <div class="form-group {% if form.errors.price %}has-error{% endif %}">
+                                    <label>Цена(В формате 23.56)</label>
+                                    <input class="form-control" placeholder="Цена" id="price" name="price" type="number" value="{{ data_product_edit.price }}">
+                                    {% if form.errors.price %}<label id="price-error" class="error" for="price">{{ form.errors.price.0 }}</label>{% endif %}
+                                 </div>
+                                 <div class="form-group {% if form.errors.wholesale_price %}has-error{% endif %}">
+                                    <label>Оптовая Цена(В формате 23.56)</label>
+                                    <input class="form-control" placeholder="Оптовая Цена" id="wholesale_price" name="wholesale_price" type="number" value="{{ data_product_edit.wholesale_price }}">
+                                    {% if form.errors.wholesale_price %}<label id="wholesale_price-error" class="error" for="wholesale_price">{{ form.errors.wholesale_price.0 }}</label>{% endif %}
+                                 </div>
+                                 <div class="form-group {% if form.errors.purshase_price %}has-error{% endif %}">
+                                    <label>Цена закупки(В формате 23.56)</label>
+                                    <input class="form-control" placeholder="Цена закупки" id="purshase_price" name="purshase_price" type="number" value="{{ data_product_edit.purshase_price }}">
+                                    {% if form.errors.purshase_price %}<label id="purshase_price-error" class="error" for="purshase_price">{{ form.errors.purshase_price.0 }}</label>{% endif %}
+                                 </div>
+                                 <div class="form-group">
+                                        <label>Описание товара</label>
+                                        <textarea class="form-control" rows="3" id="description" name="description">{{ data_product_edit.description }}</textarea>
+                                 </div>
+                                 <div class="form-group">
+                                        <label style="color: red;">Заголовок товара(Не более 100 символов)</label><span style="color: red;">*</span>
+                                        <input class="form-control" id="caption" name="caption" placeholder="Заголовок" value="{{ data_product_edit.caption }}" maxlength="100">
+                                        <span data-num="count_simbols" data-count="100"></span><span style="display: none">  - Введено <em></em> символов</span>
+                                 </div>
+                                 <div class="form-group">
+                                        <label>Аттрибуты SEO(Для продвижения страницы в поисковых системах)</label>
+                                        <textarea class="form-control" rows="3" id="seo_attributes" name="seo_attributes">{{ data_product_edit.seo_attributes }}</textarea>
+                                 </div>
+                                 <div class="form-group">
+                                      <div class="checkbox">
+                                          <label>
+                                              <input type="checkbox" value="1" name="is_belarus" {% if data_product_edit.is_belarus %} checked {% endif %}>Товар из Беларуси
+                                          </label>
+                                      </div>
+                                      <div class="checkbox">
+                                          <label>
+                                               <input type="checkbox" value="1" name="is_active" {% if data_product_edit.is_active %} checked {% endif %}>Сделать активным(Будет отображен на сайте)
+                                          </label>
+                                      </div>
+                                      <div class="checkbox">
+                                          <label>
+                                             <input type="checkbox" value="1" name="is_new" {% if data_product_edit.is_new %} checked {% endif %}>Пометить как новый товар
+                                          </label>
+                                      </div>
+                                 </div>
+                                 <div class="form-group {% if form.errors.discount %}has-error{% endif %}">
+                                    <label>Скидка(%)</label>
+                                    <input class="form-control" id="discount" name="discount" type="number" value="{{ data_product_edit.discount }}">
+                                    {% if form.errors.discount %}<label id="discount-error" class="error" for="discount">{{ form.errors.discount.0 }}</label>{% endif %}
+                                 </div>
+                                 <div class="form-group {% if form.errors.price_down %}has-error{% endif %}">
+                                    <label>Уценка(%)</label>
+                                    <input class="form-control" id="price_down" name="price_down" type="number" value="{{ data_product_edit.price_down }}">
+                                    {% if form.errors.price_down %}<label id="price_down-error" class="error" for="price_down">{{ form.errors.price_down.0 }}</label>{% endif %}
+                                 </div>
+                                 <div class="form-group {% if form.errors.sale_price %}has-error{% endif %}">
+                                    <label>Распродажа(%)</label>
+                                    <input class="form-control" id="sale_price" name="sale_price" type="number" value="{{ data_product_edit.sale_price }}">
+                                    {% if form.errors.sale_price %}<label id="sale_price-error" class="error" for="sale_price">{{ form.errors.sale_price.0 }}</label>{% endif %}
+                                 </div>
+                            </div>
+                        <div class="col-lg-6">
+                                <h2>Размеры</h2>
+                            {% if maincategorys.0.sizetable_set.all %}
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Размер</th>
+                                                <th>Колличество</th>
+                                                <th>Удалить</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="height_size_id">
+                                        {% with size_count=data_product_edit.sizecount.all mc=data_product_edit.maincategory.sizetable_set.all %}
+                                            {% for sc in size_count %}
+                                            <tr>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <select class="form-control" name="height[]">
+                                                            {% for height_list in mc %}
+                                                                <option name="{{ height_list.height }}" value="{{ height_list.height }}"
+                                                                        {% if height_list.height == sc.size %} selected {% endif %}>
+                                                                    {{ height_list.height }}
+                                                                </option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                       <input class="form-control"
+                                                              placeholder="Колличество" name="count_height[]" value="{{ sc.count_num }}" maxlength="5" type="number">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить Размер</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        {% endwith %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="form-group">
+                                    <label>Добавить Размер</label>
+                                    <button type="button" class="btn btn-sm btn-success form-control" id="add_size_fields">Добавить Размер</button>
+                                </div>
+                            {% else %}
+                                <span style="color: red;">Нет размеров для данной категории </span>
+                            {% endif %}
+                            {% with reletad_images=data_product_edit.image.all %}
+                            <h2>Добавить Изображения</h2>Допустимые форматы jpeg, png, jpg.Максимальный размер 5МБ.
+                            <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Добавить</th>
+                                                <th>Фото</th>
+                                                <th>Удалить</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr  id="main_photo_tr">
+                                                <td>
+                                                    <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
+                                                           name="main_photo_path"
+                                                           onchange="handleMainFileImg(this.files)" id="main_photo_path" style="display: none;" value="">
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-success form-control"
+                                                            id="add_main_file_img" {% if data_product_edit.main_photo_path %} style="display: none" {% else %} style="display: block;" {% endif %}>
+                                                             Добавить заглавное фото</button>
+                                                </td>
+                                                <td>
+                                                    <img {% if data_product_edit.main_photo_path %} src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}"
+                                                         {% else %} src="/media/nophoto.png" {% endif %}
+                                                         width="100px;" height="100px;" alt="" id="main_photo">
+                                                </td>
+                                                <td>
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-danger form-control"
+                                                            id="del_main_photo"
+                                                            {% if data_product_edit.main_photo_path %} style="display: block" {% else %} style="display: none;" {% endif %}>
+                                                                    Удалить фото
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                        {% for num in image_num %}
+                                            {% with df=reletad_images|strint:num %}
+                                            {% if df %}
+                                            <tr>
+                                                <td>
+                                                    <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
+                                                           data-images="imgages-product" name="img_product[]" data-num-img="1" style="display: none;">
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-success form-control"
+                                                            data-anothe="anothe_img" style="display: none;">
+                                                            Добавить фото {{ forloop.counter }}</button>
+                                                </td>
+                                                <td>
+                                                    <img src="/{{ df.img_path }}" width="100px;" height="100px;" alt="">
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-danger form-control"  style="display: block;" data-delete-imgs='delete-imgs' data-photo-id="{{ df.id }}">
+                                                        Удалить фото {{ forloop.counter }} </button>
+                                                </td>
+
+                                            </tr>
+                                            {% else %}
+                                            <tr>
+                                                <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
+                                                           data-images="imgages-product" name="img_product[]" style="display: none;">
+                                                    <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото {{ forloop.counter }}</button>
+                                                </td>
+                                                <td>
+                                                    <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;"
+                                                            data-delete-imgs='delete-imgs'>
+                                                            Удалить фото {{ forloop.counter }}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                            {% endwith %}
+                                        {% endfor %}
+                                        {% endwith %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">Обновить Товар</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <a type="button" class="btn btn-sm btn-primary form-control" id="save_exit" href="{% url 'products' %}">Отмена</a>
+                            </div>
+                         </div>
+                    </form>
                     {% endif %}
-                    {% with reletad_images=data_product_edit.image.all %}
-                    <h2>Добавить Изображения</h2>Допустимые форматы jpeg, png, jpg.Максимальный размер 5МБ.
-                    <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Добавить</th>
-                                        <th>Фото</th>
-                                        <th>Удалить</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr  id="main_photo_tr">
-                                        <td>
-                                            <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   name="main_photo_path"
-                                                   onchange="handleMainFileImg(this.files)" id="main_photo_path" style="display: none;" value="">
-                                            <button type="button"
-                                                    class="btn btn-sm btn-success form-control"
-                                                    id="add_main_file_img" {% if data_product_edit.main_photo_path %} style="display: none" {% else %} style="display: block;" {% endif %}>
-                                                     Добавить заглавное фото</button>
-                                        </td>
-                                        <td>
-                                            <img {% if data_product_edit.main_photo_path %} src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}"
-                                                 {% else %} src="/media/nophoto.png" {% endif %}
-                                                 width="100px;" height="100px;" alt="" id="main_photo">
-                                        </td>
-                                        <td>
-                                            <button type="button"
-                                                    class="btn btn-sm btn-danger form-control"
-                                                    id="del_main_photo"
-                                                    {% if data_product_edit.main_photo_path %} style="display: block" {% else %} style="display: none;" {% endif %}>
-                                                            Удалить фото
-                                            </button>
-                                        </td>
-
-                                    </tr>
-                                {% for num in image_num %}
-                                    {% with df=reletad_images|strint:num %}
-                                    {% if df %}
-                                    <tr>
-                                        <td>
-                                            <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="1" style="display: none;">
-                                            <button type="button"
-                                                    class="btn btn-sm btn-success form-control"
-                                                    data-anothe="anothe_img" style="display: none;">
-                                                    Добавить фото {{ forloop.counter }}</button>
-                                        </td>
-                                        <td>
-                                            <img src="/{{ df.img_path }}" width="100px;" height="100px;" alt="">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control"  style="display: block;" data-delete-imgs='delete-imgs' data-photo-id="{{ df.id }}">
-                                                Удалить фото {{ forloop.counter }} </button>
-                                        </td>
-
-                                    </tr>
-                                    {% else %}
-                                    <tr>
-                                        <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" style="display: none;">
-                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото {{ forloop.counter }}</button>
-                                        </td>
-                                        <td>
-                                            <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;"
-                                                    data-delete-imgs='delete-imgs'>
-                                                    Удалить фото {{ forloop.counter }}
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    {% endif %}
-                                    {% endwith %}
-                                {% endfor %}
-                                {% endwith %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">Обновить Товар</button>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                           <a type="button" class="btn btn-sm btn-primary form-control" id="save_exit" href="{% url 'products' %}">Отмена</a>
-                        </div>
-                    </div>
-
-                </form>
-                {% endif %}
                 </div>
                 <!-- /.row -->
             </div>

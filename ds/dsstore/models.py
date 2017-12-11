@@ -102,7 +102,7 @@ class SizeTable(models.Model):
     objects = ManageSizeTable()
 
     class Meta:
-        ordering = ['id']
+        ordering = ['height']
 
 class SizeTableForm(ModelForm):
     class Meta:
@@ -273,6 +273,18 @@ class ProductsForm(ModelForm):
                               },
                          }
 
+class ProductsFormEdit(ModelForm):
+    class Meta:
+        model = Products
+        fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'discount']
+
+        error_messages = {
+                             'articul': {'required': "Пожалуйста введите артикул",
+                                         'max_length':"Не более 30 символов",
+                                         'unique': "Этот артикул уже используетсяб введите другой"
+                              },
+                         }
 
 
 """--------------SizeCount Model--------------------------"""

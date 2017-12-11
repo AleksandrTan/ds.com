@@ -102,20 +102,20 @@ $('#articul').blur(function () {
 				rules: {
 					articul: {
 						required: true,
-						maxlength: 30
+						maxlength: 6
 					},
 					price: {
 						//required: true,
 						number: true,
-						maxlength: 50
+						maxlength: 10
 					},
 					wholesale_price: {
 						number: true,
-						maxlength: 50
+						maxlength: 10
 					},
 					purshase_price: {
 					    number: true,
-						maxlength: 50
+						maxlength: 10
 					},
 					meta_info: {
 					    required: false,
@@ -124,7 +124,22 @@ $('#articul').blur(function () {
 					caption:{
 						required: true,
 						maxlength: 100
-					}
+					},
+					discount: {
+						//required: true,
+						number: true,
+						maxlength: 10
+					},
+					price_down: {
+						//required: true,
+						number: true,
+						maxlength: 10
+					},
+					sale_price: {
+						//required: true,
+						number: true,
+						maxlength: 10
+					},
 
 				},
 				messages: {
@@ -134,15 +149,15 @@ $('#articul').blur(function () {
 					},
 					price: {
 						number: 'Должно быть числом!',
-						maxlength: "Не более 50 символов"
+						maxlength: "Не более 10 символов"
 					},
 					wholesale_price: {
 						number: 'Должно быть числом!',
-						maxlength: "Не более 50 символов"
+						maxlength: "Не более 10 символов"
 					},
                     purshase_price: {
 					   number: 'Должно быть числом!',
-					   maxlength: "Не более 50 символов"
+					   maxlength: "Не более 10 символов"
 					},
 					meta_info: {
 					    maxlength: "Не более 500 символов"
@@ -150,6 +165,18 @@ $('#articul').blur(function () {
 					caption: {
 						required: "Пожалуйста введите заголовок",
 						maxlength: "Не более 100 символов"
+					},
+					discount: {
+						number: 'Должно быть числом!',
+						maxlength: "Не более 10 символов"
+					},
+					price_down: {
+						number: 'Должно быть числом!',
+						maxlength: "Не более 10 символов"
+					},
+					sale_price: {
+						number: 'Должно быть числом!',
+						maxlength: "Не более 10 символов"
 					},
 				},
                 errorClass: "alert-danger",

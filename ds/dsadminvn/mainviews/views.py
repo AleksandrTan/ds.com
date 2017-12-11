@@ -20,7 +20,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from dsstore.models import (MainCategory, NameProduct, SizeTable,
                             SizeTableForm, Brends, Seasons, Products,
-                            ProductsForm, Image, SizeCount)
+                            ProductsForm, ProductsFormEdit, Image, SizeCount)
 
 
 class BaseAdminView(View):
@@ -474,7 +474,7 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
     login_url = 'login'
     permission_required = "auth.change_user"
     model = Products
-    form_class = ProductsForm
+    form_class = ProductsFormEdit
     context_object_name = 'data_product_edit'
     template_name = 'products/editproduct.html'
     success_url = '/adminnv/products/'
@@ -570,7 +570,6 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
                 img.delete()
             except OSError:
                pass
-
 
 class ViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     permission_required = "auth.change_user"
