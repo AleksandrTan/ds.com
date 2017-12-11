@@ -13,6 +13,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import JsonResponse
 from django.core.urlresolvers import reverse_lazy
 from django.core.urlresolvers import reverse
+from django.shortcuts import render
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
@@ -613,4 +614,13 @@ class CheckIssetArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
         if request.is_ajax():
            product_result = Products.objects.check_iset_articul(kwargs['articul'])
         return JsonResponse({"status": product_result})
+
+class FoundArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    template_name = 'products/detailview.html'
+
+    def post(self, request):
+        args = {'tab_products':True, 'product_data':Products.objects.found_articul(self.request.POST.getlist('articul'))}
+        return render(request, self.template_name, args)
 

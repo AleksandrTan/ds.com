@@ -14,7 +14,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Подробный просмотр товара  {{ product_data.id }}
+                                <i class="fa fa-table"></i> Подробный просмотр товара  {{ product_data }}
                             </li>
                         </ol>
                     </div>
@@ -44,7 +44,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="mc_list">
-
+                                {% if product_data %}
                                     <tr>
                                         <td class="text-center">{{ product_data.articul }}</td>
                                         <td class="text-center">{{ product_data.maincategory.name }}</td>
@@ -58,7 +58,9 @@
                                                                    href="{% url 'editproduct' product_data.id %}">Редактировать</a>
                                         </td>
                                     </tr>
-
+                                {% else %}
+                                <tr>Нет данных</tr>
+                                {% endif %}
                                 </tbody>
                             </table>
                         </div>

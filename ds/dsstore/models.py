@@ -221,6 +221,12 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
+    def found_articul(self, articul):
+        try:
+            return Products.objects.get(articul=articul[0])
+        except Products.DoesNotExist:
+            return False
+
 class Products(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)
     articul = models.CharField(unique=True, max_length=10, blank=False)
@@ -277,7 +283,7 @@ class ProductsFormEdit(ModelForm):
     class Meta:
         model = Products
         fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
-                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'discount']
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'discount', 'price_down', 'sale_price']
 
         error_messages = {
                              'articul': {'required': "Пожалуйста введите артикул",
