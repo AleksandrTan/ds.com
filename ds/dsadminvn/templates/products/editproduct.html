@@ -1,6 +1,7 @@
 {% extends "main.html" %}
 {% load staticfiles %}
 {% block content %}
+{% load customfilters %}
 <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
 <div class="btn-modal-wrap btn-modal-wrap-1">
     <!-- Modal Deleted -->
@@ -38,7 +39,7 @@
                                 <i class="fa fa-table"></i> <a href="{% url 'products' %}">Товары</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Редактирование товара {{ form.errors }}
+                                <i class="fa fa-table"></i> Редактирование товара {{ form.errors }} {{ image_num }}
                             </li>
                         </ol>
                     </div>
@@ -251,7 +252,7 @@
                                      {% endfor %}
                                     </tr>
                                 </tbody>
-                                {% endwith %}
+
                             </table>
                         </div>
                         <h2>Добавить Изображения</h2>Допустимые форматы jpeg, png, jpg.Максимальный размер 5МБ.
@@ -273,7 +274,7 @@
                                             <button type="button"
                                                     class="btn btn-sm btn-success form-control"
                                                     id="add_main_file_img" {% if data_product_edit.main_photo_path %} style="display: none" {% else %} style="display: block;" {% endif %}>
-                                                Добавить заглавное фото</button>
+                                                     Добавить заглавное фото</button>
                                         </td>
                                         <td>
                                             <img {% if data_product_edit.main_photo_path %} src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}"
@@ -290,83 +291,57 @@
                                         </td>
 
                                     </tr>
-
+                                {% for num in image_num %}
+                                    {% if reletad_images.num != '' %}
+                                        {% with df=reletad_images|strint:num %}
                                     <tr>
                                         <td>
                                             <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
                                                    data-images="imgages-product" name="img_product[]" data-num-img="1" style="display: none;">
-                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото 1</button>
+                                            <button type="button"
+                                                    class="btn btn-sm btn-success form-control"
+                                                    data-anothe="anothe_img" style="display: none;">
+                                                    Добавить фото 1</button>
                                         </td>
                                         <td>
-                                            <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
+                                            <img src="/{{ df.img_path }}" width="100px;" height="100px;" alt="{{ df }}">
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control"  style="display: none;" data-delete-imgs='delete-imgs' >Удалить фото 1</button>
+                                            <button type="button" class="btn btn-sm btn-danger form-control"  style="display: block;" data-delete-imgs='delete-imgs' >Удалить фото {{ num }}</button>
                                         </td>
 
                                     </tr>
+                                    {% endwith %}
+                                    {% else %}
                                     <tr>
                                         <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
                                                    data-images="imgages-product" name="img_product[]" data-num-img="2" style="display: none;">
-                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото 2</button>
+                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото {{ num }}</button>
                                         </td>
                                         <td>
-                                            <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
+                                            <img src="/media/nophoto.png" width="100px;" height="100px;" alt="{{ reletad_images.0.img_path }}">
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;" data-delete-imgs='delete-imgs' >Удалить фото 2</button>
+                                            <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;" data-delete-imgs='delete-imgs' >Удалить фото {{ num }}</button>
                                         </td>
 
                                     </tr>
-                                    <tr>
-                                        <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="3" style="display: none;">
-                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото 3</button>
-                                        </td>
-                                        <td>
-                                            <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control"  style="display: none;" data-delete-imgs='delete-imgs'>Удалить фото 3</button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="4" style="display: none;">
-                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото 4</button>
-                                        </td>
-                                        <td>
-                                            <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control"  style="display: none;" data-delete-imgs='delete-imgs'>Удалить фото 4</button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="5" style="display: none;">
-                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото 5</button>
-                                        </td>
-                                        <td>
-                                            <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;" data-delete-imgs='delete-imgs'>Удалить фото 5</button>
-                                        </td>
-
-                                    </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                {% endwith %}
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <div class="form-group">
-                            <label>Обновить Товар</label>
                             <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">Обновить Товар</button>
-                         </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                           <a type="button" class="btn btn-sm btn-primary form-control" id="save_exit" href="{% url 'products' %}">Отмена</a>
+                        </div>
                     </div>
 
                 </form>

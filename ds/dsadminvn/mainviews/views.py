@@ -486,6 +486,7 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         context['brends'] = Brends.objects.get_active_brends()
         context['seasons'] = Seasons.objects.get_active_seasons()
         context['tab_products'] = True
+        context['image_num'] = range(7)
         context['action'] = reverse('editproduct',
                                     kwargs={'pk': self.get_object().id})
 
