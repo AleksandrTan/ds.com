@@ -14,7 +14,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Товары
+                                <i class="fa fa-table"></i> Товары {{ product_data }}
                             </li>
                         </ol>
                     </div>
@@ -39,12 +39,12 @@
                         </form>
                     </div>
                     <div class="col-lg-10">
-                        <form class="form form-offer" method="post" name="filter_product" action="{% url 'filterproduct' %}"
+                        <form class="form form-offer" method="get" name="filter_product" action="{% url 'filterproduct' %}"
                               id="filter_product" >{% csrf_token %}
                         <div class="col-lg-2">
                             <div class="form-group ">
                             <label>Категория</label>
-                                <select class="form-control" name="maincategory" id="maincategory">
+                                <select class="form-control" name="maincategory">
                                     <option name="0" value="0">Выберите Категорию</option>
                                     {% for mcl in maincategorys %}
                                         <option name="{{ mcl.id }}" value="{{ mcl.id }}">{{ mcl.name }}</option>
@@ -107,7 +107,7 @@
                               </div>
                          </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-sm btn-success form-control">Найти Товар</button>
+                                <button type="submit" class="btn btn-sm btn-success form-control" name="submit">Найти Товар</button>
                             </div>
                         </form>
                     </div>
