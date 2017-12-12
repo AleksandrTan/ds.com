@@ -227,6 +227,9 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
+    def filter_products(self, data):
+        pass
+
 class Products(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)
     articul = models.CharField(unique=True, max_length=10, blank=False)

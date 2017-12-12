@@ -642,6 +642,7 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
     permission_required = "auth.change_user"
     login_url = 'login'
     template_name = 'products/productswork.html'
+    context_object_name = 'products_list'
     paginate_by = 20
 
     def get_context_data(self, **kwargs):
@@ -658,10 +659,9 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
         if request.GET:
             form = FilterProducts(request.GET)
             if form.is_valid():
-                articul = form.cleaned_data['maincategory']
-                self.object_list = self.get_queryset()
+                self.object_list = self.get_queryset(form.cleaned_data)
                 context =  self.get_context_data(object_list=self.object_list)
-                context['product_data'] = self.get_queryset()
+                context['data_form'] = form.cleaned_data
                 return render(request, self.template_name, context)
             else:
                 self.object_list = self.get_queryset()
@@ -669,5 +669,5 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
                 context['form'] = form
                 return render(request, self.template_name, context)
 
-    def get_queryset(self):
-        return Products.objects.get_list_products()
+    def get_queryset(self, data):
+        return Products.objects.filter_products(data)
