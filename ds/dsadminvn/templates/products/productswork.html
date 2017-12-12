@@ -14,7 +14,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Товары {{ data_form }}
+                                <i class="fa fa-table"></i> Товары {{ data_form }}{{ products_list }}
                             </li>
                         </ol>
                     </div>
@@ -44,8 +44,8 @@
                         <div class="col-lg-2">
                             <div class="form-group ">
                             <label>Категория</label>
-                                <select class="form-control" name="maincategory">
-                                    <option name="0" value="0">Выберите Категорию</option>
+                                <select class="form-control" name="maincategory_id">
+                                    <option name="0" value="">Выберите Категорию</option>
                                     {% for mcl in maincategorys %}
                                         <option name="{{ mcl.id }}" value="{{ mcl.id }}">{{ mcl.name }}</option>
                                     {% endfor %}
@@ -55,8 +55,8 @@
                         <div class="col-lg-2">
                              <div class="form-group ">
                                  <label>Название</label>
-                                     <select class="form-control" name="nameproduct">
-                                             <option name="0" value="0">Выберите Название</option>
+                                     <select class="form-control" name="nameproduct_id">
+                                             <option name="0" value="">Выберите Название</option>
                                          {% for name_product in nameproducts %}
                                              <option name="{{ name_product.id }}" value="{{ name_product.id }}">{{ name_product.name }}</option>
                                          {% endfor %}
@@ -68,7 +68,7 @@
                                <div class="form-group ">
                                     <label>Бренд</label>
                                         <select class="form-control" name="brends">
-                                            <option name="0" value="0">Выберите бренд</option>
+                                            <option name="0" value="">Выберите бренд</option>
                                             {% for brend in brends %}
                                                 <option name="{{ brend.id }}" value="{{ brend.id }}">{{ brend.name }}</option>
                                             {% endfor %}
@@ -82,7 +82,7 @@
                                     <label>Сезон</label>
                                         <select class="form-control" name="season_id">
                                             {% for season in seasons %}
-                                                <option name="0" value="0">Выберите сезон</option>
+                                                <option name="0" value="">Выберите сезон</option>
                                                 <option name="{{ season.id }}" value="{{ season.id }}">{{ season.name }}</option>
                                             {% endfor %}
                                         </select>
@@ -108,7 +108,7 @@
                               </div>
                          </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-sm btn-success form-control" name="submit">Найти Товар</button>
+                                <button type="submit" class="btn btn-sm btn-success form-control">Найти Товар</button>
                             </div>
                         </div>
                         </form>

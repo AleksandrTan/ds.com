@@ -228,7 +228,16 @@ class ManageProductsModel(models.Manager):
             return False
 
     def filter_products(self, data):
-        pass
+        query = Products.objects
+        d = {}
+        for param in data:
+            if data[param]:
+                d[param] = data[param]
+        try:
+            return query.filter(**d).all()
+        except Products.DoesNotExist:
+            return list(d.items())
+
 
 class Products(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)

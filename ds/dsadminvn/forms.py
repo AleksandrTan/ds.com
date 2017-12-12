@@ -4,8 +4,8 @@ class FoundArticuls(forms.Form):
     articul  = forms.CharField(max_length=6, label='articul')
 
 class FilterProducts(forms.Form):
-    maincategory = forms.CharField(required=False)
-    nameproduct = forms.CharField(required=False)
+    maincategory_id = forms.CharField(required=False)
+    nameproduct_id = forms.CharField(required=False)
     brends = forms.CharField(required=False)
     season_id = forms.CharField(required=False)
     is_belarus = forms.BooleanField(required=False)
