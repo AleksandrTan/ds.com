@@ -379,11 +379,16 @@ class ProductsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, L
     queryset = Products.objects.get_list_products()
     template_name = 'products/productswork.html'
     context_object_name = 'products_list'
-    paginate_by = 20
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super(ProductsWork, self).get_context_data(**kwargs)
+        context['maincategorys'] = MainCategory.objects.get_active_categories()
+        context['nameproducts'] = NameProduct.objects.get_active_products()
+        context['brends'] = Brends.objects.get_active_brends()
+        context['seasons'] = Seasons.objects.get_active_seasons()
         context['tab_products'] = True
+
         return context
 
 class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
@@ -489,6 +494,9 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
                                     kwargs={'pk': self.get_object().id})
 
         return context
+
+    # def get_success_url(self):
+    #     return self.request.build_absolute_uri()
 
     def form_valid(self, form):
         instance = form.save(commit=False)
@@ -626,3 +634,19 @@ class FoundArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, T
                 'product_data':Products.objects.found_articul(articul)}
         return render(request, self.template_name, args)
 
+class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    template_name = 'products/productswork.html'
+    context_object_name = 'products_list'
+    paginate_by = 20
+
+    def get_context_data(self, **kwargs):
+        context = super(FilterProduct, self).get_context_data(**kwargs)
+        context['maincategorys'] = MainCategory.objects.get_active_categories()
+        context['nameproducts'] = NameProduct.objects.get_active_products()
+        context['brends'] = Brends.objects.get_active_brends()
+        context['seasons'] = Seasons.objects.get_active_seasons()
+        context['tab_products'] = True
+
+        return context

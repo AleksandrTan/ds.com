@@ -28,7 +28,7 @@
                             <a type="button" class="btn btn-sm btn-success form-control" href="{% url 'showform_for_add_product' %}">Добавить</a>
                          </div>
                         <form class="form form-offer" method="post" name="found_product" action="{% url 'foundproduct' %}"
-                              id="found_product" enctype="multipart/form-data">{% csrf_token %}
+                              id="found_product">{% csrf_token %}
                             <div class="form-group">
                                 <label>Поиск по Артикулу</label>
                                 <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" maxlength="6">
