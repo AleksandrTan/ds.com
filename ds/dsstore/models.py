@@ -223,7 +223,7 @@ class ManageProductsModel(models.Manager):
 
     def found_articul(self, articul):
         try:
-            return Products.objects.get(articul=articul[0])
+            return Products.objects.get(articul=articul)
         except Products.DoesNotExist:
             return False
 

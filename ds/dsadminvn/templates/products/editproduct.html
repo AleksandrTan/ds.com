@@ -244,7 +244,8 @@
                                                            onchange="handleMainFileImg(this.files)" id="main_photo_path" style="display: none;" value="">
                                                     <button type="button"
                                                             class="btn btn-sm btn-success form-control"
-                                                            id="add_main_file_img" {% if data_product_edit.main_photo_path %} style="display: none" {% else %} style="display: block;" {% endif %}>
+                                                            id="add_main_file_img" {% if data_product_edit.main_photo_path == 'nophoto.png'%}
+                                                            style="display: block" {% else %} style="display: none;" {% endif %}>
                                                              Добавить заглавное фото</button>
                                                 </td>
                                                 <td>
@@ -256,7 +257,7 @@
                                                     <button type="button"
                                                             class="btn btn-sm btn-danger form-control"
                                                             id="del_main_photo"
-                                                            {% if data_product_edit.main_photo_path %} style="display: block" {% else %} style="display: none;" {% endif %}>
+                                                            {% if data_product_edit.main_photo_path  != 'nophoto.png' %} style="display: block" {% else %} style="display: none;" {% endif %}>
                                                                     Удалить фото
                                                     </button>
                                                 </td>

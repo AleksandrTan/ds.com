@@ -23,6 +23,8 @@ from dsstore.models import (MainCategory, NameProduct, SizeTable,
                             SizeTableForm, Brends, Seasons, Products,
                             ProductsForm, ProductsFormEdit, Image, SizeCount)
 
+from dsadminvn.forms import FoundArticuls
+
 
 class BaseAdminView(View):
     """
@@ -384,13 +386,15 @@ class ProductsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, L
         context['tab_products'] = True
         return context
 
-class ShowFormProductView(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
-    permission_required = "auth.change_user"
+class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     login_url = 'login'
+    permission_required = "auth.change_user"
+    form_class = ProductsForm
     template_name = 'products/createnewproduct.html'
+    succes_url = '/adminnv/products/'
 
     def get_context_data(self, **kwargs):
-        context = super(ShowFormProductView, self).get_context_data(**kwargs)
+        context = super(CreateNewProduct, self).get_context_data(**kwargs)
         context['maincategorys'] = MainCategory.objects.get_active_categories()
         context['nameproducts'] = NameProduct.objects.get_active_products()
         context['brends'] = Brends.objects.get_active_brends()
@@ -398,13 +402,6 @@ class ShowFormProductView(BaseAdminView, LoginRequiredMixin, PermissionRequiredM
         context['tab_products'] = True
 
         return context
-
-class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
-    login_url = 'login'
-    permission_required = "auth.change_user"
-    form_class = ProductsForm
-    template_name = 'products/createnewproduct.html'
-    succes_url = '/adminnv/products/'
 
     def form_valid(self, form):
 
@@ -498,6 +495,7 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         #delete main file photo
         if int(self.request.POST['is_del_mainphoto']) == 0:
             instance.main_photo_path.delete()
+            instance.main_photo_path = 'nophoto.png'
         if int(self.request.POST['is_del_other_photo']) == 1:
             self.delete_related_photo(instance, self.request.POST['list_del_other_photo'])
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '-' + instance.identifier + '#' + form.cleaned_data['articul']
@@ -621,6 +619,10 @@ class FoundArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, T
     template_name = 'products/detailview.html'
 
     def post(self, request):
-        args = {'tab_products':True, 'product_data':Products.objects.found_articul(self.request.POST.getlist('articul'))}
+        form = FoundArticuls(request.POST)
+        if form.is_valid():
+            articul = form.cleaned_data['articul']
+        args = {'tab_products':True,
+                'product_data':Products.objects.found_articul(articul)}
         return render(request, self.template_name, args)
 
