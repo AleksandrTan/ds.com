@@ -661,7 +661,10 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
             if form.is_valid():
                 self.object_list = self.get_queryset(form.cleaned_data)
                 context =  self.get_context_data(object_list=self.object_list)
-                context['data_form'] = form.cleaned_data
+                if kwargs['page']:
+                    context['data_form'] = request.GET
+                else:
+                    context['data_form'] = form.cleaned_data
                 context['request_get'] = request.GET.copy().urlencode()
                 return render(request, self.template_name, context)
             else:
