@@ -643,7 +643,7 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
     login_url = 'login'
     template_name = 'products/productswork.html'
     context_object_name = 'products_list'
-    paginate_by = 20
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super(FilterProduct, self).get_context_data(**kwargs)
@@ -662,9 +662,10 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
                 self.object_list = self.get_queryset(form.cleaned_data)
                 context =  self.get_context_data(object_list=self.object_list)
                 context['data_form'] = form.cleaned_data
+                context['request_get'] = request.GET.copy().urlencode()
                 return render(request, self.template_name, context)
             else:
-                self.object_list = self.get_queryset()
+                self.object_list = self.get_queryset(form.cleaned_data)
                 context = self.get_context_data(object_list=self.object_list)
                 context['form'] = form
                 return render(request, self.template_name, context)

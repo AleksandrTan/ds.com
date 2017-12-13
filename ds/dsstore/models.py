@@ -229,14 +229,14 @@ class ManageProductsModel(models.Manager):
 
     def filter_products(self, data):
         query = Products.objects
-        d = {}
+        work_dict = {}
         for param in data:
             if data[param]:
-                d[param] = data[param]
+                work_dict[param] = data[param]
         try:
-            return query.filter(**d).all()
+            return query.filter(**work_dict).all()
         except Products.DoesNotExist:
-            return list(d.items())
+            return False
 
 
 class Products(models.Model):
