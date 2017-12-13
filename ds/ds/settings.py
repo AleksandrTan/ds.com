@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dsstore',
-    'dsadminvn'
+    'dsadminvn',
+    'handsale'
 ]
 
 MIDDLEWARE_CLASSES = [

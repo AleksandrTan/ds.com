@@ -1,6 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from dsadminvn.mainviews import views
+from handsale.mainviews import views as viewshandsale
 
 """
     URL`s for Users site
