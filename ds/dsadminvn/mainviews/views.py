@@ -17,6 +17,7 @@ from django.shortcuts import render
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
+from  django.http import QueryDict
 
 from django.contrib.auth.models import User
 from dsstore.models import (MainCategory, NameProduct, SizeTable,
@@ -641,7 +642,7 @@ class FoundArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, T
 class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
     permission_required = "auth.change_user"
     login_url = 'login'
-    template_name = 'products/productswork.html'
+    template_name = 'products/filterproducts.html'
     context_object_name = 'products_list'
     paginate_by = 5
 
@@ -656,22 +657,31 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
         return context
 
     def get(self, request, *args, **kwargs):
-        if request.GET:
+        """
+        If submit search form
+        """
+        if request.GET['submit']:
             form = FilterProducts(request.GET)
             if form.is_valid():
                 self.object_list = self.get_queryset(form.cleaned_data)
                 context =  self.get_context_data(object_list=self.object_list)
-                if kwargs['page']:
-                    context['data_form'] = request.GET
-                else:
-                    context['data_form'] = form.cleaned_data
-                context['request_get'] = request.GET.copy().urlencode()
+                context['data_form'] = form.cleaned_data
+                copy_get = QueryDict(request.GET.copy().urlencode(), mutable=True)
+                copy_get['submit'] = 0
+                context['request_get'] = copy_get.urlencode()
                 return render(request, self.template_name, context)
             else:
                 self.object_list = self.get_queryset(form.cleaned_data)
                 context = self.get_context_data(object_list=self.object_list)
                 context['form'] = form
                 return render(request, self.template_name, context)
+        else:
+            form = FilterProducts(request.GET)
+            self.object_list = self.get_queryset(form.cleaned_data)
+            context = self.get_context_data(object_list=self.object_list)
+            context['data_form'] = form.cleaned_data
+            context['request_get'] = QueryDict(request.GET.copy().urlencode(), mutable=True)
+            return render(request, self.template_name, context)
 
     def get_queryset(self, data):
         return Products.objects.filter_products(data)

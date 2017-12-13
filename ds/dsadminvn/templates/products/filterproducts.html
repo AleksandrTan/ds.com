@@ -15,7 +15,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Товары
+                                <i class="fa fa-table"></i> Фильтр товаров
                             </li>
                         </ol>
                     </div>
@@ -177,7 +177,7 @@
     {% if is_paginated %}
     <ul class="pagination">
     {% if page_obj.has_previous %}
-      <li><a href="/adminnv/products/page/{{ page_obj.previous_page_number }}/?{{ request_get }}">&laquo;</a></li>
+      <li><a href="/adminnv/products/filterproduct/page/{{ page_obj.previous_page_number }}/?{{ request_get }}">&laquo;</a></li>
     {% else %}
       <li class="disabled"><span>&laquo;</span></li>
     {% endif %}
@@ -185,11 +185,11 @@
       {% if page_obj.number == i %}
         <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
       {% else %}
-        <li><a href="/adminnv/products/page/{{ i }}/?{{ request_get }}">{{ i }}</a></li>
+        <li><a href="/adminnv/products/filterproduct/page/{{ i }}/?{{ request_get }}">{{ i }}</a></li>
       {% endif %}
     {% endfor %}
     {% if page_obj.has_next %}
-      <li><a href="/adminnv/products/page/{{ page_obj.next_page_number }}/?{{ request_get }}">&raquo;</a></li>
+      <li><a href="/adminnv/products/filterproduct/page/{{ page_obj.next_page_number }}/?{{ request_get }}">&raquo;</a></li>
     {% else %}
       <li class="disabled"><span>&raquo;</span></li>
     {% endif %}
