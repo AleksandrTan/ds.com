@@ -248,10 +248,10 @@ class Products(models.Model):
     price = models.FloatField(blank=True, default=0.0)
     wholesale_price = models.FloatField(blank=True, default=0)
     purshase_price = models.FloatField(blank=True, default=0)
-    # main_photo_path = models.ImageField(blank=True, upload_to='images/')
-    main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
-                                          content_types=['image/jpg', 'image/png', 'image/jpeg'],
-                                          max_upload_size=5000000, blank=True, default='nophoto.png')
+    main_photo_path = models.ImageField(blank=True, upload_to='images/')
+    # main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
+    #                                       content_types=['image/jpg', 'image/png', 'image/jpeg'],
+    #                                       max_upload_size=5000000, blank=True, default='nophoto.png')
     description = models.TextField(blank=True, default='')
     caption = models.CharField(blank=False, default='', max_length=200)
     color = models.CharField(max_length=100, blank=True, default='')
@@ -327,3 +327,5 @@ class Image(models.Model):
 
     def get_absolute_url(self):
         return self.img_path
+
+

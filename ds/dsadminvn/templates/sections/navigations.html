@@ -148,7 +148,6 @@
                         </ul>
                     </li>
                     {% endif %}
-
                     {% if user.is_staff and user.is_superuser %}
                         <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#products"><i class="fa fa-fw fa-arrows-v"></i> Товары <i class="fa fa-fw fa-caret-down"></i></a>
@@ -164,8 +163,25 @@
                     {% endif %}
                     {% if user.is_staff %}
                         <li>
-                            <a href="/mainusers/"><i class="fa fa-cog"></i> Main Users</a>
-                        </li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#productsale"><i class="fa fa-fw fa-arrows-v"></i> Продажа <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="productsale" class="collapse {% if tab %} in {% endif %}">
+                            <li>
+                                <a href="{% url 'maincategory' %}"><i class="fa fa-th-list"></i> Продать товар</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'nameproduct' %}"><i class="fa fa-th-list"></i> Названия товаров</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'sizetable' %}"><i class="fa fa-th-list"></i> Таблица размеров</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'brends' %}"><i class="fa fa-th-list"></i> Бренды</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'seasons' %}"><i class="fa fa-th-list"></i> Сезоны</a>
+                            </li>
+                        </ul>
+                    </li>
                     {% endif %}
                     {% if user.is_staff %}
                         <li>

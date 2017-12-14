@@ -26,7 +26,7 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Добавить новый товар</label>
-                            <a type="button" class="btn btn-sm btn-success form-control" href="{% url 'showform_for_add_product' %}">Добавить</a>
+                            <a type="button" class="btn btn-sm btn-primary form-control" href="{% url 'showform_for_add_product' %}">Добавить</a>
                          </div>
                         <form class="form form-offer" method="post" name="found_product" action="{% url 'foundproduct' %}"
                               id="found_product">{% csrf_token %}
