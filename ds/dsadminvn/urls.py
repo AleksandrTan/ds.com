@@ -73,9 +73,9 @@ pr_patterns = [
     url(r'^checkarticul/(?P<articul>\w+)/$', views.CheckIssetArticul.as_view()),
     url(r'^deleteproduct/(?P<pk>\d+)/$', views.DeleteProduct.as_view(), name='deleteproduct'),
     url(r'^foundproduct/$', views.FoundArticul.as_view(), name='foundproduct'),
-    url(r'^filterproduct/(?:page/(?P<page>\d+)/)?$', views.FilterProduct.as_view(), name='filterproduct')
+    url(r'^filterproduct/(?:page/(?P<page>\d+)/)?$', views.FilterProduct.as_view(), name='filterproduct'),
+    url(r'^sellproduct/(?P<pk>\d+)/$', viewshandsale.SellProduct.as_view(), name='sellproduct')
 ]
-
 
 urlpatterns = [
     url(r'^loginadmin/$', auth_views.login, name='login'),
@@ -89,4 +89,3 @@ urlpatterns = [
     url(r'^adminnv/products/', include(pr_patterns)),
     url(r'^adminnv/seasons/', include(se_patterns)),
 ]
-

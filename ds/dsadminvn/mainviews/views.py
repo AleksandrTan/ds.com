@@ -410,7 +410,6 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         return context
 
     def form_valid(self, form):
-
         instance = form.save(commit=False)
         instance.identifier = self.uuid_sentece()
         instance.dirname_img = self.uuid_sentece_user()

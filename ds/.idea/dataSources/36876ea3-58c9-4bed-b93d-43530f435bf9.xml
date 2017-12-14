@@ -878,21 +878,36 @@ model</ColNames>
       <Position>15</Position>
       <DataType>date|0</DataType>
     </column>
-    <column id="205" parent="30" name="column_16">
+    <column id="205" parent="30" name="lost_num">
       <Position>16</Position>
-      <DataType>int(11)|0</DataType>
+      <DataType>float|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <index id="206" parent="30" name="handsale_productssale_dsstore_products__fk">
+    <column id="206" parent="30" name="description">
+      <Position>17</Position>
+      <DataType>char(1)|0</DataType>
+    </column>
+    <index id="207" parent="30" name="handsale_productssale_dsstore_products__fk">
       <ColNames>products_id</ColNames>
     </index>
-    <key id="207" parent="30" name="PRIMARY">
+    <index id="208" parent="30" name="handsale_productssale_auth_user__fk">
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="209" parent="30" name="PRIMARY">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="208" parent="30" name="handsale_productssale_dsstore_products__fk">
+    <foreign-key id="210" parent="30" name="handsale_productssale_dsstore_products__fk">
       <ColNames>products_id</ColNames>
       <RefSchemaName>dsdb</RefSchemaName>
       <RefTableName>dsstore_products</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <foreign-key id="211" parent="30" name="handsale_productssale_auth_user__fk">
+      <ColNames>user_id</ColNames>
+      <RefSchemaName>dsdb</RefSchemaName>
+      <RefTableName>auth_user</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>set-null</OnDelete>
     </foreign-key>

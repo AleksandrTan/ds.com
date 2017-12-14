@@ -238,6 +238,12 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
+    def get_single_product(self, pk):
+        try:
+            return Products.objects.get(id=pk)
+        except Products.DoesNotExist:
+            return False
+
 
 class Products(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)

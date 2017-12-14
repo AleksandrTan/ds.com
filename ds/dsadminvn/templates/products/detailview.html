@@ -51,6 +51,8 @@
                                         <th class="text-center">Добавлен</th>
                                         <th class="text-center">Фото</th>
                                         <th class="text-center">Редактировать</th>
+                                        <th class="text-center">Продать</th>
+                                        <th class="text-center">Удалить</th>
                                     </tr>
                                 </thead>
                                 <tbody id="mc_list">
@@ -66,6 +68,15 @@
                                         <td class="text-center"><a type="button"
                                                                    class="btn btn-sm btn-success"
                                                                    href="{% url 'editproduct' product_data.id %}">Редактировать</a>
+                                        </td>
+                                        <td class="text-center"><a type="button"
+                                                                   class="btn btn-sm btn-success"
+                                                                   href="{% url 'sellproduct' product_data.id %}">Продать</a>
+                                        </td>
+                                        <td class="text-center"><a type="button"
+                                                                   class="btn btn-sm btn-danger"
+                                                                   href="{% url 'deleteproduct' product_data.id %}">Удалить</a>
+
                                         </td>
                                     </tr>
                                 {% else %}
