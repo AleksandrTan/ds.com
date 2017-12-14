@@ -10,7 +10,7 @@ class ManagerProductSale(models.Manager):
     pass
 
 class ProductsSale(models.Model):
-    products = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='psale', null=True)
+    products = models.ForeignKey(Products, on_delete=models.SET_NULL, related_name='psale', null=True, blank=True)
     articul = models.CharField(max_length=10, blank=False)
     count_num = models.SmallIntegerField(default=0)
     size = models.SmallIntegerField(default=0)

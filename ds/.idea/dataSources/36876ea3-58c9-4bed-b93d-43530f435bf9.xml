@@ -894,7 +894,7 @@ model</ColNames>
       <RefSchemaName>dsdb</RefSchemaName>
       <RefTableName>dsstore_products</RefTableName>
       <RefColNames>id</RefColNames>
-      <OnDelete>delete</OnDelete>
+      <OnDelete>set-null</OnDelete>
     </foreign-key>
   </database-model>
 </dataSource>
