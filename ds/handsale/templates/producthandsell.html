@@ -20,11 +20,45 @@
                     </div>
                 </div>
                 <!-- /.row -->
-{#                <div class="row">#}
-{#                    <div class="col-lg-10">#}
-{#                    <label>Продать товар</label>#}
-{#                        <form class="form form-offer" method="get" name="filter_product" action="{% url 'filterproduct' %}"#}
-{#                              id="filter_product" >{% csrf_token %}#}
+                <div class="row">
+                    <div class="col-lg-10">
+                        <form class="form form-offer" method="get" name="filter_product" action="{% url 'filterproduct' %}"
+                              id="filter_product" >{% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ product_data.id }}"/>
+                        <div class="col-lg-12">
+                        <h2>Данные товара</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Артикул</th>
+                                        <th class="text-center">Категория</th>
+                                        <th class="text-center">Название</th>
+                                        <th class="text-center">Цена</th>
+                                        <th class="text-center">Скидка</th>
+                                        <th class="text-center">Размер</th>
+                                        <th class="text-center">На складе</th>
+                                        <th class="text-center">Колличество</th>
+                                        <th class="text-center">Продать</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">{{ product_data.articul }}</td>
+                                        <td class="text-center">{{ product_data.maincategory.name }}</td>
+                                        <td class="text-center">{{ product_data.nameproduct.name }}</td>
+                                        <td class="text-center">{{ product_data.price }}</td>
+                                        <td class="text-center">/index.html</td>
+                                        <td class="text-center">1265</td>
+                                        <td class="text-center">32.3%</td>
+                                        <td class="text-center">$321.33</td>
+                                        <td class="text-center">$321.33</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 {#                        <div class="col-lg-2">#}
 {#                            <div class="form-group ">#}
 {#                            <label>Категория</label>#}
@@ -51,63 +85,17 @@
 {#                                     </select>#}
 {#                             </div>#}
 {#                        </div>#}
-{#                        <div class="col-lg-2">#}
-{#                           {% if brends %}#}
-{#                               <div class="form-group ">#}
-{#                                    <label>Бренд</label>#}
-{#                                        <select class="form-control" name="brends">#}
-{#                                            <option name="0" value="">Выберите бренд</option>#}
-{#                                            {% for brend in brends %}#}
-{#                                                <option name="{{ brend.id }}" value="{{ brend.id }}" {% if brend.id == data_form.brends|strtoint %} selected {% endif %}>#}
-{#                                                    {{ brend.name }}#}
-{#                                                </option>#}
-{#                                            {% endfor %}#}
-{#                                        </select>#}
-{#                                    </div>#}
-{#                           {% endif %}#}
-{#                        </div>#}
-{#                        <div class="col-lg-2">#}
-{#                           {% if seasons %}#}
-{#                                 <div class="form-group ">#}
-{#                                    <label>Сезон</label>#}
-{#                                        <select class="form-control" name="season_id">#}
-{#                                            {% for season in seasons %}#}
-{#                                                <option name="0" value="">Выберите сезон</option>#}
-{#                                                <option name="{{ season.id }}" value="{{ season.id }}" {% if season.id == data_form.season|strtoint %} selected {% endif %}>#}
-{#                                                    {{ season.name }}#}
-{#                                                </option>#}
-{#                                            {% endfor %}#}
-{#                                        </select>#}
-{#                                 </div>#}
-{#                             {% endif %}#}
-{#                        </div>#}
-{#                        <div class="col-lg-2">#}
-{#                        <div class="form-group">#}
-{#                              <div class="checkbox">#}
-{#                                  <label>#}
-{#                                      <input type="checkbox" value="1" name="is_belarus" {% if data_form.is_belarus %} checked {% endif %}>Товар из Беларуси#}
-{#                                  </label>#}
-{#                              </div>#}
-{#                              <div class="checkbox">#}
-{#                                  <label>#}
-{#                                       <input type="checkbox" value="1" name="is_active" {% if data_form.is_active %} checked {% endif %}>Активные#}
-{#                                  </label>#}
-{#                              </div>#}
-{#                              <div class="checkbox">#}
-{#                                  <label>#}
-{#                                     <input type="checkbox" value="1" name="is_new" {% if data_form.is_new %} checked {% endif %}>Новый товар#}
-{#                                  </label>#}
-{#                              </div>#}
-{#                         </div>#}
-{#                            <div class="form-group">#}
-{#                                <button type="submit" class="btn btn-sm btn-success form-control" name="submit" value="1">Найти Товар</button>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        </form>#}
-{#                    </div>#}
-{##}
-{#                </div>#}
+{#                        #}
+
+
+                        </form>
+                    </div>
+                </div>
                 <!-- /.row -->
             </div>
     </div>
+<script>
+    var sizecount = {};
+
+</script>
 {% endblock %}
