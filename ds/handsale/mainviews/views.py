@@ -12,7 +12,6 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
     form_class = ProductsSellForm
     template_name = 'producthandsell.html'
     succes_url = '/adminnv/products/'
-
     context_object_name = 'product_data'
 
     def get_context_data(self, **kwargs):
@@ -20,7 +19,9 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
         context['tab_products'] = True
 
         return context
-
+    """
+        Show form for sell product with data produc
+    """
     def get(self, request, **kwargs):
         self.object = self.get_queryset(kwargs['pk'])
         return render(request, self.template_name, self.get_context_data())
