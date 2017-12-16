@@ -48,10 +48,22 @@
                                         <td class="text-center">{{ product_data.maincategory.name }}</td>
                                         <td class="text-center">{{ product_data.nameproduct.name }}</td>
                                         <td class="text-center">{{ product_data.price }}</td>
-                                        <td class="text-center">/index.html</td>
-                                        <td class="text-center">1265</td>
-                                        <td class="text-center">32.3%</td>
-                                        <td class="text-center">$321.33</td>
+                                        <td class="text-center">
+                                            <input name="lost_num" type="number" id="lost_num" value="0">
+                                        </td>
+                                        <td class="text-center">
+                                            <select class="form-control" name="size" id="size">
+                                                {% for size in product_data.sizecount.all %}
+                                                    <option name="{{ size.id }}" value="{{ size.id }}">
+                                                        {{ size.size }}
+                                                    </option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                        <td class="text-center" id="in_stock">{{ product_data.sizecount.all.0.count_num }}</td>
+                                        <td class="text-center">
+                                            <input name="count_num" value="0" id="count_num"/>
+                                        </td>
                                         <td class="text-center">$321.33</td>
                                     </tr>
 
@@ -59,35 +71,6 @@
                             </table>
                         </div>
                     </div>
-{#                        <div class="col-lg-2">#}
-{#                            <div class="form-group ">#}
-{#                            <label>Категория</label>#}
-{#                                <select class="form-control" name="maincategory_id">#}
-{#                                    <option name="0" value="">Выберите Категорию</option>#}
-{#                                    {% for mcl in maincategorys %}#}
-{#                                        <option name="{{ mcl.id }}" value="{{ mcl.id }}" {% if mcl.id == data_form.maincategory_id|strtoint %} selected {% endif %}>#}
-{#                                            {{ mcl.name }}#}
-{#                                        </option>#}
-{#                                    {% endfor %}#}
-{#                                </select>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="col-lg-2">#}
-{#                             <div class="form-group ">#}
-{#                                 <label>Название</label>#}
-{#                                     <select class="form-control" name="nameproduct_id">#}
-{#                                             <option name="0" value="">Выберите Название</option>#}
-{#                                         {% for name_product in nameproducts %}#}
-{#                                             <option name="{{ name_product.id }}" value="{{ name_product.id }}"#}
-{#                                                     {% if name_product.id == data_form.nameproduct_id|strtoint %} selected {% endif %}> {{ name_product.name }}#}
-{#                                             </option>#}
-{#                                         {% endfor %}#}
-{#                                     </select>#}
-{#                             </div>#}
-{#                        </div>#}
-{#                        #}
-
-
                         </form>
                     </div>
                 </div>
@@ -95,7 +78,12 @@
             </div>
     </div>
 <script>
-    var sizecount = {};
+    var sizecount = {
+    {% for size in product_data.sizecount.all %}
+        '{{ size.id }}':{{ size.count_num }},
+    {% endfor %}
+    };
 
 </script>
+    <script src="{% static 'js/products/productsale.js' %}"></script>
 {% endblock %}

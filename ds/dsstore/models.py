@@ -322,6 +322,9 @@ class SizeCount(models.Model):
 
     objects = ManagerSizeCount()
 
+    class Meta:
+        ordering = ['size']
+
 
 """------------------Images Model---------------------------"""
 
