@@ -47,7 +47,12 @@ $(document).ready(function () {
 
 //Add sizes fields
     $('#add_size_fields').click(function () {
+    	if ($('#count_sizes').val() <=  $('#count_sizes_add').val()){
+    	    return false;
+        }
         $('#height_size_id tr:last-child').clone(true).appendTo($('#height_size_id'));
+    	$('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) + 1);
+
     });
 //Remove size field
     $('#height_size_id').on('click', '[data-deletes=delete_size]', function () {
@@ -55,6 +60,7 @@ $(document).ready(function () {
             return false;
         }
         $(this).parents('tr').remove();
+        $('#count_sizes_add').val($('#count_sizes_add').val() - 1);
     });
 
 //Check isset articul

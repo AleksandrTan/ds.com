@@ -49,7 +49,9 @@
                     <p>Нет категорий или названий для отображения.Добавте данные!</p>
                 {% else %}
                 <form class="form form-offer" method="post" name="add_new_product" action="{% url 'createproduct' %}"
-                  id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
+                      id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
+                    <input type="hidden" value="{{ maincategorys.0.sizetable_set.count }}" id="count_sizes"/>
+                    <input type="hidden" value="1" id="count_sizes_add"/>
                     <div class="col-lg-6">
                         <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
                             <label style="color: red;">Артикул</label><span style="color: red;">*</span>
