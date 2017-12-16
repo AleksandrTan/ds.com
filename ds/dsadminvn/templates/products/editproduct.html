@@ -55,6 +55,8 @@
                         <input type="hidden" id="is_del_mainphoto" {% if data_product_edit.main_photo_path %} value="1" {% else %} value="0" {% endif %} name="is_del_mainphoto"/>
                         <input type="hidden" name="is_del_other_photo" value="0" id="is_del_other_photo"/>
                         <input type="hidden" name="list_del_other_photo" value="{}" id="list_del_other_photo"/>
+                        <input type="hidden" value="{{ maincategorys.0.sizetable_set.count }}" id="count_sizes"/>
+                        <input type="hidden" value="{{ data_product_edit.sizecount.count }}" id="count_sizes_add"/>
                         <div class="col-lg-6">
                                 <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
                                     <label style="color: red;">Артикул</label><span style="color: red;">*</span>
@@ -295,7 +297,7 @@
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;"
-                                                            data-delete-imgs='delete-imgs'>
+                                                            data-delete-imgs='delete-imgs' data-photo-id='0'>
                                                             Удалить фото {{ forloop.counter }}
                                                     </button>
                                                 </td>

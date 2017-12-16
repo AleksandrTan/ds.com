@@ -60,7 +60,7 @@ $(document).ready(function () {
             return false;
         }
         $(this).parents('tr').remove();
-        $('#count_sizes_add').val($('#count_sizes_add').val() - 1);
+        $('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) - 1);
     });
 
 //Check isset articul

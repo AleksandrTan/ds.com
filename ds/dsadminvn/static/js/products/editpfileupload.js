@@ -97,10 +97,15 @@ $('[data-delete-imgs=delete-imgs]').click(function () {
     $el.unwrap();
     $(this).hide();
     $el.next().show();
-    $('#is_del_other_photo').val(1);
-    var data_json_img = $.parseJSON($('#list_del_other_photo').val());
-    var num_img = parseInt($(this).attr('data-photo-id'));
-    data_json_img[num_img] = num_img;
-    $('#list_del_other_photo').val(JSON.stringify(data_json_img));
-    console.log(data_json_img);
+    if ($(this).attr('data-photo-id') == 0){
+        return false;
+    }
+    else{
+        $('#is_del_other_photo').val(1);
+        var data_json_img = $.parseJSON($('#list_del_other_photo').val());
+        var num_img = parseInt($(this).attr('data-photo-id'));
+        data_json_img[num_img] = num_img;
+        $('#list_del_other_photo').val(JSON.stringify(data_json_img));
+        console.log(data_json_img);
+    }
 });
