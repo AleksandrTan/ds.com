@@ -43,10 +43,11 @@
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-10">
-                        <form class="form form-offer" method="get" name="filter_product" action="{% url 'filterproduct' %}"
-                              id="filter_product" >{% csrf_token %}
-                            <input type="hidden" name="product_id" value="{{ product_data.id }}"/>
+                        <form class="form form-offer" method="get" name="seil_product" action="{{ action }}"
+                              id="seil_product" >{% csrf_token %}
+                            <input type="hidden" name="products" value="{{ product_data.id }}"/>
                             <input type="hidden" name="start_price" id="start_price" value="{{ product_data.price }}"/>
+                            <input type="hidden" name="price" id="price" value="{{ product_data.price }}"/>
                         <div class="col-lg-12">
                         <h2>Данные товара</h2>
                         <div class="table-responsive">
@@ -60,9 +61,11 @@
                                         <th class="text-center">Скидка</th>
                                         <th class="text-center">Размер</th>
                                         <th class="text-center">На складе</th>
-                                        <th class="text-center">Колличество</th>
+                                        <th class="text-center">Колличество<span style="color: red;">*</span></th>
+                                        <th class="text-center">Примечание</th>
                                         <th class="text-center">Продать</th>
                                         <th class="text-center">Редактировать</th>
+                                        <th class="text-center">Отмена</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,7 +88,10 @@
                                         </td>
                                         <td class="text-center" id="in_stock">{{ product_data.sizecount.all.0.count_num }}</td>
                                         <td class="text-center">
-                                            <input name="count_num" value="0" id="count_num" type="number"/>
+                                            <input name="count_num" value="" id="count_num" type="number"/>
+                                        </td>
+                                        <td>
+                                            <textarea name="description"  rows="5"></textarea>
                                         </td>
                                         <td class="text-center">
                                             <button type="submit" class="btn btn-sm btn-success">Продать</button>
@@ -94,8 +100,10 @@
                                                                    class="btn btn-sm btn-primary"
                                                                    href="{% url 'editproduct' product_data.id %}">Редактировать</a>
                                         </td>
+                                        <td>
+                                            <a type="button" class="btn btn-sm btn-primary form-control" id="save_exit" href="{% url 'products' %}">Отмена</a>
+                                        </td>
                                     </tr>
-
                                 </tbody>
                             </table>
                         </div>
@@ -114,5 +122,6 @@
     };
 
 </script>
+    <script type="text/javascript" src="{% static 'js/validator/jquery.validate.js' %}"></script>
     <script src="{% static 'js/products/productsale.js' %}"></script>
 {% endblock %}

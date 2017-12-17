@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import CreateView
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
 from dsadminvn.mainviews.views import BaseAdminView
 
 from dsstore.models import Products
@@ -17,6 +18,8 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
     def get_context_data(self, **kwargs):
         context = super(SellProduct, self).get_context_data(**kwargs)
         context['tab_products'] = True
+        context['action'] = reverse('sellproduct',
+                                    kwargs={'pk': kwargs['pk']})
 
         return context
     """
@@ -28,3 +31,18 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
 
     def get_queryset(self, pk):
         return Products.objects.get_single_product(pk)
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.link_name = ''
+        product = Products.objects.get_single_product(form.cleaned_data['products'])
+        instance.products = product
+        instance.save()
+
+        return super(SellProduct, self).form_valid(form)
+
+    def form_invalid(self, form):
+        context = self.get_context_data()
+        context['tab_products'] = True
+
+        return self.render_to_response(context)

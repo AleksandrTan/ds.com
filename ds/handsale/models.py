@@ -31,14 +31,8 @@ class ProductsSale(models.Model):
 class ProductsSellForm(ModelForm):
     class Meta:
         model = ProductsSale
-        fields = ['products', 'articul', 'count_num', 'size', 'price', 'lost_num', 'description']
+        fields = ['count_num', 'size', 'price', 'lost_num', 'description']
 
         error_messages = {
-                             'articul': {'required': "Пожалуйста введите артикул",
-                                         'max_length':"Не более 30 символов",
-                                         'unique': "Этот артикул уже используетсяб введите другой"
-                              },
-                             'count_num': {'required': "Пожалуйста введите колличество"},
-                             'size': {'required': "Пожалуйста введите размер"},
-
-                         }
+            'count_num': {'required': "Пожалуйста введите колличество"}
+        }
