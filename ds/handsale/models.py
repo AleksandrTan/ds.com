@@ -45,8 +45,6 @@ class ProductsSellForm(ModelForm):
             'count_num': {'required': "Пожалуйста введите колличество"}
         }
 
-
-
     def clean(self):
         # check the quantity of goods sold and availability in stock
         cleaned_data = self.cleaned_data

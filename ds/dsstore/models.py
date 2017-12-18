@@ -1,6 +1,7 @@
 #from django.conf import settings
 from django.db import models
 from django.forms import ModelForm
+from django.core.exceptions import ValidationError
 
 from dsstore.mainhelpers import MainImgTypeField as MI
 
@@ -30,6 +31,12 @@ class ManagerMainCategories(models.Manager):
             data = {"status": True}
         mc.save()
         return data
+
+    def get_single_maincategory(self, pk):
+        try:
+            return MainCategory.objects.get(id=pk)
+        except Products.DoesNotExist:
+            return False
 
 class MainCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -253,10 +260,10 @@ class Products(models.Model):
     price = models.FloatField(blank=True, default=0.0)
     wholesale_price = models.FloatField(blank=True, default=0)
     purshase_price = models.FloatField(blank=True, default=0)
-    main_photo_path = models.ImageField(blank=True, upload_to='images/')
-    # main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
-    #                                       content_types=['image/jpg', 'image/png', 'image/jpeg'],
-    #                                       max_upload_size=5000000, blank=True, default='nophoto.png')
+    # main_photo_path = models.ImageField(blank=True, upload_to='images/')
+    main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
+                                          content_types=['image/jpg', 'image/png', 'image/jpeg'],
+                                          max_upload_size=5000000, blank=True, default='nophoto.png')
     description = models.TextField(blank=True, default='')
     caption = models.CharField(blank=False, default='', max_length=200)
     color = models.CharField(max_length=100, blank=True, default='')
@@ -284,6 +291,13 @@ class Products(models.Model):
         return self.link_name
 
 class ProductsForm(ModelForm):
+    """
+    set request param
+    """
+    def __init__(self, request, *args, **kwargs):
+        self.request = request
+        super(ProductsForm, self).__init__(*args, **kwargs)
+
     class Meta:
         model = Products
         fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
@@ -295,6 +309,14 @@ class ProductsForm(ModelForm):
                                          'unique': "Этот артикул уже используетсяб введите другой"
                               },
                          }
+
+    def clean(self):
+        # check if count height's not moore sizes num for maincategory
+        cleaned_data = self.cleaned_data
+        maincategory = cleaned_data['maincategory']
+        if len(self.request.POST.getlist('height[]')) > maincategory.sizetable_set.count():
+            raise ValidationError(len(self.request.POST.getlist('height[]')), code='invalid')
+        return self.cleaned_data
 
 class ProductsFormEdit(ModelForm):
     class Meta:
@@ -308,7 +330,6 @@ class ProductsFormEdit(ModelForm):
                                          'unique': "Этот артикул уже используетсяб введите другой"
                               },
                          }
-
 
 """--------------SizeCount Model--------------------------"""
 

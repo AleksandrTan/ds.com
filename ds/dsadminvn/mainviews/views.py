@@ -399,6 +399,16 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
     template_name = 'products/createnewproduct.html'
     succes_url = '/adminnv/products/'
 
+#Add request in kwargs variable for checked height[] data in clean()  method FormModel ProductsForm
+    def get_form_kwargs(self):
+        """This method is what injects forms with their keyword
+            arguments."""
+        # grab the current set of form #kwargs
+        kwargs = super(CreateNewProduct, self).get_form_kwargs()
+        # Update the kwargs with the request
+        kwargs['request'] = self.request
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super(CreateNewProduct, self).get_context_data(**kwargs)
         context['maincategorys'] = MainCategory.objects.get_active_categories()
@@ -406,6 +416,8 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         context['brends'] = Brends.objects.get_active_brends()
         context['seasons'] = Seasons.objects.get_active_seasons()
         context['tab_products'] = True
+        d =  MainCategory.objects.get_single_maincategory(11)
+        context['a'] = d.sizetable_set.count()
 
         return context
 
