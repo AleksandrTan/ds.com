@@ -4,16 +4,16 @@ $(document).ready(function () {
     	$('#count_num').val('');
     });
 //Set count_num value
-    $('#count_num').on('click keyup', function () {
-       if (parseInt($(this).val()) > parseInt($('#in_stock').text())){
-            $('#is_deleted_ctr').modal();
-            $(this).val('');
-        }
-    });
+//     $('#count_num').on('click keyup', function () {
+//        if (parseInt($(this).val()) > parseInt($('#in_stock').text())){
+//             $('#is_deleted_ctr').modal();
+//             $(this).val('');
+//         }
+//     });
 //Set lost_num value
-    $('#lost_num').change(function () {
-        var start_price = $('#start_price').val();
-        $('#price').text(start_price - $(this).val());
+    $('#lost_num').on('click keyup', function () {
+    	var start_price = $('#start_price').val();
+        $('#price_table').text(start_price - $(this).val());
     });
 
     //Validations form

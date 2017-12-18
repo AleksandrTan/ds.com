@@ -314,12 +314,18 @@ class ProductsFormEdit(ModelForm):
 
 class ManagerSizeCount(models.Manager):
 
-    def get_single_size(self, pk, count_num):
+    def get_single_size(self, pk, count_num=0):
         try:
             size =  SizeCount.objects.only("size").get(id=pk)
             size.count_num = size.count_num - count_num
             size.save()
             return size.size
+        except Products.DoesNotExist:
+            return False
+
+    def get_single_sizecount(self, pk):
+        try:
+            return SizeCount.objects.get(id=pk)
         except Products.DoesNotExist:
             return False
 

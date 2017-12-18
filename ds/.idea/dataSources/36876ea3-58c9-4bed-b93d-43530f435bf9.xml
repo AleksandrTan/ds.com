@@ -885,7 +885,7 @@ model</ColNames>
     </column>
     <column id="206" parent="30" name="description">
       <Position>17</Position>
-      <DataType>char(1)|0</DataType>
+      <DataType>text|0</DataType>
     </column>
     <index id="207" parent="30" name="handsale_productssale_dsstore_products__fk">
       <ColNames>products_id</ColNames>

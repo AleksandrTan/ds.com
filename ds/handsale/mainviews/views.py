@@ -21,7 +21,7 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
 
         return context
     """
-        Show form for sell product with data produc
+        Show form for sell product with data product
     """
     def get(self, request, **kwargs):
         self.object = self.get_queryset(kwargs['pk'])
@@ -38,9 +38,11 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
         instance = form.save(commit=False)
         instance.link_name = ''
         # product = Products.objects.get_single_product(form.cleaned_data['products'])
-        instance.size = SizeCount.objects.get_single_size(form.cleaned_data['size'], form.cleaned_data['count_num'])
+        instance.size = SizeCount.objects.get_single_size(form.cleaned_data['size'])
         instance.products = form.cleaned_data['products']
         instance.save()
+        # reduce the amount of product
+        SizeCount.objects.get_single_size(form.cleaned_data['size'], form.cleaned_data['count_num'])
 
         return super(SellProduct, self).form_valid(form)
 

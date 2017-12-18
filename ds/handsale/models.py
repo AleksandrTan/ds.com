@@ -1,7 +1,7 @@
 from django.db import models
 from django.forms import ModelForm
 
-from dsstore.models import Products
+from dsstore.models import Products, SizeCount
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -32,17 +32,16 @@ class ProductsSale(models.Model):
 class ProductsSellForm(ModelForm):
     class Meta:
         model = ProductsSale
-        fields = ['products', 'count_num', 'size', 'price', 'lost_num', 'description']
+        fields = ['size', 'products', 'count_num', 'price', 'lost_num', 'description']
 
         error_messages = {
             'count_num': {'required': "Пожалуйста введите колличество"}
         }
 
-    # def clean_count_num(self):
-    #
-    #     cleaned_data = self.cleaned_data
-    #     count_num = cleaned_data.get("count_num")
-    #     if count_num != 2:
-    #         raise ValidationError('Колличество продаваемого товара больше чем на складе!!!')
-    #
-    #     return cleaned_data
+    def clean(self):
+        # check the quantity of goods sold and availability in stock
+        cleaned_data = self.cleaned_data
+        sizecount = SizeCount.objects.get_single_sizecount(cleaned_data['size'])
+        if cleaned_data.get("count_num") > sizecount.count_num:
+            raise ValidationError('Колличество продаваемого товара больше чем на складе!!!', code='invalid')
+        return self.cleaned_data

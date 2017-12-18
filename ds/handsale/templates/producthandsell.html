@@ -35,7 +35,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Продать товар{{ action }}{{ form.errors.count_num }}
+                                <i class="fa fa-table"></i> Продать товар{{ form.errors }}
                             </li>
                         </ol>
                     </div>
@@ -73,7 +73,7 @@
                                         <td class="text-center">{{ product_data.articul }}</td>
                                         <td class="text-center">{{ product_data.maincategory.name }}</td>
                                         <td class="text-center">{{ product_data.nameproduct.name }}</td>
-                                        <td class="text-center" id="price">{{ product_data.price }}</td>
+                                        <td class="text-center" id="price_table">{{ product_data.price }}</td>
                                         <td class="text-center">
                                             <input name="lost_num" type="number" id="lost_num" value="0">
                                         </td>
