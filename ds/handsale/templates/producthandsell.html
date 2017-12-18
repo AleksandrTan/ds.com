@@ -35,7 +35,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Продать товар{{ form.errors }}
+                                <i class="fa fa-table"></i> Продать товар{{ form.non_field_errors }}
                             </li>
                         </ol>
                     </div>
@@ -89,6 +89,7 @@
                                         <td class="text-center" id="in_stock">{{ product_data.sizecount.all.0.count_num }}</td>
                                         <td class="text-center">
                                             <input name="count_num" value="" id="count_num" type="number"/>
+                                            {% if form.non_field_errors %}<label id="count_num-error" class="error" for="count_num">{{ form.non_field_errors }}</label>{% endif %}
                                         </td>
                                         <td>
                                             <textarea name="description"  rows="5"></textarea>

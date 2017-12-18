@@ -37,9 +37,10 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.link_name = ''
-        # product = Products.objects.get_single_product(form.cleaned_data['products'])
+        product = Products.objects.get_single_product(self.kwargs['pk'])
+        instance.articul = product.articul
         instance.size = SizeCount.objects.get_single_size(form.cleaned_data['size'])
-        instance.products = form.cleaned_data['products']
+        instance.products = product
         instance.save()
         # reduce the amount of product
         SizeCount.objects.get_single_size(form.cleaned_data['size'], form.cleaned_data['count_num'])

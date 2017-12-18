@@ -317,6 +317,7 @@ class ManagerSizeCount(models.Manager):
     def get_single_size(self, pk, count_num=0):
         try:
             size =  SizeCount.objects.only("size").get(id=pk)
+            # reduce the amount of goods for a size
             size.count_num = size.count_num - count_num
             size.save()
             return size.size

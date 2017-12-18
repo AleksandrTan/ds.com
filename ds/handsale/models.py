@@ -30,6 +30,13 @@ class ProductsSale(models.Model):
     objects = ManagerProductSale()
 
 class ProductsSellForm(ModelForm):
+
+    def get_absolute_url(self):
+        return "products/%s" % self.link_name
+
+    def __str__(self):
+        return self.link_name
+
     class Meta:
         model = ProductsSale
         fields = ['size', 'products', 'count_num', 'price', 'lost_num', 'description']
@@ -37,6 +44,8 @@ class ProductsSellForm(ModelForm):
         error_messages = {
             'count_num': {'required': "Пожалуйста введите колличество"}
         }
+
+
 
     def clean(self):
         # check the quantity of goods sold and availability in stock
