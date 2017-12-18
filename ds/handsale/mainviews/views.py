@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from dsadminvn.mainviews.views import BaseAdminView
 
-from dsstore.models import Products
+from dsstore.models import Products, SizeCount
 from handsale.models import ProductsSale, ProductsSellForm
 
 class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
@@ -38,6 +38,7 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
         instance = form.save(commit=False)
         instance.link_name = ''
         # product = Products.objects.get_single_product(form.cleaned_data['products'])
+        instance.size = SizeCount.objects.get_single_size(form.cleaned_data['size'], form.cleaned_data['count_num'])
         instance.products = form.cleaned_data['products']
         instance.save()
 

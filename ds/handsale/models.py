@@ -38,11 +38,11 @@ class ProductsSellForm(ModelForm):
             'count_num': {'required': "Пожалуйста введите колличество"}
         }
 
-    def clean_count_num(self):
-
-        cleaned_data = self.cleaned_data
-        count_num = cleaned_data.get("count_num")
-        if count_num != 2:
-            raise ValidationError('Колличество продаваемого товара больше чем на складе!!!')
-
-        return cleaned_data
+    # def clean_count_num(self):
+    #
+    #     cleaned_data = self.cleaned_data
+    #     count_num = cleaned_data.get("count_num")
+    #     if count_num != 2:
+    #         raise ValidationError('Колличество продаваемого товара больше чем на складе!!!')
+    #
+    #     return cleaned_data

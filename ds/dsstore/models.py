@@ -313,7 +313,15 @@ class ProductsFormEdit(ModelForm):
 """--------------SizeCount Model--------------------------"""
 
 class ManagerSizeCount(models.Manager):
-    pass
+
+    def get_single_size(self, pk, count_num):
+        try:
+            size =  SizeCount.objects.only("size").get(id=pk)
+            size.count_num = size.count_num - count_num
+            size.save()
+            return size.size
+        except Products.DoesNotExist:
+            return False
 
 class SizeCount(models.Model):
     products = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='sizecount', null=True)
