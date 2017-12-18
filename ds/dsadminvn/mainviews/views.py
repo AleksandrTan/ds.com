@@ -624,6 +624,9 @@ class DeleteProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
         path = settings.MEDIA_ROOT + '\\images\\' + obj.dirname_img
         shutil.rmtree(path, ignore_errors=True)
 
+    # def get_success_url(self):
+    #     return self.request.get_full_path()
+
 class CheckIssetArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
     permission_required = "auth.change_user"
     login_url = 'login'
@@ -675,7 +678,7 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
             form = FilterProducts(request.GET)
             if form.is_valid():
                 self.object_list = self.get_queryset(form.cleaned_data)
-                context =  self.get_context_data(object_list=self.object_list)
+                context = self.get_context_data(object_list=self.object_list)
                 context['data_form'] = form.cleaned_data
                 copy_get = QueryDict(request.GET.copy().urlencode(), mutable=True)
                 copy_get['submit'] = 0

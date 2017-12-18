@@ -292,7 +292,7 @@ class Products(models.Model):
 
 class ProductsForm(ModelForm):
     """
-    set request param
+    set request param, param request add  in __init__ like positional argument
     """
     def __init__(self, request, *args, **kwargs):
         self.request = request
