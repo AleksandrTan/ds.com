@@ -4,6 +4,7 @@ import shutil
 from django.conf import settings
 from django.shortcuts import redirect
 from django.core.files.storage import FileSystemStorage
+from django.core.exceptions import ValidationError
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import View
 from django.views.generic.base import TemplateView
@@ -18,6 +19,7 @@ from django.shortcuts import render
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from django.http import QueryDict
+from django.db import IntegrityError
 
 from django.contrib.auth.models import User
 from dsstore.models import (MainCategory, NameProduct, SizeTable,
@@ -427,6 +429,7 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         instance.dirname_img = self.uuid_sentece_user()
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '-' + instance.identifier + '#' + form.cleaned_data['articul']
         instance.save()
+
         self.save_oter_files(instance, form)
         self.saved_sizes_count(instance)
         return super(CreateNewProduct, self).form_valid(form)
@@ -493,6 +496,16 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
     context_object_name = 'data_product_edit'
     template_name = 'products/editproduct.html'
     success_url = '/adminnv/products/'
+
+    # Add request in kwargs variable for checked height[] data in clean()  method FormModel ProductsForm
+    def get_form_kwargs(self):
+        """This method is what injects forms with their keyword
+            arguments."""
+        # grab the current set of form #kwargs
+        kwargs = super(EditProduct, self).get_form_kwargs()
+        # Update the kwargs with the request
+        kwargs['request'] = self.request
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super(EditProduct, self).get_context_data(**kwargs)

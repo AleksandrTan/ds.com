@@ -51,16 +51,16 @@ $(document).ready(function () {
     	    return false;
         }
         $('#height_size_id tr:last-child').clone(true).appendTo($('#height_size_id'));
-    	// $('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) + 1);
+    	$('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) + 1);
 
     });
 //Remove size field
     $('#height_size_id').on('click', '[data-deletes=delete_size]', function () {
-        // if ($('#height_size_id').children('tr').length == 1){
-        //     return false;
-        // }
+        if ($('#height_size_id').children('tr').length == 1){
+            return false;
+        }
         $(this).parents('tr').remove();
-        // $('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) - 1);
+        $('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) - 1);
     });
 
 //Check isset articul
@@ -72,6 +72,7 @@ $('#articul').blur(function () {
        );
        function onAjaxSuccess(data) {
            if(data.status){
+           	   $('#articul').val('');
                $('#modal_content').text('').text('Введенный артикул уже существует!Выберите другой');
                $('#modal_alarm').modal();
            }

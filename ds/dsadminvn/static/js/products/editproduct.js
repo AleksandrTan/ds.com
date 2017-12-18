@@ -82,7 +82,7 @@ $('#articul').blur(function () {
                if(data.status){
                    $('#modal_content').text('').text('Введенный артикул уже существует!Выберите другой');
                    $('#modal_alarm').modal();
-               }
+                   $('#articul').val('');              }
            };
        };
    };

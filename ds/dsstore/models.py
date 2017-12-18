@@ -315,10 +315,21 @@ class ProductsForm(ModelForm):
         cleaned_data = self.cleaned_data
         maincategory = cleaned_data['maincategory']
         if len(self.request.POST.getlist('height[]')) > maincategory.sizetable_set.count():
-            raise ValidationError(len(self.request.POST.getlist('height[]')), code='invalid')
+            raise ValidationError('Колличество введенных размеров больше чем размеров категории', code='invalid')
+        #check isset articul
+        if Products.objects.check_iset_articul(cleaned_data['articul']):
+            raise ValidationError('Введенный артикул уже существует!Выберите другой', code='invalid')
         return self.cleaned_data
 
 class ProductsFormEdit(ModelForm):
+    """
+        set request param, param request add  in __init__ like positional argument
+        """
+
+    def __init__(self, request, *args, **kwargs):
+        self.request = request
+        super(ProductsFormEdit, self).__init__(*args, **kwargs)
+
     class Meta:
         model = Products
         fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
@@ -330,6 +341,17 @@ class ProductsFormEdit(ModelForm):
                                          'unique': "Этот артикул уже используетсяб введите другой"
                               },
                          }
+
+    def clean(self):
+        # check if count height's not moore sizes num for maincategory
+        cleaned_data = self.cleaned_data
+        maincategory = cleaned_data['maincategory']
+        if len(self.request.POST.getlist('height[]')) > maincategory.sizetable_set.count():
+            raise ValidationError('Колличество введенных размеров больше чем размеров категории', code='invalid')
+        #check isset articul
+        # if Products.objects.check_iset_articul(cleaned_data['articul']):
+        #     raise ValidationError('Введенный артикул уже существует!Выберите другой', code='invalid')
+        return self.cleaned_data
 
 """--------------SizeCount Model--------------------------"""
 

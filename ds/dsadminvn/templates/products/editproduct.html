@@ -46,6 +46,11 @@
                 </div>
                 <!-- /.row -->
                 <div class="row">
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>Внимание!!!</strong> {{ form.non_field_errors }}
+                </div>
+                {% endif %}
                     {% if not maincategorys or not nameproducts %}
                         <p>Нет категорий или названий для отображения.Добавте данные!</p>
                     {% else %}
