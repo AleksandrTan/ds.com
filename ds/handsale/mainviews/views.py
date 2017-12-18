@@ -18,8 +18,6 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
     def get_context_data(self, **kwargs):
         context = super(SellProduct, self).get_context_data(**kwargs)
         context['tab_products'] = True
-        context['action'] = reverse('sellproduct',
-                                    kwargs={'pk': kwargs['pk']})
 
         return context
     """
@@ -27,7 +25,11 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
     """
     def get(self, request, **kwargs):
         self.object = self.get_queryset(kwargs['pk'])
-        return render(request, self.template_name, self.get_context_data())
+        context = self.get_context_data()
+        context['action'] = reverse('sellproduct',
+                                    kwargs={'pk': kwargs['pk']})
+
+        return render(request, self.template_name, context)
 
     def get_queryset(self, pk):
         return Products.objects.get_single_product(pk)
@@ -35,14 +37,18 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.link_name = ''
-        product = Products.objects.get_single_product(form.cleaned_data['products'])
-        instance.products = product
+        # product = Products.objects.get_single_product(form.cleaned_data['products'])
+        instance.products = form.cleaned_data['products']
         instance.save()
 
         return super(SellProduct, self).form_valid(form)
 
     def form_invalid(self, form):
+        self.object = form.cleaned_data['products']
         context = self.get_context_data()
         context['tab_products'] = True
 
         return self.render_to_response(context)
+
+    def get_success_url(self):
+        return self.succes_url

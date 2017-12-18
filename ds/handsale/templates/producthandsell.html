@@ -35,7 +35,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Продать товар
+                                <i class="fa fa-table"></i> Продать товар{{ action }}{{ form.errors.count_num }}
                             </li>
                         </ol>
                     </div>
@@ -43,7 +43,7 @@
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-10">
-                        <form class="form form-offer" method="get" name="seil_product" action="{{ action }}"
+                        <form class="form form-offer" method="post" name="seil_product" action="{{ action }}"
                               id="seil_product" >{% csrf_token %}
                             <input type="hidden" name="products" value="{{ product_data.id }}"/>
                             <input type="hidden" name="start_price" id="start_price" value="{{ product_data.price }}"/>
