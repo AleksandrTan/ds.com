@@ -43,6 +43,8 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
         instance.products = product
         if form.cleaned_data['lost_num']:
             instance.true_price = form.cleaned_data['price'] - form.cleaned_data['lost_num']
+        else:
+            instance.true_price = form.cleaned_data['price']
         instance.total_amount = form.cleaned_data['price'] * form.cleaned_data['count_num']
         instance.save()
         # reduce the amount of product

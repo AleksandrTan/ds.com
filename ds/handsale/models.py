@@ -44,7 +44,8 @@ class ProductsSellForm(ModelForm):
         fields = ['size', 'products', 'count_num', 'price', 'lost_num', 'description']
 
         error_messages = {
-            'count_num': {'required': "Пожалуйста введите колличество"}
+            'count_num': {'required': "Пожалуйста введите колличество"},
+            'price': {'invalid': "Для товара не указана цена"}
         }
 
     def clean(self):

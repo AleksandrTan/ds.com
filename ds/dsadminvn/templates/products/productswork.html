@@ -47,7 +47,7 @@
                             <div class="form-group ">
                             <label>Категория</label>
                                 <select class="form-control" name="maincategory_id">
-                                    <option name="0" value="">Выберите Категорию</option>
+                                    <option name="0" value="">Категория</option>
                                     {% for mcl in maincategorys %}
                                         <option name="{{ mcl.id }}" value="{{ mcl.id }}" {% if mcl.id == data_form.maincategory_id|strtoint %} selected {% endif %}>
                                             {{ mcl.name }}
@@ -60,7 +60,7 @@
                              <div class="form-group ">
                                  <label>Название</label>
                                      <select class="form-control" name="nameproduct_id">
-                                             <option name="0" value="">Выберите Название</option>
+                                             <option name="0" value="">Название</option>
                                          {% for name_product in nameproducts %}
                                              <option name="{{ name_product.id }}" value="{{ name_product.id }}"
                                                      {% if name_product.id == data_form.nameproduct_id|strtoint %} selected {% endif %}> {{ name_product.name }}
@@ -74,7 +74,7 @@
                                <div class="form-group ">
                                     <label>Бренд</label>
                                         <select class="form-control" name="brends">
-                                            <option name="0" value="">Выберите бренд</option>
+                                            <option name="0" value="">Бренд</option>
                                             {% for brend in brends %}
                                                 <option name="{{ brend.id }}" value="{{ brend.id }}" {% if brend.id == data_form.brends|strtoint %} selected {% endif %}>
                                                     {{ brend.name }}
@@ -90,7 +90,7 @@
                                     <label>Сезон</label>
                                         <select class="form-control" name="season_id">
                                             {% for season in seasons %}
-                                                <option name="0" value="">Выберите сезон</option>
+                                                <option name="0" value="">Сезон</option>
                                                 <option name="{{ season.id }}" value="{{ season.id }}" {% if season.id == data_form.season|strtoint %} selected {% endif %}>
                                                     {{ season.name }}
                                                 </option>

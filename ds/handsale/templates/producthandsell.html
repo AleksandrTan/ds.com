@@ -28,23 +28,24 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Продать товар
+                            Продать товар - {{ product_data.articul }}
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Продать товар
+                                <i class="fa fa-table"></i> Продать товар {{ product_data.articul }}
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
                 <div class="row">
+                <div class="alert alert-danger" id="not_price" style="display: none;"></div>
                 {% if form.errors %}
                     <div class="alert alert-danger">
-                        <strong>Внимание!!!</strong> {{ form.errors.count_num }}
+                        <strong>Внимание!!!</strong> {{ form.errors.count_num }}{{ form.errors.price }}
                     </div>
                 {% endif %}
                 {% if form.non_field_errors %}
@@ -52,7 +53,7 @@
                         <strong>Внимание!!!</strong> {{ form.non_field_errors }}
                     </div>
                 {% endif %}
-                    <div class="col-lg-10">
+                    <div class="col-lg-12" id="sell_product_div">
                         <form class="form form-offer" method="post" name="seil_product" action="{{ action }}"
                               id="seil_product" >{% csrf_token %}
                             <input type="hidden" name="products" value="{{ product_data.id }}"/>

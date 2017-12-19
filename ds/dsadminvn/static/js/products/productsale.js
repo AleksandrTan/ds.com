@@ -1,4 +1,9 @@
 $(document).ready(function () {
+    if ($('#price').val() == 'None'){
+        $('#not_price').text('Внимание!!!Для этого товара не указана цена!!!').show();
+        $('#sell_product_div').hide();
+    }
+
 //Set count num in stock
     $('#size' ).change(function () {
     	$('#in_stock').text(sizecount[$(this).val()]);
