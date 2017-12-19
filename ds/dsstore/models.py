@@ -221,10 +221,13 @@ class ManageProductsModel(models.Manager):
     def get_list_products(self):
         return Products.objects.only('id', 'articul', 'price', 'is_active')
 
-    def check_iset_articul(self, articul):
+    def check_iset_articul(self, articul, flag_isset=False):
         try:
-            Products.objects.get(articul=articul)
-            return True
+            product = Products.objects.get(articul=articul)
+            if flag_isset:
+                return product.articul
+            else:
+                return True
         except Products.DoesNotExist:
             return False
 
@@ -349,8 +352,8 @@ class ProductsFormEdit(ModelForm):
         if len(self.request.POST.getlist('height[]')) > maincategory.sizetable_set.count():
             raise ValidationError('Колличество введенных размеров больше чем размеров категории', code='invalid')
         #check isset articul
-        # if Products.objects.check_iset_articul(cleaned_data['articul']):
-        #     raise ValidationError('Введенный артикул уже существует!Выберите другой', code='invalid')
+        if self.request.POST.getlist('articul_product_hidden')[0] != cleaned_data['articul']:
+            raise ValidationError('Вы изменили существующий артикул!!!Нельзя так делать!!!', code='invalid')
         return self.cleaned_data
 
 """--------------SizeCount Model--------------------------"""

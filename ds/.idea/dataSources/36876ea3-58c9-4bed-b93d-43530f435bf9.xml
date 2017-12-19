@@ -887,24 +887,34 @@ model</ColNames>
       <Position>17</Position>
       <DataType>text|0</DataType>
     </column>
-    <index id="207" parent="30" name="handsale_productssale_dsstore_products__fk">
+    <column id="207" parent="30" name="true_price">
+      <Position>18</Position>
+      <DataType>float|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="208" parent="30" name="total_amount">
+      <Position>19</Position>
+      <DataType>float|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <index id="209" parent="30" name="handsale_productssale_dsstore_products__fk">
       <ColNames>products_id</ColNames>
     </index>
-    <index id="208" parent="30" name="handsale_productssale_auth_user__fk">
+    <index id="210" parent="30" name="handsale_productssale_auth_user__fk">
       <ColNames>user_id</ColNames>
     </index>
-    <key id="209" parent="30" name="PRIMARY">
+    <key id="211" parent="30" name="PRIMARY">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="210" parent="30" name="handsale_productssale_dsstore_products__fk">
+    <foreign-key id="212" parent="30" name="handsale_productssale_dsstore_products__fk">
       <ColNames>products_id</ColNames>
       <RefSchemaName>dsdb</RefSchemaName>
       <RefTableName>dsstore_products</RefTableName>
       <RefColNames>id</RefColNames>
       <OnDelete>set-null</OnDelete>
     </foreign-key>
-    <foreign-key id="211" parent="30" name="handsale_productssale_auth_user__fk">
+    <foreign-key id="213" parent="30" name="handsale_productssale_auth_user__fk">
       <ColNames>user_id</ColNames>
       <RefSchemaName>dsdb</RefSchemaName>
       <RefTableName>auth_user</RefTableName>

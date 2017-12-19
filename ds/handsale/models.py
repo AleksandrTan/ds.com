@@ -16,6 +16,8 @@ class ProductsSale(models.Model):
     count_num = models.SmallIntegerField(default=0, blank=False)
     size = models.SmallIntegerField(default=0, blank=False)
     price = models.FloatField(blank=False, default=0.0)
+    true_price = models.FloatField(blank=False, default=0.0)
+    total_amount = models.FloatField(blank=False, default=0.0)
     lost_num = models.FloatField(blank=True, default=0.0)
     plase_sale = models.SmallIntegerField(blank=False, default=1)
     date_sale = models.DateField(auto_now_add=True)

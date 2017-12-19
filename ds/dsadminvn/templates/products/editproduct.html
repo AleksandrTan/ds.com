@@ -56,7 +56,7 @@
                     {% else %}
                     <form class="form form-offer" method="post" name="edit_product" action="{{ action }}"
                       id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
-                        <input type="hidden" id="articul_product_hidden" value="{{ data_product_edit.articul }}">
+                        <input type="hidden" id="articul_product_hidden" name="articul_product_hidden" value="{{ data_product_edit.articul }}">
                         <input type="hidden" id="is_del_mainphoto" {% if data_product_edit.main_photo_path %} value="1" {% else %} value="0" {% endif %} name="is_del_mainphoto"/>
                         <input type="hidden" name="is_del_other_photo" value="0" id="is_del_other_photo"/>
                         <input type="hidden" name="list_del_other_photo" value="{}" id="list_del_other_photo"/>
@@ -65,7 +65,10 @@
                         <div class="col-lg-6">
                                 <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
                                     <label style="color: red;">Артикул</label><span style="color: red;">*</span>
-                                    <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" value="{{ data_product_edit.articul }}" maxlength="6">
+                                    <input class="form-control" placeholder="Артикул"
+                                           id="articul" name="articul" type="text"
+                                           value="{{ data_product_edit.articul }}"
+                                           maxlength="6">
                                     {% if form.errors.articul %}<label id="articul-error" class="error" for="articul">{{ form.errors.articul.0 }}</label>{% endif %}
                                 </div>
                                 <div class="form-group ">
