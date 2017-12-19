@@ -35,13 +35,23 @@
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Продать товар{{ form.non_field_errors }}
+                                <i class="fa fa-table"></i> Продать товар
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
                 <div class="row">
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Внимание!!!</strong> {{ form.errors.count_num }}
+                    </div>
+                {% endif %}
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>Внимание!!!</strong> {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
                     <div class="col-lg-10">
                         <form class="form form-offer" method="post" name="seil_product" action="{{ action }}"
                               id="seil_product" >{% csrf_token %}
@@ -89,13 +99,12 @@
                                         <td class="text-center" id="in_stock">{{ product_data.sizecount.all.0.count_num }}</td>
                                         <td class="text-center">
                                             <input name="count_num" value="" id="count_num" type="number"/>
-                                            {% if form.non_field_errors %}<label id="count_num-error" class="error" for="count_num">{{ form.non_field_errors }}</label>{% endif %}
                                         </td>
                                         <td>
                                             <textarea name="description"  rows="5"></textarea>
                                         </td>
                                         <td class="text-center">
-                                            <button type="submit" class="btn btn-sm btn-success">Продать</button>
+                                            <button type="submit" class="btn btn-sm btn-success" id="sale_but">Продать</button>
                                         </td>
                                         <td class="text-center"><a type="button"
                                                                    class="btn btn-sm btn-primary"

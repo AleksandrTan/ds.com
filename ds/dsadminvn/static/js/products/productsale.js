@@ -3,6 +3,14 @@ $(document).ready(function () {
     $('#size' ).change(function () {
     	$('#in_stock').text(sizecount[$(this).val()]);
     	$('#count_num').val('');
+    	if (sizecount[$(this).val()] == 0){
+    	    $('#count_num').hide();
+    	    $('#sale_but').hide();
+        }
+        else {
+    	    $('#count_num').show();
+    	    $('#sale_but').show();
+        }
     });
 //Set count_num value
     $('#count_num').on('click keyup', function () {

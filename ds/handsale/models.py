@@ -51,6 +51,6 @@ class ProductsSellForm(ModelForm):
         # check the quantity of goods sold and availability in stock
         cleaned_data = self.cleaned_data
         sizecount = SizeCount.objects.get_single_sizecount(cleaned_data['size'])
-        if cleaned_data.get("count_num") > sizecount.count_num:
+        if cleaned_data.get("count_num") and cleaned_data.get("count_num") > sizecount.count_num:
             raise ValidationError('Колличество продаваемого товара больше чем на складе!!!', code='invalid')
         return self.cleaned_data
