@@ -39,6 +39,7 @@
                         </form>
                     </div>
                     <div class="col-lg-12">
+                    {% if product_data %}
                        <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead>
@@ -56,7 +57,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="mc_list">
-                                {% if product_data %}
+
                                     <tr>
                                         <td class="text-center">{{ product_data.articul }}</td>
                                         <td class="text-center">{{ product_data.maincategory.name }}</td>
@@ -79,16 +80,62 @@
 
                                         </td>
                                     </tr>
-                                {% else %}
-                                    <tr><td style="color: red;">Нет данных для отображения.</td></tr>
-                                {% endif %}
                                 </tbody>
                             </table>
                         </div>
+                    {% else %}
+                    <p style="color: red;">Нет данных для отображения.</p>
+                    {% endif %}
+
+                    {% if product_data %}
+                       <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Артикул</th>
+                                        <th class="text-center">Категория</th>
+                                        <th class="text-center">Название</th>
+                                        <th class="text-center">Цена</th>
+                                        <th class="text-center">Активен</th>
+                                        <th class="text-center">Добавлен</th>
+                                        <th class="text-center">Фото</th>
+                                        <th class="text-center">Редактировать</th>
+                                        <th class="text-center">Продать</th>
+                                        <th class="text-center">Удалить</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mc_list">
+
+                                    <tr>
+                                        <td class="text-center">{{ product_data.articul }}</td>
+                                        <td class="text-center">{{ product_data.maincategory.name }}</td>
+                                        <td class="text-center">{{ product_data.nameproduct.name }}</td>
+                                        <td class="text-center">{{ product_data.price }}</td>
+                                        <td class="text-center">{% if product_data.is_active %} ДА {% else %} НЕТ {% endif %}</td>
+                                        <td class="text-center">{{ product_data.date_create|date:"d-m-Y" }}</td>
+                                        <td class="text-center"><img src="{{MEDIA_URL}}{{ product_data.main_photo_path }}" width="150px;" height="150px;"></td>
+                                        <td class="text-center"><a type="button"
+                                                                   class="btn btn-sm btn-success"
+                                                                   href="{% url 'editproduct' product_data.id %}">Редактировать</a>
+                                        </td>
+                                        <td class="text-center"><a type="button"
+                                                                   class="btn btn-sm btn-success"
+                                                                   href="{% url 'sellproduct' product_data.id %}">Продать</a>
+                                        </td>
+                                        <td class="text-center"><a type="button"
+                                                                   class="btn btn-sm btn-danger"
+                                                                   href="{% url 'deleteproduct' product_data.id %}">Удалить</a>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                     <p style="color: red;">Нет данных для отображения.</p>
+                    {% endif %}
                     </div>
                 </div>
-                <!-- /.row -->
-
             </div>
     </div>
 {% endblock %}
