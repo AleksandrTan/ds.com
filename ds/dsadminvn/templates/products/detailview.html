@@ -116,9 +116,6 @@
                                 <table class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Артикул</th>
-                                            <th class="text-center">Категория</th>
-                                            <th class="text-center">Название</th>
                                             <th class="text-center">Размер</th>
                                             <th class="text-center">Колличество</th>
                                             <th class="text-center">Цена</th>
@@ -128,6 +125,8 @@
                                             <th class="text-center">Место продажи</th>
                                             <th class="text-center">Дата продажи</th>
                                             <th class="text-center">Статус</th>
+                                            <th class="text-center">Возврат</th>
+                                            <th class="text-center">Дата возврата</th>
                                             <th class="text-center">Описание</th>
                                             <th class="text-center">Оформить Возврат</th>
                                           </tr>
@@ -135,9 +134,6 @@
                                     <tbody>
                                     {% for data in product_data.psale.all %}
                                         <tr>
-                                            <td class="text-center">{{ product_data.articul }}</td>
-                                            <td class="text-center">{{ product_data.maincategory.name }}</td>
-                                            <td class="text-center">{{ product_data.nameproduct.name }}</td>
                                             <td class="text-center">{{ data.size }}</td>
                                             <td class="text-center">{{ data.count_num }}</td>
                                             <td class="text-center">{{ data.price }}</td>
@@ -149,13 +145,28 @@
                                             </td>
                                             <td class="text-center">{{ data.date_sale|date:"d-m-Y" }}</td>
                                             <td class="text-center">
-                                                {% if data.order_status  == 4 %} Продано {% endif %}
+                                                {% if data.order_status  == 4 %} Продано {% elif data.order_status  == 5 %} Возврат
+                                                {% endif %}
                                             </td>
+                                            <td class="text-center">
+                                                {% if data.is_return %} Да {% else %} Нет {% endif %}
+                                            </td>
+                                            <td class="text-center">{{ data.date_return|date:"d-m-Y" }}</td>
                                             <td class="text-center">{{ data.description }}</td>
-                                            <td class="text-center"><a type="button"
-                                                                       class="btn btn-sm btn-danger"
-                                                                       href="{% url 'returnsale' product_data.id data.id %}">
-                                                                       Возврат</a>
+                                            <td class="text-center">
+                                                {% if data.is_return %}
+                                                    <a type="button"
+                                                       class="btn btn-sm btn-danger"
+                                                       href="{% url 'returnsale' product_data.id data.id %}" style="display: none;">
+                                                       Возврат
+                                                    </a>
+                                                {% else %}
+                                                    <a type="button"
+                                                       class="btn btn-sm btn-danger"
+                                                       href="{% url 'returnsale' product_data.id data.id %}">
+                                                       Возврат
+                                                    </a>
+                                                {% endif %}
 
                                             </td>
                                         </tr>

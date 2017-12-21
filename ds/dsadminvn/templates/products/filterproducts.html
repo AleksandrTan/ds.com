@@ -90,7 +90,7 @@
                                         <select class="form-control" name="season_id">
                                             {% for season in seasons %}
                                                 <option name="0" value="">Выберите сезон</option>
-                                                <option name="{{ season.id }}" value="{{ season.id }}" {% if season.id == data_form.season|strtoint %} selected {% endif %}>
+                                                <option name="{{ season.id }}" value="{{ season.id }}" {% if season.id == data_form.season_id|strtoint %} selected {% endif %}>
                                                     {{ season.name }}
                                                 </option>
                                             {% endfor %}
