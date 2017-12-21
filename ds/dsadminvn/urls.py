@@ -74,7 +74,8 @@ pr_patterns = [
     url(r'^deleteproduct/(?P<pk>\d+)/$', views.DeleteProduct.as_view(), name='deleteproduct'),
     url(r'^foundproduct/$', views.FoundArticul.as_view(), name='foundproduct'),
     url(r'^filterproduct/(?:page/(?P<page>\d+)/)?$', views.FilterProduct.as_view(), name='filterproduct'),
-    url(r'^sellproduct/(?P<pk>\d+)/$', viewshandsale.SellProduct.as_view(), name='sellproduct')
+    url(r'^sellproduct/(?P<pk>\d+)/$', viewshandsale.SellProduct.as_view(), name='sellproduct'),
+    url(r'^returnsell/(?P<pk>\d+)/(?P<plase_pk>\d+)/$', viewshandsale.ReturnSale.as_view(), name='returnsale')
 ]
 
 urlpatterns = [

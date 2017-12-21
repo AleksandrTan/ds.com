@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.forms import ModelForm
 
@@ -8,7 +10,15 @@ from django.core.exceptions import ValidationError
 """-------------------- Model ProductSale--------------------------"""
 
 class ManagerProductSale(models.Manager):
-    pass
+
+    def return_sale(self, pk):
+        psale = ProductsSale.objects.filter(id=pk).get()
+        psale.is_return = True
+        psale.date_return = datetime.now()
+        psale.total_amount = 0.0
+        psale.order_status = 5
+        psale.save()
+
 
 class ProductsSale(models.Model):
     products = models.ForeignKey(Products, on_delete=models.SET_NULL, related_name='psale', null=True, blank=True)

@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import CreateView
+from django.views.generic.base import RedirectView
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from dsadminvn.mainviews.views import BaseAdminView
@@ -61,3 +62,24 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
 
     def get_success_url(self):
         return self.succes_url
+
+class ReturnSale(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, RedirectView):
+    login_url = 'login'
+    permission_required = "auth.change_user"
+    url = '/adminnv/products/viewproduct/%s/'
+
+    def get_redirect_url(self, **kwargs):
+        """
+        Return the URL redirect to. Keyword arguments from the
+        URL pattern match generating the redirect request
+        are provided as kwargs to this method.
+        """
+        if self.url:
+            url = self.url % kwargs['pk']
+            return url
+        else:
+            return None
+
+    def get(self, request, *args, **kwargs):
+        ProductsSale.objects.return_sale(kwargs['plase_pk'])
+        return super(ReturnSale, self).get(request, *args, **kwargs)
