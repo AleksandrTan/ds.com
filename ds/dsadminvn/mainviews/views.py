@@ -418,8 +418,8 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         context['brends'] = Brends.objects.get_active_brends()
         context['seasons'] = Seasons.objects.get_active_seasons()
         context['tab_products'] = True
-        d =  MainCategory.objects.get_single_maincategory(11)
-        context['a'] = d.sizetable_set.count()
+        # d =  MainCategory.objects.get_single_maincategory(11)
+        # context['a'] = d.sizetable_set.count()
 
         return context
 
