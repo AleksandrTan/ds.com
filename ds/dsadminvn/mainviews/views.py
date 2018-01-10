@@ -4,7 +4,6 @@ import shutil
 from django.conf import settings
 from django.shortcuts import redirect
 from django.core.files.storage import FileSystemStorage
-from django.core.exceptions import ValidationError
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import View
 from django.views.generic.base import TemplateView
@@ -19,7 +18,6 @@ from django.shortcuts import render
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from django.http import QueryDict
-from django.db import IntegrityError
 
 from django.contrib.auth.models import User
 from dsstore.models import (MainCategory, NameProduct, SizeTable,
@@ -27,7 +25,6 @@ from dsstore.models import (MainCategory, NameProduct, SizeTable,
                             ProductsForm, ProductsFormEdit, Image, SizeCount)
 
 from dsadminvn.forms import FoundArticuls, FilterProducts
-
 
 class BaseAdminView(View):
     """
