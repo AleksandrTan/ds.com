@@ -43,7 +43,6 @@ $(document).ready(function () {
                 parentElementTable.append(new_size);
                 $('#count_sizes').val(data.length);
                 $('#count_sizes_add').val(1);
-
             }
         }
     });

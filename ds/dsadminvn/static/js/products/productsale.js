@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    if ($('#price').val() == 'None'){
+    if ($('#price').val() == 0){
         $('#not_price').text('Внимание!!!Для этого товара не указана цена!!!').show();
         $('#sell_product_div').hide();
     }
