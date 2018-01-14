@@ -41,6 +41,9 @@ $(document).ready(function () {
                     '<button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить Размер</button></div></td></tr>';
 
                 parentElementTable.append(new_size);
+                $('#count_sizes').val(data.length);
+                $('#count_sizes_add').val(1);
+
             }
         }
     });

@@ -67,7 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #if wonted use tag {{MEDIA_URL}} in templates
+                #if wonted to use tag {{MEDIA_URL}} in templates
                 'django.template.context_processors.media'
             ],
         },

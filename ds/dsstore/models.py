@@ -362,7 +362,7 @@ class ManagerSizeCount(models.Manager):
 
     def get_single_size(self, pk, count_num=0):
         try:
-            size =  SizeCount.objects.only("size").get(id=pk)
+            size = SizeCount.objects.only("size").get(id=pk)
             # reduce the amount of goods for a size
             size.count_num = size.count_num - count_num
             size.save()
@@ -376,12 +376,20 @@ class ManagerSizeCount(models.Manager):
         except Products.DoesNotExist:
             return False
 
+    def return_product(self, products_id, size, count_num):
+        order = SizeCount.objects.filter(products_id=products_id).filter(size=size).get()
+        order.return_product(count_num)
+
 class SizeCount(models.Model):
     products = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='sizecount', null=True)
     size = models.SmallIntegerField(default=0)
     count_num = models.SmallIntegerField(default=0)
 
     objects = ManagerSizeCount()
+
+    def return_product(self, count_num):
+        self.count_num += count_num
+        self.save()
 
     class Meta:
         ordering = ['size']

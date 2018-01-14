@@ -17,7 +17,10 @@ class ManagerProductSale(models.Manager):
         psale.date_return = datetime.now()
         psale.total_amount = 0.0
         psale.order_status = 5
+        SizeCount.objects.return_product(psale.products_id, psale.size, psale.count_num)
+        psale.count_num = 0
         psale.save()
+
 
 
 class ProductsSale(models.Model):
