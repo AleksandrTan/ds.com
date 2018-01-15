@@ -93,7 +93,7 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center">Размер</th>
-                                            <th class="text-center">Колличество</th>
+                                            <th class="text-center">Остаток на складе</th>
                                           </tr>
                                     </thead>
                                     <tbody>
@@ -145,11 +145,11 @@
                                             </td>
                                             <td class="text-center">{{ data.date_sale|date:"d-m-Y" }}</td>
                                             <td class="text-center">
-                                                {% if data.order_status  == 4 %} Продано {% elif data.order_status  == 5 %} Возврат
+                                                {% if data.order_status  == 4 %} Продано {% elif data.order_status  == 5 %} <span style="color: red;">Возврат</span>
                                                 {% endif %}
                                             </td>
                                             <td class="text-center">
-                                                {% if data.is_return %} Да {% else %} Нет {% endif %}
+                                                {% if data.is_return %} <span style="color: red;">Да</span> {% else %} Нет {% endif %}
                                             </td>
                                             <td class="text-center">{{ data.date_return|date:"d-m-Y" }}</td>
                                             <td class="text-center">{{ data.description }}</td>

@@ -1,0 +1,138 @@
+{% extends "main.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="btn-modal-wrap btn-modal-wrap-1">
+    <!-- Modal Deleted -->
+    <div class="modal fade" id="is_deleted_ctr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="fa fa-times" aria-hidden="true">
+                    </span></button>
+                    <h4 class="modal-title" id="myModalLabel" style="color: #ff0012">Внимание!!!</h4>
+                </div>
+                 <div class="modal-body">
+                     <h3 style="color: #ff0012">Колличество продаваемого товара больше чем на складе!!!</h3>
+                </div>
+{#                <div class="modal-footer">#}
+{#                    <button type="button" class="btn btn-xs btn-default" id="cancel_type">Cancel</button>#}
+{#                    <button type="button" class="btn btn-xs btn-danger" id="delete_type" data_id_type="">Deleted</button>#}
+{#                </div>#}
+            </div>
+        </div>
+    </div>
+</div>
+<div id="page-wrapper">
+        <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Продать товар - {{ product_data.articul }}
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-table"></i> Продать товар {{ product_data.articul }}
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                <div class="alert alert-danger" id="not_price" style="display: none;"></div>
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Внимание!!!</strong> {{ form.errors.count_num }}{{ form.errors.price }}
+                    </div>
+                {% endif %}
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>Внимание!!!</strong> {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+                    <div class="col-lg-12" id="sell_product_div">
+                        <form class="form form-offer" method="post" name="seil_product" action="{{ action }}"
+                              id="seil_product" >{% csrf_token %}
+                            <input type="hidden" name="products" value="{{ product_data.id }}"/>
+                            <input type="hidden" name="start_price" id="start_price" value="{{ product_data.price }}"/>
+                            <input type="hidden" name="price" id="price" value="{{ product_data.price }}"/>
+                        <div class="col-lg-12">
+                        <h2>Данные товара</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Артикул</th>
+                                        <th class="text-center">Категория</th>
+                                        <th class="text-center">Название</th>
+                                        <th class="text-center">Цена</th>
+                                        <th class="text-center">Скидка</th>
+                                        <th class="text-center">Размер</th>
+                                        <th class="text-center">На складе</th>
+                                        <th class="text-center">Колличество<span style="color: red;">*</span></th>
+                                        <th class="text-center">Примечание</th>
+                                        <th class="text-center">Продать</th>
+                                        <th class="text-center">Редактировать</th>
+                                        <th class="text-center">Отмена</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">{{ product_data.articul }}</td>
+                                        <td class="text-center">{{ product_data.maincategory.name }}</td>
+                                        <td class="text-center">{{ product_data.nameproduct.name }}</td>
+                                        <td class="text-center" id="price_table">{{ product_data.price }}</td>
+                                        <td class="text-center">
+                                            <input name="lost_num" type="number" id="lost_num" value="0">
+                                        </td>
+                                        <td class="text-center">
+                                            <select class="form-control" name="size" id="size">
+                                                {% for size in product_data.sizecount.all %}
+                                                    <option name="{{ size.id }}" value="{{ size.id }}">
+                                                        {{ size.size }}
+                                                    </option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                        <td class="text-center" id="in_stock">{{ product_data.sizecount.all.0.count_num }}</td>
+                                        <td class="text-center">
+                                            <input name="count_num" value="" id="count_num" type="number"/>
+                                        </td>
+                                        <td>
+                                            <textarea name="description"  rows="5"></textarea>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="submit" class="btn btn-sm btn-success" id="sale_but">Продать</button>
+                                        </td>
+                                        <td class="text-center"><a type="button"
+                                                                   class="btn btn-sm btn-primary"
+                                                                   href="{% url 'editproduct' product_data.id %}">Редактировать</a>
+                                        </td>
+                                        <td>
+                                            <a type="button" class="btn btn-sm btn-primary form-control" id="save_exit" href="{% url 'products' %}">Отмена</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+    </div>
+<script>
+    var sizecount = {
+    {% for size in product_data.sizecount.all %}
+        '{{ size.id }}':{{ size.count_num }},
+    {% endfor %}
+    };
+
+</script>
+    <script type="text/javascript" src="{% static 'js/validator/jquery.validate.js' %}"></script>
+    <script src="{% static 'js/products/productsale.js' %}"></script>
+{% endblock %}
