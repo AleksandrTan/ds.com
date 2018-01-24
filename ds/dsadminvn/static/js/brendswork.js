@@ -1,6 +1,6 @@
 $(document).ready( function(){
 /*
-* Add new main category data
+* Add new brends data
 * */
   $('#add_new_br').click(function () {
 
