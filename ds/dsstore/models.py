@@ -295,7 +295,7 @@ class Products(models.Model):
 
 class ProductsForm(ModelForm):
     """
-    set request param, param request add  in __init__ like positional argument
+        Set request param, param request add  in __init__ like positional argument
     """
     def __init__(self, request, *args, **kwargs):
         self.request = request
@@ -326,9 +326,8 @@ class ProductsForm(ModelForm):
 
 class ProductsFormEdit(ModelForm):
     """
-        set request param, param request add  in __init__ like positional argument
+        set request param, param request add  in __init__ like positional argument for check in clean method
         """
-
     def __init__(self, request, *args, **kwargs):
         self.request = request
         super(ProductsFormEdit, self).__init__(*args, **kwargs)
