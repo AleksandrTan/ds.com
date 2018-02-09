@@ -244,7 +244,7 @@ class ManageProductsModel(models.Manager):
             if data[param]:
                 work_dict[param] = data[param]
         try:
-            return query.filter(**work_dict).all()
+            return query.filter(**work_dict)
         except Products.DoesNotExist:
             return False
 

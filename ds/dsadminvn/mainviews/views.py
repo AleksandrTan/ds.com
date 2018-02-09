@@ -685,27 +685,19 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
         """
         If submit search form, add more options
         """
-        if request.GET['submit']:
-            form = FilterProducts(request.GET)
-            if form.is_valid():
-                self.object_list = self.get_queryset(form.cleaned_data)
-                context = self.get_context_data(object_list=self.object_list)
-                context['data_form'] = form.cleaned_data
-                copy_get = QueryDict(request.GET.copy().urlencode(), mutable=True)
-                copy_get['submit'] = 0
-                context['request_get'] = copy_get.urlencode()
-                return render(request, self.template_name, context)
-            else:
-                self.object_list = self.get_queryset(form.cleaned_data)
-                context = self.get_context_data(object_list=self.object_list)
-                context['form'] = form
-                return render(request, self.template_name, context)
-        else:
-            form = FilterProducts(request.GET)
+        form = FilterProducts(request.GET)
+        if form.is_valid():
             self.object_list = self.get_queryset(form.cleaned_data)
             context = self.get_context_data(object_list=self.object_list)
             context['data_form'] = form.cleaned_data
-            context['request_get'] = QueryDict(request.GET.copy().urlencode(), mutable=True)
+            copy_get = QueryDict(request.GET.copy().urlencode(), mutable=True)
+            copy_get['submit'] = 0
+            context['request_get'] = copy_get.urlencode()
+            return render(request, self.template_name, context)
+        else:
+            self.object_list = self.get_queryset(form.cleaned_data)
+            context = self.get_context_data(object_list=self.object_list)
+            context['form'] = form
             return render(request, self.template_name, context)
 
     def get_queryset(self, data):
