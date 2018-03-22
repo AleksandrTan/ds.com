@@ -5,7 +5,6 @@ from django.core.exceptions import ValidationError
 
 from dsstore.mainhelpers import MainImgTypeField as MI
 
-
 """-------------Main Category model--------------------"""
 
 class ManagerMainCategories(models.Manager):
@@ -52,7 +51,6 @@ class MainCategory(models.Model):
 
     class Meta:
         ordering = ['id']
-
 
 """----------- Name Producn model -----------------------"""
 class ManagerNameProducts(models.Manager):
@@ -209,7 +207,6 @@ class Seasons(models.Model):
 
     class Meta:
         ordering = ['id']
-
 
 """--------------Products Model-------------------------"""
 
@@ -392,7 +389,6 @@ class SizeCount(models.Model):
 
     class Meta:
         ordering = ['size']
-
 
 """------------------Images Model---------------------------"""
 
