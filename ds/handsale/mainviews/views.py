@@ -8,12 +8,13 @@ from dsadminvn.mainviews.views import BaseAdminView
 from dsstore.models import Products, SizeCount
 from handsale.models import ProductsSale, ProductsSellForm
 
+
 class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     login_url = 'login'
     permission_required = "auth.change_user"
     form_class = ProductsSellForm
     template_name = 'producthandsell.html'
-    succes_url = '/adminnv/products/'
+    succes_url = '/adminnv/products/viewproduct/'
     context_object_name = 'product_data'
 
     def get_context_data(self, **kwargs):
@@ -61,7 +62,7 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
         return self.render_to_response(context)
 
     def get_success_url(self):
-        return self.succes_url
+        return self.succes_url+'{0}'.format(self.object.products_id)
 
 class ReturnSale(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, RedirectView):
     login_url = 'login'

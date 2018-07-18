@@ -60,7 +60,8 @@
                     <div class="col-lg-6">
                         <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
                             <label style="color: red;">Артикул</label><span style="color: red;">*</span>
-                            <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" value="{{ data.articul }}" maxlength="6" required>
+                            <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" value="{{ data.articul }}"
+                                   maxlength="6" required>
                             {% if form.errors.articul %}<label id="articul-error" class="error" for="articul">{{ form.errors.articul.0 }}</label>{% endif %}
                             {% if form.non_field_errors %}<label id="articul-error" class="error" for="articul">{{ fform.non_field_errors }}</label>{% endif %}
                         </div>

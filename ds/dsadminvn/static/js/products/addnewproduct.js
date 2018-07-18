@@ -78,7 +78,7 @@ $('#articul').blur(function () {
                $('#modal_content').text('').text('Введенный артикул уже существует!Выберите другой');
                $('#modal_alarm').modal();
            }
-       };
+       }
    }
 
 });
@@ -151,7 +151,7 @@ $('#articul').blur(function () {
 					caption: {
 						required: "Пожалуйста введите заголовок",
 						maxlength: "Не более 100 символов"
-					},
+					}
 				},
                 errorClass: "alert-danger",
 				highlight: function ( element, errorClass, validClass ) {

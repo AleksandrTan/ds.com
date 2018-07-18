@@ -26,6 +26,7 @@ from dsstore.models import (MainCategory, NameProduct, SizeTable,
 
 from dsadminvn.forms import FoundArticuls, FilterProducts
 
+
 class BaseAdminView(View):
     """
     Base view for admin views.
@@ -41,6 +42,7 @@ class BaseAdminView(View):
 
 #Class MainView  - start page
 
+
 class MainView(BaseAdminView, LoginRequiredMixin, TemplateView):
    template_name = 'index.html'
    login_url = 'login'
@@ -54,6 +56,7 @@ class MainView(BaseAdminView, LoginRequiredMixin, TemplateView):
     Work with users site
 """
 
+
 class UsersWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
    permission_required = "auth.change_user"
@@ -62,6 +65,7 @@ class UsersWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, List
    queryset = User.objects.all()
    context_object_name = 'users_list' #or for custom paginate page_obj in template
    paginate_by = 10
+
 
 class UserDetailView(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):
 
@@ -74,6 +78,7 @@ class UserDetailView(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin,
 """
     Work with MainCategory
 """
+
 
 class MainCategoryWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
@@ -88,6 +93,7 @@ class MainCategoryWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         context = super(MainCategoryWork, self).get_context_data(**kwargs)
         context['tab'] = True
         return context
+
 
 class AjaxMainCategoryNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
@@ -106,6 +112,7 @@ class AjaxMainCategoryNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredM
         string = re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
         return re.sub(r"'", '', string)
 
+
 class AjaxMainCategoryActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
@@ -115,6 +122,7 @@ class AjaxMainCategoryActive(BaseAdminView, LoginRequiredMixin, PermissionRequir
         if request.is_ajax():
             data = MainCategory.objects.change_active_status(kwargs['pk'])
         return JsonResponse(data)
+
 
 class MainCategoryDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
@@ -135,6 +143,7 @@ class MainCategoryDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMi
     Work with Name Product
 """
 
+
 class NameProductWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
     permission_required = "auth.change_user"
@@ -148,6 +157,7 @@ class NameProductWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
         context = super(NameProductWork, self).get_context_data(**kwargs)
         context['tab'] = True
         return context
+
 
 class AjaxNameProductNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
@@ -166,6 +176,7 @@ class AjaxNameProductNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMi
         import unidecode
         return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
 
+
 class AjaxNameProductActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
@@ -176,6 +187,7 @@ class AjaxNameProductActive(BaseAdminView, LoginRequiredMixin, PermissionRequire
             data = NameProduct.objects.change_active_status(kwargs['pk'])
 
         return JsonResponse(data)
+
 
 class NameProductDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
@@ -194,6 +206,7 @@ class NameProductDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
 
 """----------------Work with Size Table---------------------------"""
 
+
 class SizeTableWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
     permission_required = "auth.change_user"
@@ -207,6 +220,7 @@ class SizeTableWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
         context['tab'] = True
         context['main_category_list'] = MainCategory.objects.get_active_categories()
         return context
+
 
 class SizeTableAddNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = "auth.change_user"
@@ -234,6 +248,7 @@ class SizeTableAddNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
     def get_success_url(self):
         return self.succes_url
 
+
 class SizeTableDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
@@ -249,6 +264,7 @@ class SizeTableDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
         context['tab'] = True
         return context
 
+
 class AjaxGetSizes(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
@@ -260,6 +276,7 @@ class AjaxGetSizes(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
         return JsonResponse(list(data), safe=False)
 
 """---------------Work with Brends -------------------------------"""
+
 
 class BrendsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
@@ -273,6 +290,7 @@ class BrendsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Lis
         context = super(BrendsWork, self).get_context_data(**kwargs)
         context['tab'] = True
         return context
+
 
 class AjaxBrendNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
@@ -290,6 +308,7 @@ class AjaxBrendNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
         import unidecode
         return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
 
+
 class AjaxBrendActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
@@ -299,6 +318,7 @@ class AjaxBrendActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
         if request.is_ajax():
             data = Brends.objects.change_active_status(kwargs['pk'])
         return JsonResponse(data)
+
 
 class BrendDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
@@ -317,6 +337,7 @@ class BrendDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
 """----------------Work with seasons---------------------------------"""
 
+
 class SeasonsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
     permission_required = "auth.change_user"
@@ -329,6 +350,7 @@ class SeasonsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Li
         context = super(SeasonsWork, self).get_context_data(**kwargs)
         context['tab'] = True
         return context
+
 
 class AjaxSeasonNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
@@ -346,6 +368,7 @@ class AjaxSeasonNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
         import unidecode
         return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
 
+
 class AjaxSeasonActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
     permission_required = "auth.change_user"
@@ -355,6 +378,7 @@ class AjaxSeasonActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         if request.is_ajax():
             data = Seasons.objects.change_active_status(kwargs['pk'])
         return JsonResponse(data)
+
 
 class SeasonDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
@@ -373,6 +397,7 @@ class SeasonDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
 """---------------Work with Products-------------------------------"""
 
+
 class ProductsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
     permission_required = "auth.change_user"
     login_url = 'login'
@@ -390,6 +415,7 @@ class ProductsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, L
         context['tab_products'] = True
 
         return context
+
 
 class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     login_url = 'login'
@@ -444,10 +470,10 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
     def get_success_url(self):
         return self.succes_url
 
-    def slugify(swlf, str):
+    def slugify(self, strg):
         import re
         import unidecode
-        string = re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
+        string = re.sub(r'\s+', '-', unidecode.unidecode(strg).lower().strip())
         return re.sub(r"'", '', string)
 
     def uuid_sentece_user(self):
@@ -479,10 +505,11 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
     def saved_sizes_count(self, instance):
         # map(lambda x: x.save(),
         #     [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list])
-        data_list  = zip(self.request.POST.getlist('height[]'), self.request.POST.getlist('count_height[]'))
+        data_list = zip(self.request.POST.getlist('height[]'), self.request.POST.getlist('count_height[]'))
         d = [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list]
         for sizes in d:
             sizes.save()
+
 
 class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     login_url = 'login'
@@ -548,10 +575,10 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
 
         return self.render_to_response(context)
 
-    def slugify(swlf, str):
+    def slugify(self, strg):
         import re
         import unidecode
-        string = re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
+        string = re.sub(r'\s+', '-', unidecode.unidecode(strg).lower().strip())
         return re.sub(r"'", '', string)
 
     def uuid_sentece_user(self):
@@ -583,7 +610,7 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
     def saved_sizes_count(self, instance):
         # map(lambda x: x.save(),
         #     [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list])
-        data_list  = zip(self.request.POST.getlist('height[]'), self.request.POST.getlist('count_height[]'))
+        data_list = zip(self.request.POST.getlist('height[]'), self.request.POST.getlist('count_height[]'))
         edit_data = [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list]
         #update sizecount data(poducts_id set null in table field) inserted new data
         instance.sizecount.set(edit_data, clear=True, bulk=False)
@@ -596,10 +623,11 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         for imaje in data:
             img = Image.objects.filter(id=imaje).get()
             try:
-                os.remove(settings.BASE_DIR +'/'+ img.img_path)
+                os.remove(settings.BASE_DIR + '/' + img.img_path)
                 img.delete()
             except OSError:
                pass
+
 
 class ViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     permission_required = "auth.change_user"
@@ -612,6 +640,7 @@ class ViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, De
         context = super(ViewProduct, self).get_context_data(**kwargs)
         context['tab_products'] = True
         return context
+
 
 class DeleteProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     permission_required = "auth.change_user"
@@ -638,6 +667,7 @@ class DeleteProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
     # def get_success_url(self):
     #     return self.request.get_full_path()
 
+
 class CheckIssetArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
     permission_required = "auth.change_user"
     login_url = 'login'
@@ -646,6 +676,7 @@ class CheckIssetArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
         if request.is_ajax():
            product_result = Products.objects.check_iset_articul(kwargs['articul'])
         return JsonResponse({"status": product_result})
+
 
 class FoundArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
     permission_required = "auth.change_user"
@@ -663,6 +694,7 @@ class FoundArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, T
             args = {'tab_products': True,
                     'product_data': False}
             return render(request, self.template_name, args)
+
 
 class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
     permission_required = "auth.change_user"
