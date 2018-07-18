@@ -7,6 +7,7 @@ from dsstore.mainhelpers import MainImgTypeField as MI
 
 """-------------Main Category model--------------------"""
 
+
 class ManagerMainCategories(models.Manager):
 #Get active Categories
     def get_active_categories(self):
@@ -37,6 +38,7 @@ class ManagerMainCategories(models.Manager):
         except Products.DoesNotExist:
             return False
 
+
 class MainCategory(models.Model):
     name = models.CharField(max_length=100)
     name_url = models.CharField(max_length=100)
@@ -53,6 +55,8 @@ class MainCategory(models.Model):
         ordering = ['id']
 
 """----------- Name Producn model -----------------------"""
+
+
 class ManagerNameProducts(models.Manager):
 #Get active Categories
     def get_active_products(self):
@@ -77,6 +81,7 @@ class ManagerNameProducts(models.Manager):
         np.save()
         return data
 
+
 class NameProduct(models.Model):
     name = models.CharField(max_length=100)
     name_url = models.CharField(max_length=100)
@@ -93,10 +98,13 @@ class NameProduct(models.Model):
         ordering = ['id']
 
 """------------ SizeTable Model-------------------------------"""
+
+
 class ManageSizeTable(models.Manager):
 
     def get_size_data(self, pk):
         return SizeTable.objects.filter(maincategory_id=pk).values('height')
+
 
 class SizeTable(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE)
@@ -108,6 +116,7 @@ class SizeTable(models.Model):
 
     class Meta:
         ordering = ['height']
+
 
 class SizeTableForm(ModelForm):
     class Meta:
@@ -129,6 +138,8 @@ class SizeTableForm(ModelForm):
                         }
 
 """-------------------Brends Model ------------------------------------"""
+
+
 class ManagerBrends(models.Manager):
 
     def get_active_brends(self):
@@ -152,6 +163,7 @@ class ManagerBrends(models.Manager):
             data = {"status": True}
         br.save()
         return data
+
 
 class Brends(models.Model):
     name = models.CharField(max_length=100)
@@ -193,6 +205,7 @@ class ManagerSeasons(models.Manager):
         se.save()
         return data
 
+
 class Seasons(models.Model):
     name = models.CharField(max_length=100)
     name_url = models.CharField(max_length=100)
@@ -210,8 +223,10 @@ class Seasons(models.Model):
 
 """--------------Products Model-------------------------"""
 
+
 def custom_directory_path(instance, filename):
     return 'images/{0}/{1}'.format(instance.dirname_img, filename)
+
 
 class ManageProductsModel(models.Manager):
 
@@ -250,6 +265,7 @@ class ManageProductsModel(models.Manager):
             return Products.objects.get(id=pk)
         except Products.DoesNotExist:
             return False
+
 
 class Products(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)
@@ -290,6 +306,7 @@ class Products(models.Model):
     def __str__(self):
         return self.link_name
 
+
 class ProductsForm(ModelForm):
     """
         Set request param, param request add  in __init__ like positional argument
@@ -320,6 +337,7 @@ class ProductsForm(ModelForm):
         if Products.objects.check_iset_articul(cleaned_data['articul']):
             raise ValidationError('Введенный артикул уже существует!Выберите другой', code='invalid')
         return self.cleaned_data
+
 
 class ProductsFormEdit(ModelForm):
     """
@@ -354,6 +372,7 @@ class ProductsFormEdit(ModelForm):
 
 """--------------SizeCount Model--------------------------"""
 
+
 class ManagerSizeCount(models.Manager):
 
     def get_single_size(self, pk, count_num=0):
@@ -376,6 +395,7 @@ class ManagerSizeCount(models.Manager):
         order = SizeCount.objects.filter(products_id=products_id).filter(size=size).get()
         order.return_product(count_num)
 
+
 class SizeCount(models.Model):
     products = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='sizecount', null=True)
     size = models.SmallIntegerField(default=0)
@@ -391,6 +411,7 @@ class SizeCount(models.Model):
         ordering = ['size']
 
 """------------------Images Model---------------------------"""
+
 
 class Image(models.Model):
 
