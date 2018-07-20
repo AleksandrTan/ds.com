@@ -367,7 +367,9 @@ class ProductsFormEdit(ModelForm):
             raise ValidationError('Колличество введенных размеров больше чем размеров категории', code='invalid')
         #check isset articul
         if self.request.POST.getlist('articul_product_hidden')[0] != cleaned_data['articul']:
+            cleaned_data['articul'] = self.request.POST.getlist('articul_product_hidden')[0]
             raise ValidationError('Вы изменили существующий артикул!!!Нельзя так делать!!!', code='invalid')
+
         return self.cleaned_data
 
 """--------------SizeCount Model--------------------------"""
