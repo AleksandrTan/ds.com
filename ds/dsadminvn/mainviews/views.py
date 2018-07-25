@@ -674,7 +674,17 @@ class CheckIssetArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
-           product_result = Products.objects.check_iset_articul(kwargs['articul'])
+           product_result = Products.objects.check_isset_articul(kwargs['articul'])
+        return JsonResponse({"status": product_result})
+
+
+class CheckIssetPreBarcode(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+           product_result = Products.objects.check_isset_pre_barcode(kwargs['pre_barcode'])
         return JsonResponse({"status": product_result})
 
 

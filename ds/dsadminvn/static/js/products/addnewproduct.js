@@ -83,6 +83,24 @@ $('#articul').blur(function () {
 
 });
 
+//Check isset pre_barcode
+$('#pre_barcode').blur(function () {
+   if ($(this).val() != ''){
+       $.get(
+        "/adminnv/products/checkprebarcode/"+$(this).val()+"/",
+        onAjaxSuccess
+       );
+       function onAjaxSuccess(data) {
+           if(data.status){
+           	   $('#pre_barcode').val('');
+               $('#modal_content').text('').text('Введенный штрих-код уже существует!Выберите другой');
+               $('#modal_alarm').modal();
+           }
+       }
+   }
+
+});
+
 //Show count entered simbols for input tags
     $("input").keyup(function() {
         $(this).next('[data-num = count_simbols]').next('span').css('display', 'block').children('em').text(this.value.length);
@@ -104,6 +122,11 @@ $('#articul').blur(function () {
 					articul: {
 						required: true,
 						maxlength: 30
+					},
+					pre_barcode: {
+						required: true,
+						maxlength: 5,
+                        number: true
 					},
 					price: {
 						//required: true,
@@ -132,6 +155,11 @@ $('#articul').blur(function () {
 					articul: {
 						required: "Пожалуйста введите артикул",
 						maxlength: "Не более 30 символов"
+					},
+                    pre_barcode: {
+						required: "Пожалуйста введите штрих-код",
+						maxlength: "Не более 5 символов",
+                        number: 'Должно быть числом!',
 					},
 					price: {
 						number: 'Должно быть числом!',

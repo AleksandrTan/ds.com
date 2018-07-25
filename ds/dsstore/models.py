@@ -233,11 +233,21 @@ class ManageProductsModel(models.Manager):
     def get_list_products(self):
         return Products.objects.only('id', 'articul', 'price', 'is_active')
 
-    def check_iset_articul(self, articul, flag_isset=False):
+    def check_isset_articul(self, articul, flag_isset=False):
         try:
             product = Products.objects.get(articul=articul)
             if flag_isset:
                 return product.articul
+            else:
+                return True
+        except Products.DoesNotExist:
+            return False
+
+    def check_isset_pre_barcode(self, pre_barcode, flag_isset=False):
+        try:
+            product = Products.objects.get(pre_barcode=pre_barcode)
+            if flag_isset:
+                return product.pre_barcode
             else:
                 return True
         except Products.DoesNotExist:
@@ -270,6 +280,8 @@ class ManageProductsModel(models.Manager):
 class Products(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)
     articul = models.CharField(unique=True, max_length=10, blank=False)
+    pre_barcode = models.CharField(unique=True, max_length=5, blank=False)
+    barcode = models.CharField(unique=True, max_length=13, blank=False)
     nameproduct = models.ForeignKey(NameProduct, on_delete=models.CASCADE, blank=False)
     brends = models.SmallIntegerField(blank=True, default=0)
     season_id = models.SmallIntegerField(blank=True, default=0)
@@ -318,13 +330,17 @@ class ProductsForm(ModelForm):
     class Meta:
         model = Products
         fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
-                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption']
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'pre_barcode']
 
         error_messages = {
                              'articul': {'required': "Пожалуйста введите артикул",
                                          'max_length':"Не более 30 символов",
                                          'unique': "Этот артикул уже используетсяб введите другой"
                               },
+                             'pre_barcode': {'required': "Пожалуйста введите Штрих-код",
+                                        'max_length': "Не более 5 символов",
+                                        'unique': "Этот штрих-код уже используетсяб введите другой"
+                             },
                          }
 
     def clean(self):
@@ -334,8 +350,11 @@ class ProductsForm(ModelForm):
         if len(self.request.POST.getlist('height[]')) > maincategory.sizetable_set.count():
             raise ValidationError('Колличество введенных размеров больше чем размеров категории', code='invalid')
         #check isset articul
-        if Products.objects.check_iset_articul(cleaned_data['articul']):
+        if Products.objects.check_isset_articul(cleaned_data['articul']):
             raise ValidationError('Введенный артикул уже существует!Выберите другой', code='invalid')
+        # check isset pre_barcode
+        if Products.objects.check_isset_pre_barcode(cleaned_data['pre_barcode']):
+            raise ValidationError('Введенный штрих-код уже существует!Выберите другой', code='invalid')
         return self.cleaned_data
 
 
@@ -350,13 +369,18 @@ class ProductsFormEdit(ModelForm):
     class Meta:
         model = Products
         fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
-                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'discount', 'price_down', 'sale_price']
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'discount', 'price_down',
+                  'sale_price', 'pre_barcode']
 
         error_messages = {
                              'articul': {'required': "Пожалуйста введите артикул",
                                          'max_length':"Не более 30 символов",
                                          'unique': "Этот артикул уже используетсяб введите другой"
-                              },
+                             },
+                             'pre_barcode': {'required': "Пожалуйста введите Штрих-код",
+                                            'max_length': "Не более 5 символов",
+                                            'unique': "Этот штрих-код уже используетсяб введите другой"
+                                            },
                          }
 
     def clean(self):
