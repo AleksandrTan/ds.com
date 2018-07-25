@@ -83,9 +83,9 @@ $('#articul').blur(function () {
                    $('#modal_content').text('').text('Введенный артикул уже существует!Выберите другой');
                    $('#modal_alarm').modal();
                    $('#articul').val('');              }
-           };
-       };
-   };
+           }
+       }
+   }
 });
 
 //Show count entered simbols for input tags

@@ -67,8 +67,14 @@
                                     <label style="color: red;">Артикул</label><span style="color: red;">*</span>
                                     <input class="form-control" placeholder="Артикул"
                                            id="articul" name="articul" type="text"
-                                           value="{{ data_product_edit.articul }}"
-                                           maxlength="6">
+                                           value="{{ data_product_edit.articul }}" maxlength="6" readonly>
+                                    {% if form.errors.articul %}<label id="articul-error" class="error" for="articul">{{ form.errors.articul.0 }}</label>{% endif %}
+                                </div>
+                                <div class="form-group {% if form.errors.pre_barcode %}has-error{% endif %}">
+                                    <label style="color: red;">Штрих-код</label><span style="color: red;">*</span>
+                                    <input class="form-control" placeholder="Штрих-код"
+                                           id="pre_barcode" name="pre_barcode" type="text"
+                                           value="{{ data_product_edit.pre_barcode }}" maxlength="5" readonly>
                                     {% if form.errors.articul %}<label id="articul-error" class="error" for="articul">{{ form.errors.articul.0 }}</label>{% endif %}
                                 </div>
                                 <div class="form-group ">

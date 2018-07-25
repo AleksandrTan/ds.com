@@ -446,10 +446,13 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         return context
 
     def form_valid(self, form):
+        import dsadminvn.mainhelpers.SetBarcode as SB
         instance = form.save(commit=False)
         instance.identifier = self.uuid_sentece()
         instance.dirname_img = self.uuid_sentece_user()
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '-' + instance.identifier + '#' + form.cleaned_data['articul']
+        genbarcode = SB.SetBarcode(form.cleaned_data['pre_barcode'])
+        instance.barcode = genbarcode.generate_barcode()
         instance.save()
 
         self.save_oter_files(instance, form)
