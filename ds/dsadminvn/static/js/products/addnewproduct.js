@@ -121,7 +121,7 @@ $('#pre_barcode').blur(function () {
 				rules: {
 					articul: {
 						required: true,
-						maxlength: 30
+						maxlength: 6
 					},
 					pre_barcode: {
 						required: true,
@@ -154,7 +154,7 @@ $('#pre_barcode').blur(function () {
 				messages: {
 					articul: {
 						required: "Пожалуйста введите артикул",
-						maxlength: "Не более 30 символов"
+						maxlength: "Не более 6 символов"
 					},
                     pre_barcode: {
 						required: "Пожалуйста введите штрих-код",
