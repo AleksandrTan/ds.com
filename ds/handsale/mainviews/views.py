@@ -38,7 +38,7 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
         return Products.objects.get_single_product(pk)
 
     def form_valid(self, form):
-        self.object = self.get_queryset(int(self.request.POST['products']))
+        self.object = form.cleaned_data['products']
         import copy
         for i in range(int(form.cleaned_data['count_num'])):
             forma = copy.deepcopy(form)
