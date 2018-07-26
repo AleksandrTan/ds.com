@@ -29,7 +29,7 @@ class ManagerProductSale(models.Manager):
 class ProductsSale(models.Model):
     products = models.ForeignKey(Products, on_delete=models.SET_NULL, related_name='psale', null=True, blank=True)
     articul = models.CharField(max_length=10, blank=False)
-    count_num = models.SmallIntegerField(default=0, blank=False)
+    count_num = models.SmallIntegerField(default=1, blank=False)
     size = models.SmallIntegerField(default=0, blank=False)
     price = models.FloatField(blank=False, default=0.0)
     true_price = models.FloatField(blank=False, default=0.0)

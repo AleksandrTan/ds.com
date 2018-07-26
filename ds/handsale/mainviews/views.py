@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import CreateView
 from django.views.generic.base import RedirectView
@@ -37,22 +38,31 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
         return Products.objects.get_single_product(pk)
 
     def form_valid(self, form):
-        instance = form.save(commit=False)
+        self.object = self.get_queryset(int(self.request.POST['products']))
+        import copy
+        for i in range(int(form.cleaned_data['count_num'])):
+            forma = copy.deepcopy(form)
+            self.saved_data(forma)
+
+        #return super(SellProduct, self).form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def saved_data(self, forma):
+        instance = forma.save(commit=False)
+        instance.count_num = 1
         instance.link_name = ''
         product = Products.objects.get_single_product(self.kwargs['pk'])
         instance.articul = product.articul
-        instance.size = SizeCount.objects.get_single_size(form.cleaned_data['size'])
+        instance.size = SizeCount.objects.get_single_size(forma.cleaned_data['size'])
         instance.products = product
-        if form.cleaned_data['lost_num']:
-            instance.true_price = form.cleaned_data['price'] - form.cleaned_data['lost_num']
+        if forma.cleaned_data['lost_num']:
+            instance.true_price = forma.cleaned_data['price'] - forma.cleaned_data['lost_num']
         else:
-            instance.true_price = form.cleaned_data['price']
-        instance.total_amount = instance.true_price * form.cleaned_data['count_num']
+            instance.true_price = forma.cleaned_data['price']
+        instance.total_amount = instance.true_price
         instance.save()
         # reduce the amount of product
-        SizeCount.objects.get_single_size(form.cleaned_data['size'], form.cleaned_data['count_num'])
-
-        return super(SellProduct, self).form_valid(form)
+        SizeCount.objects.get_single_size(forma.cleaned_data['size'], 1)
 
     def form_invalid(self, form):
         self.object = form.cleaned_data['products']
@@ -62,7 +72,8 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
         return self.render_to_response(context)
 
     def get_success_url(self):
-        return self.succes_url+'{0}'.format(self.object.products_id)
+        return self.succes_url+'{0}'.format(self.object.id)
+
 
 class ReturnSale(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, RedirectView):
     login_url = 'login'

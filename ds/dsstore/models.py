@@ -352,6 +352,11 @@ class ProductsForm(ModelForm):
         #check isset articul
         if Products.objects.check_isset_articul(cleaned_data['articul']):
             raise ValidationError('Введенный артикул уже существует!Выберите другой', code='invalid')
+        #check 5 num in pre_barcode
+        if len(cleaned_data['pre_barcode']) < 5:
+            raise ValidationError ('Штрих-код должен содержать 5 цифр!!!')
+        if not type(int(cleaned_data['pre_barcode'])) is int:
+            raise ValidationError('Должны быть только цифры')
         # check isset pre_barcode
         if Products.objects.check_isset_pre_barcode(cleaned_data['pre_barcode']):
             raise ValidationError('Введенный штрих-код уже существует!Выберите другой', code='invalid')

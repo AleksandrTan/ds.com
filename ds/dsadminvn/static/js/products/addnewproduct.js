@@ -12,7 +12,7 @@ $.validator.setDefaults( {
                             });
                     }
      		 }
-		} );
+		});
 $(document).ready(function () {
 //Change sizes for select maincategory
     $('#maincategory' ).change(function () {
@@ -85,7 +85,11 @@ $('#articul').blur(function () {
 
 //Check isset pre_barcode
 $('#pre_barcode').blur(function () {
-   if ($(this).val() != ''){
+    if ($(this).val().length < 5){
+        alert('Введите 5 чисел');
+        return false;
+    }
+    if ($(this).val() != ''){
        $.get(
         "/adminnv/products/checkprebarcode/"+$(this).val()+"/",
         onAjaxSuccess
@@ -159,7 +163,7 @@ $('#pre_barcode').blur(function () {
                     pre_barcode: {
 						required: "Пожалуйста введите штрих-код",
 						maxlength: "Не более 5 символов",
-                        number: 'Должно быть числом!',
+                        number: 'Должно быть числом!'
 					},
 					price: {
 						number: 'Должно быть числом!',

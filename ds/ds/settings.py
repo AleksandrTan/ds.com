@@ -159,3 +159,19 @@ TEST_MEDIA_IMAGES = 'media/images/'
 CONTENT_TYPES_FILE = ['image/jpeg', 'image/jpg', 'image/png']
 #Max size for upload files
 MAX_SIZE_UPLOAD = 5000000
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        }
+    },
+}
