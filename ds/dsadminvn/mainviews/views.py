@@ -747,3 +747,11 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
 
     def get_queryset(self, data):
         return Products.objects.filter_products(data)
+
+
+class SaleViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    template_name = 'products/saleviewproduct.html'
+    context_object_name = 'sale_list'
+    paginate_by = 5

@@ -1,0 +1,113 @@
+{% extends "main.html" %}
+{% load staticfiles %}
+{% block content %}
+<div id="page-wrapper">
+        <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Карточка Товара
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-table"></i> Статистика продаж товара
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Добавить новый товар</label>
+                            <a type="button" class="btn btn-sm btn-success form-control" href="{% url 'showform_for_add_product' %}">Добавить</a>
+                         </div>
+                        <form class="form form-offer" method="post" name="found_product" action="{% url 'foundproduct' %}"
+                              id="found_product">{% csrf_token %}
+                            <div class="form-group">
+                                <label>Поиск по Артикулу</label>
+                                <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" maxlength="6">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">Найти Товар</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-12">
+                     {% if product_data %}
+                           <h3>Продажи</h3>
+                           <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Размер</th>
+                                            <th class="text-center">Колличество</th>
+                                            <th class="text-center">Цена</th>
+                                            <th class="text-center">Скидка</th>
+                                            <th class="text-center">Цена со скидкой</th>
+                                            <th class="text-center">Общая сумма</th>
+                                            <th class="text-center">Место продажи</th>
+                                            <th class="text-center">Дата продажи</th>
+                                            <th class="text-center">Статус</th>
+                                            <th class="text-center">Возврат</th>
+                                            <th class="text-center">Дата возврата</th>
+                                            <th class="text-center">Описание</th>
+                                            <th class="text-center">Оформить Возврат</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for data in product_data.psale.all %}
+                                        <tr>
+                                            <td class="text-center">{{ data.size }}</td>
+                                            <td class="text-center">{{ data.count_num }}</td>
+                                            <td class="text-center">{{ data.price }}</td>
+                                            <td class="text-center">{{ data.lost_num }}</td>
+                                            <td class="text-center">{{ data.true_price }}</td>
+                                            <td class="text-center">{{ data.total_amount }}</td>
+                                            <td class="text-center">
+                                                {% if data.plase_sale  == 1%} Магазин {% else %} Интернет {% endif %}
+                                            </td>
+                                            <td class="text-center">{{ data.date_sale|date:"d-m-Y" }}</td>
+                                            <td class="text-center">
+                                                {% if data.order_status  == 4 %} Продано {% elif data.order_status  == 5 %} <span style="color: red;">Возврат</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-center">
+                                                {% if data.is_return %} <span style="color: red;">Да</span> {% else %} Нет {% endif %}
+                                            </td>
+                                            <td class="text-center">{{ data.date_return|date:"d-m-Y" }}</td>
+                                            <td class="text-center">{{ data.description }}</td>
+                                            <td class="text-center">
+                                                {% if data.is_return %}
+                                                    <a type="button"
+                                                       class="btn btn-sm btn-danger"
+                                                       href="{% url 'returnsale' product_data.id data.id %}" style="display: none;">
+                                                       Возврат
+                                                    </a>
+                                                {% else %}
+                                                    <a type="button"
+                                                       class="btn btn-sm btn-danger"
+                                                       href="{% url 'returnsale' product_data.id data.id %}">
+                                                       Возврат
+                                                    </a>
+                                                {% endif %}
+
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <p style="color: red;">Нет данных для отображения.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+    </div>
+{% endblock %}

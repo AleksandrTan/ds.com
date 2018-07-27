@@ -137,6 +137,7 @@
                                         <th class="text-center">Просмотр</th>
                                         <th class="text-center">Редактировать</th>
                                         <th class="text-center">Продать</th>
+                                        <th class="text-center">Статистика</th>
                                         <th class="text-center">Удалить</th>
                                     </tr>
                                 </thead>
@@ -183,6 +184,10 @@
                                                                    href="#">Нельзя
                                             </a>
                                             {% endif %}
+                                        </td>
+                                        <td class="text-center"><a type="button"
+                                                                   class="btn btn-sm btn-success"
+                                                                   href="{% url 'saleproductview' product_data.id %}">Статистика</a>
                                         </td>
                                         <td class="text-center"><a type="button"
                                                                    class="btn btn-sm btn-danger"
