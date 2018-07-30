@@ -47,14 +47,16 @@
                                   id="filter_product" >{% csrf_token %}
                             <div class="col-lg-2">
                                 <div class="form-group">
-                                    <label>С </label>
-                                    <input class="form-control" name="date_with" id="date_with" type="text" placeholder="Дата С">
+                                    <label>С {{ data_form }}</label>
+                                    <input class="form-control" name="date_with" id="date_with" type="text" placeholder="Дата С"
+                                           value="{{ data_form.date_with|date:"Y-m-d" }}">
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>ПО  </label>
-                                    <input class="form-control" name="date_by" id="date_by" type="text" placeholder="Дата ПО">
+                                    <input class="form-control" name="date_by" id="date_by" type="text" placeholder="Дата ПО"
+                                           value="{{ data_form.date_by|date:"Y-m-d" }}>
                                 </div>
                             </div>
                             <div class="col-lg-12">

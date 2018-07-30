@@ -16,5 +16,5 @@ class FilterProducts(forms.Form):
 
 
 class FilterSaleProduct(forms.Form):
-    date_with = forms.DateField()
-    date_by = forms.DateField()
+    date_with = forms.DateField(required=False)
+    date_by = forms.DateField(required=False)
