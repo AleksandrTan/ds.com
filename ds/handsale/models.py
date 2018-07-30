@@ -25,10 +25,16 @@ class ManagerProductSale(models.Manager):
         psale.save()
 
     def get_list_data(self, products_id, data={}):
-        try:
+        if data:
+            return self.filter_date_sales(products_id, data)
+        else:
             return ProductsSale.objects.filter(products_id=products_id)
-        except ProductsSale.DoesNotExist:
-            return False
+
+    def filter_date_sales(self, products_id, data={}):
+        query = ProductsSale.objects
+        if data['date_with'] and data['date_by']:
+            return query.filter(date_sale__gte=data['date_with']).filter(date_sale__lte=data['date_by']).filter(products_id=products_id)
+
 
 
 class ProductsSale(models.Model):

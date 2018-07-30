@@ -780,7 +780,7 @@ class SaleViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
             else:
                 self.object_list = self.get_queryset(form.cleaned_data)
                 context = self.get_context_data(object_list=self.object_list)
-                # context['data_form'] = form.cleaned_data
+                context['data_form'] = form.cleaned_data
                 context['form'] = form
                 return render(request, self.template_name, context)
         else:
