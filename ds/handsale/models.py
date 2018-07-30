@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 
 """-------------------- Model ProductSale--------------------------"""
 
+
 class ManagerProductSale(models.Manager):
 
     def return_sale(self, pk):
@@ -34,7 +35,6 @@ class ManagerProductSale(models.Manager):
         query = ProductsSale.objects
         if data['date_with'] and data['date_by']:
             return query.filter(date_sale__gte=data['date_with']).filter(date_sale__lte=data['date_by']).filter(products_id=products_id)
-
 
 
 class ProductsSale(models.Model):
