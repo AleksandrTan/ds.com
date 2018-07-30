@@ -14,7 +14,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Статистика продаж товара {{ product_data.articul }}
+                                <i class="fa fa-table"></i> Статистика продаж товара <a href="{% url 'viewproduct' product_data.id %}">{{ product_data.articul }}</a>
                             </li>
                         </ol>
                     </div>
