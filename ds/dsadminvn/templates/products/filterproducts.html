@@ -180,7 +180,7 @@
             </div>
     </div>
     <!--Pagination-->
-    {% if is_paginated %}
+{% if is_paginated %}
     <ul class="pagination">
     {% if page_obj.has_previous %}
       <li><a href="/adminnv/products/filterproduct/page/{{ page_obj.previous_page_number }}/?{{ request_get }}">&laquo;</a></li>

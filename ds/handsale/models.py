@@ -24,6 +24,11 @@ class ManagerProductSale(models.Manager):
         psale.count_num = 0
         psale.save()
 
+    def get_list_data(self):
+        try:
+            return ProductsSale.objects.all()
+        except ProductsSale.DoesNotExist:
+            return False
 
 
 class ProductsSale(models.Model):
@@ -46,6 +51,7 @@ class ProductsSale(models.Model):
     date_return = models.DateField(blank=False)
     description = models.CharField(default='', blank=True, max_length=2000)
     objects = ManagerProductSale()
+
 
 class ProductsSellForm(ModelForm):
 

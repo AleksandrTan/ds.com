@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import CreateView
 from django.views.generic.base import RedirectView
+from django.views.generic.list import ListView
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from dsadminvn.mainviews.views import BaseAdminView
@@ -95,3 +96,21 @@ class ReturnSale(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Red
     def get(self, request, *args, **kwargs):
         ProductsSale.objects.return_sale(kwargs['plase_pk'])
         return super(ReturnSale, self).get(request, *args, **kwargs)
+
+
+class SaleViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    template_name = 'products/saleviewproduct.html'
+    context_object_name = 'sale_list'
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super(SaleViewProduct, self).get_context_data(**kwargs)
+        context['product_data'] = Products.objects.get_single_product(self.kwargs['pk'])
+        context['tab_products'] = True
+
+        return context
+
+    def get_queryset(self):
+        return ProductsSale.objects.get_list_data()

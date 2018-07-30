@@ -14,7 +14,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Статистика продаж товара
+                                <i class="fa fa-table"></i> Статистика продаж товара {{ product_data.articul }}
                             </li>
                         </ol>
                     </div>
@@ -61,7 +61,7 @@
                                           </tr>
                                     </thead>
                                     <tbody>
-                                    {% for data in product_data.psale.all %}
+                                    {% for data in sale_list %}
                                         <tr>
                                             <td class="text-center">{{ data.size }}</td>
                                             <td class="text-center">{{ data.count_num }}</td>
@@ -99,6 +99,8 @@
 
                                             </td>
                                         </tr>
+                                    {% empty %}
+                                        <p style="color: red;">Нет данных для отображения.</p>
                                     {% endfor %}
                                     </tbody>
                                 </table>
@@ -110,4 +112,25 @@
                 </div>
             </div>
     </div>
+{% if is_paginated %}
+    <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="/adminnv/products/saleviewproduct/{{ product_data.id }}/page/{{ page_obj.previous_page_number }}/">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="/adminnv/products/saleviewproduct/{{ product_data.id }}/page/{{ i }}/">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="/adminnv/products/saleviewproduct/{{ product_data.id }}/page/{{ page_obj.next_page_number }}/">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+    </ul>
+{% endif %}
 {% endblock %}
