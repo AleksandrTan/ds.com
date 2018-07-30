@@ -2,7 +2,6 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import CreateView
 from django.views.generic.base import RedirectView
-from django.views.generic.list import ListView
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from dsadminvn.mainviews.views import BaseAdminView
