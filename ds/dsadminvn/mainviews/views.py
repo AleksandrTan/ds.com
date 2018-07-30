@@ -23,8 +23,8 @@ from django.contrib.auth.models import User
 from dsstore.models import (MainCategory, NameProduct, SizeTable,
                             SizeTableForm, Brends, Seasons, Products,
                             ProductsForm, ProductsFormEdit, Image, SizeCount)
-
-from dsadminvn.forms import FoundArticuls, FilterProducts
+from handsale.models import ProductsSale
+from dsadminvn.forms import FoundArticuls, FilterProducts, FilterSaleProduct
 
 
 class BaseAdminView(View):
@@ -747,3 +747,45 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
 
     def get_queryset(self, data):
         return Products.objects.filter_products(data)
+
+
+class SaleViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    template_name = 'products/saleviewproduct.html'
+    context_object_name = 'sale_list'
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super(SaleViewProduct, self).get_context_data(**kwargs)
+        context['product_data'] = Products.objects.get_single_product(self.kwargs['pk'])
+        context['tab_products'] = True
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        """
+        If submit search form, add more options
+        """
+        if request.GET.getlist('submit'):
+            form = FilterSaleProduct(request.GET)
+            if form.is_valid():
+                self.object_list = self.get_queryset(form.cleaned_data)
+                context = self.get_context_data(object_list=self.object_list)
+                context['data_form'] = form.cleaned_data
+                copy_get = QueryDict(request.GET.copy().urlencode(), mutable=True)
+                copy_get['submit'] = 0
+                context['request_get'] = copy_get.urlencode()
+                return render(request, self.template_name, context)
+            else:
+                self.object_list = self.get_queryset(form.cleaned_data)
+                context = self.get_context_data(object_list=self.object_list)
+                context['form'] = form
+                return render(request, self.template_name, context)
+        else:
+            self.object_list = self.get_queryset()
+            return render(request, self.template_name, self.get_context_data())
+
+    def get_queryset(self, data={}):
+        return ProductsSale.objects.get_list_data(self.kwargs['pk'], data)
+

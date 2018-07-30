@@ -40,21 +40,21 @@
                     </div>
                     <div class="col-lg-12">
                     {% if product_data %}
-                           <h3>Продажи</h3>
+                           <h3>Продажи Товара {{ product_data.articul }}</h3>
 
                         <label>Поиск по Дате</label>
-                            <form class="form form-offer" method="get" name="filter_product" action="{% url 'filterproduct' %}"
+                            <form class="form form-offer" method="get" name="filter_product" action="{% url 'saleproductview' product_data.id %}"
                                   id="filter_product" >{% csrf_token %}
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>С </label>
-                                    <input class="form-control" name="date_with" id="date_with" type="text">
+                                    <input class="form-control" name="date_with" id="date_with" type="text" placeholder="Дата С">
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>ПО  </label>
-                                    <input class="form-control" name="date_by" id="date_by" type="text">
+                                    <input class="form-control" name="date_by" id="date_by" type="text" placeholder="Дата ПО">
                                 </div>
                             </div>
                             <div class="col-lg-12">
