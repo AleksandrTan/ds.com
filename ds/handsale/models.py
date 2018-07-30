@@ -24,9 +24,9 @@ class ManagerProductSale(models.Manager):
         psale.count_num = 0
         psale.save()
 
-    def get_list_data(self):
+    def get_list_data(self, products_id):
         try:
-            return ProductsSale.objects.all()
+            return ProductsSale.objects.filter(products_id=products_id)
         except ProductsSale.DoesNotExist:
             return False
 

@@ -113,4 +113,4 @@ class SaleViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
         return context
 
     def get_queryset(self):
-        return ProductsSale.objects.get_list_data()
+        return ProductsSale.objects.get_list_data(self.kwargs['pk'])
