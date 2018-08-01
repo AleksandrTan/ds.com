@@ -58,14 +58,14 @@ class ProductsSale(models.Model):
     description = models.CharField(default='', blank=True, max_length=2000)
     objects = ManagerProductSale()
 
-
-class ProductsSellForm(ModelForm):
-
     def get_absolute_url(self):
         return "products/%s" % self.link_name
 
     def __str__(self):
         return self.link_name
+
+
+class ProductsSellForm(ModelForm):
 
     class Meta:
         model = ProductsSale

@@ -2,7 +2,7 @@ import os
 import shutil
 
 from django.conf import settings
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import View
@@ -11,9 +11,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import JsonResponse
-from django.core.urlresolvers import reverse_lazy
-from django.core.urlresolvers import reverse
-from django.shortcuts import render
+from django.core.urlresolvers import reverse_lazy, reverse
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
@@ -25,6 +23,7 @@ from dsstore.models import (MainCategory, NameProduct, SizeTable,
                             ProductsForm, ProductsFormEdit, Image, SizeCount)
 from handsale.models import ProductsSale
 from dsadminvn.forms import FoundArticuls, FilterProducts, FilterSaleProduct
+import dsadminvn.mainhelpers.SetBarcode as SB
 
 
 class BaseAdminView(View):
@@ -446,16 +445,15 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         return context
 
     def form_valid(self, form):
-        import dsadminvn.mainhelpers.SetBarcode as SB
         instance = form.save(commit=False)
         instance.identifier = self.uuid_sentece()
         instance.dirname_img = self.uuid_sentece_user()
-        instance.link_name = self.slugify(form.cleaned_data['caption']) + '-' + instance.identifier + '#' + form.cleaned_data['articul']
+        instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['articul']
         genbarcode = SB.SetBarcode(form.cleaned_data['pre_barcode'])
         instance.barcode = genbarcode.generate_barcode()
         instance.save()
 
-        self.save_oter_files(instance, form)
+        self.save_other_files(instance, form)
         self.saved_sizes_count(instance)
         return super(CreateNewProduct, self).form_valid(form)
 
@@ -487,7 +485,7 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         import uuid
         return str(uuid.uuid4())[:10]
 
-    def save_oter_files(self, instance, form):
+    def save_other_files(self, instance, form):
         if not os.path.isdir(settings.TEST_MEDIA_IMAGES + instance.dirname_img) and self.request.FILES.getlist('other_img[]'):
             os.mkdir(settings.TEST_MEDIA_IMAGES + instance.dirname_img, mode=0o777)
         # https://docs.djangoproject.com/ja/1.11/_modules/django/utils/datastructures/ - look for MultiValueDict(getlist)
@@ -559,7 +557,7 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
             instance.main_photo_path = 'nophoto.png'
         if int(self.request.POST['is_del_other_photo']) == 1:
             self.delete_related_photo(instance, self.request.POST['list_del_other_photo'])
-        instance.link_name = self.slugify(form.cleaned_data['caption']) + '-' + instance.identifier + '#' + form.cleaned_data['articul']
+        instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['articul']
         instance.save()
         self.save_oter_files(instance, form)
         self.saved_sizes_count(instance)

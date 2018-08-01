@@ -59,7 +59,7 @@
                     <input type="hidden" value="1" id="count_sizes_add"/>
                     <div class="col-lg-6">
                         <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
-                            <label style="color: red;">Артикул</label><span style="color: red;">*</span>
+                            <label style="color: red;">Артикул(6 символов)</label><span style="color: red;">*</span>
                             <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" value="{{ data.articul }}"
                                    maxlength="6" required>
                             {% if form.errors.articul %}<label id="articul-error" class="error" for="articul">{{ form.errors.articul.0 }}</label>{% endif %}
@@ -67,7 +67,7 @@
                         </div>
                         <div class="form-group {% if form.errors.pre_barcode %}has-error{% endif %}">
                             <label style="color: red;">Штрих-код(5 цифр)</label><span style="color: red;">*</span>
-                            <input class="form-control" placeholder="Штрих-код" id="pre_barcode" name="pre_barcode" type="number"
+                            <input class="form-control" placeholder="Штрих-код" id="pre_barcode" name="pre_barcode" type="text"
                                    value="{{ data.pre_barcode }}" maxlength="5" required >
                             {% if form.errors.pre_barcode %}<label id="pre_barcode-error" class="error" for="pre_barcode">{{ form.errors.pre_barcode.0 }}</label>{% endif %}
                             {% if form.non_field_errors %}<label id="pre_barcode-error" class="error" for="pre_barcode">{{ form.non_field_errors }}</label>{% endif %}
