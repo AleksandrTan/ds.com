@@ -68,8 +68,8 @@
                                             <th class="text-center">Колличество</th>
                                             <th class="text-center">Цена</th>
                                             <th class="text-center">Скидка</th>
-                                            <th class="text-center">Цена со скидкой</th>
-                                            <th class="text-center">Общая сумма</th>
+                                            <th class="text-center">Уступили</th>
+                                            <th class="text-center">Итоговая цена</th>
                                             <th class="text-center">Место продажи</th>
                                             <th class="text-center">Дата продажи</th>
                                             <th class="text-center">Статус</th>
@@ -85,9 +85,9 @@
                                             <td class="text-center">{{ data.size }}</td>
                                             <td class="text-center">{{ data.count_num }}</td>
                                             <td class="text-center">{{ data.price }}</td>
+                                            <td class="text-center">{{ data.discount }}%</td>
                                             <td class="text-center">{{ data.lost_num }}</td>
                                             <td class="text-center">{{ data.true_price }}</td>
-                                            <td class="text-center">{{ data.total_amount }}</td>
                                             <td class="text-center">
                                                 {% if data.plase_sale  == 1%} Магазин {% else %} Интернет {% endif %}
                                             </td>

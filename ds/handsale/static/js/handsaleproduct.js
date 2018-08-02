@@ -27,7 +27,14 @@ $(document).ready(function () {
 //Set lost_num value
     $('#lost_num').on('click keyup', function () {
     	var start_price = $('#start_price').val();
-        $('#price_table').text(start_price - $(this).val());
+    	var price_discount_hidden = $('#price_discount_hidden').val();
+
+    	if (parseInt($('#discount').text()) > 0){
+            $('#price_discount').text(price_discount_hidden - $(this).val());
+		}
+		else {
+    		$('#price_table').text(start_price - $(this).val());
+		}
     });
 
 //Validations form
@@ -35,14 +42,24 @@ $(document).ready(function () {
 				rules: {
 					count_num: {
 						required: true,
-						maxlength: 30
+						maxlength: 30,
+                        min: 0
 					},
+                    lost_num: {
+						maxlength: 30,
+                        min: 0
+					}
 				},
 				messages: {
 					count_num: {
 						required: "Пожалуйста введите колличество",
-						maxlength: "Не более 30 символов"
+						maxlength: "Не более 30 символов",
+                        min: "Больше 0!!!"
 					},
+                    lost_num: {
+						maxlength: "Не более 30 символов",
+                        min: "Больше 0!!!"
+					}
 				},
                 errorClass: "alert-danger",
 				highlight: function ( element, errorClass, validClass ) {

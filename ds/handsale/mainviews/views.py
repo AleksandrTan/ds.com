@@ -29,6 +29,8 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
     def get(self, request, **kwargs):
         self.object = self.get_queryset(kwargs['pk'])
         context = self.get_context_data()
+        context['price_discount'] = self.object.price if self.object.discount == 0 else \
+            self.object.price - ((self.object.price * self.object.discount)/ 100)
         context['action'] = reverse('sellproduct',
                                     kwargs={'pk': kwargs['pk']})
 
@@ -55,11 +57,18 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
         instance.articul = product.articul
         instance.size = SizeCount.objects.get_single_size(forma.cleaned_data['size'])
         instance.products = product
-        if forma.cleaned_data['lost_num']:
+        if forma.cleaned_data['lost_num'] and product.discount:
+            instance.lost_num = forma.cleaned_data['lost_num']
+            instance.true_price = (product.price - ((product.price * product.discount) / 100)) - forma.cleaned_data['lost_num']
+        elif forma.cleaned_data['lost_num'] and not product.discount:
+            instance.lost_num = forma.cleaned_data['lost_num']
             instance.true_price = forma.cleaned_data['price'] - forma.cleaned_data['lost_num']
+        elif not forma.cleaned_data['lost_num'] and product.discount:
+            instance.true_price = product.price - ((product.price * product.discount) / 100)
         else:
             instance.true_price = forma.cleaned_data['price']
         instance.total_amount = instance.true_price
+        instance.discount = product.discount
         instance.save()
         # reduce the amount of product
         SizeCount.objects.get_single_size(forma.cleaned_data['size'], 1)

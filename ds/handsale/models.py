@@ -47,6 +47,7 @@ class ProductsSale(models.Model):
     total_amount = models.FloatField(blank=False, default=0.0)
     lost_num = models.FloatField(blank=True, default=0.0)
     plase_sale = models.SmallIntegerField(blank=False, default=1)
+    discount = models.SmallIntegerField(blank=True, default=0)
     date_sale = models.DateField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='productssale', null=True, blank=True)
     link_name = models.CharField(max_length=550)

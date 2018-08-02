@@ -132,12 +132,13 @@
                                         <th class="text-center">Категория</th>
                                         <th class="text-center">Название</th>
                                         <th class="text-center">Цена</th>
+                                        <th class="text-center">Скидка</th>
                                         <th class="text-center">Активен</th>
                                         <th class="text-center">Добавлен</th>
                                         <th class="text-center">Просмотр</th>
                                         <th class="text-center">Редактировать</th>
                                         <th class="text-center">Продать</th>
-                                        <th class="text-center">Статистика</th>
+{#                                        <th class="text-center">Статистика</th>#}
                                         <th class="text-center">Удалить</th>
                                     </tr>
                                 </thead>
@@ -148,6 +149,7 @@
                                         <td class="text-center">{{ product_data.maincategory.name }}</td>
                                         <td class="text-center">{{ product_data.nameproduct.name }}</td>
                                         <td class="text-center">{{ product_data.price }}</td>
+                                        <td class="text-center">{{ product_data.discount }}%</td>
                                         {% if product_data.is_active %}
                                             <td class="text-center"> ДА </td>
                                         {% else %}
@@ -185,10 +187,10 @@
                                             </a>
                                             {% endif %}
                                         </td>
-                                        <td class="text-center"><a type="button"
-                                                                   class="btn btn-sm btn-success"
-                                                                   href="{% url 'saleproductview' product_data.id %}">Статистика</a>
-                                        </td>
+{#                                        <td class="text-center"><a type="button"#}
+{#                                                                   class="btn btn-sm btn-success"#}
+{#                                                                   href="{% url 'saleproductview' product_data.id %}">Статистика</a>#}
+{#                                        </td>#}
                                         <td class="text-center"><a type="button"
                                                                    class="btn btn-sm btn-danger"
                                                                    href="{% url 'deleteproduct' product_data.id %}">Удалить</a>
