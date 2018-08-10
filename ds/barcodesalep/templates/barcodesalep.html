@@ -1,6 +1,7 @@
 {% extends "main.html" %}
 {% load staticfiles %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
 <div class="btn-modal-wrap btn-modal-wrap-1">
     <!-- Modal Deleted -->
     <div class="modal fade" id="is_deleted_ctr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -129,6 +130,9 @@
                 <!-- /.row -->
             </div>
     </div>
+<div class="hellopreloader">
+    <div class="hellopreloader_preload" id="hellopreloader_preload"></div>
+</div>
 <script>
     var sizecount = {
     {% for size in product_data.sizecount.all %}

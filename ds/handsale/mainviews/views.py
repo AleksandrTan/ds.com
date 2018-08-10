@@ -30,7 +30,7 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
         self.object = self.get_queryset(kwargs['pk'])
         context = self.get_context_data()
         context['price_discount'] = self.object.price if self.object.discount == 0 else \
-            self.object.price - ((self.object.price * self.object.discount)/ 100)
+            self.object.price - ((self.object.price * self.object.discount) / 100)
         context['action'] = reverse('sellproduct',
                                     kwargs={'pk': kwargs['pk']})
 
