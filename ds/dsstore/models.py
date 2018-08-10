@@ -281,14 +281,14 @@ class ManageProductsModel(models.Manager):
         if len(barcode) < 13 and len(barcode) != 0:
             try:
                 data_product = Products.objects.only('id', 'articul', 'barcode', 'price', 'discount').filter(articul=barcode).get()
-                return {'status': True, 'data': data_product}
+                return {'status': True, 'data_product': data_product}
             except Products.DoesNotExist:
                 return {'status': False}
         # if get barcode
         elif len(barcode) == 13:
             try:
                 data_product = Products.objects.only('id', 'articul', 'barcode', 'price', 'discount').filter(barcode=barcode).get()
-                return {'status': True, 'data': data_product}
+                return {'status': True, 'data_product': data_product}
             except Products.DoesNotExist:
                 return {'status': False}
         else:
