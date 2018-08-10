@@ -276,6 +276,24 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
+    def get_product_barcode(self, barcode):
+        # if get articul
+        if len(barcode) < 13 and len(barcode) != 0:
+            try:
+                data_product = Products.objects.only('id', 'articul', 'barcode', 'price', 'discount').filter(articul=barcode).get()
+                return {'status': True, 'data': data_product}
+            except Products.DoesNotExist:
+                return {'status': False}
+        # if get barcode
+        elif len(barcode) == 13:
+            try:
+                data_product = Products.objects.only('id', 'articul', 'barcode', 'price', 'discount').filter(barcode=barcode).get()
+                return {'status': True, 'data': data_product}
+            except Products.DoesNotExist:
+                return {'status': False}
+        else:
+            return {'status': False}
+
 
 class Products(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)

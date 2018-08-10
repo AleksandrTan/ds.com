@@ -18,5 +18,8 @@ class GetSaleProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin)
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
-            product_result = Products.objects.check_isset_pre_barcode(kwargs['pre_barcode'])
-        return JsonResponse({"status": product_result})
+            product_result = Products.objects.get_product_barcode(kwargs['identifier'])
+            if product_result['status']:
+                return JsonResponse({"status": True})
+            else:
+                return JsonResponse({"status": False})
