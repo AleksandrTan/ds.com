@@ -20,6 +20,6 @@ class GetSaleProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin)
         if request.is_ajax():
             product_result = Products.objects.get_product_barcode(kwargs['identifier'])
             if product_result['status']:
-                return JsonResponse({"status": True, 'data_product': product_result['data_product'].id})
+                return JsonResponse({"status": True, 'data_product': product_result['data_product']})
             else:
                 return JsonResponse({"status": False})
