@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
 <div class="btn-modal-wrap btn-modal-wrap-1">
     <!-- Modal Deleted -->
-    <div class="modal fade" id="is_deleted_ctr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="alert_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -13,12 +13,8 @@
                     <h4 class="modal-title" id="myModalLabel" style="color: #ff0012">Внимание!!!</h4>
                 </div>
                  <div class="modal-body">
-                     <h3 style="color: #ff0012">Колличество продаваемого товара больше чем на складе!!!</h3>
+                     <h3 style="color: #ff0012" id="text_alert"></h3>
                 </div>
-{#                <div class="modal-footer">#}
-{#                    <button type="button" class="btn btn-xs btn-default" id="cancel_type">Cancel</button>#}
-{#                    <button type="button" class="btn btn-xs btn-danger" id="delete_type" data_id_type="">Deleted</button>#}
-{#                </div>#}
             </div>
         </div>
     </div>
@@ -79,6 +75,8 @@
                                         <th class="text-center">Название</th>
                                         <th class="text-center">Цена</th>
                                         <th class="text-center">Скидка</th>
+                                        <th class="text-center">Цена со скидкой</th>
+                                        <th class="text-center">Уступить</th>
                                         <th class="text-center">Размер</th>
                                         <th class="text-center">На складе</th>
                                         <th class="text-center">Колличество<span style="color: red;">*</span></th>
@@ -135,9 +133,7 @@
 </div>
 <script>
     var sizecount = {
-    {% for size in product_data.sizecount.all %}
-        '{{ size.id }}':{{ size.count_num }},
-    {% endfor %}
+
     };
 
 </script>

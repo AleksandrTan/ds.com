@@ -13,6 +13,10 @@ function FoundBarcode(e){
     this.e = e;
     this.barcode = $('#barcode_articul').val();
     this.preloader = $('#hellopreloader_preload');
+    this.alertinfo = $('#alert_info');
+    this.alertinfotext = $('#text_alert');
+    this.parenttable = $('#products_list');
+
 
     this.init = function () {
         e.preventDefault();
@@ -28,13 +32,18 @@ function FoundBarcode(e){
        );
        function onAjaxSuccess(data) {
            if(data.status){
-               thet.preloader.css({'display':'none', 'opacity': '0.5'});
-           	   alert(2000);
+               thet.addRowProduct(data.data_product);
            }
            else {
+               thet.alertinfotext.text('');
                thet.preloader.css({'display':'none', 'opacity': '0.5'});
-               alert(1000);
+               thet.alertinfotext.text('Произошла ошибка, попробуйте еще раз!!!');
+               thet.alertinfo.modal();
            }
        }
+    }
+
+    this.addRowProduct = function () {
+
     }
 }
