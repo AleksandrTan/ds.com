@@ -316,6 +316,9 @@ class Products(models.Model):
     price = models.FloatField(blank=True, default=0.0)
     wholesale_price = models.FloatField(blank=True, default=0)
     purshase_price = models.FloatField(blank=True, default=0)
+    modelss = models.CharField(blank=True, default='', max_length=50)
+    size = models.SmallIntegerField(blank=True, default=0)
+    count_num = models.SmallIntegerField(blank=True, default=0)
     # main_photo_path = models.ImageField(blank=True, upload_to='images/')
     main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
                                           content_types=['image/jpg', 'image/png', 'image/jpeg'],
@@ -357,7 +360,7 @@ class ProductsForm(ModelForm):
     class Meta:
         model = Products
         fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
-                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'pre_barcode']
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'pre_barcode', 'modelss', 'size', 'count_num']
 
         error_messages = {
                              'articul': {'required': "Пожалуйста введите артикул",
@@ -402,7 +405,7 @@ class ProductsFormEdit(ModelForm):
         model = Products
         fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
                   'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'discount', 'price_down',
-                  'sale_price', 'pre_barcode']
+                  'sale_price', 'pre_barcode', 'modelss', 'size', 'count_num']
 
         error_messages = {
                              'articul': {'required': "Пожалуйста введите артикул",

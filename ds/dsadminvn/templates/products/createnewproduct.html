@@ -72,6 +72,13 @@
                             {% if form.errors.pre_barcode %}<label id="pre_barcode-error" class="error" for="pre_barcode">{{ form.errors.pre_barcode.0 }}</label>{% endif %}
                             {% if form.non_field_errors %}<label id="pre_barcode-error" class="error" for="pre_barcode">{{ form.non_field_errors }}</label>{% endif %}
                         </div>
+                        <div class="form-group {% if form.errors.modelss %}has-error{% endif %}">
+                            <label>Модель</label>
+                            <input class="form-control" placeholder="Модель" id="modelss" name="modelss" type="text"
+                                   value="{{ data.modelss }}" maxlength="50">
+                            {% if form.errors.modelss %}<label id="modelss-error" class="error" for="modelss">{{ form.errors.modelss.0 }}</label>{% endif %}
+                            {% if form.non_field_errors %}<label id="modelss-error" class="error" for="modelss">{{ form.non_field_errors }}</label>{% endif %}
+                        </div>
                         <div class="form-group ">
                             <label>Категория</label>
                                 <select class="form-control" name="maincategory" id="maincategory">
@@ -170,14 +177,14 @@
                                     <tr>
                                         <th>Размер</th>
                                         <th>Колличество</th>
-                                        <th>Удалить</th>
+{#                                        <th>Удалить</th>#}
                                     </tr>
                                 </thead>
                                 <tbody id="height_size_id">
                                     <tr>
                                         <td>
                                             <div class="form-group">
-                                                <select class="form-control" name="height[]">
+                                                <select class="form-control" name="size">
                                                     {% for height_list in maincategorys.0.sizetable_set.all %}
                                                         <option name="{{ height_list.height }}" value="{{ height_list.height }}">{{ height_list.height }}</option>
                                                     {% endfor %}
@@ -187,21 +194,12 @@
                                         <td>
                                             <div class="form-group">
                                                <input class="form-control"
-                                                      placeholder="Колличество" name="count_height[]" value="0" maxlength="5" type="number">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-group">
-                                                <button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить Размер</button>
+                                                      placeholder="Колличество" name="count_num" value="" maxlength="5" type="number">
                                             </div>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="form-group">
-                            <label>Добавить Размер</label>
-                            <button type="button" class="btn btn-sm btn-success form-control" id="add_size_fields">Добавить Размер</button>
                         </div>
                     {% else %}
                         <span style="color: red;">Нет размеров для данной категории </span>

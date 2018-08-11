@@ -454,7 +454,6 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         instance.save()
 
         self.save_other_files(instance, form)
-        self.saved_sizes_count(instance)
         return super(CreateNewProduct, self).form_valid(form)
 
     def form_invalid(self, form):
@@ -502,14 +501,6 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
                     # messages.info(self.request, 'Three credits remain in your account.')
                     continue
         return True
-
-    def saved_sizes_count(self, instance):
-        # map(lambda x: x.save(),
-        #     [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list])
-        data_list = zip(self.request.POST.getlist('height[]'), self.request.POST.getlist('count_height[]'))
-        d = [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list]
-        for sizes in d:
-            sizes.save()
 
 
 class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):

@@ -36,9 +36,8 @@ $(document).ready(function () {
                     optionsElement = optionsElement + '<option name="'+data[i].height+'" value="'+data[i].height+'">'+data[i].height+'</option>';
                 }
 
-                var new_size = '<tr><td><div class="form-group"><select class="form-control" name="height[]">'+optionsElement+'</select></div></td><td><div class="form-group">' +
-                    '<input class="form-control" placeholder="Колличество" name="count_height[]" value="0"></div></td><td><div class="form-group">'+
-                    '<button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить Размер</button></div></td></tr>';
+                var new_size = '<tr><td><div class="form-group"><select class="form-control" name="size">'+optionsElement+'</select></div></td><td><div class="form-group">' +
+                    '<input class="form-control" placeholder="Колличество" name="count_num" value="0"></div></td></tr>';
 
                 parentElementTable.append(new_size);
                 $('#count_sizes').val(data.length);
@@ -47,23 +46,6 @@ $(document).ready(function () {
         }
     });
 
-//Add sizes fields
-    $('#add_size_fields').click(function () {
-    	if ($('#count_sizes').val() <=  $('#count_sizes_add').val()){
-    	    return false;
-        }
-        $('#height_size_id tr:last-child').clone(true).appendTo($('#height_size_id'));
-    	$('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) + 1);
-
-    });
-//Remove size field
-    $('#height_size_id').on('click', '[data-deletes=delete_size]', function () {
-        if ($('#height_size_id').children('tr').length == 1){
-            return false;
-        }
-        $(this).parents('tr').remove();
-        $('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) - 1);
-    });
 
 //Check isset articul
 $('#articul').blur(function () {
