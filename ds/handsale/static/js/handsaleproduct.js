@@ -4,19 +4,19 @@ $(document).ready(function () {
         $('#sell_product_div').hide();
     }
 
-//Set count num in stock
-    $('#size' ).change(function () {
-    	$('#in_stock').text(sizecount[$(this).val()]);
-    	$('#count_num').val('');
-    	if (sizecount[$(this).val()] == 0){
-    	    $('#count_num').hide();
-    	    $('#sale_but').hide();
-        }
-        else {
-    	    $('#count_num').show();
-    	    $('#sale_but').show();
-        }
-    });
+// //Set count num in stock
+//     $('#size' ).change(function () {
+//     	$('#in_stock').text(sizecount[$(this).val()]);
+//     	$('#count_num').val('');
+//     	if (sizecount[$(this).val()] == 0){
+//     	    $('#count_num').hide();
+//     	    $('#sale_but').hide();
+//         }
+//         else {
+//     	    $('#count_num').show();
+//     	    $('#sale_but').show();
+//         }
+//     });
 //Set count_num value
     $('#count_num').on('click keyup', function () {
        if (parseInt($(this).val()) > parseInt($('#in_stock').text())){

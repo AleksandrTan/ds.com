@@ -320,6 +320,26 @@ class ManageProductsModel(models.Manager):
         else:
             return {'status': False}
 
+    def reduce_amount(self, pk, count_num=0):
+        try:
+            size = Products.objects.only("size").get(id=pk)
+            # reduce the amount of goods for a size
+            size.count_num = size.count_num - count_num
+            size.save()
+            return size.size
+        except Products.DoesNotExist:
+            return False
+
+    def return_amount(self, pk):
+        try:
+            size = Products.objects.only("size").get(id=pk)
+            # reduce the amount of goods for a size
+            size.count_num = size.count_num + 1
+            size.save()
+            return size.size
+        except Products.DoesNotExist:
+            return False
+
 
 class Products(models.Model):
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)

@@ -551,7 +551,6 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['articul']
         instance.save()
         self.save_oter_files(instance, form)
-        self.saved_sizes_count(instance)
 
         return super(EditProduct, self).form_valid(form)
 
@@ -599,15 +598,15 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
                     continue
         return True
 
-    def saved_sizes_count(self, instance):
-        # map(lambda x: x.save(),
-        #     [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list])
-        data_list = zip(self.request.POST.getlist('height[]'), self.request.POST.getlist('count_height[]'))
-        edit_data = [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list]
-        #update sizecount data(poducts_id set null in table field) inserted new data
-        instance.sizecount.set(edit_data, clear=True, bulk=False)
-        #delete old data
-        SizeCount.objects.filter(products_id=None).delete()
+    # def saved_sizes_count(self, instance):
+    #     # map(lambda x: x.save(),
+    #     #     [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list])
+    #     data_list = zip(self.request.POST.getlist('height[]'), self.request.POST.getlist('count_height[]'))
+    #     edit_data = [SizeCount(products=instance, size=sizes[0], count_num=sizes[1]) for sizes in data_list]
+    #     #update sizecount data(poducts_id set null in table field) inserted new data
+    #     instance.sizecount.set(edit_data, clear=True, bulk=False)
+    #     #delete old data
+    #     SizeCount.objects.filter(products_id=None).delete()
 
     def delete_related_photo(self, instance, file_list):
         import json

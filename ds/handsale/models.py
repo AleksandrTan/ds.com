@@ -12,7 +12,7 @@ from django.core.exceptions import ValidationError
 
 class ManagerProductSale(models.Manager):
 
-    def return_sale(self, pk):
+    def return_sale(self, pk, pk_product):
         psale = ProductsSale.objects.filter(id=pk).get()
         psale.is_return = True
         psale.date_return = datetime.now()
@@ -21,9 +21,9 @@ class ManagerProductSale(models.Manager):
         psale.price = 0
         psale.true_price = 0
         psale.lost_num = 0
-        SizeCount.objects.return_product(psale.products_id, psale.size, psale.count_num)
         psale.count_num = 0
         psale.save()
+        Products.objects.return_amount(pk_product)
 
     def get_list_data(self, products_id, data={}):
         if data:
@@ -80,7 +80,7 @@ class ProductsSellForm(ModelForm):
     def clean(self):
         # check the quantity of goods sold and availability in stock
         cleaned_data = self.cleaned_data
-        sizecount = SizeCount.objects.get_single_sizecount(cleaned_data['size'])
-        if cleaned_data.get("count_num") and cleaned_data.get("count_num") > sizecount.count_num:
+        product = Products.objects.get_single_product(cleaned_data['products'].id)
+        if cleaned_data.get("count_num") and cleaned_data.get("count_num") > product.count_num:
             raise ValidationError('Колличество продаваемого товара больше чем на складе!!!', code='invalid')
         return self.cleaned_data

@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from dsadminvn.mainviews.views import BaseAdminView
 
-from dsstore.models import Products, SizeCount
+from dsstore.models import Products
 from handsale.models import ProductsSale, ProductsSellForm
 
 
@@ -55,7 +55,7 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
         instance.link_name = ''
         product = Products.objects.get_single_product(self.kwargs['pk'])
         instance.articul = product.articul
-        instance.size = SizeCount.objects.get_single_size(forma.cleaned_data['size'])
+        instance.size = product.size
         instance.products = product
         if forma.cleaned_data['lost_num'] and product.discount:
             instance.lost_num = forma.cleaned_data['lost_num']
@@ -71,7 +71,7 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
         instance.discount = product.discount
         instance.save()
         # reduce the amount of product
-        SizeCount.objects.get_single_size(forma.cleaned_data['size'], 1)
+        Products.objects.reduce_amount(product.id, 1)
 
     def form_invalid(self, form):
         self.object = form.cleaned_data['products']
@@ -102,5 +102,5 @@ class ReturnSale(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Red
             return None
 
     def get(self, request, *args, **kwargs):
-        ProductsSale.objects.return_sale(kwargs['plase_pk'])
+        ProductsSale.objects.return_sale(kwargs['plase_pk'], kwargs['pk'])
         return super(ReturnSale, self).get(request, *args, **kwargs)
