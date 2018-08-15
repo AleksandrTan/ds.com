@@ -680,14 +680,14 @@ class CheckIssetPreBarcode(BaseAdminView, LoginRequiredMixin, PermissionRequired
         return JsonResponse({"status": product_result})
 
 
-class CheckIssetModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
-    permission_required = "auth.change_user"
-    login_url = 'login'
-
-    def get(self, request, *args, **kwargs):
-        if request.is_ajax():
-            product_result = Products.objects.check_isset_modelss(kwargs['modelss'])
-        return JsonResponse({"status": product_result})
+# class CheckIssetModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
+#     permission_required = "auth.change_user"
+#     login_url = 'login'
+#
+#     def get(self, request, *args, **kwargs):
+#         if request.is_ajax():
+#             product_result = Products.objects.check_isset_modelss(kwargs['modelss'])
+#         return JsonResponse({"status": product_result})
 
 
 class FoundArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
@@ -711,18 +711,18 @@ class FoundArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, T
 class FoundsModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
     permission_required = "auth.change_user"
     login_url = 'login'
-    template_name = 'products/detailview.html'
+    template_name = 'products/detailmodelss.html'
 
     def post(self, request):
         form = FoundModelss(request.POST)
         if form.is_valid():
             modelss = form.cleaned_data['modelss']
-            args = {'tab_products':True,
-                    'product_data':Products.objects.found_modelss(modelss)}
+            args = {'tab_products': True,
+                    'products': Products.objects.found_modelss(modelss)}
             return render(request, self.template_name, args)
         else:
             args = {'tab_products': True,
-                    'product_data': False}
+                    'products': False}
             return render(request, self.template_name, args)
 
 

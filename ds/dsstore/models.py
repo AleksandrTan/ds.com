@@ -271,7 +271,7 @@ class ManageProductsModel(models.Manager):
 
     def found_modelss(self, modelss):
         try:
-            return Products.objects.get(modelss=modelss)
+            return Products.objects.filter(modelss=modelss).all()
         except Products.DoesNotExist:
             return False
 

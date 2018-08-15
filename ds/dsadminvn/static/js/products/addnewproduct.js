@@ -87,23 +87,23 @@ $('#pre_barcode').blur(function () {
 
 });
 
-//Check isset modelss
-$('#modelss').blur(function () {
-    if ($(this).val() != ''){
-       $.get(
-        "/adminnv/products/checkmodelss/"+$(this).val()+"/",
-        onAjaxSuccess
-       );
-       function onAjaxSuccess(data) {
-           if(data.status){
-           	   $('#modelss').val('');
-               $('#modal_content').text('').text('Введенная модель уже существует!Выберите другую');
-               $('#modal_alarm').modal();
-           }
-       }
-   }
-
-});
+// //Check isset modelss
+// $('#modelss').blur(function () {
+//     if ($(this).val() != ''){
+//        $.get(
+//         "/adminnv/products/checkmodelss/"+$(this).val()+"/",
+//         onAjaxSuccess
+//        );
+//        function onAjaxSuccess(data) {
+//            if(data.status){
+//            	   $('#modelss').val('');
+//                $('#modal_content').text('').text('Введенная модель уже существует!Выберите другую');
+//                $('#modal_alarm').modal();
+//            }
+//        }
+//    }
+//
+// });
 
 //Show count entered simbols for input tags
     $("input").keyup(function() {
