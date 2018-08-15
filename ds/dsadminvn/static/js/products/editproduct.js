@@ -19,53 +19,53 @@ $.validator.setDefaults( {
 		} );
 $(document).ready(function () {
 //Change sizes for select maincategory
-    $('#maincategory' ).change(function () {
-    	$.get(
-              "/adminnv/sizetable/ajax/getsizes/"+$(this).val()+"/",
-              onAjaxSuccess
-            );
-    	var parentElementTable = $('#height_size_id');
-        function onAjaxSuccess(data)
-        {
-            if (data.length == 0){
-                parentElementTable.empty();
-                var trElem = '<tr><td style="color: red;">Нет размеров для отображения!</td></tr>';
-                parentElementTable.append(trElem);
-            }
-            else {
-                parentElementTable.empty();
-                var optionsElement = '';
+//     $('#maincategory' ).change(function () {
+//     	$.get(
+//               "/adminnv/sizetable/ajax/getsizes/"+$(this).val()+"/",
+//               onAjaxSuccess
+//             );
+//     	var parentElementTable = $('#height_size_id');
+//         function onAjaxSuccess(data)
+//         {
+//             if (data.length == 0){
+//                 parentElementTable.empty();
+//                 var trElem = '<tr><td style="color: red;">Нет размеров для отображения!</td></tr>';
+//                 parentElementTable.append(trElem);
+//             }
+//             else {
+//                 parentElementTable.empty();
+//                 var optionsElement = '';
+//
+//                 for(var i = 0; i <= data.length - 1; i++){
+//                     optionsElement = optionsElement + '<option name="'+data[i].height+'" value="'+data[i].height+'">'+data[i].height+'</option>';
+//                 }
+//
+//                 var new_size = '<tr><td><div class="form-group"><select class="form-control" name="height[]">'+optionsElement+'</select></div></td><td><div class="form-group">' +
+//                     '<input class="form-control" placeholder="Колличество" name="count_height[]" value="1"></div></td><td><div class="form-group">'+
+//                     '<button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить Размер</button></div></td></tr>';
+//
+//                 parentElementTable.append(new_size);
+//             }
+//         }
+//     });
 
-                for(var i = 0; i <= data.length - 1; i++){
-                    optionsElement = optionsElement + '<option name="'+data[i].height+'" value="'+data[i].height+'">'+data[i].height+'</option>';
-                }
-
-                var new_size = '<tr><td><div class="form-group"><select class="form-control" name="height[]">'+optionsElement+'</select></div></td><td><div class="form-group">' +
-                    '<input class="form-control" placeholder="Колличество" name="count_height[]" value="1"></div></td><td><div class="form-group">'+
-                    '<button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить Размер</button></div></td></tr>';
-
-                parentElementTable.append(new_size);
-            }
-        }
-    });
-
-//Add sizes fields
-    $('#add_size_fields').click(function () {
-        if ($('#count_sizes').val() <=  $('#count_sizes_add').val()){
-    	    return false;
-        }
-        $('#height_size_id tr:last-child').clone(true).appendTo($('#height_size_id'));
-    	$('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) + 1);
-
-    });
-//Remove size field
-    $('#height_size_id').on('click', '[data-deletes=delete_size]', function () {
-        if ($('#height_size_id').children('tr').length == 1){
-            return false;
-        }
-        $(this).parents('tr').remove();
-        $('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) - 1);
-    });
+// //Add sizes fields
+//     $('#add_size_fields').click(function () {
+//         if ($('#count_sizes').val() <=  $('#count_sizes_add').val()){
+//     	    return false;
+//         }
+//         $('#height_size_id tr:last-child').clone(true).appendTo($('#height_size_id'));
+//     	$('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) + 1);
+//
+//     });
+// //Remove size field
+//     $('#height_size_id').on('click', '[data-deletes=delete_size]', function () {
+//         if ($('#height_size_id').children('tr').length == 1){
+//             return false;
+//         }
+//         $(this).parents('tr').remove();
+//         $('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) - 1);
+//     });
 
 //Check isset articul
 $('#articul').blur(function () {
@@ -145,7 +145,7 @@ $('#articul').blur(function () {
 						//required: true,
 						number: true,
 						maxlength: 10
-					},
+					}
 
 				},
 				messages: {
@@ -183,7 +183,7 @@ $('#articul').blur(function () {
 					sale_price: {
 						number: 'Должно быть числом!',
 						maxlength: "Не более 10 символов"
-					},
+					}
 				},
                 errorClass: "alert-danger",
 				highlight: function ( element, errorClass, validClass ) {

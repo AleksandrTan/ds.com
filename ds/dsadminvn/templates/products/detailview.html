@@ -44,6 +44,7 @@
                                 <table class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
+                                            <th class="text-center">Модель</th>
                                             <th class="text-center">Артикул</th>
                                             <th class="text-center">Категория</th>
                                             <th class="text-center">Название</th>
@@ -61,6 +62,7 @@
                                     <tbody id="mc_list">
 
                                         <tr>
+                                            <td class="text-center">{{ product_data.modelss }}</td>
                                             <td class="text-center">{{ product_data.articul }}</td>
                                             <td class="text-center">{{ product_data.maincategory.name }}</td>
                                             <td class="text-center">{{ product_data.nameproduct.name }}</td>
@@ -104,12 +106,10 @@
                                           </tr>
                                     </thead>
                                     <tbody>
-                                    {% for data in product_data.sizecount.all %}
                                         <tr>
-                                            <td class="text-center">{{ data.size }}</td>
-                                            <td class="text-center">{{ data.count_num }}</td>
+                                            <td class="text-center">{{ product_data.size }}</td>
+                                            <td class="text-center">{{ product_data.count_num }}</td>
                                         </tr>
-                                    {% endfor %}
                                     </tbody>
                                 </table>
                             </div>

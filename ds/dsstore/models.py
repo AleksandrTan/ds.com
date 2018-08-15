@@ -253,6 +253,16 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
+    def check_isset_modelss(self, modelss, flag_isset=False):
+        try:
+            product = Products.objects.get(modelss=modelss)
+            if flag_isset:
+                return product.pre_barcode
+            else:
+                return True
+        except Products.DoesNotExist:
+            return False
+
     def found_articul(self, articul):
         try:
             return Products.objects.get(articul=articul)

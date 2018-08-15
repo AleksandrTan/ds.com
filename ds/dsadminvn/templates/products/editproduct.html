@@ -75,7 +75,14 @@
                                     <input class="form-control" placeholder="Штрих-код"
                                            id="pre_barcode" name="pre_barcode" type="text"
                                            value="{{ data_product_edit.pre_barcode }}" maxlength="5" readonly>
-                                    {% if form.errors.articul %}<label id="articul-error" class="error" for="articul">{{ form.errors.articul.0 }}</label>{% endif %}
+                                    {% if form.errors.pre_barcode %}<label id="pre_barcode-error" class="error" for="pre_barcode">{{ form.errors.pre_barcode.0 }}</label>{% endif %}
+                                </div>
+                                <div class="form-group {% if form.errors.modelss %}has-error{% endif %}">
+                                    <label>Модель</label>
+                                    <input class="form-control" placeholder="Модель"
+                                           id="modelss" name="modelss" type="text"
+                                           value="{{ data_product_edit.modelss }}" maxlength="5" readonly>
+                                    {% if form.errors.modelss %}<label id="modelss-error" class="error" for="modelss">{{ form.errors.modelss.0 }}</label>{% endif %}
                                 </div>
                                 <div class="form-group ">
                                     <label>Категория</label>
@@ -198,46 +205,26 @@
                                             <tr>
                                                 <th>Размер</th>
                                                 <th>Колличество</th>
-                                                <th>Удалить</th>
                                             </tr>
                                         </thead>
                                         <tbody id="height_size_id">
-                                        {% with size_count=data_product_edit.sizecount.all mc=data_product_edit.maincategory.sizetable_set.all %}
-                                            {% for sc in size_count %}
-                                            <tr>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <select class="form-control" name="height[]">
-                                                            {% for height_list in mc %}
-                                                                <option name="{{ height_list.height }}" value="{{ height_list.height }}"
-                                                                        {% if height_list.height == sc.size %} selected {% endif %}>
-                                                                    {{ height_list.height }}
-                                                                </option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                       <input class="form-control"
-                                                              placeholder="Колличество" name="count_height[]" value="{{ sc.count_num }}" maxlength="5" type="number">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить Размер</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            {% endfor %}
-                                        {% endwith %}
-                                        </tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <input class="form-control" name="size" type="text" value="{{ data_product_edit.size }}" readonly>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                               <input class="form-control"
+                                                      placeholder="Колличество" name="count_num" value="{{ data_product_edit.count_num }}" maxlength="5" type="number">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
                                     </table>
                                 </div>
-                                <div class="form-group">
-                                    <label>Добавить Размер</label>
-                                    <button type="button" class="btn btn-sm btn-success form-control" id="add_size_fields">Добавить Размер</button>
-                                </div>
+
                             {% else %}
                                 <span style="color: red;">Нет размеров для данной категории </span>
                             {% endif %}

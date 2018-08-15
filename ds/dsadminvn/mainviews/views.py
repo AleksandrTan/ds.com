@@ -680,6 +680,16 @@ class CheckIssetPreBarcode(BaseAdminView, LoginRequiredMixin, PermissionRequired
         return JsonResponse({"status": product_result})
 
 
+class CheckIssetModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            product_result = Products.objects.check_isset_modelss(kwargs['modelss'])
+        return JsonResponse({"status": product_result})
+
+
 class FoundArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
     permission_required = "auth.change_user"
     login_url = 'login'
