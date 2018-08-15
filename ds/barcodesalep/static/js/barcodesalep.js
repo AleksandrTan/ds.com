@@ -37,13 +37,14 @@ function FoundBarcode(e){
            else {
                thet.alertinfotext.text('');
                thet.preloader.css({'display':'none', 'opacity': '0.5'});
-               thet.alertinfotext.text('Произошла ошибка, попробуйте еще раз!!!');
+               thet.alertinfotext.text('Произошла ошибка, либо товар не найден попробуйте еще раз!!!');
                thet.alertinfo.modal();
            }
        }
-    }
+    };
 
-    this.addRowProduct = function () {
-
+    this.addRowProduct = function (data_product) {
+        alert(data_product.articul);
+        this.preloader.css({'display':'none', 'opacity': '0.5'});
     }
 }

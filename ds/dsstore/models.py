@@ -313,7 +313,18 @@ class ManageProductsModel(models.Manager):
         # if get barcode
         elif len(barcode) == 13:
             try:
-                data_product = Products.objects.only('id', 'articul', 'barcode', 'price', 'discount').filter(barcode=barcode).get()
+                product = Products.objects.only('id', 'articul', 'barcode', 'price', 'discount').filter(barcode=barcode).get()
+                data_product = {}
+                data_product['id'] = product.id
+                data_product['articul'] = product.articul
+                data_product['barcode'] = product.barcode
+                data_product['price'] = product.price
+                data_product['discount'] = product.discount
+                data_product['price_discount'] = product.price if product.discount == 0 else \
+                    product.price - ((product.price * product.discount) / 100)
+                data_product['category'] = product.maincategory.name
+                data_product['sizes'] = {size.id: [size.id, size.size, size.count_num] for size in
+                                         product.sizecount.all()}
                 return {'status': True, 'data_product': data_product}
             except Products.DoesNotExist:
                 return {'status': False}

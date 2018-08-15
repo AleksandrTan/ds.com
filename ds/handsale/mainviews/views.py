@@ -87,7 +87,7 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
 class ReturnSale(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, RedirectView):
     login_url = 'login'
     permission_required = "auth.change_user"
-    url = '/adminnv/products/viewproduct/%s/'
+    url = '/adminnv/products/saleviewproduct/%s/'
 
     def get_redirect_url(self, **kwargs):
         """
