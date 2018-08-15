@@ -269,6 +269,12 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
+    def found_modelss(self, modelss):
+        try:
+            return Products.objects.get(modelss=modelss)
+        except Products.DoesNotExist:
+            return False
+
     def filter_products(self, data):
         query = Products.objects
         work_dict = {}

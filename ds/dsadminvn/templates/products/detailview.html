@@ -22,19 +22,33 @@
                 <!-- /.row -->
 
                 <div class="row">
+{#                    <div class="col-lg-2">#}
+{#                        <div class="form-group">#}
+{#                            <label>Добавить новый товар</label>#}
+{#                            <a type="button" class="btn btn-sm btn-primary form-control" href="{% url 'showform_for_add_product' %}">Добавить</a>#}
+{#                         </div>#}
+{#                    </div>#}
                     <div class="col-lg-2">
-                        <div class="form-group">
-                            <label>Добавить новый товар</label>
-                            <a type="button" class="btn btn-sm btn-success form-control" href="{% url 'showform_for_add_product' %}">Добавить</a>
-                         </div>
-                        <form class="form form-offer" method="post" name="found_product" action="{% url 'foundproduct' %}"
+                       <form class="form form-offer" method="post" name="found_product" action="{% url 'foundproduct' %}"
                               id="found_product">{% csrf_token %}
                             <div class="form-group">
                                 <label>Поиск по Артикулу</label>
                                 <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" maxlength="6">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">Найти Товар</button>
+                                <button type="submit" class="btn btn-sm btn-success form-control">Найти Товар</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-2">
+                        <form class="form form-offer" method="post" name="found_modelss" action="{% url 'foundmodelss' %}"
+                              id="found_modelss">{% csrf_token %}
+                            <div class="form-group">
+                                <label>Поиск по Модели</label>
+                                <input class="form-control" placeholder="Модель" id="modelss" name="modelss" type="text">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-sm btn-success form-control">Найти Товар</button>
                             </div>
                         </form>
                     </div>

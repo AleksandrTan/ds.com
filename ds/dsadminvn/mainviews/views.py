@@ -22,7 +22,7 @@ from dsstore.models import (MainCategory, NameProduct, SizeTable,
                             SizeTableForm, Brends, Seasons, Products,
                             ProductsForm, ProductsFormEdit, Image, SizeCount)
 from handsale.models import ProductsSale
-from dsadminvn.forms import FoundArticuls, FilterProducts, FilterSaleProduct
+from dsadminvn.forms import FoundArticuls, FilterProducts, FilterSaleProduct, FoundModelss
 import dsadminvn.mainhelpers.SetBarcode as SB
 
 
@@ -701,6 +701,24 @@ class FoundArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, T
             articul = form.cleaned_data['articul']
             args = {'tab_products':True,
                     'product_data':Products.objects.found_articul(articul)}
+            return render(request, self.template_name, args)
+        else:
+            args = {'tab_products': True,
+                    'product_data': False}
+            return render(request, self.template_name, args)
+
+
+class FoundsModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    template_name = 'products/detailview.html'
+
+    def post(self, request):
+        form = FoundModelss(request.POST)
+        if form.is_valid():
+            modelss = form.cleaned_data['modelss']
+            args = {'tab_products':True,
+                    'product_data':Products.objects.found_modelss(modelss)}
             return render(request, self.template_name, args)
         else:
             args = {'tab_products': True,

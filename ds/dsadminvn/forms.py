@@ -2,7 +2,11 @@ from django import forms
 
 
 class FoundArticuls(forms.Form):
-    articul  = forms.CharField(max_length=6, label='articul')
+    articul = forms.CharField(max_length=6, label='articul')
+
+
+class FoundModelss(forms.Form):
+    modelss = forms.CharField(max_length=50, label='modelss')
 
 
 class FilterProducts(forms.Form):

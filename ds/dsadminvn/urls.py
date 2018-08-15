@@ -74,6 +74,7 @@ pr_patterns = [
     url(r'^checkmodelss/(?P<modelss>\w+)/$', views.CheckIssetModelss.as_view()),
     url(r'^deleteproduct/(?P<pk>\d+)/$', views.DeleteProduct.as_view(), name='deleteproduct'),
     url(r'^foundproduct/$', views.FoundArticul.as_view(), name='foundproduct'),
+    url(r'^foundmodelss/$', views.FoundsModelss.as_view(), name='foundmodelss'),
     url(r'^filterproduct/(?:page/(?P<page>\d+)/)?$', views.FilterProduct.as_view(), name='filterproduct'),
     url(r'^saleviewproduct/(?P<pk>\d+)/(?:page/(?P<page>\d+)/)?$', views.SaleViewProduct.as_view(), name='saleproductview'),
     url(r'^handsale/', include('handsale.urls')),
