@@ -306,7 +306,7 @@ class ManageProductsModel(models.Manager):
                 data_product['price_discount'] = product.price if product.discount == 0 else \
                     product.price - ((product.price * product.discount) / 100)
                 data_product['category'] = product.maincategory.name
-                data_product['sizes'] = {size.id: [size.id, size.size, size.count_num] for size in product.sizecount.all()}
+                data_product['size'] = product.size
                 return {'status': True, 'data_product': data_product}
             except Products.DoesNotExist:
                 return {'status': False}
@@ -323,8 +323,7 @@ class ManageProductsModel(models.Manager):
                 data_product['price_discount'] = product.price if product.discount == 0 else \
                     product.price - ((product.price * product.discount) / 100)
                 data_product['category'] = product.maincategory.name
-                data_product['sizes'] = {size.id: [size.id, size.size, size.count_num] for size in
-                                         product.sizecount.all()}
+                data_product['size'] = product.size
                 return {'status': True, 'data_product': data_product}
             except Products.DoesNotExist:
                 return {'status': False}
