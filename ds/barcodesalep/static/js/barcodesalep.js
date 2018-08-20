@@ -1,3 +1,7 @@
+$(document).ready(function () {
+    $('#barcode_articul').focus();
+})
+
 $( "#found_product" ).submit(function (e) {
     barcodeGet = new FoundBarcode(e);
     barcodeGet.init();
@@ -46,5 +50,9 @@ function FoundBarcode(e){
     this.addRowProduct = function (data_product) {
         alert(data_product.articul);
         this.preloader.css({'display':'none', 'opacity': '0.5'});
+    }
+    
+    this.deleteRowProduct = function () {
+        
     }
 }

@@ -294,37 +294,18 @@ class ManageProductsModel(models.Manager):
 
     def get_product_barcode(self, barcode):
         # if get articul
+        data_product = {}
         if len(barcode) < 13 and len(barcode) != 0:
             try:
                 product = Products.objects.only('id', 'articul', 'barcode', 'price', 'discount').filter(articul=barcode).get()
-                data_product = {}
-                data_product['id'] = product.id
-                data_product['articul'] = product.articul
-                data_product['barcode'] = product.barcode
-                data_product['price'] = product.price
-                data_product['discount'] = product.discount
-                data_product['price_discount'] = product.price if product.discount == 0 else \
-                    product.price - ((product.price * product.discount) / 100)
-                data_product['category'] = product.maincategory.name
-                data_product['size'] = product.size
-                return {'status': True, 'data_product': data_product}
+                return {'status': True, 'data_product': self.hm_get_barcode_query(product)}
             except Products.DoesNotExist:
                 return {'status': False}
         # if get barcode
         elif len(barcode) == 13:
             try:
                 product = Products.objects.only('id', 'articul', 'barcode', 'price', 'discount').filter(barcode=barcode).get()
-                data_product = {}
-                data_product['id'] = product.id
-                data_product['articul'] = product.articul
-                data_product['barcode'] = product.barcode
-                data_product['price'] = product.price
-                data_product['discount'] = product.discount
-                data_product['price_discount'] = product.price if product.discount == 0 else \
-                    product.price - ((product.price * product.discount) / 100)
-                data_product['category'] = product.maincategory.name
-                data_product['size'] = product.size
-                return {'status': True, 'data_product': data_product}
+                return {'status': True, 'data_product': self.hm_get_barcode_query(product)}
             except Products.DoesNotExist:
                 return {'status': False}
         else:
@@ -349,6 +330,19 @@ class ManageProductsModel(models.Manager):
             return size.size
         except Products.DoesNotExist:
             return False
+
+    def hm_get_barcode_query(self, product):
+        data_product = dict()
+        data_product['id'] = product.id
+        data_product['articul'] = product.articul
+        data_product['barcode'] = product.barcode
+        data_product['price'] = product.price
+        data_product['discount'] = product.discount
+        data_product['price_discount'] = product.price if product.discount == 0 else \
+            product.price - ((product.price * product.discount) / 100)
+        data_product['category'] = product.maincategory.name
+        data_product['size'] = product.size
+        return data_product
 
 
 class Products(models.Model):
