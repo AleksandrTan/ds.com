@@ -70,6 +70,9 @@ function FoundBarcode(e){
         this.parenttable.append(new_product);
         this.totalForms.val(parseInt(this.totalForms.val()) + 1);
         this.barcode_articul.val('').focus();
+        if (this.hasChildElements() == 1){
+            this.buttonCancellCeil.show();
+        }
         this.preloader.css({'display':'none', 'opacity': '0.5'});
     };
 
@@ -79,7 +82,11 @@ function FoundBarcode(e){
 }
 
 //Delete product
-$('#products_list').on('click', '[data-delete-product=delete-product]', function (e) {
-    var identificator = $(e).attr('data-count-id');
-    alert(identificator);
+$('#products_list').on('click', '[data-delete-product=delete-product]', function () {
+    var identificator = $(this).attr('data-count-id');
+    $('#add_ptr-'+identificator).remove();
+    $('#id_form-TOTAL_FORMS').val(parseInt($('#id_form-TOTAL_FORMS').val()) - 1);
+    if ($('#products_list').find('tr').length == 0){
+            $('#cancel_ceil').hide();
+        }
 });
