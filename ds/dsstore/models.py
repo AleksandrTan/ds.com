@@ -341,6 +341,7 @@ class ManageProductsModel(models.Manager):
         data_product['price_discount'] = product.price if product.discount == 0 else \
             product.price - ((product.price * product.discount) / 100)
         data_product['category'] = product.maincategory.name
+        data_product['name'] = product.nameproduct.name
         data_product['size'] = product.size
         return data_product
 

@@ -20,6 +20,9 @@ function FoundBarcode(e){
     this.alertinfo = $('#alert_info');
     this.alertinfotext = $('#text_alert');
     this.parenttable = $('#products_list');
+    this.totalForms = $('#id_form-TOTAL_FORMS');
+    this.maxForms = $('#id_form-MAX_NUM_FORMS');
+    this.minForms = $('#id_form-MIN_NUM_FORMS');
 
 
     this.init = function () {
@@ -47,12 +50,21 @@ function FoundBarcode(e){
        }
     };
 
-    this.addRowProduct = function (data_product) {
-        alert(data_product.articul);
+    this.addRowProduct = function (product_data) {
+        new_product = '<tr><td class="text-center"><input type="hidden" name="products" value="'+product_data.id+'"/>' +
+            '<input type="hidden" name="start_price" id="start_price" value="'+product_data.price+'"/>' +
+            '<input type="hidden" name="price" id="price" value="'+product_data.price+'"/>'+product_data.articul+'</td>' +
+            '<td class="text-center">'+product_data.category+'</td><td class="text-center">'+product_data.name+'</td>' +
+            '<td class="text-center" id="price_table">'+product_data.price+'</td><td class="text-center">' +
+            '<input name="lost_num" type="number" id="lost_num" value="0"></td><td class="text-center">'+product_data.size+'</td>' +
+            '<td class="text-center" id="in_stock">'+product_data.count_num+'</td><td class="text-center">1</td><td>' +
+            '<textarea name="description"  rows="5"></textarea></td><td>' +
+            '<a type="button" class="btn btn-sm btn-primary form-control" id="save_exit" href="">Отмена</a></td></tr>';
+        this.parenttable.append(new_product);
         this.preloader.css({'display':'none', 'opacity': '0.5'});
-    }
+    };
     
     this.deleteRowProduct = function () {
         
-    }
+    };
 }
