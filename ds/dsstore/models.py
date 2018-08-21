@@ -297,14 +297,14 @@ class ManageProductsModel(models.Manager):
         data_product = {}
         if len(barcode) < 13 and len(barcode) != 0:
             try:
-                product = Products.objects.only('id', 'articul', 'barcode', 'price', 'discount').filter(articul=barcode).get()
+                product = Products.objects.filter(articul=barcode).get()
                 return {'status': True, 'data_product': self.hm_get_barcode_query(product)}
             except Products.DoesNotExist:
                 return {'status': False}
         # if get barcode
         elif len(barcode) == 13:
             try:
-                product = Products.objects.only('id', 'articul', 'barcode', 'price', 'discount').filter(barcode=barcode).get()
+                product = Products.objects.filter(barcode=barcode).get()
                 return {'status': True, 'data_product': self.hm_get_barcode_query(product)}
             except Products.DoesNotExist:
                 return {'status': False}
@@ -343,6 +343,7 @@ class ManageProductsModel(models.Manager):
         data_product['category'] = product.maincategory.name
         data_product['name'] = product.nameproduct.name
         data_product['size'] = product.size
+        data_product['count_num'] = product.count_num
         return data_product
 
 

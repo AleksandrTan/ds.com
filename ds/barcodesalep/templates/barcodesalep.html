@@ -61,13 +61,13 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-lg-12" id="sell_product_div">
-                        <form class="form form-offer" method="post" name="barcodeseil_product" action="POST"
+                    <form class="form form-offer" method="post" name="barcodeseil_product" action=""
                               id="barcodeseil_product" >{% csrf_token %}
-                              <input id="id_form-TOTAL_FORMS" name="form-TOTAL_FORMS" type="hidden" value="2" />
+                              <input id="id_form-TOTAL_FORMS" name="form-TOTAL_FORMS" type="hidden" value="0" />
                               <input id="id_form-INITIAL_FORMS" name="form-INITIAL_FORMS" type="hidden" value="0" />
                               <input id="id_form-MIN_NUM_FORMS" name="form-MIN_NUM_FORMS" type="hidden" value="0" />
-                              <input id="id_form-MAX_NUM_FORMS" name="form-MAX_NUM_FORMS" type="hidden" value="100" />
+                              <input id="id_form-MAX_NUM_FORMS" name="form-MAX_NUM_FORMS" type="hidden" value="1000" />
+                    <div class="col-lg-12" id="sell_product_div">
                         <div class="col-lg-12">
                         <h2>Данные товара</h2>
                         <div class="table-responsive">
@@ -83,7 +83,7 @@
                                         <th class="text-center">Уступить</th>
                                         <th class="text-center">Размер</th>
                                         <th class="text-center">На складе</th>
-                                        <th class="text-center">Колличество<span style="color: red;">*</span></th>
+                                        <th class="text-center">Колличество</th>
                                         <th class="text-center">Примечание</th>
                                         <th class="text-center">Отмена</th>
                                     </tr>
@@ -92,9 +92,15 @@
                                 </tbody>
                             </table>
                         </div>
+                        </div>
                     </div>
-                        </form>
-                    </div>
+                        <div class="row" id="cancel_ceil" style="display: none";>
+                        <div class="col-md-4 col-md-offset-9">
+                                <button type="submit" class="btn btn-sm btn-success">Продать</button>
+                                <a type="button" class="btn btn-sm btn-danger" href="{% url 'homeadmin' %}">Отмена</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <!-- /.row -->
             </div>
@@ -109,5 +115,4 @@
 
 </script>
     <script src="{% static 'js/barcodesalep.js' %}"></script>
-    <script src="{% static 'js/formset.js' %}"></script>
 {% endblock %}

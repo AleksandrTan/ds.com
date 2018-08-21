@@ -7,4 +7,4 @@ class BarcodeSellProduct(forms.Form):
     lost_num = forms.CharField(required=False)
 
 
-BarcodeFormSet = formset_factory(BarcodeSellProduct, extra=2, max_num=100)
+BarcodeFormSet = formset_factory(BarcodeSellProduct)
