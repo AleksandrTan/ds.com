@@ -29,6 +29,12 @@ $(document).ready(function () {
     	var start_price = $('#start_price').val();
     	var price_discount_hidden = $('#price_discount_hidden').val();
 
+    	if (parseInt($(this).val()) < 0){
+    	    alert("Должно быть БОЛЬШЕ 0!!!!!");
+    	    $(this).val('');
+    	    return false;
+        }
+
     	if (parseInt($('#discount').text()) > 0){
             $('#price_discount').text(price_discount_hidden - $(this).val());
 		}

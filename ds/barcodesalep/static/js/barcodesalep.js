@@ -59,6 +59,7 @@ function FoundBarcode(e){
         var new_product = '<tr id="add_ptr-'+count_tr+'"><td class="text-center"><input type="hidden" ' +
             'id="id_form-'+count_tr+'-products" name="form-'+count_tr+'-products" value="'+product_data.id+'"/>' +
             '<input type="hidden" name="start_price" id="start_price-'+count_tr+'" value="'+product_data.price+'"/>' +
+            '<input type="hidden" name="true_price_discount" id="true_price_discount-'+count_tr+'" value="'+product_data.price_discount+'"/>' +
             '<input type="hidden" name="price" id="price-'+count_tr+'" value="'+product_data.price+'"/>'+product_data.articul+'</td>' +
             '<td class="text-center">'+product_data.category+'</td><td class="text-center">'+product_data.name+'</td>' +
             '<td class="text-center" id="price_table-'+count_tr+'">'+product_data.price+'</td><td class="text-center">'+product_data.discount+'%</td>' +
@@ -143,8 +144,14 @@ function DeleteProduct(e, obj){
 $('#products_list').on('click keyup', 'td input', function () {
     var id_pr = $(this).attr('data-id-product');
     var ds = $('[id=price_discount-'+id_pr+']');
-    if (parseInt($(this).val()) > 0){
-       ds.text(parseInt(ds.text()) - parseInt($(this).val()));
+    if (parseInt($(this).val()) >= 0){
+       ds.text(parseInt($('[id=true_price_discount-'+id_pr+']').val()) - parseInt($(this).val()));
+       $('#total_amount_all').text(parseInt($('[id=true_price_discount-'+id_pr+']').val()) - parseInt($(this).val()));
+    }
+    else if ($(this).val() == ''){
+        $(this).val(0);
+        ds.text(parseInt($('[id=true_price_discount-'+id_pr+']').val()) - parseInt($(this).val()));
+        $('#total_amount_all').text(parseInt($('[id=true_price_discount-'+id_pr+']').val()) - parseInt($(this).val()));
     }
     else {
         alert('Должно быть больше 0 !!!');
