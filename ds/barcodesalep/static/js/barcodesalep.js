@@ -26,6 +26,7 @@ function FoundBarcode(e){
     this.maxForms = $('#id_form-MAX_NUM_FORMS');
     this.minForms = $('#id_form-MIN_NUM_FORMS');
     this.buttonCancellCeil = $('#cancel_ceil');
+    this.total_amount_all = $('#total_amount_all');
 
 
     this.init = function () {
@@ -70,6 +71,7 @@ function FoundBarcode(e){
         this.parenttable.append(new_product);
         this.totalForms.val(parseInt(this.totalForms.val()) + 1);
         this.barcode_articul.val('').focus();
+        this.total_amount_all.text(parseInt(this.total_amount_all.text()) + product_data.price_discount);
         if (this.hasChildElements() == 1){
             this.buttonCancellCeil.show();
         }
@@ -79,14 +81,53 @@ function FoundBarcode(e){
     this.hasChildElements = function() {
         return this.parenttable.find('tr').length;
     };
+    
+    this.calculationOfAmount = function () {
+        
+    }
 }
 
 //Delete product
-$('#products_list').on('click', '[data-delete-product=delete-product]', function () {
-    var identificator = $(this).attr('data-count-id');
-    $('#add_ptr-'+identificator).remove();
-    $('#id_form-TOTAL_FORMS').val(parseInt($('#id_form-TOTAL_FORMS').val()) - 1);
-    if ($('#products_list').find('tr').length == 0){
-            $('#cancel_ceil').hide();
-        }
+$('#products_list').on('click', '[data-delete-product=delete-product]', function (e) {
+    var deleteProduct = new DeleteProduct(e, $(this));
+    deleteProduct.init();
+
+    // var identificator = $(this).attr('data-count-id');
+    // $('#add_ptr-'+identificator).remove();
+    // $('#id_form-TOTAL_FORMS').val(parseInt($('#id_form-TOTAL_FORMS').val()) - 1);
+    // if ($('#products_list').find('tr').length == 0){
+    //         $('#cancel_ceil').hide();
+    //     }
 });
+
+function DeleteProduct(e, obj){
+    this.e = e;
+    this.obj = obj;
+    this.barcode = $('#barcode_articul').val();
+    this.barcode_articul = $('#barcode_articul');
+    this.preloader = $('#hellopreloader_preload');
+    this.alertinfo = $('#alert_info');
+    this.alertinfotext = $('#text_alert');
+    this.parenttable = $('#products_list');
+    this.totalForms = $('#id_form-TOTAL_FORMS');
+    this.maxForms = $('#id_form-MAX_NUM_FORMS');
+    this.minForms = $('#id_form-MIN_NUM_FORMS');
+    this.buttonCancellCeil = $('#cancel_ceil');
+    this.total_amount_all = $('#total_amount_all');
+
+    this.init = function () {
+        e.preventDefault();
+        this.preloader.css({'display':'block', 'opacity': '0.5'});
+        this.deleteProduct();
+    };
+
+    this.deleteProduct = function () {
+        var identificator = this.obj.attr('data-count-id');
+        $('#add_ptr-'+identificator).remove();
+        $('#id_form-TOTAL_FORMS').val(parseInt($('#id_form-TOTAL_FORMS').val()) - 1);
+        if ($('#products_list').find('tr').length == 0){
+                $('#cancel_ceil').hide();
+            }
+        this.preloader.css({'display':'none', 'opacity': '0.5'});
+    }
+}
