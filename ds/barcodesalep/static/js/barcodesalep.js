@@ -27,6 +27,7 @@ function FoundBarcode(e){
     this.minForms = $('#id_form-MIN_NUM_FORMS');
     this.buttonCancellCeil = $('#cancel_ceil');
     this.total_amount_all = $('#total_amount_all');
+    this.true_total_amount = $('#true_total_amount');
 
 
     this.init = function () {
@@ -89,6 +90,7 @@ function FoundBarcode(e){
     
     this.calculationOfAmount = function (price_discount) {
         this.total_amount_all.text(parseInt(this.total_amount_all.text()) + price_discount);
+        this.true_total_amount.text(parseInt(this.true_total_amount.text()) + price_discount);
         return true;
     }
 }
@@ -113,6 +115,7 @@ function DeleteProduct(e, obj){
     this.minForms = $('#id_form-MIN_NUM_FORMS');
     this.buttonCancellCeil = $('#cancel_ceil');
     this.total_amount_all = $('#total_amount_all');
+    this.true_total_amount = $('#true_total_amount');
 
     this.init = function () {
         e.preventDefault();
@@ -122,10 +125,12 @@ function DeleteProduct(e, obj){
 
     this.deleteProduct = function () {
         var identificator = this.obj.attr('data-count-id');
-         this.calculationOfAmount(identificator);
+        this.calculationOfAmount(identificator);
         $('#add_ptr-'+identificator).remove();
         this.totalForms.val(parseInt(this.totalForms.val()) - 1);
         if (this.hasChildElements() == 0){
+                this.total_amount_all.text('0');
+                this.true_total_amount.text('0');
                 this.buttonCancellCeil.hide();
             }
         this.preloader.css({'display':'none', 'opacity': '0.5'});
@@ -137,6 +142,7 @@ function DeleteProduct(e, obj){
 
     this.calculationOfAmount = function (identificator) {
         this.total_amount_all.text(parseInt(this.total_amount_all.text()) - parseInt($('#price_discount-'+identificator).text()));
+        this.true_total_amount.text(parseInt(this.true_total_amount.text()) - parseInt($('#price_discount-'+identificator).text()));
         return true;
     }
 }
@@ -145,13 +151,18 @@ $('#products_list').on('click keyup', 'td input', function () {
     var id_pr = $(this).attr('data-id-product');
     var ds = $('[id=price_discount-'+id_pr+']');
     if (parseInt($(this).val()) >= 0){
-       ds.text(parseInt($('[id=true_price_discount-'+id_pr+']').val()) - parseInt($(this).val()));
-       $('#total_amount_all').text(parseInt($('[id=true_price_discount-'+id_pr+']').val()) - parseInt($(this).val()));
+        var old_pr = parseInt(ds.text());
+        var new_pr = parseInt($('[id=true_price_discount-'+id_pr+']').val()) - parseInt($(this).val());
+        ds.text(new_pr);
+        $('#total_amount_all').text((parseInt($('#true_total_amount').text()) - old_pr) + new_pr);
+        $('#true_total_amount').text((parseInt($('#true_total_amount').text()) - old_pr) + new_pr);
     }
     else if ($(this).val() == ''){
-        $(this).val(0);
-        ds.text(parseInt($('[id=true_price_discount-'+id_pr+']').val()) - parseInt($(this).val()));
-        $('#total_amount_all').text(parseInt($('[id=true_price_discount-'+id_pr+']').val()) - parseInt($(this).val()));
+        var old_pr = parseInt(ds.text());
+        var new_pr = parseInt($('[id=true_price_discount-'+id_pr+']').val());
+        ds.text(parseInt(new_pr));
+        $('#total_amount_all').text((parseInt($('#true_total_amount').text()) - old_pr) + new_pr);
+        $('#true_total_amount').text((parseInt($('#true_total_amount').text()) - old_pr) + new_pr);
     }
     else {
         alert('Должно быть больше 0 !!!');
@@ -159,3 +170,4 @@ $('#products_list').on('click keyup', 'td input', function () {
         return false;
     }
 });
+  parseInt($('#total_amount_all').text());
