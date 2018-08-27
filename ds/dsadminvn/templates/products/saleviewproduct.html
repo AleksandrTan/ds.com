@@ -86,7 +86,7 @@
                                             <td class="text-center">{{ data.count_num }}</td>
                                             <td class="text-center">{{ data.price }}</td>
                                             <td class="text-center">{{ data.discount }}%</td>
-                                            <td class="text-center">{{ data.lost_num }}</td>
+                                            <td class="text-center">{% if data.lost_num %}{{ data.lost_num }} {% else %} 0 {% endif %}</td>
                                             <td class="text-center">{{ data.true_price }}</td>
                                             <td class="text-center">
                                                 {% if data.plase_sale  == 1%} Магазин {% else %} Интернет {% endif %}

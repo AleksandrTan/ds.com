@@ -59,16 +59,14 @@ function FoundBarcode(e){
         var count_tr = this.hasChildElements();
         var new_product = '<tr id="add_ptr-'+count_tr+'"><td class="text-center"><input type="hidden" ' +
             'id="id_form-'+count_tr+'-products" name="form-'+count_tr+'-products" value="'+product_data.id+'"/>' +
-            '<input type="hidden" name="start_price" id="start_price-'+count_tr+'" value="'+product_data.price+'"/>' +
-            '<input type="hidden" name="true_price_discount" id="true_price_discount-'+count_tr+'" value="'+product_data.price_discount+'"/>' +
-            '<input type="hidden" name="price" id="price-'+count_tr+'" value="'+product_data.price+'"/>'+product_data.articul+'</td>' +
-            '<td class="text-center">'+product_data.category+'</td><td class="text-center">'+product_data.name+'</td>' +
+            '<input type="hidden" name="true_price_discount" id="true_price_discount-'+count_tr+'" value="'+product_data.price_discount+'"/>'+
+             product_data.articul+'</td><td class="text-center">'+product_data.category+'</td><td class="text-center">'+product_data.name+'</td>' +
             '<td class="text-center" id="price_table-'+count_tr+'">'+product_data.price+'</td><td class="text-center">'+product_data.discount+'%</td>' +
             '<td class="text-center" id="price_discount-'+count_tr+'">'+product_data.price_discount+'</td>' +
             '<td><input id="id_form-'+count_tr+'-lost_num" name="form-'+count_tr+'-lost_num" type="number" data-id-product="'+count_tr+'"></td>' +
             '<td class="text-center">'+product_data.size+'</td>' +
-            '<td class="text-center" id="in_stock-'+count_tr+'">'+product_data.count_num+'</td><td class="text-center">1</td><td>' +
-            '<textarea name="description"  rows="5"></textarea></td><td>' +
+            '<td class="text-center">1</td><td>' +
+            '<textarea name="description"  rows="5" id="description_pr-'+count_tr+'"></textarea></td><td>' +
             '<button type="button" class="btn btn-sm btn-danger form-control" data-delete-product="delete-product" ' +
             'data-count-id="'+count_tr+'">Отмена</button></td></tr>';
         this.parenttable.append(new_product);
