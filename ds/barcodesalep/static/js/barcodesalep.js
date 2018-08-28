@@ -57,18 +57,22 @@ function FoundBarcode(e){
 
     this.addRowProduct = function (product_data) {
         var count_tr = this.hasChildElements();
-        var new_product = '<tr id="add_ptr-'+count_tr+'"><td class="text-center"><input type="hidden" ' +
-            'id="id_form-'+count_tr+'-products" name="form-'+count_tr+'-products" value="'+product_data.id+'"/>' +
+        var new_product = '<tr id="add_ptr-'+count_tr+'">' +
+            '<td class="text-center"><input type="hidden" id="id_form-'+count_tr+'-products" name="form-'+count_tr+'-products" value="'+product_data.id+'"/>' +
             '<input type="hidden" name="true_price_discount" id="true_price_discount-'+count_tr+'" value="'+product_data.price_discount+'"/>'+
-             product_data.articul+'</td><td class="text-center">'+product_data.category+'</td><td class="text-center">'+product_data.name+'</td>' +
-            '<td class="text-center" id="price_table-'+count_tr+'">'+product_data.price+'</td><td class="text-center">'+product_data.discount+'%</td>' +
+             product_data.articul+'</td>' +
+            '<td class="text-center">'+product_data.category+'</td>' +
+            '<td class="text-center">'+product_data.name+'</td>' +
+            '<td class="text-center" id="price_table-'+count_tr+'">'+product_data.price+'</td>' +
+            '<td class="text-center">'+product_data.discount+'%</td>' +
             '<td class="text-center" id="price_discount-'+count_tr+'">'+product_data.price_discount+'</td>' +
             '<td><input id="id_form-'+count_tr+'-lost_num" name="form-'+count_tr+'-lost_num" type="number" data-id-product="'+count_tr+'"></td>' +
             '<td class="text-center">'+product_data.size+'</td>' +
-            '<td class="text-center">1</td><td>' +
-            '<textarea name="description"  rows="5" id="description_pr-'+count_tr+'"></textarea></td><td>' +
-            '<button type="button" class="btn btn-sm btn-danger form-control" data-delete-product="delete-product" ' +
-            'data-count-id="'+count_tr+'">Отмена</button></td></tr>';
+            '<td class="text-center">1</td>' +
+            '<td><textarea name="description"  rows="5" id="description_pr-'+count_tr+'"></textarea></td>' +
+            '<td><button type="button" class="btn btn-sm btn-danger form-control" data-delete-product="delete-product" ' +
+            'data-count-id="'+count_tr+'">Отмена</button></td>' +
+            '</tr>';
         this.parenttable.append(new_product);
         //change count forms
         this.totalForms.val(parseInt(this.totalForms.val()) + 1);
@@ -126,6 +130,7 @@ function DeleteProduct(e, obj){
         this.calculationOfAmount(identificator);
         $('#add_ptr-'+identificator).remove();
         this.totalForms.val(parseInt(this.totalForms.val()) - 1);
+        this.updateElementIndex();
         if (this.hasChildElements() == 0){
                 this.total_amount_all.text('0');
                 this.true_total_amount.text('0');
@@ -142,6 +147,20 @@ function DeleteProduct(e, obj){
         this.total_amount_all.text(parseInt(this.total_amount_all.text()) - parseInt($('#price_discount-'+identificator).text()));
         this.true_total_amount.text(parseInt(this.true_total_amount.text()) - parseInt($('#price_discount-'+identificator).text()));
         return true;
+    };
+
+    this.updateElementIndex = function() {
+        var childs = this.parenttable.find('tr');
+        for (var i=0; i < this.hasChildElements(); i++){
+            var objchild = $(childs[i]);
+            var childstd = objchild.find('td');
+            objchild.attr('id', 'add_ptr-'+i);
+        //console.log($($(childstd[0]).children()[0]));return false;
+            $($(childstd[0]).children()[0]).attr('id', 'id_form-'+i+'-products');
+            $($(childstd[0]).children()[0]).attr('name', 'form-'+i+'-products');
+            $($(childstd[0]).children()[1]).attr('id', 'true_price_discount-'+i);
+
+        }
     }
 }
 //to set how many lost in price
@@ -168,4 +187,3 @@ $('#products_list').on('click keyup', 'td input', function () {
         return false;
     }
 });
-  parseInt($('#total_amount_all').text());
