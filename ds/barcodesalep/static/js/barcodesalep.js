@@ -69,7 +69,7 @@ function FoundBarcode(e){
             '<td><input id="id_form-'+count_tr+'-lost_num" name="form-'+count_tr+'-lost_num" type="number" data-id-product="'+count_tr+'"></td>' +
             '<td class="text-center">'+product_data.size+'</td>' +
             '<td class="text-center">1</td>' +
-            '<td><textarea name="description"  rows="5" id="description_pr-'+count_tr+'"></textarea></td>' +
+            '<td><textarea name="form-'+count_tr+'-description"  rows="5" id="id_form-'+count_tr+'-description"></textarea></td>' +
             '<td><button type="button" class="btn btn-sm btn-danger form-control" data-delete-product="delete-product" ' +
             'data-count-id="'+count_tr+'">Отмена</button></td>' +
             '</tr>';
@@ -159,6 +159,14 @@ function DeleteProduct(e, obj){
             $($(childstd[0]).children()[0]).attr('id', 'id_form-'+i+'-products');
             $($(childstd[0]).children()[0]).attr('name', 'form-'+i+'-products');
             $($(childstd[0]).children()[1]).attr('id', 'true_price_discount-'+i);
+            $(childstd[3]).attr('id', 'price_table-'+i);
+            $(childstd[5]).attr('id', 'price_discount-'+i);
+            $($(childstd[6]).children()[0]).attr('id', 'id_form-'+i+'-lost_num');
+            $($(childstd[6]).children()[0]).attr('name', 'form-'+i+'-lost_num');
+            $($(childstd[6]).children()[0]).attr('data-id-product', i);
+            $($(childstd[9]).children()[0]).attr('id', 'id_form-'+i+'-description');
+            $($(childstd[9]).children()[0]).attr('name', 'form-'+i+'-description');
+            $($(childstd[10]).children()[0]).attr('data-count-id', i);
 
         }
     }
