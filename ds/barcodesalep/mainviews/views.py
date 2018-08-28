@@ -5,7 +5,6 @@ from django.views.generic.edit import CreateView
 
 from dsadminvn.mainviews.views import BaseAdminView
 from dsstore.models import Products
-from barcodesalep.forms import BarcodeFormSet
 from handsale.models import ProductsBarcodeFormSet, ProductsSale
 
 
@@ -13,12 +12,6 @@ class BarcodeSalePage(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
     permission_required = "auth.change_user"
     login_url = 'login'
     template_name = 'barcodesalep.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(BarcodeSalePage, self).get_context_data(**kwargs)
-        context['barcodeformset'] = BarcodeFormSet()
-
-        return context
 
 
 class GetSaleProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):

@@ -51,6 +51,7 @@ function FoundBarcode(e){
                thet.preloader.css({'display':'none', 'opacity': '0.5'});
                thet.alertinfotext.text('Произошла ошибка, либо товар не найден попробуйте еще раз!!!');
                thet.alertinfo.modal();
+               thet.barcode_articul.val('').focus();
            }
        }
     };
@@ -66,7 +67,7 @@ function FoundBarcode(e){
             '<td class="text-center" id="price_table-'+count_tr+'">'+product_data.price+'</td>' +
             '<td class="text-center">'+product_data.discount+'%</td>' +
             '<td class="text-center" id="price_discount-'+count_tr+'">'+product_data.price_discount+'</td>' +
-            '<td><input id="id_form-'+count_tr+'-lost_num" name="form-'+count_tr+'-lost_num" type="number" data-id-product="'+count_tr+'"></td>' +
+            '<td class="text-center"><input id="id_form-'+count_tr+'-lost_num" name="form-'+count_tr+'-lost_num" type="number" data-id-product="'+count_tr+'"></td>' +
             '<td class="text-center">'+product_data.size+'</td>' +
             '<td class="text-center">1</td>' +
             '<td><textarea name="form-'+count_tr+'-description"  rows="5" id="id_form-'+count_tr+'-description"></textarea></td>' +
