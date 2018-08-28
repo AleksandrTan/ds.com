@@ -61,7 +61,7 @@
                             </div>
                         </form>
                     </div>
-                    <form class="form form-offer" method="post" name="barcodeseil_product" action=""
+                    <form class="form form-offer" method="post" name="barcodeseil_product" action="{% url 'barcodesaveproducts' %}"
                               id="barcodeseil_product" >{% csrf_token %}
                               <input id="id_form-TOTAL_FORMS" name="form-TOTAL_FORMS" type="hidden" value="0" />
                               <input id="id_form-INITIAL_FORMS" name="form-INITIAL_FORMS" type="hidden" value="0" />

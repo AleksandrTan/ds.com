@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.db import models
 from django.forms import ModelForm
+from django.forms import modelformset_factory
 
 from dsstore.models import Products, SizeCount
 from django.contrib.auth.models import User
@@ -84,3 +85,10 @@ class ProductsSellForm(ModelForm):
         if cleaned_data.get("count_num") and cleaned_data.get("count_num") > product.count_num:
             raise ValidationError('Колличество продаваемого товара больше чем на складе!!!', code='invalid')
         return self.cleaned_data
+
+
+class ProductsSellBarcode(ModelForm):
+    pass
+
+
+ProductsBarcodeFormSet = modelformset_factory(ProductsSale, fields=('products', 'lost_num', 'description'))
