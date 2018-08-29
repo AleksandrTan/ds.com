@@ -403,7 +403,7 @@ class ProductsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, L
     queryset = Products.objects.get_list_products()
     template_name = 'products/productswork.html'
     context_object_name = 'products_list'
-    paginate_by = 2
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super(ProductsWork, self).get_context_data(**kwargs)
@@ -644,7 +644,6 @@ class DeleteProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
     def get_context_data(self, **kwargs):
         context = super(DeleteProduct, self).get_context_data(**kwargs)
         context['tab_products'] = True
-        context['next_url'] = self.request.GET['next_url']
         return context
 
     def delete(self, request, *args, **kwargs):
@@ -656,8 +655,8 @@ class DeleteProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
         path = settings.MEDIA_ROOT + '\\images\\' + obj.dirname_img
         shutil.rmtree(path, ignore_errors=True)
 
-    def get_success_url(self):
-        return self.request.POST['next_url']
+    # def get_success_url(self):
+    #     return self.request.POST['next_url']
 
 
 class CheckIssetArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
@@ -731,7 +730,7 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
     login_url = 'login'
     template_name = 'products/filterproducts.html'
     context_object_name = 'products_list'
-    paginate_by = 5
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super(FilterProduct, self).get_context_data(**kwargs)

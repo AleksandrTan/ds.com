@@ -26,7 +26,7 @@
 
                     <form action="{% url "deleteproduct" pk=data_product_delete.id %}" method="POST">
                       {% csrf_token %}
-                      <input type="hidden" name="next_url" value="{{ next_url }}">
+
                       <input type="submit" value="Да." class="btn btn-sm btn-danger"/>
                       <a href="{% url "products" %}" class="btn btn-sm btn-success">Нет.</a>
                     </form>

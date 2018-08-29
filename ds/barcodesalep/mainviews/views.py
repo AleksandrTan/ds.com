@@ -30,7 +30,7 @@ class GetSaleProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin)
 class SaveProducts(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     login_url = 'login'
     permission_required = "auth.change_user"
-    succes_url = '/adminnv/products/'
+    succes_url = '/adminnv/products/barcode/page/'
     context_object_name = 'product_data'
     model = ProductsSale
     fields = ('products', 'lost_num', 'description')
@@ -42,27 +42,26 @@ class SaveProducts(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, C
             for instance in instances:
                 instance.count_num = 1
                 instance.link_name = ''
-                product = Products.objects.get_single_product(instance.products.id)
-                instance.articul = product.articul
-                instance.size = product.size
-                instance.price = product.price
-                instance.products = product
-                if instance.lost_num and product.discount:
+                instance.articul = instance.products.articul
+                instance.size = instance.products.size
+                instance.price = instance.products.price
+                instance.products = instance.products
+                if instance.lost_num and instance.products.discount:
                     instance.lost_num = instance.lost_num
-                    instance.true_price = (product.price - ((product.price * product.discount) / 100)) - \
+                    instance.true_price = (instance.products.price - ((instance.products.price * instance.products.discount) / 100)) - \
                                           instance.lost_num
-                elif instance.lost_num and not product.discount:
+                elif instance.lost_num and not instance.products.discount:
                     instance.lost_num = instance.lost_num
                     instance.true_price = instance.price - instance.lost_num
-                elif not instance.lost_num and product.discount:
-                    instance.true_price = product.price - ((product.price * product.discount) / 100)
+                elif not instance.lost_num and instance.products.discount:
+                    instance.true_price = instance.products.price - ((instance.products.price * instance.products.discount) / 100)
                 else:
                     instance.true_price = instance.price
                 instance.total_amount = instance.true_price
-                instance.discount = product.discount
+                instance.discount = instance.products.discount
                 instance.save()
                 # reduce the amount of product
-                Products.objects.reduce_amount(product.id, 1)
+                Products.objects.reduce_amount(instance.products.id, 1)
         return super(SaveProducts, self).form_valid(formset)
 
     def get_success_url(self):
