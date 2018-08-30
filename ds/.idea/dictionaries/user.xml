@@ -6,6 +6,9 @@
       <w>genbarcode</w>
       <w>getproduct</w>
       <w>isset</w>
+      <w>maincategory</w>
+      <w>maincategorys</w>
+      <w>nameproducts</w>
       <w>sentece</w>
       <w>succes</w>
     </words>

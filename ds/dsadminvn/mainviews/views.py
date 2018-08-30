@@ -103,7 +103,7 @@ class AjaxMainCategoryNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredM
         if request.is_ajax():
             name_url = self.slugify(request.GET['name'])
             new_mc = MainCategory.objects.save_new_category(self.request.GET['name'], self.slugify(request.GET['name']))
-        return JsonResponse({"status": True, 'id':new_mc.id, 'name_url':name_url})
+            return JsonResponse({"status": True, 'id': new_mc.id, 'name_url': name_url})
 
     def slugify(self, str):
         import re
@@ -120,7 +120,7 @@ class AjaxMainCategoryActive(BaseAdminView, LoginRequiredMixin, PermissionRequir
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
             data = MainCategory.objects.change_active_status(kwargs['pk'])
-        return JsonResponse(data)
+            return JsonResponse(data)
 
 
 class MainCategoryDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
@@ -130,13 +130,7 @@ class MainCategoryDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMi
 
     def get(self, request, *args, **kwargs):
         MainCategory.objects.get(pk=kwargs['pk']).delete()
-        redirect_url = '/adminnv/maincategory/'
-        return redirect(redirect_url)
-
-    def get_context_data(self, **kwargs):
-        context = super(MainCategoryDelete, self).get_context_data(**kwargs)
-        context['tab'] = True
-        return context
+        return redirect('/adminnv/maincategory/')
 
 """
     Work with Name Product
@@ -166,9 +160,9 @@ class AjaxNameProductNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMi
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
             name_url = self.slugify(request.GET['name'])
-            new_np =  NameProduct.objects.save_new_nameproduct(request.GET['name'], name_url)
+            new_np = NameProduct.objects.save_new_nameproduct(request.GET['name'], name_url)
 
-        return JsonResponse({"status": True, 'id':new_np.id, 'name_url':name_url})
+            return JsonResponse({"status": True, 'id':new_np.id, 'name_url':name_url})
 
     def slugify(self, strg):
         import re
@@ -186,7 +180,7 @@ class AjaxNameProductActive(BaseAdminView, LoginRequiredMixin, PermissionRequire
         if request.is_ajax():
             data = NameProduct.objects.change_active_status(kwargs['pk'])
 
-        return JsonResponse(data)
+            return JsonResponse(data)
 
 
 class NameProductDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
@@ -199,10 +193,6 @@ class NameProductDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
         redirect_url = '/adminnv/nameproduct/'
         return redirect(redirect_url)
 
-    def get_context_data(self, **kwargs):
-        context = super(NameProductDelete, self).get_context_data(**kwargs)
-        context['tab'] = True
-        return context
 
 """----------------Work with Size Table---------------------------"""
 
@@ -259,11 +249,6 @@ class SizeTableDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
         redirect_url = '/adminnv/sizetable/'
         return redirect(redirect_url)
 
-    def get_context_data(self, **kwargs):
-        context = super(NameProductDelete, self).get_context_data(**kwargs)
-        context['tab'] = True
-        return context
-
 
 class AjaxGetSizes(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
 
@@ -273,7 +258,7 @@ class AjaxGetSizes(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
             data = SizeTable.objects.get_size_data(kwargs['pk'])
-        return JsonResponse(list(data), safe=False)
+            return JsonResponse(list(data), safe=False)
 
 """---------------Work with Brends -------------------------------"""
 
@@ -300,8 +285,8 @@ class AjaxBrendNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
             name_url = self.slugify(request.GET['name'])
-            new_br =  Brends.objects.save_new_brend(name=self.request.GET['name'], name_url=name_url)
-        return JsonResponse({"status": True, 'id':new_br.id, 'name_url':name_url})
+            new_br = Brends.objects.save_new_brend(name=self.request.GET['name'], name_url=name_url)
+            return JsonResponse({"status": True, 'id': new_br.id, 'name_url': name_url})
 
     def slugify(self, strg):
         import re
@@ -318,7 +303,7 @@ class AjaxBrendActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
             data = Brends.objects.change_active_status(kwargs['pk'])
-        return JsonResponse(data)
+            return JsonResponse(data)
 
 
 class BrendDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
@@ -330,11 +315,6 @@ class BrendDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
         Brends.objects.get(pk=kwargs['pk']).delete()
         redirect_url = '/adminnv/brends/'
         return redirect(redirect_url)
-
-    def get_context_data(self, **kwargs):
-        context = super(BrendDelete, self).get_context_data(**kwargs)
-        context['tab'] = True
-        return context
 
 """----------------Work with seasons---------------------------------"""
 
@@ -361,8 +341,8 @@ class AjaxSeasonNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
             name_url = self.slugify(request.GET['name'])
-            new_se =  Seasons.objects.save_new_season(name=self.request.GET['name'], name_url=name_url)
-        return JsonResponse({"status": True, 'id':new_se.id, 'name_url':name_url})
+            new_se = Seasons.objects.save_new_season(name=self.request.GET['name'], name_url=name_url)
+            return JsonResponse({"status": True, 'id': new_se.id, 'name_url': name_url})
 
     def slugify(self, strg):
         import re
@@ -379,7 +359,7 @@ class AjaxSeasonActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
             data = Seasons.objects.change_active_status(kwargs['pk'])
-        return JsonResponse(data)
+            return JsonResponse(data)
 
 
 class SeasonDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
@@ -391,11 +371,6 @@ class SeasonDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
         Seasons.objects.get(pk=kwargs['pk']).delete()
         redirect_url = '/adminnv/seasons/'
         return redirect(redirect_url)
-
-    def get_context_data(self, **kwargs):
-        context = super(SeasonDelete, self).get_context_data(**kwargs)
-        context['tab'] = True
-        return context
 
 """---------------Work with Products-------------------------------"""
 
@@ -547,7 +522,6 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         instance = form.save(commit=False)
         #delete main file photo
         if int(self.request.POST['is_del_mainphoto']) == 0:
-            instance.main_photo_path.delete()
             instance.main_photo_path = 'nophoto.png'
         if int(self.request.POST['is_del_other_photo']) == 1:
             self.delete_related_photo(instance, self.request.POST['list_del_other_photo'])
@@ -669,7 +643,7 @@ class CheckIssetArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
            product_result = Products.objects.check_isset_articul(kwargs['articul'])
-        return JsonResponse({"status": product_result})
+           return JsonResponse({"status": product_result})
 
 
 class CheckIssetPreBarcode(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
@@ -701,8 +675,8 @@ class FoundArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, T
         form = FoundArticuls(request.POST)
         if form.is_valid():
             articul = form.cleaned_data['articul']
-            args = {'tab_products':True,
-                    'product_data':Products.objects.found_articul(articul)}
+            args = {'tab_products': True,
+                    'product_data': Products.objects.found_articul(articul)}
             return render(request, self.template_name, args)
         else:
             args = {'tab_products': True,
@@ -751,7 +725,8 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
         """
         form = FilterProducts(request.GET)
         if form.is_valid():
-            self.object_list = self.get_queryset(form.cleaned_data)
+            self.data = form.cleaned_data
+            self.object_list = self.get_queryset()
             context = self.get_context_data(object_list=self.object_list)
             context['data_form'] = form.cleaned_data
             copy_get = QueryDict(request.GET.copy().urlencode(), mutable=True)
@@ -759,13 +734,14 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
             context['request_get'] = copy_get.urlencode()
             return render(request, self.template_name, context)
         else:
-            self.object_list = self.get_queryset(form.cleaned_data)
+            self.data = form.cleaned_data
+            self.object_list = self.get_queryset()
             context = self.get_context_data(object_list=self.object_list)
             context['form'] = form
             return render(request, self.template_name, context)
 
-    def get_queryset(self, data):
-        return Products.objects.filter_products(data)
+    def get_queryset(self):
+        return Products.objects.filter_products(self.data)
 
 
 class SaleViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
@@ -789,7 +765,8 @@ class SaleViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
         if request.GET.getlist('submit'):
             form = FilterSaleProduct(request.GET)
             if form.is_valid():
-                self.object_list = self.get_queryset(form.cleaned_data)
+                self.data = form.cleaned_data
+                self.object_list = self.get_queryset()
                 context = self.get_context_data(object_list=self.object_list)
                 context['data_form'] = form.cleaned_data
                 copy_get = QueryDict(request.GET.copy().urlencode(), mutable=True)
@@ -797,15 +774,16 @@ class SaleViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
                 context['request_get'] = copy_get.urlencode()
                 return render(request, self.template_name, context)
             else:
-                self.object_list = self.get_queryset(form.cleaned_data)
+                self.data = form.cleaned_data
+                self.object_list = self.get_queryset()
                 context = self.get_context_data(object_list=self.object_list)
                 context['data_form'] = form.cleaned_data
                 context['form'] = form
                 return render(request, self.template_name, context)
         else:
+            self.data = dict()
             self.object_list = self.get_queryset()
             return render(request, self.template_name, self.get_context_data())
 
-    def get_queryset(self, data={}):
-        return ProductsSale.objects.get_list_data(self.kwargs['pk'], data)
-
+    def get_queryset(self):
+        return ProductsSale.objects.get_list_data(self.kwargs['pk'], self.data)
