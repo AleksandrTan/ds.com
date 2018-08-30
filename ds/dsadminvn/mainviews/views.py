@@ -105,7 +105,7 @@ class AjaxMainCategoryNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredM
             new_mc = MainCategory.objects.save_new_category(self.request.GET['name'], self.slugify(request.GET['name']))
         return JsonResponse({"status": True, 'id':new_mc.id, 'name_url':name_url})
 
-    def slugify(swlf, str):
+    def slugify(self, str):
         import re
         import unidecode
         string = re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
@@ -170,10 +170,11 @@ class AjaxNameProductNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMi
 
         return JsonResponse({"status": True, 'id':new_np.id, 'name_url':name_url})
 
-    def slugify(swlf, str):
+    def slugify(self, strg):
         import re
         import unidecode
-        return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
+        string = re.sub(r'\s+', '-', unidecode.unidecode(strg).lower().strip())
+        return re.sub(r"'", '', string)
 
 
 class AjaxNameProductActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
@@ -302,10 +303,11 @@ class AjaxBrendNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
             new_br =  Brends.objects.save_new_brend(name=self.request.GET['name'], name_url=name_url)
         return JsonResponse({"status": True, 'id':new_br.id, 'name_url':name_url})
 
-    def slugify(swlf, str):
+    def slugify(self, strg):
         import re
         import unidecode
-        return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
+        string = re.sub(r'\s+', '-', unidecode.unidecode(strg).lower().strip())
+        return re.sub(r"'", '', string)
 
 
 class AjaxBrendActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
@@ -362,10 +364,11 @@ class AjaxSeasonNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
             new_se =  Seasons.objects.save_new_season(name=self.request.GET['name'], name_url=name_url)
         return JsonResponse({"status": True, 'id':new_se.id, 'name_url':name_url})
 
-    def slugify(swlf, str):
+    def slugify(self, strg):
         import re
         import unidecode
-        return re.sub(r'\s+', '-', unidecode.unidecode(str).lower().strip())
+        string = re.sub(r'\s+', '-', unidecode.unidecode(strg).lower().strip())
+        return re.sub(r"'", '', string)
 
 
 class AjaxSeasonActive(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):

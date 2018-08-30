@@ -110,8 +110,8 @@
                          <div class="form-group ">
                             <label>Сезон</label>
                                 <select class="form-control" name="season_id">
+                                    <option name="0" value="0">Выберите сезон</option>
                                     {% for season in seasons %}
-                                        <option name="0" value="0">Выберите сезон</option>
                                         <option name="{{ season.id }}" value="{{ season.id }}">{{ season.name }}</option>
                                     {% endfor %}
                                 </select>

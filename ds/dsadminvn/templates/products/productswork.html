@@ -73,9 +73,10 @@
                                  <div class="form-group ">
                                     <label>Сезон</label>
                                         <select class="form-control" name="season_id">
+                                            <option name="0" value="">Сезон</option>
                                             {% for season in seasons %}
-                                                <option name="0" value="">Сезон</option>
-                                                <option name="{{ season.id }}" value="{{ season.id }}" {% if season.id == data_form.season|strtoint %} selected {% endif %}>
+                                                <option name="{{ season.id }}" value="{{ season.id }}" {% if season.id == data_form.season|strtoint %} selected
+                                                {% endif %}>
                                                     {{ season.name }}
                                                 </option>
                                             {% endfor %}

@@ -86,9 +86,4 @@ class ProductsSellForm(ModelForm):
             raise ValidationError('Колличество продаваемого товара больше чем на складе!!!', code='invalid')
         return self.cleaned_data
 
-
-class ProductsSellBarcode(ModelForm):
-    pass
-
-
 ProductsBarcodeFormSet = modelformset_factory(ProductsSale, fields=('products', 'lost_num', 'description'))
