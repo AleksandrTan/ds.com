@@ -103,3 +103,8 @@ ENV/
 #media
 .media/
 media/
+
+#settings
+/ds/ds/settings.py
+settings.py
+
