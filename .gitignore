@@ -105,5 +105,5 @@ ENV/
 media/
 
 #settings
-ds/ds/settings.py
+/ds/settings.py
 
