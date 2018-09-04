@@ -79,6 +79,7 @@ pr_patterns = [
     url(r'^saleviewproduct/(?P<pk>\d+)/(?:page/(?P<page>\d+)/)?$', views.SaleViewProduct.as_view(), name='saleproductview'),
     url(r'^handsale/', include('handsale.urls')),
     url(r'^barcode/', include('barcodesalep.urls')),
+    url(r'^discount/', include('discountmodule.urls')),
 ]
 
 urlpatterns = [

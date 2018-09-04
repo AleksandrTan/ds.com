@@ -20,7 +20,7 @@ from django.http import QueryDict
 from django.contrib.auth.models import User
 from dsstore.models import (MainCategory, NameProduct, SizeTable,
                             SizeTableForm, Brends, Seasons, Products,
-                            ProductsForm, ProductsFormEdit, Image, SizeCount)
+                            ProductsForm, ProductsFormEdit, Image)
 from handsale.models import ProductsSale
 from dsadminvn.forms import FoundArticuls, FilterProducts, FilterSaleProduct, FoundModelss
 import dsadminvn.mainhelpers.SetBarcode as SB
