@@ -235,7 +235,7 @@ class ManageProductsModel(models.Manager):
 
     def check_isset_articul(self, articul, flag_isset=False):
         try:
-            product = Products.objects.get(articul=articul)
+            product = Products.objects.only('articul').get(articul=articul)
             if flag_isset:
                 return product.articul
             else:
@@ -245,7 +245,7 @@ class ManageProductsModel(models.Manager):
 
     def check_isset_pre_barcode(self, pre_barcode, flag_isset=False):
         try:
-            product = Products.objects.get(pre_barcode=pre_barcode)
+            product = Products.objects.only('pre_barcode').get(pre_barcode=pre_barcode)
             if flag_isset:
                 return product.pre_barcode
             else:
@@ -253,14 +253,10 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
-    def check_isset_modelss(self, modelss, flag_isset=False):
-        try:
-            product = Products.objects.get(modelss=modelss)
-            if flag_isset:
-                return product.pre_barcode
-            else:
-                return True
-        except Products.DoesNotExist:
+    def check_isset_modelss(self, modelss):
+        if Products.objects.only('modelss').filter(modelss=modelss).exists():
+            return True
+        else:
             return False
 
     def found_articul(self, articul):

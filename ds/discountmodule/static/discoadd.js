@@ -2,17 +2,7 @@
 * Identifier for debug mode(if true - form submited on server)
 * */
 var is_validate_js = true;
-$.validator.setDefaults( {
-    submitHandler: function () {
-	       		       if (is_validate_js){
-			               $( "#add_new_product" ).submit(function (e) {
-			                                            $('#hellopreloader_preload').css({'display':'block', 'opacity': '0.5'});
-			                                            var form = this;
-                                                        form.submit();
-                            });
-                    }
-     		 }
-		});
+
 $(document).ready(function () {
 
 //Check isset articul
@@ -23,9 +13,9 @@ $('#articul').blur(function () {
         onAjaxSuccess
        );
        function onAjaxSuccess(data) {
-           if(data.status){
+           if(!data.status){
            	   $('#articul').val('');
-               $('#modal_content').text('').text('Введенный артикул уже существует!Выберите другой');
+               $('#modal_content').text('').text('Такого артикула не существует!Выберите другой');
                $('#modal_alarm').modal();
            }
        }
@@ -41,9 +31,9 @@ $('#modelss').blur(function () {
         onAjaxSuccess
        );
        function onAjaxSuccess(data) {
-           if(data.status){
+           if(!data.status){
            	   $('#modelss').val('');
-               $('#modal_content').text('').text('Введенная модель уже существует!Выберите другую');
+               $('#modal_content').text('').text('Такой модели не существует!Выберите другую');
                $('#modal_alarm').modal();
            }
        }
@@ -66,68 +56,21 @@ $('#modelss').blur(function () {
 
 //Validations form
 
-    $( "#add_new_product" ).validate( {
+    $( "#filter_disco" ).validate( {
 				rules: {
-					articul: {
+					disco_value: {
 						required: true,
-						maxlength: 6
-					},
-					pre_barcode: {
-						required: true,
-						maxlength: 5,
-                        number: true
-					},
-					price: {
-						//required: true,
+						maxlength: 6,
 						number: true,
-						maxlength: 50
-					},
-					wholesale_price: {
-						number: true,
-						maxlength: 50
-					},
-					purshase_price: {
-					    number: true,
-						maxlength: 50
-					},
-					meta_info: {
-					    required: false,
-						maxlength: 500
-					},
-					caption:{
-						required: true,
-						maxlength: 100
+                        min: 0
 					}
-
 				},
 				messages: {
-					articul: {
-						required: "Пожалуйста введите артикул",
-						maxlength: "Не более 6 символов"
-					},
-                    pre_barcode: {
-						required: "Пожалуйста введите штрих-код",
-						maxlength: "Не более 5 символов",
-                        number: 'Должно быть числом!'
-					},
-					price: {
-						number: 'Должно быть числом!',
-						maxlength: "Не более 50 символов"
-					},
-					wholesale_price: {
-						number: 'Должно быть числом!',
-						maxlength: "Не более 50 символов"
-					},
-                    purshase_price: {
-					   number: 'Должно быть числом!',
-					   maxlength: "Не более 50 символов"
-					},
-					meta_info: {
-					    maxlength: "Не более 500 символов"
-					},
-					caption: {
-						required: "Пожалуйста введите заголовок",
-						maxlength: "Не более 100 символов"
+					disco_value: {
+						required: "Пожалуйста введите скидку",
+						maxlength: "Не более 6 символов",
+                        number: 'Должно быть числом!',
+                        min: 'Блять больше 0!!!!'
 					}
 				},
                 errorClass: "alert-danger",
@@ -140,5 +83,78 @@ $('#modelss').blur(function () {
 					$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
 				}
 			} );
+
+
+    $( "#articul_disco" ).validate( {
+				rules: {
+					art_disco: {
+						required: true,
+						maxlength: 6,
+						number: true,
+                        min: 0
+					},
+                    articul:{
+					    required: true,
+                    }
+				},
+				messages: {
+					art_disco: {
+						required: "Пожалуйста введите скидку",
+						maxlength: "Не более 6 символов",
+                        number: 'Должно быть числом!',
+                        min: 'Блять больше 0!!!!'
+					},
+                    articul: {
+					    required: "Пожалуйста введите Артикул",
+                    }
+				},
+                errorClass: "alert-danger",
+				highlight: function ( element, errorClass, validClass ) {
+					$( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
+					$( element ).next( "label" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+				},
+				unhighlight: function ( element, errorClass, validClass ) {
+					$( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
+					$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+				}
+	} );
+
+
+    $( "#model_disco" ).validate( {
+				rules: {
+					mod_disco: {
+                        required: true,
+                        maxlength: 6,
+                        number: true,
+                        min: 0
+                    },
+                    modelss:{
+					    required: true
+                    }
+
+				},
+				messages: {
+					mod_disco: {
+						required: "Пожалуйста введите скидку",
+						maxlength: "Не более 6 символов",
+                        number: 'Должно быть числом!',
+                        min: 'Блять больше 0!!!!'
+					},
+                    modelss:{
+					    required: "Пожалуйста введите Модель",
+                    }
+				},
+                errorClass: "alert-danger",
+				highlight: function ( element, errorClass, validClass ) {
+					$( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
+					$( element ).next( "label" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+				},
+				unhighlight: function ( element, errorClass, validClass ) {
+					$( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
+					$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+				}
+	} );
+
+
 });
 
