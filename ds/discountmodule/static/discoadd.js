@@ -94,7 +94,7 @@ $('#modelss').blur(function () {
                         min: 0
 					},
                     articul:{
-					    required: true,
+					    required: true
                     }
 				},
 				messages: {
