@@ -75,7 +75,10 @@ class DeleteDiscounts(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
     login_url = 'login'
 
     def get(self, request, *args, **kwargs):
-        Discounts.objects.get(pk=kwargs['pk']).delete()
+        discount = Discounts.objects.get(pk=kwargs['pk'])
+        if discount.list_id:
+            Products.objects.delete_discount(discount.list_id.split(','))
+        discount.delete()
         return redirect('/adminnv/products/discount/discolist/')
 
 

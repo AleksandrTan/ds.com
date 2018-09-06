@@ -335,6 +335,9 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
+    def delete_discount(self, id_list):
+        Products.objects.filter(id__in=id_list).update(discount=0)
+
     def hm_get_barcode_query(self, product):
         data_product = dict()
         data_product['id'] = product.id
