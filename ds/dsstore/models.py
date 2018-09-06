@@ -335,6 +335,16 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
+    def set_discount_articul_products(self, articul, disco_value):
+        try:
+            count_record = Products.objects.filter(articul=articul).update(discount=disco_value)
+            if count_record > 0:
+                return ','.join([str(i) for i in Products.objects.filter(articul=articul).values_list('id', flat=True)])
+            else:
+                return False
+        except Products.DoesNotExist:
+            return False
+
     def delete_discount(self, id_list):
         Products.objects.filter(id__in=id_list).update(discount=0)
 

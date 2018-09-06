@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from dsadminvn.mainviews.views import BaseAdminView
 from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Products)
 from discountmodule.models import Discounts
-from discountmodule.forms import FilterDiscounts
+from discountmodule.forms import FilterDiscounts, ArticulDiscounts
 
 
 class DiscountsPage(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
@@ -59,11 +59,41 @@ class SetDiscountFilter(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
             context['seasons'] = Seasons.objects.get_active_seasons()
             context['form_data'] = self.data
             context['form_errors'] = form.errors['disco_value']
+            context['tab_discounts'] = True
             return render(request, 'discountadd.html', context)
 
 
 class SetDiscountArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
-    pass
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    template_name = 'discountshow.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SetDiscountArticul, self).get_context_data(**kwargs)
+        context['tab_discounts'] = True
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = ArticulDiscounts(request.POST)
+        if form.is_valid():
+            list_id = Products.objects.set_discount_articul_products(form.cleaned_data['articul'], form.cleaned_data['art_disco'])
+            if list_id:
+                Discounts.objects.save_discount(list_id, form.cleaned_data['description_f'], form.cleaned_data['art_disco'])
+                return redirect('/adminnv/products/discount/discolist/')
+            else:
+                return redirect('/adminnv/products/discount/discolist/')
+        else:
+            self.data = form.cleaned_data
+            context = dict()
+            context['maincategorys'] = MainCategory.objects.get_active_categories()
+            context['nameproducts'] = NameProduct.objects.get_active_products()
+            context['brends'] = Brends.objects.get_active_brends()
+            context['seasons'] = Seasons.objects.get_active_seasons()
+            context['form_data'] = self.data
+            context['form_errors'] = form.errors
+            context['tab_discounts'] = True
+            return render(request, 'discountadd.html', context)
 
 
 class SetDiscountModel(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
