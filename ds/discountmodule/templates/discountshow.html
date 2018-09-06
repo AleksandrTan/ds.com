@@ -9,7 +9,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="fa fa-times" aria-hidden="true">
                     </span></button>
-                    <h4 class="modal-title" id="myModalLabel" style="color: #ff0012">Внимание!!!Удаление Бренда!!!</h4>
+                    <h4 class="modal-title" id="myModalLabel" style="color: #ff0012">Внимание!!!Удаление Скидки!!!</h4>
                 </div>
                  <div class="modal-body">
                      <h3 style="color: #ff0012">ВЫ действительно хотите удалить эту скидку???</h3>
@@ -60,7 +60,7 @@
                                     <tr>
                                         <td class="text-center">{{ forloop.counter }}</td>
                                         <td class="text-center">{{ disco.description }}</td>
-                                        <td class="text-center">{{ disco.date_create }}</td>
+                                        <td class="text-center">{{ disco.date_create|date:"d-m-Y" }}</td>
                                         <td class="text-center">{{ disco.disco_value }}</td>
                                         <td class="text-center"><a type="button" data_delete="delete"
                                                                    id="{{ disco.id }}"
