@@ -273,10 +273,7 @@ class ManageProductsModel(models.Manager):
 
     def filter_products(self, data):
         query = Products.objects
-        work_dict = {}
-        for param in data:
-            if data[param]:
-                work_dict[param] = data[param]
+        work_dict = {param: data[param] for param in data if data[param]}
         try:
             return query.filter(**work_dict)
         except Products.DoesNotExist:
@@ -323,6 +320,18 @@ class ManageProductsModel(models.Manager):
             size.count_num = size.count_num + 1
             size.save()
             return size.size
+        except Products.DoesNotExist:
+            return False
+
+    def set_discount_products(self, data, disco_value):
+        query = Products.objects
+        work_dict = {param: data[param] for param in data if data[param]}
+        try:
+            count_record = query.filter(**work_dict).update(discount=disco_value)
+            if count_record > 0:
+                return ','.join(list(Products.objects.values_list('id')))
+            else:
+                return False
         except Products.DoesNotExist:
             return False
 
