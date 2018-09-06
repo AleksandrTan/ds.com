@@ -329,7 +329,7 @@ class ManageProductsModel(models.Manager):
         try:
             count_record = query.filter(**work_dict).update(discount=disco_value)
             if count_record > 0:
-                return ','.join(list(Products.objects.values_list('id')))
+                return ','.join([str(i) for i in query.filter(**work_dict).values_list('id', flat=True)])
             else:
                 return False
         except Products.DoesNotExist:

@@ -41,14 +41,15 @@ class SetDiscountFilter(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
         form = FilterDiscounts(request.POST)
         if form.is_valid():
             disco_val = form.cleaned_data['disco_value']
-            desc = form.cleaned_data['description_f']
+            description = form.cleaned_data['description_f']
             form.cleaned_data.pop('disco_value')
             form.cleaned_data.pop('description_f')
-
-            # context = dict()
-            # context['form_data'] = self.data
-            # return render(request, 'discountadd.html', context)
-            return redirect('/adminnv/products/discount/discopage/')
+            list_id = Products.objects.set_discount_products(form.cleaned_data, disco_val)
+            if list_id:
+                Discounts.objects.save_discount(list_id, description, disco_val)
+                return redirect('/adminnv/products/discount/discopage/')
+            else:
+                return redirect('/adminnv/products/')
         else:
             self.data = form.cleaned_data
             context = dict()
