@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
 from django.shortcuts import render, redirect
@@ -47,9 +47,9 @@ class SetDiscountFilter(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
             list_id = Products.objects.set_discount_products(form.cleaned_data, disco_val)
             if list_id:
                 Discounts.objects.save_discount(list_id, description, disco_val)
-                return redirect('/adminnv/products/discount/discopage/')
+                return redirect('/adminnv/products/discount/discolist/')
             else:
-                return redirect('/adminnv/products/')
+                return redirect('/adminnv/products/discount/discolist/')
         else:
             self.data = form.cleaned_data
             context = dict()
@@ -71,8 +71,22 @@ class SetDiscountModel(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
 
 
 class DeleteDiscounts(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
-    pass
+    permission_required = "auth.change_user"
+    login_url = 'login'
+
+    def get(self, request, *args, **kwargs):
+        Discounts.objects.get(pk=kwargs['pk']).delete()
+        return redirect('/adminnv/products/discount/discolist/')
 
 
 class DiscountList(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
-    pass
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    template_name = 'discountshow.html'
+    context_object_name = 'discounts_list'
+    model = Discounts
+
+    def get_context_data(self, **kwargs):
+        context = super(DiscountList, self).get_context_data(**kwargs)
+        context['tab_discounts'] = True
+        return context
