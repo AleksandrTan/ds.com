@@ -92,6 +92,8 @@
                             <div class="form-group">
                                  <label>Скидка</label><span style="color: red;">*</span>
                                  <input class="form-control" placeholder="Скидка" id="disco_value" name="disco_value" type="number" value="">
+                                 {% if form_errors %}<label id="disco_value-error" class="error"
+                                                                        for="disco_value">{{ form_errors.0 }}</label>{% endif %}
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-sm btn-success form-control" name="submit" value="1">Добавить</button>

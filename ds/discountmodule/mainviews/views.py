@@ -2,10 +2,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from dsadminvn.mainviews.views import BaseAdminView
-from dsstore.models import (MainCategory, NameProduct, Brends, Seasons)
+from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Products)
+from discountmodule.models import Discounts
 from discountmodule.forms import FilterDiscounts
 
 
@@ -25,7 +26,7 @@ class DiscountsPage(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
         return context
 
 
-class SetDiscountFilter(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
+class SetDiscountFilter(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
     permission_required = "auth.change_user"
     login_url = 'login'
     template_name = 'discountshow.html'
@@ -36,26 +37,22 @@ class SetDiscountFilter(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
 
         return context
 
-    def get(self, request, *args, **kwargs):
-        """
-        If submit search form, add more options
-        """
-        form = FilterDiscounts(request.GET)
+    def post(self, request, *args, **kwargs):
+        form = FilterDiscounts(request.POST)
         if form.is_valid():
             self.data = form.cleaned_data
-            self.object_list = self.get_queryset()
-            context = self.get_context_data(object_list=self.object_list)
-            context['data_form'] = form.cleaned_data
-            copy_get = QueryDict(request.GET.copy().urlencode(), mutable=True)
-            copy_get['submit'] = 0
-            context['request_get'] = copy_get.urlencode()
-            return render(request, self.template_name, context)
+            return redirect('/adminnv/products/discount/discopage/')
         else:
             self.data = form.cleaned_data
-            self.object_list = self.get_queryset()
-            context = self.get_context_data(object_list=self.object_list)
-            context['form'] = form
-            return render(request, self.template_name, context)
+            context = dict()
+            context['maincategorys'] = MainCategory.objects.get_active_categories()
+            context['nameproducts'] = NameProduct.objects.get_active_products()
+            context['brends'] = Brends.objects.get_active_brends()
+            context['seasons'] = Seasons.objects.get_active_seasons()
+            context['form_data'] = self.data
+            context['form_errors'] = form.errors['disco_value']
+            return render(request, 'discountadd.html', context)
+
 
 class SetDiscountArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     pass
