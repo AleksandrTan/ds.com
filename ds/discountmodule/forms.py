@@ -11,6 +11,12 @@ class FilterDiscounts(forms.Form):
 
 
 class ArticulDiscounts(forms.Form):
-    description_f = forms.CharField(required=False)
+    description_a = forms.CharField(required=False)
     art_disco = forms.IntegerField(required=True, error_messages={'required': 'Введите скидку'})
     articul = forms.CharField(required=True, error_messages={'required': 'Введите артикул'})
+
+
+class ModelDiscounts(forms.Form):
+    description_m = forms.CharField(required=False)
+    mod_disco = forms.IntegerField(required=True, error_messages={'required': 'Введите скидку'})
+    modelss = forms.CharField(required=True, error_messages={'required': 'Введите артикул'})

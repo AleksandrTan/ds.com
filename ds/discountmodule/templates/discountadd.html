@@ -107,18 +107,18 @@
                             <div class="form-group">
                                 <label>Скидка по Артикулу</label>
                                 <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" maxlength="6">
-                                {% if form_errors %}<label id="disco_value-error" style="color: red"
-                                                                        for="disco_value">{{ form_errors.articul.0 }}</label>{% endif %}
+                                {% if form_errors %}<label id="articul-error" style="color: red"
+                                                                        for="articul">{{ form_errors.articul.0 }}</label>{% endif %}
                             </div>
                             <div class="form-group">
                                 <label>Описание</label>
-                                <textarea class="form-control" rows="3" id="description" name="description"></textarea>
+                                <textarea class="form-control" rows="3" id="description_a" name="description_a"></textarea>
                             </div>
                             <div class="form-group">
                                  <label>Скидка</label><span style="color: red;">*</span>
                                  <input class="form-control" placeholder="Скидка" id="art_disco" name="art_disco" type="number" value="">
-                                 {% if form_errors %}<label id="disco_value-error" style="color: red"
-                                                                        for="disco_value">{{ form_errors.art_disco.0 }}</label>{% endif %}
+                                 {% if form_errors %}<label id="art_disco-error" style="color: red"
+                                                                        for="art_disco">{{ form_errors.art_disco.0 }}</label>{% endif %}
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-sm btn-success form-control">Добавить</button>
@@ -126,19 +126,23 @@
                         </form>
                     </div>
                     <div class="col-lg-2">
-                        <form class="form form-offer" method="post" name="model_disco" action="{% url 'discountfilter' %}"
+                        <form class="form form-offer" method="post" name="model_disco" action="{% url 'discountmodel' %}"
                               id="model_disco">{% csrf_token %}
                             <div class="form-group">
                                 <label>Скидка по Модели</label>
                                 <input class="form-control" placeholder="Модель" id="modelss" name="modelss" type="text">
+                                {% if form_errors %}<label id="modelss-error" style="color: red"
+                                                                        for="modelss">{{ form_errors.modelss.0 }}</label>{% endif %}
                             </div>
                             <div class="form-group">
                                 <label>Описание</label>
-                                <textarea class="form-control" rows="3" id="description" name="description"></textarea>
+                                <textarea class="form-control" rows="3" id="description_m" name="description_m"></textarea>
                             </div>
                             <div class="form-group">
                                  <label>Скидка</label><span style="color: red;">*</span>
                                  <input class="form-control" placeholder="Скидка" id="mod_disco" name="mod_disco" type="number" value="">
+                                 {% if form_errors %}<label id="mod_disco-error" style="color: red"
+                                                                        for="mod_disco">{{ form_errors.mod_disco.0 }}</label>{% endif %}
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-sm btn-success form-control">Добавить</button>

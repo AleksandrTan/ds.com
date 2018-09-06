@@ -84,7 +84,6 @@ $('#modelss').blur(function () {
 				}
 			} );
 
-
     $( "#articul_disco" ).validate( {
 				rules: {
 					art_disco: {
@@ -119,7 +118,6 @@ $('#modelss').blur(function () {
 				}
 	} );
 
-
     $( "#model_disco" ).validate( {
 				rules: {
 					mod_disco: {
@@ -141,7 +139,7 @@ $('#modelss').blur(function () {
                         min: 'Блять больше 0!!!!'
 					},
                     modelss:{
-					    required: "Пожалуйста введите Модель",
+					    required: "Пожалуйста введите Модель"
                     }
 				},
                 errorClass: "alert-danger",
@@ -154,7 +152,4 @@ $('#modelss').blur(function () {
 					$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
 				}
 	} );
-
-
 });
-
