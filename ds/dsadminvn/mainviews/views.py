@@ -4,6 +4,7 @@ import shutil
 from django.conf import settings
 from django.shortcuts import redirect, render
 from django.core.files.storage import FileSystemStorage
+from django.core.cache import cache
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import View
 from django.views.generic.base import TemplateView
@@ -23,7 +24,6 @@ from dsstore.models import (MainCategory, NameProduct, SizeTable,
                             ProductsForm, ProductsFormEdit, Image)
 from handsale.models import ProductsSale
 from dsadminvn.forms import FoundArticuls, FilterProducts, FilterSaleProduct, FoundModelss
-import dsadminvn.mainhelpers.SetBarcode as SB
 
 
 class BaseAdminView(View):
@@ -427,6 +427,7 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         instance.identifier = self.uuid_sentece()
         instance.dirname_img = self.uuid_sentece_user()
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['articul']
+        import dsadminvn.mainhelpers.SetBarcode as SB
         genbarcode = SB.SetBarcode(form.cleaned_data['pre_barcode'])
         instance.barcode = genbarcode.generate_barcode()
         instance.save()

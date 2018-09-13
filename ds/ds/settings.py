@@ -176,3 +176,7 @@ LOGGING = {
         }
     },
 }
+
+ADMINS = (
+    ('Alex Tan', 'rumych2013@gmail.com'),
+)
