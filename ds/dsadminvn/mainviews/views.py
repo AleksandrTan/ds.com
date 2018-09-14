@@ -466,6 +466,7 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
     def save_other_files(self, instance, form):
         if not os.path.isdir(settings.TEST_MEDIA_IMAGES + instance.dirname_img) and self.request.FILES.getlist('other_img[]'):
             os.mkdir(settings.TEST_MEDIA_IMAGES + instance.dirname_img, mode=777)
+            os.chmod(settings.TEST_MEDIA_IMAGES + instance.dirname_img, '0777')
         # https://docs.djangoproject.com/ja/1.11/_modules/django/utils/datastructures/ - look for MultiValueDict(getlist)
         if self.request.FILES.getlist('img_product[]'):
             for ifile in self.request.FILES.getlist('img_product[]'):
@@ -560,7 +561,7 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
 
     def save_oter_files(self, instance, form):
         if not os.path.isdir(settings.TEST_MEDIA_IMAGES + instance.dirname_img) and self.request.FILES.getlist('other_img[]'):
-            os.mkdir(settings.TEST_MEDIA_IMAGES + instance.dirname_img, mode=0o777)
+            os.mkdir(settings.TEST_MEDIA_IMAGES + instance.dirname_img, mode=777)
         # https://docs.djangoproject.com/ja/1.11/_modules/django/utils/datastructures/ - look for MultiValueDict(getlist)
         if self.request.FILES.getlist('img_product[]'):
             for ifile in self.request.FILES.getlist('img_product[]'):
