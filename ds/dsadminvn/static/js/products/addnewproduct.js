@@ -156,7 +156,8 @@ $('#pre_barcode').blur(function () {
 						maxlength: 100
 					},
 					count_num: {
-						min: 0
+						min: 0,
+                        required: true,
 					}
 
 				},
@@ -190,7 +191,8 @@ $('#pre_barcode').blur(function () {
 						maxlength: "Не более 100 символов"
 					},
 					count_num: {
-						min: "Больше 0!!!"
+						min: "Больше 0!!!",
+                        required: "Пожалуйста введите колличество"
 					}
 				},
                 errorClass: "alert-danger",

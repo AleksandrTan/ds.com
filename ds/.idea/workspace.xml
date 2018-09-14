@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d038e7be-5329-43d2-b228-19170d0d687e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html" afterPath="$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dsadminvn/mainviews/views.py" afterPath="$PROJECT_DIR$/dsadminvn/mainviews/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dsadminvn/static/js/products/addnewproduct.js" afterPath="$PROJECT_DIR$/dsadminvn/static/js/products/addnewproduct.js" />
     </list>
     <ignored path="handsale/migrations/" />
     <ignored path="handsale/migrations/0001_initial.py" />
@@ -46,7 +47,7 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ds/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1820">
+            <state relative-caret-position="-2184">
               <caret line="32" column="30" lean-forward="false" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
               <folding />
             </state>
@@ -75,27 +76,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dsadminvn/mainviews/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="419" column="23" lean-forward="false" selection-start-line="419" selection-start-column="17" selection-end-line="419" selection-end-column="23" />
+            <state relative-caret-position="209">
+              <caret line="467" column="77" lean-forward="false" selection-start-line="467" selection-start-column="77" selection-end-line="467" selection-end-column="77" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <element signature="e#2303#2540#0" expanded="false" />
                 <element signature="e#2642#2838#0" expanded="false" />
                 <element signature="e#2976#3340#0" expanded="false" />
                 <element signature="e#12570#13259#0" expanded="false" />
-                <element signature="e#17318#22539#0" expanded="false" />
-                <element signature="e#22637#22985#0" expanded="false" />
-                <element signature="e#23085#23914#0" expanded="false" />
-                <element signature="e#24006#24289#0" expanded="false" />
-                <element signature="e#24384#24672#0" expanded="false" />
-                <element signature="e#24764#25049#0" expanded="false" />
-                <element signature="e#25150#25753#0" expanded="false" />
-                <element signature="e#25855#26452#0" expanded="false" />
-                <element signature="e#26550#28203#0" expanded="false" />
-                <element signature="e#28303#30122#0" expanded="false" />
+                <element signature="e#17327#22548#0" expanded="false" />
+                <element signature="e#22646#22994#0" expanded="false" />
+                <element signature="e#24015#24298#0" expanded="false" />
+                <element signature="e#24393#24681#0" expanded="false" />
+                <element signature="e#24773#25058#0" expanded="false" />
+                <element signature="e#25159#25762#0" expanded="false" />
+                <element signature="e#25864#26461#0" expanded="false" />
+                <element signature="e#26559#28212#0" expanded="false" />
+                <element signature="e#28312#30131#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -104,14 +104,14 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dsstore/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
+            <state relative-caret-position="1262">
               <caret line="394" column="47" lean-forward="false" selection-start-line="394" selection-start-column="47" selection-end-line="394" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="createnewproduct.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="createnewproduct.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="140">
@@ -127,10 +127,14 @@
       <file leaf-file-name="addnewproduct.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dsadminvn/static/js/products/addnewproduct.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="45" column="39" lean-forward="false" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
+            <state relative-caret-position="1560">
+              <caret line="194" column="65" lean-forward="false" selection-start-line="194" selection-start-column="65" selection-end-line="194" selection-end-column="65" />
               <folding>
-                <marker date="1536941426973" expanded="true" signature="1048:1059" ph="..." />
+                <marker date="1536942078039" expanded="true" signature="615:6627" ph="{...}" />
+                <marker date="1536942078039" expanded="true" signature="1048:1059" ph="..." />
+                <marker date="1536942078039" expanded="true" signature="4452:6622" ph="{&quot;errorClass&quot;: &quot;alert-danger&quot;...}" />
+                <marker date="1536942078039" expanded="true" signature="5111:6048" ph="{...}" />
+                <marker date="1536942078039" expanded="true" signature="5941:6042" ph="{&quot;min&quot;: &quot;Больше 0!!!&quot;...}" />
               </folding>
             </state>
           </provider>
@@ -223,9 +227,9 @@
         <option value="$PROJECT_DIR$/ds/settings.py" />
         <option value="$PROJECT_DIR$/dsadminvn/templates/products/editproduct.html" />
         <option value="$PROJECT_DIR$/dsstore/models.py" />
-        <option value="$PROJECT_DIR$/dsadminvn/mainviews/views.py" />
-        <option value="$PROJECT_DIR$/dsadminvn/static/js/products/addnewproduct.js" />
         <option value="$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html" />
+        <option value="$PROJECT_DIR$/dsadminvn/static/js/products/addnewproduct.js" />
+        <option value="$PROJECT_DIR$/dsadminvn/mainviews/views.py" />
       </list>
     </option>
   </component>
@@ -282,72 +286,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dsadminvn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dsadminvn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dsadminvn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="products" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dsadminvn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -659,13 +597,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1508917586671</updated>
-    </task>
-    <task id="LOCAL-00181" summary="Barcode sales">
-      <created>1535478652056</created>
-      <option name="number" value="00181" />
-      <option name="presentableId" value="LOCAL-00181" />
-      <option name="project" value="LOCAL" />
-      <updated>1535478652056</updated>
     </task>
     <task id="LOCAL-00182" summary="Barcode sales">
       <created>1535483149451</created>
@@ -1003,7 +934,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536941456028</updated>
     </task>
-    <option name="localTasksCounter" value="230" />
+    <task id="LOCAL-00230" summary="Discounts module">
+      <created>1536941766202</created>
+      <option name="number" value="00230" />
+      <option name="presentableId" value="LOCAL-00230" />
+      <option name="project" value="LOCAL" />
+      <updated>1536941766202</updated>
+    </task>
+    <option name="localTasksCounter" value="231" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1112,7 +1050,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="30" />
+      <option name="time" value="31" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1421,27 +1359,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.handsale_productssale">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ds/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1820">
-          <caret line="32" column="30" lean-forward="false" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.dsstore_products">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1479,48 +1396,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dsadminvn/mainviews/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="419" column="23" lean-forward="false" selection-start-line="419" selection-start-column="17" selection-end-line="419" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#2303#2540#0" expanded="false" />
-            <element signature="e#2642#2838#0" expanded="false" />
-            <element signature="e#2976#3340#0" expanded="false" />
-            <element signature="e#12570#13259#0" expanded="false" />
-            <element signature="e#17318#22539#0" expanded="false" />
-            <element signature="e#22637#22985#0" expanded="false" />
-            <element signature="e#23085#23914#0" expanded="false" />
-            <element signature="e#24006#24289#0" expanded="false" />
-            <element signature="e#24384#24672#0" expanded="false" />
-            <element signature="e#24764#25049#0" expanded="false" />
-            <element signature="e#25150#25753#0" expanded="false" />
-            <element signature="e#25855#26452#0" expanded="false" />
-            <element signature="e#26550#28203#0" expanded="false" />
-            <element signature="e#28303#30122#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dsstore/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="394" column="47" lean-forward="false" selection-start-line="394" selection-start-column="47" selection-end-line="394" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dsadminvn/static/js/products/addnewproduct.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="45" column="39" lean-forward="false" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
-          <folding>
-            <marker date="1536941426973" expanded="true" signature="1048:1059" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -1528,6 +1403,72 @@
           <folding>
             <element signature="e#21582#21605#0#HTML" expanded="true" />
             <element signature="e#21617#21638#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.handsale_productssale">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dsadminvn/static/js/products/addnewproduct.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1560">
+          <caret line="194" column="65" lean-forward="false" selection-start-line="194" selection-start-column="65" selection-end-line="194" selection-end-column="65" />
+          <folding>
+            <marker date="1536942078039" expanded="true" signature="615:6627" ph="{...}" />
+            <marker date="1536942078039" expanded="true" signature="1048:1059" ph="..." />
+            <marker date="1536942078039" expanded="true" signature="4452:6622" ph="{&quot;errorClass&quot;: &quot;alert-danger&quot;...}" />
+            <marker date="1536942078039" expanded="true" signature="5111:6048" ph="{...}" />
+            <marker date="1536942078039" expanded="true" signature="5941:6042" ph="{&quot;min&quot;: &quot;Больше 0!!!&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dsstore/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1262">
+          <caret line="394" column="47" lean-forward="false" selection-start-line="394" selection-start-column="47" selection-end-line="394" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ds/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2184">
+          <caret line="32" column="30" lean-forward="false" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dsadminvn/mainviews/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="467" column="77" lean-forward="false" selection-start-line="467" selection-start-column="77" selection-end-line="467" selection-end-column="77" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#2303#2540#0" expanded="false" />
+            <element signature="e#2642#2838#0" expanded="false" />
+            <element signature="e#2976#3340#0" expanded="false" />
+            <element signature="e#12570#13259#0" expanded="false" />
+            <element signature="e#17327#22548#0" expanded="false" />
+            <element signature="e#22646#22994#0" expanded="false" />
+            <element signature="e#24015#24298#0" expanded="false" />
+            <element signature="e#24393#24681#0" expanded="false" />
+            <element signature="e#24773#25058#0" expanded="false" />
+            <element signature="e#25159#25762#0" expanded="false" />
+            <element signature="e#25864#26461#0" expanded="false" />
+            <element signature="e#26559#28212#0" expanded="false" />
+            <element signature="e#28312#30131#0" expanded="false" />
           </folding>
         </state>
       </provider>
