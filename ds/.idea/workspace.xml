@@ -4,7 +4,9 @@
     <list default="true" id="d038e7be-5329-43d2-b228-19170d0d687e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/36876ea3-58c9-4bed-b93d-43530f435bf9.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/36876ea3-58c9-4bed-b93d-43530f435bf9.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dsadminvn/templates/products/editproduct.html" afterPath="$PROJECT_DIR$/dsadminvn/templates/products/editproduct.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dsadminvn/mainviews/views.py" afterPath="$PROJECT_DIR$/dsadminvn/mainviews/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dsadminvn/static/js/products/addnewproduct.js" afterPath="$PROJECT_DIR$/dsadminvn/static/js/products/addnewproduct.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html" afterPath="$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dsstore/models.py" afterPath="$PROJECT_DIR$/dsstore/models.py" />
     </list>
     <ignored path="handsale/migrations/" />
@@ -70,7 +72,7 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dsadminvn/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1540">
+            <state relative-caret-position="576">
               <caret line="79" column="49" lean-forward="false" selection-start-line="79" selection-start-column="49" selection-end-line="79" selection-end-column="49" />
               <folding />
             </state>
@@ -80,24 +82,24 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dsadminvn/mainviews/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-17">
-              <caret line="377" column="18" lean-forward="false" selection-start-line="377" selection-start-column="18" selection-end-line="377" selection-end-column="18" />
+            <state relative-caret-position="443">
+              <caret line="419" column="23" lean-forward="false" selection-start-line="419" selection-start-column="17" selection-end-line="419" selection-end-column="23" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <element signature="e#2303#2540#0" expanded="false" />
                 <element signature="e#2642#2838#0" expanded="false" />
                 <element signature="e#2976#3340#0" expanded="false" />
                 <element signature="e#12570#13259#0" expanded="false" />
-                <element signature="e#17329#22550#0" expanded="false" />
-                <element signature="e#22648#22996#0" expanded="false" />
-                <element signature="e#23096#23925#0" expanded="false" />
-                <element signature="e#24017#24300#0" expanded="false" />
-                <element signature="e#24395#24683#0" expanded="false" />
-                <element signature="e#24775#25060#0" expanded="false" />
-                <element signature="e#25161#25764#0" expanded="false" />
-                <element signature="e#25866#26463#0" expanded="false" />
-                <element signature="e#26561#28214#0" expanded="false" />
-                <element signature="e#28314#30133#0" expanded="false" />
+                <element signature="e#17318#22539#0" expanded="false" />
+                <element signature="e#22637#22985#0" expanded="false" />
+                <element signature="e#23085#23914#0" expanded="false" />
+                <element signature="e#24006#24289#0" expanded="false" />
+                <element signature="e#24384#24672#0" expanded="false" />
+                <element signature="e#24764#25049#0" expanded="false" />
+                <element signature="e#25150#25753#0" expanded="false" />
+                <element signature="e#25855#26452#0" expanded="false" />
+                <element signature="e#26550#28203#0" expanded="false" />
+                <element signature="e#28303#30122#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -106,19 +108,31 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dsstore/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="388" column="73" lean-forward="false" selection-start-line="388" selection-start-column="73" selection-end-line="388" selection-end-column="73" />
+            <state relative-caret-position="302">
+              <caret line="394" column="47" lean-forward="false" selection-start-line="394" selection-start-column="47" selection-end-line="394" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editproduct.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/dsadminvn/templates/products/editproduct.html">
+      <file leaf-file-name="createnewproduct.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="221" column="18" lean-forward="false" selection-start-line="220" selection-start-column="18" selection-end-line="221" selection-end-column="18" />
+            <state relative-caret-position="300">
+              <caret line="306" column="110" lean-forward="false" selection-start-line="306" selection-start-column="98" selection-end-line="306" selection-end-column="110" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addnewproduct.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dsadminvn/static/js/products/addnewproduct.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="560">
+              <caret line="45" column="39" lean-forward="false" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
+              <folding>
+                <marker date="1536941426973" expanded="true" signature="1048:1059" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -188,7 +202,6 @@
         <option value="$PROJECT_DIR$/barcodesalep/forms.py" />
         <option value="$PROJECT_DIR$/barcodesalep/static/js/barcodesalep.js" />
         <option value="$PROJECT_DIR$/dsadminvn/templates/products/deleteproduct.html" />
-        <option value="$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html" />
         <option value="$PROJECT_DIR$/dsadminvn/templates/products/productswork.html" />
         <option value="$PROJECT_DIR$/dsadminvn/templates/products/saleviewproduct.html" />
         <option value="$PROJECT_DIR$/discountmodule/mainviews/__init__.py" />
@@ -204,15 +217,16 @@
         <option value="$PROJECT_DIR$/discountmodule/templates/discountshow.html" />
         <option value="$PROJECT_DIR$/discountmodule/static/js/discoadd.js" />
         <option value="$PROJECT_DIR$/ds/wsgi.py" />
-        <option value="$PROJECT_DIR$/dsadminvn/mainviews/views.py" />
-        <option value="$PROJECT_DIR$/dsadminvn/static/js/products/addnewproduct.js" />
         <option value="$PROJECT_DIR$/dsadminvn/static/js/products/editproduct.js" />
         <option value="$PROJECT_DIR$/handsale/models.py" />
         <option value="$PROJECT_DIR$/barcodesalep/mainviews/views.py" />
         <option value="$PROJECT_DIR$/handsale/mainviews/views.py" />
         <option value="$PROJECT_DIR$/ds/settings.py" />
-        <option value="$PROJECT_DIR$/dsstore/models.py" />
         <option value="$PROJECT_DIR$/dsadminvn/templates/products/editproduct.html" />
+        <option value="$PROJECT_DIR$/dsstore/models.py" />
+        <option value="$PROJECT_DIR$/dsadminvn/mainviews/views.py" />
+        <option value="$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html" />
+        <option value="$PROJECT_DIR$/dsadminvn/static/js/products/addnewproduct.js" />
       </list>
     </option>
   </component>
@@ -286,7 +300,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -304,11 +322,33 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="products" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ds" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ds" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dsadminvn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -620,13 +660,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1508917586671</updated>
-    </task>
-    <task id="LOCAL-00179" summary="Barcode sales">
-      <created>1535378456280</created>
-      <option name="number" value="00179" />
-      <option name="presentableId" value="LOCAL-00179" />
-      <option name="project" value="LOCAL" />
-      <updated>1535378456280</updated>
     </task>
     <task id="LOCAL-00180" summary="Barcode sales">
       <created>1535477438321</created>
@@ -964,7 +997,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536919879935</updated>
     </task>
-    <option name="localTasksCounter" value="228" />
+    <task id="LOCAL-00228" summary="Discounts module">
+      <created>1536939354452</created>
+      <option name="number" value="00228" />
+      <option name="presentableId" value="LOCAL-00228" />
+      <option name="project" value="LOCAL" />
+      <updated>1536939354452</updated>
+    </task>
+    <option name="localTasksCounter" value="229" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -978,13 +1018,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17857143" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2907489" sideWeight="0.53837955" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09914712" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2907489" sideWeight="0.46162048" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2907489" sideWeight="0.46162048" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21696036" sideWeight="0.4632196" order="10" side_tool="false" content_ui="tabs" />
@@ -1078,18 +1118,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.dsstore_sizecount">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dsadminvn/static/js/products/editpfileupload.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1700">
@@ -1345,14 +1373,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dsadminvn/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1540">
-          <caret line="79" column="49" lean-forward="false" selection-start-line="79" selection-start-column="49" selection-end-line="79" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/discountmodule/static/js/discoadd.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="576">
@@ -1375,37 +1395,6 @@
         <state relative-caret-position="2900">
           <caret line="147" column="21" lean-forward="false" selection-start-line="147" selection-start-column="21" selection-end-line="147" selection-end-column="21" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dsadminvn/static/js/products/addnewproduct.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="191" column="21" lean-forward="false" selection-start-line="189" selection-start-column="20" selection-end-line="191" selection-end-column="21" />
-          <folding>
-            <marker date="1536861586165" expanded="true" signature="1048:1059" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="135" column="101" lean-forward="false" selection-start-line="135" selection-start-column="87" selection-end-line="135" selection-end-column="101" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.dsstore_products">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -1454,35 +1443,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dsadminvn/mainviews/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="377" column="18" lean-forward="false" selection-start-line="377" selection-start-column="18" selection-end-line="377" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#2303#2540#0" expanded="false" />
-            <element signature="e#2642#2838#0" expanded="false" />
-            <element signature="e#2976#3340#0" expanded="false" />
-            <element signature="e#12570#13259#0" expanded="false" />
-            <element signature="e#17329#22550#0" expanded="false" />
-            <element signature="e#22648#22996#0" expanded="false" />
-            <element signature="e#23096#23925#0" expanded="false" />
-            <element signature="e#24017#24300#0" expanded="false" />
-            <element signature="e#24395#24683#0" expanded="false" />
-            <element signature="e#24775#25060#0" expanded="false" />
-            <element signature="e#25161#25764#0" expanded="false" />
-            <element signature="e#25866#26463#0" expanded="false" />
-            <element signature="e#26561#28214#0" expanded="false" />
-            <element signature="e#28314#30133#0" expanded="false" />
-          </folding>
+    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.dsstore_products">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dsstore/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="388" column="73" lean-forward="false" selection-start-line="388" selection-start-column="73" selection-end-line="388" selection-end-column="73" />
-          <folding />
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -1491,6 +1461,72 @@
         <state relative-caret-position="540">
           <caret line="221" column="18" lean-forward="false" selection-start-line="220" selection-start-column="18" selection-end-line="221" selection-end-column="18" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dsadminvn/mainhelpers/SetBarcode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dsadminvn/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="79" column="49" lean-forward="false" selection-start-line="79" selection-start-column="49" selection-end-line="79" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dsadminvn/mainviews/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="419" column="23" lean-forward="false" selection-start-line="419" selection-start-column="17" selection-end-line="419" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#2303#2540#0" expanded="false" />
+            <element signature="e#2642#2838#0" expanded="false" />
+            <element signature="e#2976#3340#0" expanded="false" />
+            <element signature="e#12570#13259#0" expanded="false" />
+            <element signature="e#17318#22539#0" expanded="false" />
+            <element signature="e#22637#22985#0" expanded="false" />
+            <element signature="e#23085#23914#0" expanded="false" />
+            <element signature="e#24006#24289#0" expanded="false" />
+            <element signature="e#24384#24672#0" expanded="false" />
+            <element signature="e#24764#25049#0" expanded="false" />
+            <element signature="e#25150#25753#0" expanded="false" />
+            <element signature="e#25855#26452#0" expanded="false" />
+            <element signature="e#26550#28203#0" expanded="false" />
+            <element signature="e#28303#30122#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dsstore/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="394" column="47" lean-forward="false" selection-start-line="394" selection-start-column="47" selection-end-line="394" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="306" column="110" lean-forward="false" selection-start-line="306" selection-start-column="98" selection-end-line="306" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dsadminvn/static/js/products/addnewproduct.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="45" column="39" lean-forward="false" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
+          <folding>
+            <marker date="1536941426973" expanded="true" signature="1048:1059" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -716,6 +716,7 @@ model</ColNames>
     <column id="171" parent="27" name="brends">
       <Position>23</Position>
       <DataType>smallint(6)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
     <column id="172" parent="27" name="pre_barcode">
       <Position>28</Position>
@@ -735,6 +736,7 @@ model</ColNames>
     <column id="175" parent="27" name="count_num">
       <Position>31</Position>
       <DataType>smallint(6)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
     <column id="176" parent="27" name="modelss">
       <Position>32</Position>

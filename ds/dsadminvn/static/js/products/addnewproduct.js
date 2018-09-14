@@ -26,6 +26,7 @@ $(document).ready(function () {
             if (data.length == 0){
                 parentElementTable.empty();
                 var trElem = '<tr><td style="color: red;">Нет размеров для отображения!</td></tr>';
+                $('#save_product').hide();
                 parentElementTable.append(trElem);
             }
             else {
@@ -42,6 +43,7 @@ $(document).ready(function () {
                 parentElementTable.append(new_size);
                 $('#count_sizes').val(data.length);
                 $('#count_sizes_add').val(1);
+                $('#save_product').show();
             }
         }
     });

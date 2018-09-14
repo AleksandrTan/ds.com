@@ -50,8 +50,8 @@
                     <strong>Внимание!!!</strong> {{ form.non_field_errors }}
                 </div>
                 {% endif %}
-                {% if not maincategorys or not nameproducts %}
-                    <p>Нет категорий или названий для отображения.Добавте данные!</p>
+                {% if not maincategorys or not nameproducts or not brends %}
+                    <p>Нет категорий или названий или бренда для отображения.Добавте данные!</p>
                 {% else %}
                 <form class="form form-offer" method="post" name="add_new_product" action="{% url 'createproduct' %}"
                       id="add_new_product" enctype="multipart/form-data">{% csrf_token %}

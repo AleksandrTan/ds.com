@@ -379,14 +379,14 @@ class Products(models.Model):
     pre_barcode = models.CharField(unique=True, max_length=5, blank=False)
     barcode = models.CharField(unique=True, max_length=13, blank=False)
     nameproduct = models.ForeignKey(NameProduct, on_delete=models.CASCADE, blank=False)
-    brends = models.SmallIntegerField(blank=True, default=0, null=True)
+    brends = models.SmallIntegerField(blank=True, default=0)
     season_id = models.SmallIntegerField(blank=True, default=0)
     price = models.FloatField(blank=True, default=0.0)
     wholesale_price = models.FloatField(blank=True, default=0)
     purshase_price = models.FloatField(blank=True, default=0)
     modelss = models.CharField(blank=True, default='', max_length=50)
     size = models.SmallIntegerField(blank=True, default=0)
-    count_num = models.SmallIntegerField(blank=True, default=0, null=True)
+    count_num = models.SmallIntegerField(blank=True, default=0)
     # main_photo_path = models.ImageField(blank=True, upload_to='images/')
     main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
                                           content_types=['image/jpg', 'image/png', 'image/jpeg'],

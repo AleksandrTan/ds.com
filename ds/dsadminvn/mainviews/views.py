@@ -428,7 +428,7 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         instance.dirname_img = self.uuid_sentece_user()
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['articul']
         import dsadminvn.mainhelpers.SetBarcode as SB
-        genbarcode = SB.SetBarcode(form.cleaned_data['pre_barcode'])
+        genbarcode = SB(form.cleaned_data['pre_barcode'])
         instance.barcode = genbarcode.generate_barcode()
         instance.save()
 
