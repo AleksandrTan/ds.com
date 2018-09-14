@@ -24,6 +24,7 @@ from dsstore.models import (MainCategory, NameProduct, SizeTable,
                             ProductsForm, ProductsFormEdit, Image)
 from handsale.models import ProductsSale
 from dsadminvn.forms import FoundArticuls, FilterProducts, FilterSaleProduct, FoundModelss
+from dsadminvn.mainhelpers.SetBarcode import SetBarcode as SBS
 
 
 class BaseAdminView(View):
@@ -427,8 +428,7 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         instance.identifier = self.uuid_sentece()
         instance.dirname_img = self.uuid_sentece_user()
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['articul']
-        import dsadminvn.mainhelpers.SetBarcode as SBS
-        genbarcode = SBS.SetBarcode(form.cleaned_data['pre_barcode'])
+        genbarcode = SBS(form.cleaned_data['pre_barcode'])
         instance.barcode = genbarcode.generate_barcode()
         instance.save()
 

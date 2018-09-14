@@ -78,23 +78,23 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dsadminvn/mainviews/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="430" column="24" lean-forward="false" selection-start-line="430" selection-start-column="24" selection-end-line="430" selection-end-column="24" />
+            <state relative-caret-position="409">
+              <caret line="435" column="16" lean-forward="false" selection-start-line="435" selection-start-column="16" selection-end-line="435" selection-end-column="16" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#2303#2540#0" expanded="false" />
-                <element signature="e#2642#2838#0" expanded="false" />
-                <element signature="e#2976#3340#0" expanded="false" />
-                <element signature="e#12570#13259#0" expanded="false" />
-                <element signature="e#17329#22550#0" expanded="false" />
-                <element signature="e#22648#22996#0" expanded="false" />
-                <element signature="e#24017#24300#0" expanded="false" />
-                <element signature="e#24395#24683#0" expanded="false" />
-                <element signature="e#24775#25060#0" expanded="false" />
-                <element signature="e#25161#25764#0" expanded="false" />
-                <element signature="e#25866#26463#0" expanded="false" />
-                <element signature="e#26561#28214#0" expanded="false" />
-                <element signature="e#28314#30133#0" expanded="false" />
+                <element signature="e#2366#2603#0" expanded="false" />
+                <element signature="e#2705#2901#0" expanded="false" />
+                <element signature="e#3039#3403#0" expanded="false" />
+                <element signature="e#12633#13322#0" expanded="false" />
+                <element signature="e#17326#22547#0" expanded="false" />
+                <element signature="e#22645#22993#0" expanded="false" />
+                <element signature="e#24014#24297#0" expanded="false" />
+                <element signature="e#24392#24680#0" expanded="false" />
+                <element signature="e#24772#25057#0" expanded="false" />
+                <element signature="e#25158#25761#0" expanded="false" />
+                <element signature="e#25863#26460#0" expanded="false" />
+                <element signature="e#26558#28211#0" expanded="false" />
+                <element signature="e#28311#30130#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -113,9 +113,11 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dsstore/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1262">
+            <state relative-caret-position="7880">
               <caret line="394" column="47" lean-forward="false" selection-start-line="394" selection-start-column="47" selection-end-line="394" selection-end-column="47" />
-              <folding />
+              <folding>
+                <element signature="e#34#62#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -625,13 +627,6 @@
       <option name="presentableId" value="Default" />
       <updated>1508917586671</updated>
     </task>
-    <task id="LOCAL-00183" summary="Barcode sales">
-      <created>1535483330664</created>
-      <option name="number" value="00183" />
-      <option name="presentableId" value="LOCAL-00183" />
-      <option name="project" value="LOCAL" />
-      <updated>1535483330664</updated>
-    </task>
     <task id="LOCAL-00184" summary="Barcode sales">
       <created>1535484587668</created>
       <option name="number" value="00184" />
@@ -968,7 +963,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536943917039</updated>
     </task>
-    <option name="localTasksCounter" value="232" />
+    <task id="LOCAL-00232" summary="Discounts module">
+      <created>1536944450281</created>
+      <option name="number" value="00232" />
+      <option name="presentableId" value="LOCAL-00232" />
+      <option name="project" value="LOCAL" />
+      <updated>1536944450282</updated>
+    </task>
+    <option name="localTasksCounter" value="233" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1430,14 +1432,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dsstore/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1262">
-          <caret line="394" column="47" lean-forward="false" selection-start-line="394" selection-start-column="47" selection-end-line="394" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ds/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2184">
@@ -1469,6 +1463,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dsstore/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7880">
+          <caret line="394" column="47" lean-forward="false" selection-start-line="394" selection-start-column="47" selection-end-line="394" selection-end-column="47" />
+          <folding>
+            <element signature="e#34#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dsadminvn/mainhelpers/SetBarcode.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1479,23 +1483,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dsadminvn/mainviews/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="430" column="24" lean-forward="false" selection-start-line="430" selection-start-column="24" selection-end-line="430" selection-end-column="24" />
+        <state relative-caret-position="409">
+          <caret line="435" column="16" lean-forward="false" selection-start-line="435" selection-start-column="16" selection-end-line="435" selection-end-column="16" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#2303#2540#0" expanded="false" />
-            <element signature="e#2642#2838#0" expanded="false" />
-            <element signature="e#2976#3340#0" expanded="false" />
-            <element signature="e#12570#13259#0" expanded="false" />
-            <element signature="e#17329#22550#0" expanded="false" />
-            <element signature="e#22648#22996#0" expanded="false" />
-            <element signature="e#24017#24300#0" expanded="false" />
-            <element signature="e#24395#24683#0" expanded="false" />
-            <element signature="e#24775#25060#0" expanded="false" />
-            <element signature="e#25161#25764#0" expanded="false" />
-            <element signature="e#25866#26463#0" expanded="false" />
-            <element signature="e#26561#28214#0" expanded="false" />
-            <element signature="e#28314#30133#0" expanded="false" />
+            <element signature="e#2366#2603#0" expanded="false" />
+            <element signature="e#2705#2901#0" expanded="false" />
+            <element signature="e#3039#3403#0" expanded="false" />
+            <element signature="e#12633#13322#0" expanded="false" />
+            <element signature="e#17326#22547#0" expanded="false" />
+            <element signature="e#22645#22993#0" expanded="false" />
+            <element signature="e#24014#24297#0" expanded="false" />
+            <element signature="e#24392#24680#0" expanded="false" />
+            <element signature="e#24772#25057#0" expanded="false" />
+            <element signature="e#25158#25761#0" expanded="false" />
+            <element signature="e#25863#26460#0" expanded="false" />
+            <element signature="e#26558#28211#0" expanded="false" />
+            <element signature="e#28311#30130#0" expanded="false" />
           </folding>
         </state>
       </provider>
