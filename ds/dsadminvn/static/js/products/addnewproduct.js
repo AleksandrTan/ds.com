@@ -152,6 +152,9 @@ $('#pre_barcode').blur(function () {
 					caption:{
 						required: true,
 						maxlength: 100
+					},
+					count_num: {
+						min: 0
 					}
 
 				},
@@ -183,6 +186,9 @@ $('#pre_barcode').blur(function () {
 					caption: {
 						required: "Пожалуйста введите заголовок",
 						maxlength: "Не более 100 символов"
+					},
+					count_num: {
+						min: "Больше 0!!!"
 					}
 				},
                 errorClass: "alert-danger",
