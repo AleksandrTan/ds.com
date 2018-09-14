@@ -53,25 +53,26 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
         instance = forma.save(commit=False)
         instance.count_num = 1
         instance.link_name = ''
-        product = Products.objects.get_single_product(self.kwargs['pk'])
-        instance.articul = product.articul
-        instance.size = product.size
-        instance.products = product
-        if forma.cleaned_data['lost_num'] and product.discount:
+        #product = Products.objects.get_single_product(self.kwargs['pk'])
+        instance.articul = instance.products.articul
+        instance.size = instance.products.size
+        instance.purshase_price = instance.products.purshase_price
+        instance.products = instance.products
+        if forma.cleaned_data['lost_num'] and instance.products.discount:
             instance.lost_num = forma.cleaned_data['lost_num']
-            instance.true_price = (product.price - ((product.price * product.discount) / 100)) - forma.cleaned_data['lost_num']
-        elif forma.cleaned_data['lost_num'] and not product.discount:
+            instance.true_price = (instance.products.price - ((instance.products.price * instance.products.discount) / 100)) - forma.cleaned_data['lost_num']
+        elif forma.cleaned_data['lost_num'] and not instance.products.discount:
             instance.lost_num = forma.cleaned_data['lost_num']
             instance.true_price = forma.cleaned_data['price'] - forma.cleaned_data['lost_num']
-        elif not forma.cleaned_data['lost_num'] and product.discount:
-            instance.true_price = product.price - ((product.price * product.discount) / 100)
+        elif not forma.cleaned_data['lost_num'] and instance.products.discount:
+            instance.true_price = instance.products.price - ((instance.products.price * instance.products.discount) / 100)
         else:
             instance.true_price = forma.cleaned_data['price']
         instance.total_amount = instance.true_price
-        instance.discount = product.discount
+        instance.discount = instance.products.discount
         instance.save()
         # reduce the amount of product
-        Products.objects.reduce_amount(product.id, 1)
+        Products.objects.reduce_amount(instance.products.id, 1)
 
     def form_invalid(self, form):
         self.object = form.cleaned_data['products']

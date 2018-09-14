@@ -45,6 +45,7 @@ class SaveProducts(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, C
                 instance.articul = instance.products.articul
                 instance.size = instance.products.size
                 instance.price = instance.products.price
+                instance.purshase_price = instance.products.purshase_price
                 instance.products = instance.products
                 if instance.lost_num and instance.products.discount:
                     instance.lost_num = instance.lost_num
