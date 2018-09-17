@@ -49,7 +49,7 @@ function FoundBarcode(e){
            else {
                thet.alertinfotext.text('');
                thet.preloader.css({'display':'none', 'opacity': '0.5'});
-               thet.alertinfotext.text('Произошла ошибка, либо товар не найден попробуйте еще раз!!!');
+               thet.alertinfotext.text('Произошла ошибка, либо товар не найден попробуйте еще раз!!!Возможно не указана цена!!!');
                thet.alertinfo.modal();
                thet.barcode_articul.val('').focus();
            }

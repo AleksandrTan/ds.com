@@ -92,9 +92,28 @@
                                                                        class="btn btn-sm btn-success"
                                                                        href="{% url 'editproduct' product_data.id %}">Редактировать</a>
                                             </td>
-                                            <td class="text-center"><a type="button"
-                                                                       class="btn btn-sm btn-success"
-                                                                       href="{% url 'sellproduct' product_data.id %}">Продать</a>
+                                            <td class="text-center">
+                                            {% if product_data.price and product_data.is_active %}
+                                                    <a type="button"
+                                                                           class="btn btn-sm btn-success"
+                                                                           href="{% url 'sellproduct' product_data.id %}">Продать
+                                                    </a>
+                                                    {% elif not product_data.price and product_data.is_active %}
+                                                    <a type="button"
+                                                                           class="btn btn-sm btn-danger"
+                                                                           href="#">Нет цены
+                                                    </a>
+                                                    {% elif product_data.price and not product_data.is_active %}
+                                                    <a type="button"
+                                                                           class="btn btn-sm btn-danger"
+                                                                           href="#">Не активен
+                                                    </a>
+                                                    {% elif not product_data.price and not product_data.is_active %}
+                                                    <a type="button"
+                                                                           class="btn btn-sm btn-danger"
+                                                                           href="#">Нельзя
+                                                    </a>
+                                            {% endif %}
                                             </td>
                                             <td class="text-center"><a type="button"
                                                                    class="btn btn-sm btn-success"
