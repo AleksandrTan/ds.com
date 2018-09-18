@@ -66,8 +66,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dsadminvn/mainviews/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1760">
-              <caret line="543" column="38" lean-forward="false" selection-start-line="543" selection-start-column="38" selection-end-line="543" selection-end-column="38" />
+            <state relative-caret-position="-500">
+              <caret line="580" column="42" lean-forward="true" selection-start-line="580" selection-start-column="42" selection-end-line="580" selection-end-column="42" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <element signature="e#2366#2603#0" expanded="false" />
@@ -75,13 +75,13 @@
                 <element signature="e#3039#3403#0" expanded="false" />
                 <element signature="e#12633#13322#0" expanded="false" />
                 <element signature="e#22943#23291#0" expanded="false" />
-                <element signature="e#24312#24595#0" expanded="false" />
-                <element signature="e#24690#24978#0" expanded="false" />
-                <element signature="e#25070#25355#0" expanded="false" />
-                <element signature="e#25456#26059#0" expanded="false" />
-                <element signature="e#26161#26758#0" expanded="false" />
-                <element signature="e#26856#28509#0" expanded="false" />
-                <element signature="e#28609#30428#0" expanded="false" />
+                <element signature="e#24397#24680#0" expanded="false" />
+                <element signature="e#24775#25063#0" expanded="false" />
+                <element signature="e#25155#25440#0" expanded="false" />
+                <element signature="e#25541#26144#0" expanded="false" />
+                <element signature="e#26246#26843#0" expanded="false" />
+                <element signature="e#26941#28594#0" expanded="false" />
+                <element signature="e#28694#30513#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -187,8 +187,8 @@
         <option value="$PROJECT_DIR$/barcodesalep/mainviews/views.py" />
         <option value="$PROJECT_DIR$/barcodesalep/static/js/barcodesalep.js" />
         <option value="$PROJECT_DIR$/dsadminvn/templates/products/detailview.html" />
-        <option value="$PROJECT_DIR$/dsadminvn/mainviews/views.py" />
         <option value="$PROJECT_DIR$/dsadminvn/templates/index.html" />
+        <option value="$PROJECT_DIR$/dsadminvn/mainviews/views.py" />
       </list>
     </option>
   </component>
@@ -244,25 +244,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dsadminvn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dsadminvn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
+              <option name="myItemId" value="media" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -574,13 +556,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1508917586671</updated>
-    </task>
-    <task id="LOCAL-00192" summary="Barcode sales">
-      <created>1535964378601</created>
-      <option name="number" value="00192" />
-      <option name="presentableId" value="LOCAL-00192" />
-      <option name="project" value="LOCAL" />
-      <updated>1535964378601</updated>
     </task>
     <task id="LOCAL-00193" summary="Barcode sales">
       <created>1535964457006</created>
@@ -918,7 +893,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537291127560</updated>
     </task>
-    <option name="localTasksCounter" value="241" />
+    <task id="LOCAL-00241" summary="Discounts module">
+      <created>1537291340412</created>
+      <option name="number" value="00241" />
+      <option name="presentableId" value="LOCAL-00241" />
+      <option name="project" value="LOCAL" />
+      <updated>1537291340412</updated>
+    </task>
+    <option name="localTasksCounter" value="242" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -934,11 +916,11 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18336888" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18336888" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2907489" sideWeight="0.53837955" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09914712" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2907489" sideWeight="0.46162048" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2907489" sideWeight="0.46162048" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21696036" sideWeight="0.4632196" order="10" side_tool="false" content_ui="tabs" />
@@ -1420,8 +1402,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dsadminvn/mainviews/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1760">
-          <caret line="543" column="38" lean-forward="false" selection-start-line="543" selection-start-column="38" selection-end-line="543" selection-end-column="38" />
+        <state relative-caret-position="-500">
+          <caret line="580" column="42" lean-forward="true" selection-start-line="580" selection-start-column="42" selection-end-line="580" selection-end-column="42" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
             <element signature="e#2366#2603#0" expanded="false" />
@@ -1429,13 +1411,13 @@
             <element signature="e#3039#3403#0" expanded="false" />
             <element signature="e#12633#13322#0" expanded="false" />
             <element signature="e#22943#23291#0" expanded="false" />
-            <element signature="e#24312#24595#0" expanded="false" />
-            <element signature="e#24690#24978#0" expanded="false" />
-            <element signature="e#25070#25355#0" expanded="false" />
-            <element signature="e#25456#26059#0" expanded="false" />
-            <element signature="e#26161#26758#0" expanded="false" />
-            <element signature="e#26856#28509#0" expanded="false" />
-            <element signature="e#28609#30428#0" expanded="false" />
+            <element signature="e#24397#24680#0" expanded="false" />
+            <element signature="e#24775#25063#0" expanded="false" />
+            <element signature="e#25155#25440#0" expanded="false" />
+            <element signature="e#25541#26144#0" expanded="false" />
+            <element signature="e#26246#26843#0" expanded="false" />
+            <element signature="e#26941#28594#0" expanded="false" />
+            <element signature="e#28694#30513#0" expanded="false" />
           </folding>
         </state>
       </provider>

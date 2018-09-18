@@ -560,7 +560,7 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         return str(uuid.uuid4())[:10]
 
     def save_other_files(self, instance, form):
-        if not os.path.exists(settings.BASE_DIR + '/ '+ settings.TEST_MEDIA_IMAGES+instance.dirname_img) and self.request.FILES.getlist('other_img[]'):
+        if not os.path.exists(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img) and self.request.FILES.getlist('other_img[]'):
             os.mkdir(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img, mode=0o777)
         # https://docs.djangoproject.com/ja/1.11/_modules/django/utils/datastructures/ - look for MultiValueDict(getlist)
         if self.request.FILES.getlist('img_product[]'):
@@ -632,7 +632,8 @@ class DeleteProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
 
     def delete_images_dir(self):
         obj = self.get_object()
-        path = settings.MEDIA_ROOT + '\\images\\' + obj.dirname_img
+        path = settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+obj.dirname_img
+        #path = settings.MEDIA_ROOT + '\\images\\' + obj.dirname_img
         shutil.rmtree(path, ignore_errors=True)
 
     # def get_success_url(self):
