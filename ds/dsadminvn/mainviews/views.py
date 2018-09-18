@@ -464,15 +464,15 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         return str(uuid.uuid4())[:10]
 
     def save_other_files(self, instance, form):
-        if not os.path.exists(settings.BASE_DIR +'/'+settings.TEST_MEDIA_IMAGES+instance.dirname_img) and self.request.FILES.getlist('other_img[]'):
-            os.mkdir(settings.BASE_DIR +'/'+settings.TEST_MEDIA_IMAGES+instance.dirname_img, mode=0o777)
+        if not os.path.exists(settings.BASE_DIR + '/ '+ settings.TEST_MEDIA_IMAGES+instance.dirname_img) and self.request.FILES.getlist('other_img[]'):
+            os.mkdir(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img, mode=0o777)
         # https://docs.djangoproject.com/ja/1.11/_modules/django/utils/datastructures/ - look for MultiValueDict(getlist)
         if self.request.FILES.getlist('img_product[]'):
-            os.chmod(settings.BASE_DIR +'/'+settings.TEST_MEDIA_IMAGES+instance.dirname_img, 0o777)
+            os.chmod(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img, 0o777)
             for ifile in self.request.FILES.getlist('img_product[]'):
                 if ifile.size < settings.MAX_SIZE_UPLOAD and ifile.content_type in settings.CONTENT_TYPES_FILE:
                     fs = FileSystemStorage(location=settings.MEDIA_ROOT + '/images/' + instance.dirname_img,
-                                           base_url='medis/images/' + instance.dirname_img)
+                                           base_url='media/images/' + instance.dirname_img)
                     filename = fs.save(ifile.name, ifile)
                     i = Image(products=instance,
                               img_path=fs.url(filename))
@@ -529,7 +529,7 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
             self.delete_related_photo(instance, self.request.POST['list_del_other_photo'])
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['articul']
         instance.save()
-        self.save_oter_files(instance, form)
+        self.save_other_files(instance, form)
 
         return super(EditProduct, self).form_valid(form)
 
@@ -559,15 +559,16 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         import uuid
         return str(uuid.uuid4())[:10]
 
-    def save_oter_files(self, instance, form):
-        if not os.path.isdir(settings.TEST_MEDIA_IMAGES + instance.dirname_img) and self.request.FILES.getlist('other_img[]'):
-            os.mkdir(settings.TEST_MEDIA_IMAGES + instance.dirname_img, mode=777)
+    def save_other_files(self, instance, form):
+        if not os.path.exists(settings.BASE_DIR + '/ '+ settings.TEST_MEDIA_IMAGES+instance.dirname_img) and self.request.FILES.getlist('other_img[]'):
+            os.mkdir(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img, mode=0o777)
         # https://docs.djangoproject.com/ja/1.11/_modules/django/utils/datastructures/ - look for MultiValueDict(getlist)
         if self.request.FILES.getlist('img_product[]'):
+            os.chmod(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img, 0o777)
             for ifile in self.request.FILES.getlist('img_product[]'):
                 if ifile.size < settings.MAX_SIZE_UPLOAD and ifile.content_type in settings.CONTENT_TYPES_FILE:
-                    fs = FileSystemStorage(location=settings.TEST_MEDIA_IMAGES + instance.dirname_img,
-                                           base_url=settings.TEST_MEDIA_IMAGES + instance.dirname_img)
+                    fs = FileSystemStorage(location=settings.MEDIA_ROOT + '/images/' + instance.dirname_img,
+                                           base_url='media/images/' + instance.dirname_img)
                     filename = fs.save(ifile.name, ifile)
                     i = Image(products=instance,
                               img_path=fs.url(filename))
