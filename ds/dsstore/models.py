@@ -417,6 +417,26 @@ class Products(models.Model):
     date_create = models.DateTimeField(auto_now_add=True)
     objects = ManageProductsModel()
 
+    # change the main_imgfield value to be the newley modifed image value - png
+    # def clean(self):
+    #     from PIL import Image as Ima
+    #     from io import BytesIO
+    #     from django.core.files.uploadedfile import InMemoryUploadedFile
+    #     import sys
+    #     # Opening the uploaded image
+    #     im = Ima.open(self.main_photo_path)
+    #     output = BytesIO()
+    #     # Resize/modify the image
+    #     im = im.resize((277, 205))
+    #     # after modifications, save it to the output
+    #     im.save(output, format='PNG', quality=100)
+    #     output.seek(0)
+    #
+    #     # change the main_imgfield value to be the newley modifed image value - png
+    #     self.main_photo_path = InMemoryUploadedFile(output, 'MI.MainImgTypeField', "%s.png" % self.main_photo_path.name.split('.')[0],
+    #                                          'image/png', sys.getsizeof(output), None)
+    #     super(Products, self).clean()
+
     def get_absolute_url(self):
          return "products/%s" % self.link_name
 

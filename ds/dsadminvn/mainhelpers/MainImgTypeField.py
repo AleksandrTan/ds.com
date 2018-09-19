@@ -1,4 +1,4 @@
-from django.db.models import FileField
+from django.db.models import FileField, ImageField
 from django.forms import forms
 
 
@@ -6,7 +6,9 @@ from django.forms import forms
     Custom type for field 'main_img' in table Sentence
     https://blog.bixly.com/accept-only-specific-file-types-in-django-file-upload
 """
-class MainImgTypeField(FileField):
+
+
+class MainImgTypeField(ImageField):
     """
     Same as FileField, but you can specify:
         * content_types - list containing allowed content_types.

@@ -128,7 +128,8 @@
                     {% endif %}
                     {% if user.is_staff %}
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Характеристики <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Характеристики
+                            <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse {% if tab %} in {% endif %}">
                             <li>
                                 <a href="{% url 'maincategory' %}"><i class="fa fa-th-list"></i> Категории товаров</a>
@@ -150,7 +151,8 @@
                     {% endif %}
                     {% if user.is_staff and user.is_superuser %}
                         <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#products"><i class="fa fa-fw fa-arrows-v"></i> Товары <i class="fa fa-fw fa-caret-down"></i></a>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#products"><i class="fa fa-fw fa-arrows-v"></i> Товары
+                                <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="products" class="collapse {% if tab_products %} in {% endif %}">
                                 <li>
                                     <a href="{% url 'products' %}"><i class="fa fa-hand-o-right"></i> Все товары</a>
@@ -166,10 +168,25 @@
                     </li>
                     {% if user.is_staff and user.is_superuser %}
                         <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#productsale"><i class="fa fa-fw fa-arrows-v"></i> Скидки <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#productsale"><i class="fa fa-fw fa-arrows-v"></i> Скидки
+                            <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="productsale" class="collapse {% if tab_discounts %} in {% endif %}">
                             <li>
                                 <a href="{% url 'discopage' %}"><i class="fa fa-th-list"></i> Добавить скидку</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'discolist' %}"><i class="fa fa-th-list"></i> Список скидок</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% if user.is_staff and user.is_superuser %}
+                        <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#statistics"><i class="fa fa-fw fa-arrows-v"></i> Статистика
+                            <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="statistics" class="collapse {% if tab_statistics %} in {% endif %}">
+                            <li>
+                                <a href="{% url 'discopage' %}"><i class="fa fa-th-list"></i> За день</a>
                             </li>
                             <li>
                                 <a href="{% url 'discolist' %}"><i class="fa fa-th-list"></i> Список скидок</a>
