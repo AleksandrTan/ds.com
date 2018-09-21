@@ -47,6 +47,8 @@ class PeriodStatistics(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
                 context['sum_returns_period'] = ProductsSale.objects.filterstat_date_return(form.cleaned_data)
                 if context['sum_sales_period']['price_per_page'] and context['sum_returns_period']['price_per_page']:
                     context['clear_sum'] = int(context['sum_sales_period']['price_per_page']) - int(context['sum_returns_period']['price_per_page'])
+                else:
+                    context['clear_sum'] = '0'
                 context['data_form'] = form.cleaned_data
                 return render(request, self.template_name, context)
             else:
@@ -57,5 +59,8 @@ class PeriodStatistics(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
             context = self.get_context_data()
             context['sum_sales_period'] = ProductsSale.objects.filterstat_date_sales()
             context['sum_returns_period'] = ProductsSale.objects.filterstat_date_return()
-            context['clear_sum'] = int(context['sum_sales_period']['price_per_page']) - int(context['sum_returns_period']['price_per_page'])
+            if context['sum_sales_period']['price_per_page'] and context['sum_returns_period']['price_per_page']:
+                context['clear_sum'] = int(context['sum_sales_period']['price_per_page']) - int(context['sum_returns_period']['price_per_page'])
+            else:
+                context['clear_sum'] = 0
             return render(request, self.template_name, context)

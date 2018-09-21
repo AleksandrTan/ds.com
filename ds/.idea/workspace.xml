@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d038e7be-5329-43d2-b228-19170d0d687e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/statisticsmodule/templates/datestatistics.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/handsale/mainviews/views.py" afterPath="$PROJECT_DIR$/handsale/mainviews/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/handsale/models.py" afterPath="$PROJECT_DIR$/handsale/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/statisticsmodule/mainviews/views.py" afterPath="$PROJECT_DIR$/statisticsmodule/mainviews/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/statisticsmodule/templates/datestatistics.html" afterPath="$PROJECT_DIR$/statisticsmodule/templates/datestatistics.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/statisticsmodule/templates/daystatistics.html" afterPath="$PROJECT_DIR$/statisticsmodule/templates/daystatistics.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/statisticsmodule/urls.py" afterPath="$PROJECT_DIR$/statisticsmodule/urls.py" />
     </list>
     <ignored path="handsale/migrations/" />
     <ignored path="handsale/migrations/0001_initial.py" />
@@ -96,8 +93,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/handsale/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="61" column="30" lean-forward="false" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="30" />
+            <state relative-caret-position="343">
+              <caret line="53" column="49" lean-forward="true" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -105,11 +102,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/statisticsmodule/mainviews/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="800">
-              <caret line="54" column="16" lean-forward="false" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
+            <state relative-caret-position="480">
+              <caret line="50" column="46" lean-forward="false" selection-start-line="50" selection-start-column="46" selection-end-line="50" selection-end-column="46" />
               <folding>
                 <element signature="e#0#82#0" expanded="true" />
               </folding>
@@ -117,11 +114,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="datestatistics.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="datestatistics.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/statisticsmodule/templates/datestatistics.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="59" column="89" lean-forward="false" selection-start-line="59" selection-start-column="89" selection-end-line="59" selection-end-column="89" />
+            <state relative-caret-position="600">
+              <caret line="60" column="68" lean-forward="false" selection-start-line="60" selection-start-column="68" selection-end-line="60" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -130,8 +127,8 @@
       <file leaf-file-name="daystatistics.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/statisticsmodule/templates/daystatistics.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="124" column="40" lean-forward="true" selection-start-line="109" selection-start-column="32" selection-end-line="124" selection-end-column="40" />
+            <state relative-caret-position="531">
+              <caret line="120" column="44" lean-forward="false" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="44" />
               <folding>
                 <element signature="e#946#3910#0#HTML" expanded="false" />
                 <element signature="e#3931#6907#0#HTML" expanded="false" />
@@ -225,11 +222,11 @@
         <option value="$PROJECT_DIR$/ds/settings.py" />
         <option value="$PROJECT_DIR$/statisticsmodule/static/js/daystatistics.js" />
         <option value="$PROJECT_DIR$/handsale/mainviews/views.py" />
-        <option value="$PROJECT_DIR$/statisticsmodule/templates/daystatistics.html" />
         <option value="$PROJECT_DIR$/statisticsmodule/urls.py" />
         <option value="$PROJECT_DIR$/handsale/models.py" />
-        <option value="$PROJECT_DIR$/statisticsmodule/templates/datestatistics.html" />
         <option value="$PROJECT_DIR$/statisticsmodule/mainviews/views.py" />
+        <option value="$PROJECT_DIR$/statisticsmodule/templates/daystatistics.html" />
+        <option value="$PROJECT_DIR$/statisticsmodule/templates/datestatistics.html" />
       </list>
     </option>
   </component>
@@ -598,13 +595,6 @@
       <option name="presentableId" value="Default" />
       <updated>1508917586671</updated>
     </task>
-    <task id="LOCAL-00196" summary="Barcode sales">
-      <created>1535964833935</created>
-      <option name="number" value="00196" />
-      <option name="presentableId" value="LOCAL-00196" />
-      <option name="project" value="LOCAL" />
-      <updated>1535964833935</updated>
-    </task>
     <task id="LOCAL-00197" summary="Barcode sales">
       <created>1535964880019</created>
       <option name="number" value="00197" />
@@ -941,7 +931,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537518171851</updated>
     </task>
-    <option name="localTasksCounter" value="245" />
+    <task id="LOCAL-00245" summary="Statistics module">
+      <created>1537552633593</created>
+      <option name="number" value="00245" />
+      <option name="presentableId" value="LOCAL-00245" />
+      <option name="project" value="LOCAL" />
+      <updated>1537552633593</updated>
+    </task>
+    <option name="localTasksCounter" value="246" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -960,7 +957,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11727079" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2907489" sideWeight="0.53837955" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.09914712" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09914712" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2907489" sideWeight="0.46162048" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1349,19 +1346,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.handsale_productssale">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/handsale/mainviews/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
@@ -1437,10 +1421,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/handsale/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="53" column="49" lean-forward="true" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.handsale_productssale">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/statisticsmodule/mainviews/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="50" column="46" lean-forward="false" selection-start-line="50" selection-start-column="46" selection-end-line="50" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#82#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/statisticsmodule/templates/daystatistics.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="124" column="40" lean-forward="true" selection-start-line="109" selection-start-column="32" selection-end-line="124" selection-end-column="40" />
+        <state relative-caret-position="531">
+          <caret line="120" column="44" lean-forward="false" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="44" />
           <folding>
             <element signature="e#946#3910#0#HTML" expanded="false" />
             <element signature="e#3931#6907#0#HTML" expanded="false" />
@@ -1448,31 +1465,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/handsale/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="61" column="30" lean-forward="false" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/statisticsmodule/templates/datestatistics.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="59" column="89" lean-forward="false" selection-start-line="59" selection-start-column="89" selection-end-line="59" selection-end-column="89" />
+        <state relative-caret-position="600">
+          <caret line="60" column="68" lean-forward="false" selection-start-line="60" selection-start-column="68" selection-end-line="60" selection-end-column="68" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/statisticsmodule/mainviews/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="800">
-          <caret line="54" column="16" lean-forward="false" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#82#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

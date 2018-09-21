@@ -118,8 +118,11 @@
                                     <tbody>
                                         <tr>
                                             <td class="text-center">{{ sum_sales_day.price_per_page|floatformat:"0" }}</td>
-                                            <td class="text-center">{{ sum_returns_day.price_per_page|floatformat:"0" }}</td>
-                                            <td class="text-center">{{ clear_sum }}</td>
+                                            <td class="text-center">{% if sum_returns_day.price_per_page %}
+                                                {{ sum_returns_day.price_per_page|floatformat:"0" }}{% else %} 0 {% endif %}</td>
+                                            <td class="text-center">{% if clear_sum != '0' %}{{ clear_sum }}{% else %}
+                                                {{ sum_sales_day.price_per_page|floatformat:"0" }}{% endif %}
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

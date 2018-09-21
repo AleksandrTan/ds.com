@@ -14,7 +14,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Статистика продаж
+                                <i class="fa fa-table"></i> Статистика продаж{{ clear_sum }}
                             </li>
                         </ol>
                     </div>
@@ -57,8 +57,12 @@
                                     <tbody>
                                         <tr>
                                             <td class="text-center">{{ sum_sales_period.price_per_page|floatformat:"0" }}</td>
-                                            <td class="text-center">{{ sum_returns_period.price_per_page|floatformat:"0" }}</td>
-                                            <td class="text-center">{{ clear_sum }}</td>
+                                            <td class="text-center">{% if  sum_returns_period.price_per_page %}{{ sum_returns_period.price_per_page|floatformat:"0" }}
+                                                                    {% else %}0{% endif %}
+                                            </td>
+                                            <td class="text-center">{% if clear_sum != '0' %}{{ clear_sum }}{% else %}
+                                                {{ sum_sales_period.price_per_page|floatformat:"0" }}{% endif %}
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
