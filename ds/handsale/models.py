@@ -37,6 +37,10 @@ class ManagerProductSale(models.Manager):
         if data['date_with'] and data['date_by']:
             return query.filter(date_sale__gte=data['date_with']).filter(date_sale__lte=data['date_by']).filter(products_id=products_id)
 
+    def day_statistics(self):
+        from datetime import date
+        return ProductsSale.objects.filter(date_sale=date.today())
+
 
 class ProductsSale(models.Model):
     products = models.ForeignKey(Products, on_delete=models.SET_NULL, related_name='psale', null=True, blank=True)

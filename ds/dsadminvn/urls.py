@@ -80,6 +80,7 @@ pr_patterns = [
     url(r'^handsale/', include('handsale.urls')),
     url(r'^barcode/', include('barcodesalep.urls')),
     url(r'^discount/', include('discountmodule.urls')),
+    url(r'^statistics/', include('statisticsmodule.urls'))
 ]
 
 urlpatterns = [
