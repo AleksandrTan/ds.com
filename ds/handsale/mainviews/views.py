@@ -45,6 +45,7 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
         for i in range(int(form.cleaned_data['count_num'])):
             forma = copy.deepcopy(form)
             self.saved_data(forma)
+            form.cleaned_data['lost_num'] = 0
 
         #return super(SellProduct, self).form_valid(form)
         return HttpResponseRedirect(self.get_success_url())
@@ -65,6 +66,7 @@ class SellProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Cr
             instance.lost_num = forma.cleaned_data['lost_num']
             instance.true_price = forma.cleaned_data['price'] - forma.cleaned_data['lost_num']
         elif not forma.cleaned_data['lost_num'] and instance.products.discount:
+            instance.lost_num = 0
             instance.true_price = instance.products.price - ((instance.products.price * instance.products.discount) / 100)
         else:
             instance.true_price = forma.cleaned_data['price']

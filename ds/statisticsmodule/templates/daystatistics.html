@@ -20,14 +20,15 @@
                     </div>
                 </div>
                 <!-- /.row -->
-
                 <div class="row">
                     <div class="col-lg-12">
+                    <label>Продано</label>
                            <div class="table-responsive">
                                 <table class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Размер</th>
+                                            <th class="text-center">Товар</th>
+                                            <th class="text-center">Артикул</th>
                                             <th class="text-center">Колличество</th>
                                             <th class="text-center">Цена</th>
                                             <th class="text-center">Скидка</th>
@@ -35,9 +36,6 @@
                                             <th class="text-center">Итоговая цена</th>
                                             <th class="text-center">Место продажи</th>
                                             <th class="text-center">Дата продажи</th>
-                                            <th class="text-center">Статус</th>
-                                            <th class="text-center">Возврат</th>
-                                            <th class="text-center">Дата возврата</th>
                                             <th class="text-center">Описание</th>
 
                                           </tr>
@@ -45,7 +43,8 @@
                                     <tbody>
                                     {% for data in sale_list %}
                                         <tr>
-                                            <td class="text-center">{{ data.size }}</td>
+                                            <td class="text-center">{{ data.products.maincategory }} {{ data.products.nameproduct }} Размер {{ data.size }}</td>
+                                            <td class="text-center">{{ data.articul }}</td>
                                             <td class="text-center">{{ data.count_num }}</td>
                                             <td class="text-center">{{ data.price }}</td>
                                             <td class="text-center">{{ data.discount }}%</td>
@@ -55,12 +54,45 @@
                                                 {% if data.plase_sale  == 1%} Магазин {% else %} Интернет {% endif %}
                                             </td>
                                             <td class="text-center">{{ data.date_sale|date:"d-m-Y" }}</td>
+                                            <td class="text-center">{{ data.description }}</td>
+                                        </tr>
+                                    {% empty %}
+                                        <p style="color: red;">Нет данных для отображения.</p>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    <div class="col-lg-12">
+                           <label>Возврат</label>
+                           <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Товар</th>
+                                            <th class="text-center">Артикул</th>
+                                            <th class="text-center">Колличество</th>
+                                            <th class="text-center">Цена</th>
+                                            <th class="text-center">Скидка</th>
+                                            <th class="text-center">Уступили</th>
+                                            <th class="text-center">Итоговая цена</th>
+                                            <th class="text-center">Место продажи</th>
+                                            <th class="text-center">Дата возврата</th>
+                                            <th class="text-center">Описание</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for data in returns_list %}
+                                        <tr>
+                                            <td class="text-center">{{ data.products.maincategory }} {{ data.products.nameproduct }} Размер {{ data.size }}</td>
+                                            <td class="text-center">{{ data.articul }}</td>
+                                            <td class="text-center">{{ data.count_num }}</td>
+                                            <td class="text-center">{{ data.price }}</td>
+                                            <td class="text-center">{{ data.discount }}%</td>
+                                            <td class="text-center">{% if data.lost_num %}{{ data.lost_num }} {% else %} 0 {% endif %}</td>
+                                            <td class="text-center">{{ data.true_price }}</td>
                                             <td class="text-center">
-                                                {% if data.order_status  == 4 %} Продано {% elif data.order_status  == 5 %} <span style="color: red;">Возврат</span>
-                                                {% endif %}
-                                            </td>
-                                            <td class="text-center">
-                                                {% if data.is_return %} <span style="color: red;">Да</span> {% else %} Нет {% endif %}
+                                                {% if data.plase_sale  == 1%} Магазин {% else %} Интернет {% endif %}
                                             </td>
                                             <td class="text-center">{{ data.date_return|date:"d-m-Y" }}</td>
                                             <td class="text-center">{{ data.description }}</td>
@@ -68,6 +100,27 @@
                                     {% empty %}
                                         <p style="color: red;">Нет данных для отображения.</p>
                                     {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    <div class="col-lg-12">
+                           <label>Итог</label>
+                           <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Сумма продаж</th>
+                                            <th class="text-center">Сумма возвратов</th>
+                                            <th class="text-center">Итоговая сумма</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">{{ sum_sales_day.price_per_page|floatformat:"0" }}</td>
+                                            <td class="text-center">{{ sum_returns_day.price_per_page|floatformat:"0" }}</td>
+                                            <td class="text-center">{{ clear_sum }}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
