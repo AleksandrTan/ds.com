@@ -4,7 +4,8 @@ import shutil
 from django.conf import settings
 from django.shortcuts import redirect, render
 from django.core.files.storage import FileSystemStorage
-from django.core.cache import cache
+from django.core.mail import send_mail
+
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import View
 from django.views.generic.base import TemplateView
@@ -47,10 +48,10 @@ class MainView(BaseAdminView, LoginRequiredMixin, TemplateView):
    template_name = 'index.html'
    login_url = 'login'
 
-   # def get_context_data(self, **kwargs):
-   #    content = super(MainView, self).get_context_data(**kwargs)
-   #    content['count_new_sentences'] = Sentence.objects.filter(on_moderation=0).count()
-   #    return content
+   # def get(self, request, *args, **kwargs):
+   #     send_mail('Subject here', 'Here is the message.', 'rumych2013@gmail.com',
+   #               ['rumych2013@gmail.com'], fail_silently=False)
+   #     return super(MainView, self).get(self, request, *args, **kwargs)
 
 """
     Work with users site
