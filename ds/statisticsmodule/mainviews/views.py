@@ -3,7 +3,6 @@ from django.views.generic.base import TemplateView
 from django.shortcuts import render
 
 from dsadminvn.mainviews.views import BaseAdminView
-from dsstore.models import Products
 from handsale.models import ProductsSale
 from dsadminvn.forms import FilterSaleProduct
 
@@ -19,7 +18,10 @@ class DayStatistics(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
         context['returns_list'] = ProductsSale.objects.day_statistics_returns()
         context['sum_sales_day'] = ProductsSale.objects.sum_sales_day()
         context['sum_returns_day'] = ProductsSale.objects.sum_returns_day()
-        context['clear_sum'] = int(context['sum_sales_day']['price_per_page']) - int(context['sum_returns_day']['price_per_page'])
+        if context['sum_sales_day']['price_per_page'] and context['sum_returns_day']['price_per_page']:
+            context['clear_sum'] =int(context['sum_sales_day']['price_per_page']) - int(context['sum_returns_day']['price_per_page'])
+        else:
+            context['clear_sum'] = '0'
         context['tab_statistics'] = True
         return context
 
