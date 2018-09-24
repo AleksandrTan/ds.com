@@ -1,20 +1,40 @@
 import os
-import shutil
+from django.conf import settings
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.files.storage import FileSystemStorage
 
 from dsadminvn.mainviews.views import BaseAdminView
 from dsadminvn.mainhelpers.SetBarcode import SetBarcode as SBS
-from dsstore.models import (MainCategory, NameProduct, SizeTable,
-                            SizeTableForm, Brends, Seasons, Products,
+from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Products,
                             ProductsForm, ProductsFormEdit, Image)
 
 
-class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+class ModelssWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    queryset = Products.objects.get_list_products()
+    template_name = 'createmodelss.html'
+    context_object_name = 'products_list'
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super(ModelssWork, self).get_context_data(**kwargs)
+        context['maincategorys'] = MainCategory.objects.get_active_categories()
+        context['nameproducts'] = NameProduct.objects.get_active_products()
+        context['brends'] = Brends.objects.get_active_brends()
+        context['seasons'] = Seasons.objects.get_active_seasons()
+        context['tab_products'] = True
+
+        return context
+
+
+class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     login_url = 'login'
     permission_required = "auth.change_user"
     form_class = ProductsForm
-    template_name = 'products/createnewproduct.html'
+    template_name = 'createmodelss.html'
     succes_url = '/adminnv/products/'
 
 #Add request in kwargs variable for checked height[] data in clean()  method FormModel ProductsForm
@@ -24,13 +44,13 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
             arguments.
         """
         # grab the current set of form #kwargs
-        kwargs = super(CreateNewProduct, self).get_form_kwargs()
+        kwargs = super(CreateNewModelss, self).get_form_kwargs()
         # Update the kwargs with the request
         kwargs['request'] = self.request
         return kwargs
 
     def get_context_data(self, **kwargs):
-        context = super(CreateNewProduct, self).get_context_data(**kwargs)
+        context = super(CreateNewModelss, self).get_context_data(**kwargs)
         context['maincategorys'] = MainCategory.objects.get_active_categories()
         context['nameproducts'] = NameProduct.objects.get_active_products()
         context['brends'] = Brends.objects.get_active_brends()
@@ -48,7 +68,7 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         instance.save()
 
         self.save_other_files(instance, form)
-        return super(CreateNewProduct, self).form_valid(form)
+        return super(CreateNewModelss, self).form_valid(form)
 
     def form_invalid(self, form):
         context = self.get_context_data()
@@ -98,7 +118,7 @@ class CreateNewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         return True
 
 
-class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     login_url = 'login'
     permission_required = "auth.change_user"
     model = Products

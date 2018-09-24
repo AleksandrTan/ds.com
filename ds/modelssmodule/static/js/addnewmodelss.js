@@ -13,6 +13,7 @@ $.validator.setDefaults( {
                     }
      		 }
 		});
+
 $(document).ready(function () {
 //Change sizes for select maincategory
     $('#maincategory' ).change(function () {
@@ -37,8 +38,11 @@ $(document).ready(function () {
                     optionsElement = optionsElement + '<option name="'+data[i].height+'" value="'+data[i].height+'">'+data[i].height+'</option>';
                 }
 
-                var new_size = '<tr><td><div class="form-group"><select class="form-control" name="size">'+optionsElement+'</select></div></td><td><div class="form-group">' +
-                    '<input class="form-control" placeholder="Колличество" name="count_num" value="0"></div></td></tr>';
+                var new_size = '<tr><td><input class="form-control" placeholder="Артикул" name="articul[]" type="text" value="" maxlength="6" required></td><td>' +
+                    '<input class="form-control" placeholder="Штрих-код" name="pre_barcode[]" type="number" value="" maxlength="5" required >' +
+                    '</td><td><div class="form-group"><select class="form-control" name="size">'+optionsElement+'</select></div></td><td><div class="form-group">' +
+                    '<input class="form-control" placeholder="Колличество" name="count_num" value="0"></div></td><td><div class="form-group">' +
+                    '<button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить</button></div></td></tr>';
 
                 parentElementTable.append(new_size);
                 $('#count_sizes').val(data.length);
@@ -48,6 +52,23 @@ $(document).ready(function () {
         }
     });
 
+    //Add sizes fields
+    $('#add_size_fields').click(function () {
+        if ($('#count_sizes').val() <=  $('#count_sizes_add').val()){
+    	    return false;
+        }
+        $('#height_size_id tr:last-child').clone(true).appendTo($('#height_size_id'));
+    	$('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) + 1);
+
+    });
+//Remove size field
+    $('#height_size_id').on('click', '[data-deletes=delete_size]', function () {
+        if ($('#height_size_id').children('tr').length == 1){
+            return false;
+        }
+        $(this).parents('tr').remove();
+        $('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) - 1);
+    });
 
 //Check isset articul
 $('#articul').blur(function () {
@@ -125,15 +146,18 @@ $('#pre_barcode').blur(function () {
 
     $( "#add_new_product" ).validate( {
 				rules: {
-					articul: {
-						required: true,
-						maxlength: 6
-					},
-					pre_barcode: {
-						required: true,
-						maxlength: 5,
-                        number: true
-					},
+				    modelss: {
+				        required: true
+                    },
+					// articul: {
+					// 	required: true,
+					// 	maxlength: 6
+					// },
+					// pre_barcode: {
+					// 	required: true,
+					// 	maxlength: 5,
+                     //    number: true
+					// },
 					price: {
 						//required: true,
 						number: true,
@@ -157,20 +181,23 @@ $('#pre_barcode').blur(function () {
 					},
 					count_num: {
 						min: 0,
-                        required: true,
+                        required: true
 					}
 
 				},
 				messages: {
-					articul: {
-						required: "Пожалуйста введите артикул",
-						maxlength: "Не более 6 символов"
-					},
-                    pre_barcode: {
-						required: "Пожалуйста введите штрих-код",
-						maxlength: "Не более 5 символов",
-                        number: 'Должно быть числом!'
-					},
+				    modelss: {
+				        required: "Пожалуйста введите модель"
+                    },
+					// articul: {
+					// 	required: "Пожалуйста введите артикул",
+					// 	maxlength: "Не более 6 символов"
+					// },
+                    // pre_barcode: {
+					// 	required: "Пожалуйста введите штрих-код",
+					// 	maxlength: "Не более 5 символов",
+                     //    number: 'Должно быть числом!'
+					// },
 					price: {
 						number: 'Должно быть числом!',
 						maxlength: "Не более 50 символов"
@@ -205,4 +232,18 @@ $('#pre_barcode').blur(function () {
 					$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
 				}
 			} );
+jQuery.validator.addMethod("checkArticul", function(element) {
+    for (var i = 0; i < element.length; i++) {
+        if (element[i].value == '') {
+           return false;
+        }
+        else {
+            return true;
+        }
+    }
+}, 'Plea');
+
+$('input[name="articul[]"]').rules('add', {
+    checkArticul: true
+});
 });

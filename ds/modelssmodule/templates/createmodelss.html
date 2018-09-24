@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Добавление Товара
+                            Добавление Модели
                         </h1>
                         <ol class="breadcrumb">
                             <li>
@@ -38,7 +38,7 @@
                                 <i class="fa fa-table"></i> <a href="{% url 'products' %}">Товары</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Добавить товар
+                                <i class="fa fa-table"></i> Добавить модель
                             </li>
                         </ol>
                     </div>
@@ -58,22 +58,8 @@
                     <input type="hidden" value="{{ maincategorys.0.sizetable_set.count }}" id="count_sizes"/>
                     <input type="hidden" value="1" id="count_sizes_add"/>
                     <div class="col-lg-6">
-                        <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
-                            <label style="color: red;">Артикул(6 символов)</label><span style="color: red;">*</span>
-                            <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" value="{{ data.articul }}"
-                                   maxlength="6" required>
-                            {% if form.errors.articul %}<label id="articul-error" class="error" for="articul">{{ form.errors.articul.0 }}</label>{% endif %}
-                            {% if form.non_field_errors %}<label id="articul-error" class="error" for="articul">{{ fform.non_field_errors }}</label>{% endif %}
-                        </div>
-                        <div class="form-group {% if form.errors.pre_barcode %}has-error{% endif %}">
-                            <label style="color: red;">Штрих-код(5 цифр)</label><span style="color: red;">*</span>
-                            <input class="form-control" placeholder="Штрих-код" id="pre_barcode" name="pre_barcode" type="text"
-                                   value="{{ data.pre_barcode }}" maxlength="5" required >
-                            {% if form.errors.pre_barcode %}<label id="pre_barcode-error" class="error" for="pre_barcode">{{ form.errors.pre_barcode.0 }}</label>{% endif %}
-                            {% if form.non_field_errors %}<label id="pre_barcode-error" class="error" for="pre_barcode">{{ form.non_field_errors }}</label>{% endif %}
-                        </div>
                         <div class="form-group {% if form.errors.modelss %}has-error{% endif %}">
-                            <label>Модель</label>
+                            <label style="color: red;">Модель</label><span style="color: red;">*</span>
                             <input class="form-control" placeholder="Модель" id="modelss" name="modelss" type="text"
                                    value="{{ data.modelss }}" maxlength="50">
                             {% if form.errors.modelss %}<label id="modelss-error" class="error" for="modelss">{{ form.errors.modelss.0 }}</label>{% endif %}
@@ -169,22 +155,30 @@
                     </div>
 
                     <div class="col-lg-6">
-                        <h2>Размеры</h2>
+                    <h2>Товары</h2>
                     {% if maincategorys.0.sizetable_set.all %}
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
+                                        <th>Артику(6 символов)</label><span style="color: red;">*</span></th>
+                                        <th>Штрихкод(5 чисел)</label><span style="color: red;">*</span></th>
                                         <th>Размер</th>
                                         <th>Колличество</th>
-{#                                        <th>Удалить</th>#}
+                                        <th>Удалить</th>
                                     </tr>
                                 </thead>
                                 <tbody id="height_size_id">
                                     <tr>
                                         <td>
+                                            <input class="form-control" placeholder="Артикул" name="articul[]" type="text" value="">
+                                        </td>
+                                        <td>
+                                             <input class="form-control" placeholder="Штрих-код" name="pre_barcode[]" type="number" value=""  >
+                                        </td>
+                                        <td>
                                             <div class="form-group">
-                                                <select class="form-control" name="size">
+                                                <select class="form-control" name="height[]">
                                                     {% for height_list in maincategorys.0.sizetable_set.all %}
                                                         <option name="{{ height_list.height }}" value="{{ height_list.height }}">{{ height_list.height }}</option>
                                                     {% endfor %}
@@ -194,12 +188,21 @@
                                         <td>
                                             <div class="form-group">
                                                <input class="form-control"
-                                                      placeholder="Колличество" name="count_num" value="" maxlength="5" type="number">
+                                                      placeholder="Колличество" name="count_height[]" value="0" maxlength="5" type="number">
                                             </div>
                                         </td>
+                                      <td>
+                                          <div class="form-group">
+                                               <button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить</button>
+                                       </div>
+                                       </td>
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="form-group">
+                            <label>Добавить Товар</label>
+                            <button type="button" class="btn btn-sm btn-success form-control" id="add_size_fields">Добавить</button>
                         </div>
                     {% else %}
                         <span style="color: red;">Нет размеров для данной категории </span>
@@ -326,6 +329,6 @@
     <div class="hellopreloader_preload" id="hellopreloader_preload"></div>
 </div>
 <script type="text/javascript" src="{% static 'js/validator/jquery.validate.js' %}"></script>
-<script src="{% static "js/fileuploadm.js" %}"></script>
-<script src="{% static "js/addnewproduct.js" %}"></script>
+<script src="{% static "js/fileuploadmodelss.js" %}"></script>
+<script src="{% static "js/addnewmodelss.js" %}"></script>
 {% endblock %}
