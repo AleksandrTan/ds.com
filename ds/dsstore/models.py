@@ -221,6 +221,80 @@ class Seasons(models.Model):
     class Meta:
         ordering = ['id']
 
+
+"""-------------------------Modelss Model---------------------"""
+
+
+def custom_directory_path(instance, filename):
+    return 'images/{0}/{1}'.format(instance.dirname_img, filename)
+
+
+class ManageModelss(models.Manager):
+    pass
+
+
+class Modelss(models.Model):
+    name = models.CharField(blank=True, default='', max_length=50)
+    maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)
+    articul = models.CharField(unique=True, max_length=10, blank=False)
+    pre_barcode = models.CharField(unique=True, max_length=5, blank=False)
+    barcode = models.CharField(unique=True, max_length=13, blank=False)
+    nameproduct = models.ForeignKey(NameProduct, on_delete=models.CASCADE, blank=False)
+    brends = models.SmallIntegerField(blank=True, default=0)
+    season_id = models.SmallIntegerField(blank=True, default=0)
+    price = models.FloatField(blank=True, default=0.0)
+    wholesale_price = models.FloatField(blank=True, default=0)
+    purshase_price = models.FloatField(blank=True, default=0)
+    # main_photo_path = models.ImageField(blank=True, upload_to='images/')
+    main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
+                                          content_types=['image/jpg', 'image/png', 'image/jpeg'],
+                                          max_upload_size=5000000, blank=True, default='nophoto.png')
+    description = models.TextField(blank=True, default='')
+    caption = models.CharField(blank=False, default='', max_length=200)
+    color = models.CharField(max_length=100, blank=True, default='')
+    discount = models.SmallIntegerField(blank=True, default=0)
+    price_down = models.SmallIntegerField(blank=True, default=0)
+    sale = models.BooleanField(default=False)
+    sale_price = models.FloatField(default=0, blank=True)
+    empty_count = models.BooleanField(default=False)
+    seo_attributes = models.TextField(blank=True, default='')
+    is_belarus = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
+    is_new = models.BooleanField(default=False)
+    is_new_date_end = models.DateField(auto_now_add=True)
+    link_name = models.CharField(max_length=550)
+    identifier = models.CharField(max_length=20)
+    dirname_img = models.CharField(max_length=25, default='', blank=True)
+    date_create = models.DateTimeField(auto_now_add=True)
+    objects = ManageModelss()
+
+    # change the main_imgfield value to be the newley modifed image value - png
+    # def clean(self):
+    #     from PIL import Image as Ima
+    #     from io import BytesIO
+    #     from django.core.files.uploadedfile import InMemoryUploadedFile
+    #     import sys
+    #     # Opening the uploaded image
+    #     im = Ima.open(self.main_photo_path)
+    #     output = BytesIO()
+    #     # Resize/modify the image
+    #     im = im.resize((277, 205))
+    #     # after modifications, save it to the output
+    #     im.save(output, format='PNG', quality=100)
+    #     output.seek(0)
+    #
+    #     # change the main_imgfield value to be the newley modifed image value - png
+    #     self.main_photo_path = InMemoryUploadedFile(output, 'MI.MainImgTypeField', "%s.png" % self.main_photo_path.name.split('.')[0],
+    #                                          'image/png', sys.getsizeof(output), None)
+    #     super(Products, self).clean()
+
+    def get_absolute_url(self):
+         return "products/%s" % self.link_name
+
+    def __str__(self):
+        return self.link_name
+
+
 """--------------Products Model-------------------------"""
 
 
@@ -391,13 +465,15 @@ class Products(models.Model):
     price = models.FloatField(blank=True, default=0.0)
     wholesale_price = models.FloatField(blank=True, default=0)
     purshase_price = models.FloatField(blank=True, default=0)
-    modelss = models.CharField(blank=True, default='', max_length=50)
+    modelss = models.ForeignKey(Modelss, on_delete=models.CASCADE, blank=False)
+    # modelss = models.CharField(blank=True, default='', max_length=50)
     size = models.SmallIntegerField(blank=True, default=0)
     count_num = models.SmallIntegerField(blank=True, default=0)
     # main_photo_path = models.ImageField(blank=True, upload_to='images/')
-    main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
-                                          content_types=['image/jpg', 'image/png', 'image/jpeg'],
-                                          max_upload_size=5000000, blank=True, default='nophoto.png')
+    # main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
+    #                                       content_types=['image/jpg', 'image/png', 'image/jpeg'],
+    #                                       max_upload_size=5000000, blank=True, default='nophoto.png')
+    main_photo_path = models.CharField(max_length=250, blank=True)
     description = models.TextField(blank=True, default='')
     caption = models.CharField(blank=False, default='', max_length=200)
     color = models.CharField(max_length=100, blank=True, default='')
@@ -571,74 +647,8 @@ class SizeCount(models.Model):
 
 class Image(models.Model):
 
-    products = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='image')
+    modelss = models.ForeignKey(Modelss, on_delete=models.CASCADE, related_name='image')
     img_path = models.CharField(max_length=250, blank=True)
 
     def get_absolute_url(self):
         return self.img_path
-
-
-class ManageModelss(models.Manager):
-    pass
-
-
-class Modelss(models.Model):
-    maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)
-    articul = models.CharField(unique=True, max_length=10, blank=False)
-    pre_barcode = models.CharField(unique=True, max_length=5, blank=False)
-    barcode = models.CharField(unique=True, max_length=13, blank=False)
-    nameproduct = models.ForeignKey(NameProduct, on_delete=models.CASCADE, blank=False)
-    brends = models.SmallIntegerField(blank=True, default=0)
-    season_id = models.SmallIntegerField(blank=True, default=0)
-    price = models.FloatField(blank=True, default=0.0)
-    wholesale_price = models.FloatField(blank=True, default=0)
-    purshase_price = models.FloatField(blank=True, default=0)
-    name = models.CharField(blank=True, default='', max_length=50)
-   # main_photo_path = models.ImageField(blank=True, upload_to='images/')
-    main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
-                                          content_types=['image/jpg', 'image/png', 'image/jpeg'],
-                                          max_upload_size=5000000, blank=True, default='nophoto.png')
-    description = models.TextField(blank=True, default='')
-    caption = models.CharField(blank=False, default='', max_length=200)
-    color = models.CharField(max_length=100, blank=True, default='')
-    discount = models.SmallIntegerField(blank=True, default=0)
-    price_down = models.SmallIntegerField(blank=True, default=0)
-    sale = models.BooleanField(default=False)
-    sale_price = models.FloatField(default=0, blank=True)
-    empty_count = models.BooleanField(default=False)
-    seo_attributes = models.TextField(blank=True, default='')
-    is_belarus = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
-    is_new = models.BooleanField(default=False)
-    is_new_date_end = models.DateField(auto_now_add=True)
-    link_name = models.CharField(max_length=550)
-    identifier = models.CharField(max_length=20)
-    dirname_img = models.CharField(max_length=25, default='', blank=True)
-    date_create = models.DateTimeField(auto_now_add=True)
-    objects = ManageModelss()
-
-    # change the main_imgfield value to be the newley modifed image value - png
-    # def clean(self):
-    #     from PIL import Image as Ima
-    #     from io import BytesIO
-    #     from django.core.files.uploadedfile import InMemoryUploadedFile
-    #     import sys
-    #     # Opening the uploaded image
-    #     im = Ima.open(self.main_photo_path)
-    #     output = BytesIO()
-    #     # Resize/modify the image
-    #     im = im.resize((277, 205))
-    #     # after modifications, save it to the output
-    #     im.save(output, format='PNG', quality=100)
-    #     output.seek(0)
-    #
-    #     # change the main_imgfield value to be the newley modifed image value - png
-    #     self.main_photo_path = InMemoryUploadedFile(output, 'MI.MainImgTypeField', "%s.png" % self.main_photo_path.name.split('.')[0],
-    #                                          'image/png', sys.getsizeof(output), None)
-    #     super(Products, self).clean()
-
-    def get_absolute_url(self):
-         return "products/%s" % self.link_name
-
-    def __str__(self):
-        return self.link_name
