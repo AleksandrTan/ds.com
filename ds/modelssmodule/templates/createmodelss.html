@@ -57,6 +57,7 @@
                       id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
                     <input type="hidden" value="{{ maincategorys.0.sizetable_set.count }}" id="count_sizes"/>
                     <input type="hidden" value="1" id="count_sizes_add"/>
+                    <input type="hidden" value="{}" id="product_data_lists" name="product_data_lists"/>
                     <div class="col-lg-6">
                         <div class="form-group {% if form.errors.modelss %}has-error{% endif %}">
                             <label style="color: red;">Модель</label><span style="color: red;">*</span>
@@ -156,46 +157,55 @@
 
                     <div class="col-lg-6">
                     <h2>Товары</h2>
-                    {% if maincategorys.0.sizetable_set.all %}
+                    {% if sizes_table %}
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Артику(6 символов)</label><span style="color: red;">*</span></th>
-                                        <th>Штрихкод(5 чисел)</label><span style="color: red;">*</span></th>
-                                        <th>Размер</th>
+                                        <th>Артику(6 символов)</th>
+                                        <th>Штрихкод(5 чисел)</th>
+                                        <th>Размер     </th>
                                         <th>Колличество</th>
+                                        <th>Проверка</th>
                                         <th>Удалить</th>
                                     </tr>
                                 </thead>
                                 <tbody id="height_size_id">
                                     <tr>
                                         <td>
-                                            <input class="form-control" placeholder="Артикул" name="articul[]" type="text" value="">
+                                            <input class="form-control" placeholder="Артикул" name="articul[]"
+                                                   type="text" value="" data-articul="articul">
                                         </td>
                                         <td>
-                                             <input class="form-control" placeholder="Штрих-код" name="pre_barcode[]" type="number" value=""  >
+                                             <input class="form-control" placeholder="Штрих-код" name="pre_barcode[]"
+                                                    type="number" value="" data-pre-barcode="pre-barcode" >
                                         </td>
                                         <td>
                                             <div class="form-group">
-                                                <select class="form-control" name="height[]">
-                                                    {% for height_list in maincategorys.0.sizetable_set.all %}
+                                                <select class="form-control" name="height[]" data-height="height">
+                                                    {% for height_list in sizes_table %}
                                                         <option name="{{ height_list.height }}" value="{{ height_list.height }}">{{ height_list.height }}</option>
                                                     {% endfor %}
                                                 </select>
                                             </div>
                                         </td>
-                                        <td>
+                                        <td  style="width: 15%">
                                             <div class="form-group">
                                                <input class="form-control"
-                                                      placeholder="Колличество" name="count_height[]" value="0" maxlength="5" type="number">
+                                                      placeholder="Колличество" name="count[]"
+                                                      value="0" maxlength="5" type="number" data-count="count">
                                             </div>
                                         </td>
-                                      <td>
-                                          <div class="form-group">
-                                               <button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить</button>
-                                       </div>
-                                       </td>
+                                        <td>
+                                            <div class="form-group">
+                                               <button type="button" class="btn btn-sm bg-info form-control" data-check-product="1">Проверить</button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                              <div class="form-group">
+                                                   <button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить</button>
+                                               </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -319,7 +329,6 @@
                             </div>
                          </div>
                 </form>
-
                 {% endif %}
                 </div>
                 <!-- /.row -->
@@ -328,7 +337,10 @@
 <div class="hellopreloader">
     <div class="hellopreloader_preload" id="hellopreloader_preload"></div>
 </div>
-<script type="text/javascript" src="{% static 'js/validator/jquery.validate.js' %}"></script>
 <script src="{% static "js/fileuploadmodelss.js" %}"></script>
 <script src="{% static "js/addnewmodelss.js" %}"></script>
+    <script type="text/javascript">
+        sizes_model={};
+        console.log(sizes_model);
+    </script>
 {% endblock %}

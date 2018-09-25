@@ -1,19 +1,24 @@
 /*
 * Identifier for debug mode(if true - form submited on server)
 * */
-var is_validate_js = true;
-$.validator.setDefaults( {
-    submitHandler: function () {
-	       		       if (is_validate_js){
-			               $( "#add_new_product" ).submit(function (e) {
-			                                            $('#hellopreloader_preload').css({'display':'block', 'opacity': '0.5'});
-			                                            var form = this;
-                                                        form.submit();
-                            });
-                    }
-     		 }
-		});
+$(document).on('click', '[data-check-product]', function(event) {
+               var sub = new ValidateProduct(event, $(this).closest("tr"));
+                   sub.validate();
+           });
 
+function ValidateProduct(e, obj) {
+    this.e = e;
+    this.obj = obj;
+    this.product_data_lists = $('#product_data_lists').val();
+    this.articul = this.obj.find('[data-articul = "articul"]').val();
+    this.barcode = this.obj.find('[data-pre-barcode = "pre-barcode"]').val();
+    this.height = this.obj.find('[data-height="height"]').val();
+    this.count= this.obj.find('[data-count="count"]').val();
+
+    this.validate = function () {
+        console.log(this.articul);
+    }
+}
 $(document).ready(function () {
 //Change sizes for select maincategory
     $('#maincategory' ).change(function () {
@@ -141,109 +146,4 @@ $('#pre_barcode').blur(function () {
             $(this).next('[data-num = count_simbols]').next('span').css('display', 'none');
         }
     });
-
-//Validations form
-
-    $( "#add_new_product" ).validate( {
-				rules: {
-				    modelss: {
-				        required: true
-                    },
-					// articul: {
-					// 	required: true,
-					// 	maxlength: 6
-					// },
-					// pre_barcode: {
-					// 	required: true,
-					// 	maxlength: 5,
-                     //    number: true
-					// },
-					price: {
-						//required: true,
-						number: true,
-						maxlength: 50
-					},
-					wholesale_price: {
-						number: true,
-						maxlength: 50
-					},
-					purshase_price: {
-					    number: true,
-						maxlength: 50
-					},
-					meta_info: {
-					    required: false,
-						maxlength: 500
-					},
-					caption:{
-						required: true,
-						maxlength: 100
-					},
-					count_num: {
-						min: 0,
-                        required: true
-					}
-
-				},
-				messages: {
-				    modelss: {
-				        required: "Пожалуйста введите модель"
-                    },
-					// articul: {
-					// 	required: "Пожалуйста введите артикул",
-					// 	maxlength: "Не более 6 символов"
-					// },
-                    // pre_barcode: {
-					// 	required: "Пожалуйста введите штрих-код",
-					// 	maxlength: "Не более 5 символов",
-                     //    number: 'Должно быть числом!'
-					// },
-					price: {
-						number: 'Должно быть числом!',
-						maxlength: "Не более 50 символов"
-					},
-					wholesale_price: {
-						number: 'Должно быть числом!',
-						maxlength: "Не более 50 символов"
-					},
-                    purshase_price: {
-					   number: 'Должно быть числом!',
-					   maxlength: "Не более 50 символов"
-					},
-					meta_info: {
-					    maxlength: "Не более 500 символов"
-					},
-					caption: {
-						required: "Пожалуйста введите заголовок",
-						maxlength: "Не более 100 символов"
-					},
-					count_num: {
-						min: "Больше 0!!!",
-                        required: "Пожалуйста введите колличество"
-					}
-				},
-                errorClass: "alert-danger",
-				highlight: function ( element, errorClass, validClass ) {
-					$( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
-					$( element ).next( "label" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
-				},
-				unhighlight: function ( element, errorClass, validClass ) {
-					$( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
-					$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
-				}
-			} );
-jQuery.validator.addMethod("checkArticul", function(element) {
-    for (var i = 0; i < element.length; i++) {
-        if (element[i].value == '') {
-           return false;
-        }
-        else {
-            return true;
-        }
-    }
-}, 'Plea');
-
-$('input[name="articul[]"]').rules('add', {
-    checkArticul: true
-});
 });

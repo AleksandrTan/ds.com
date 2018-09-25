@@ -11,7 +11,7 @@ from dsstore.mainhelpers import MainImgTypeField as MI
 class ManagerMainCategories(models.Manager):
 #Get active Categories
     def get_active_categories(self):
-        return MainCategory.objects.filter(is_active__exact = True)
+        return MainCategory.objects.filter(is_active__exact=True)
 
     def get_all_categories(self):
         return MainCategory.objects.all()

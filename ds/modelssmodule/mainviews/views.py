@@ -52,6 +52,7 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
     def get_context_data(self, **kwargs):
         context = super(CreateNewModelss, self).get_context_data(**kwargs)
         context['maincategorys'] = MainCategory.objects.get_active_categories()
+        context['sizes_table'] = context['maincategorys'][0].sizetable_set.all()
         context['nameproducts'] = NameProduct.objects.get_active_products()
         context['brends'] = Brends.objects.get_active_brends()
         context['seasons'] = Seasons.objects.get_active_seasons()
