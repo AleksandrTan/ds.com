@@ -4,7 +4,6 @@
     <list default="true" id="d038e7be-5329-43d2-b228-19170d0d687e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js" afterPath="$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modelssmodule/templates/createmodelss.html" afterPath="$PROJECT_DIR$/modelssmodule/templates/createmodelss.html" />
     </list>
     <ignored path="handsale/migrations/" />
     <ignored path="handsale/migrations/0001_initial.py" />
@@ -100,13 +99,11 @@
       <file leaf-file-name="addnewmodelss.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-152">
-              <caret line="123" column="65" lean-forward="false" selection-start-line="123" selection-start-column="65" selection-end-line="123" selection-end-column="65" />
+            <state relative-caret-position="17">
+              <caret line="135" column="36" lean-forward="false" selection-start-line="135" selection-start-column="36" selection-end-line="135" selection-end-column="36" />
               <folding>
-                <element signature="e#1598#1891#0" expanded="false" />
-                <element signature="e#2059#2404#0" expanded="false" />
-                <element signature="e#7951#7975#0" expanded="false" />
-                <marker date="1537981361458" expanded="true" signature="5209:5220" ph="..." />
+                <element signature="e#7763#7787#0" expanded="false" />
+                <marker date="1537983782725" expanded="true" signature="5607:5618" ph="..." />
               </folding>
             </state>
           </provider>
@@ -556,13 +553,6 @@
       <option name="presentableId" value="Default" />
       <updated>1508917586671</updated>
     </task>
-    <task id="LOCAL-00207" summary="Barcode sales">
-      <created>1535968180298</created>
-      <option name="number" value="00207" />
-      <option name="presentableId" value="LOCAL-00207" />
-      <option name="project" value="LOCAL" />
-      <updated>1535968180298</updated>
-    </task>
     <task id="LOCAL-00208" summary="Barcode sales">
       <created>1535968323851</created>
       <option name="number" value="00208" />
@@ -899,7 +889,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537956232330</updated>
     </task>
-    <option name="localTasksCounter" value="256" />
+    <task id="LOCAL-00256" summary="Modelss Module">
+      <created>1537981456663</created>
+      <option name="number" value="00256" />
+      <option name="presentableId" value="LOCAL-00256" />
+      <option name="project" value="LOCAL" />
+      <updated>1537981456663</updated>
+    </task>
+    <option name="localTasksCounter" value="257" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1011,7 +1008,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="34" />
+      <option name="time" value="35" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1391,19 +1388,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.dsstore_products">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
@@ -1422,15 +1406,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.dsstore_products">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-152">
-          <caret line="123" column="65" lean-forward="false" selection-start-line="123" selection-start-column="65" selection-end-line="123" selection-end-column="65" />
+        <state relative-caret-position="17">
+          <caret line="135" column="36" lean-forward="false" selection-start-line="135" selection-start-column="36" selection-end-line="135" selection-end-column="36" />
           <folding>
-            <element signature="e#1598#1891#0" expanded="false" />
-            <element signature="e#2059#2404#0" expanded="false" />
-            <element signature="e#7951#7975#0" expanded="false" />
-            <marker date="1537981361458" expanded="true" signature="5209:5220" ph="..." />
+            <element signature="e#7763#7787#0" expanded="false" />
+            <marker date="1537983782725" expanded="true" signature="5607:5618" ph="..." />
           </folding>
         </state>
       </provider>
