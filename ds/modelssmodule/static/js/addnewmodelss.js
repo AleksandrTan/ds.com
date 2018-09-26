@@ -1,7 +1,7 @@
 /*
 * Identifier for debug mode(if true - form submited on server)
 * */
-var product_data={1111:{}};
+var product_data={1111:{articul:1111, barcode:00001}, 2222:{articul:2222, barcode:00001}};
 var flag_checked = 0;
 
 $(document).on('click', '[data-check-product]', function(event) {
@@ -15,6 +15,7 @@ function ValidateProduct(e, obj) {
     this.product_data_lists = $('#product_data_lists').val();
     this.articulobj = this.obj.find('[data-articul = "articul"]');
     this.articul = this.obj.find('[data-articul = "articul"]').val();
+    this.barcodeobj = this.obj.find('[data-pre-barcode = "pre-barcode"]');
     this.barcode = this.obj.find('[data-pre-barcode = "pre-barcode"]').val();
     this.height = this.obj.find('[data-height="height"]').val();
     this.count = this.obj.find('[data-count="count"]').val();
@@ -29,12 +30,12 @@ function ValidateProduct(e, obj) {
         //     this.validate();
         // }
         flag_checked = 0;
-        console.log(flag_checked);
         this.validate();
     };
 
     this.validate = function () {
-        this.checkArticul();
+        //this.checkArticul();
+        this.checkBarcode();
     };
 
     this.checkFilledData = function () {
@@ -59,7 +60,6 @@ function ValidateProduct(e, obj) {
             this.alarm_text.text('').text('Введенный артикул уже существует!Выберите другой');
             this.modal_alarm.modal().modal();
             flag_checked = 1;
-            console.log(flag_checked);
             return false;
         }
         else {
@@ -92,10 +92,23 @@ function ValidateProduct(e, obj) {
     }.bind(this);
 
     this.checkBarcode = function () {
-
+        this.checkIssetBarcodePrew();
     };
 
-    this.checkIssetBarcode = function () {
+    this.checkIssetBarcodePrew = function () {
+        if (this.barcode == product_data[this.articul].barcode) {
+            this.barcodeobj.val('');
+            this.alarm_text.text('').text('Введенный штрихкод уже существует!Выберите другой');
+            this.modal_alarm.modal().modal();
+            flag_checked = 1;
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+
+    this.checkIssetBarcodeDB = function () {
 
     };
 
@@ -162,24 +175,6 @@ $(document).ready(function () {
         $(this).parents('tr').remove();
         $('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) - 1);
     });
-
-//Check isset articul
-$('#articul').blur(function () {
-   if ($(this).val() != ''){
-       $.get(
-        "/adminnv/products/checkarticul/"+$(this).val()+"/",
-        onAjaxSuccess
-       );
-       function onAjaxSuccess(data) {
-           if(data.status){
-           	   $('#articul').val('');
-               $('#modal_content').text('').text('Введенный артикул уже существует!Выберите другой');
-               $('#modal_alarm').modal();
-           }
-       }
-   }
-
-});
 
 //Check isset pre_barcode
 $('#pre_barcode').blur(function () {

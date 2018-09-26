@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d038e7be-5329-43d2-b228-19170d0d687e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dsadminvn/templates/products/detailview.html" afterPath="$PROJECT_DIR$/dsadminvn/templates/products/detailview.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js" afterPath="$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modelssmodule/templates/createmodelss.html" afterPath="$PROJECT_DIR$/modelssmodule/templates/createmodelss.html" />
     </list>
     <ignored path="handsale/migrations/" />
     <ignored path="handsale/migrations/0001_initial.py" />
@@ -101,12 +99,12 @@
       <file leaf-file-name="addnewmodelss.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-620">
-              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state relative-caret-position="260">
+              <caret line="99" column="27" lean-forward="false" selection-start-line="99" selection-start-column="27" selection-end-line="99" selection-end-column="27" />
               <folding>
-                <element signature="e#6213#6735#0" expanded="false" />
-                <element signature="e#6739#6763#0" expanded="false" />
-                <marker date="1537955362229" expanded="true" signature="3524:3535" ph="..." />
+                <element signature="e#1485#1778#0" expanded="false" />
+                <element signature="e#6817#6841#0" expanded="false" />
+                <marker date="1537956213759" expanded="true" signature="4074:4085" ph="..." />
               </folding>
             </state>
           </provider>
@@ -556,13 +554,6 @@
       <option name="presentableId" value="Default" />
       <updated>1508917586671</updated>
     </task>
-    <task id="LOCAL-00205" summary="Barcode sales">
-      <created>1535967191731</created>
-      <option name="number" value="00205" />
-      <option name="presentableId" value="LOCAL-00205" />
-      <option name="project" value="LOCAL" />
-      <updated>1535967191731</updated>
-    </task>
     <task id="LOCAL-00206" summary="Barcode sales">
       <created>1535967243876</created>
       <option name="number" value="00206" />
@@ -899,7 +890,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537873460741</updated>
     </task>
-    <option name="localTasksCounter" value="254" />
+    <task id="LOCAL-00254" summary="Modelss Module">
+      <created>1537955389919</created>
+      <option name="number" value="00254" />
+      <option name="presentableId" value="LOCAL-00254" />
+      <option name="project" value="LOCAL" />
+      <updated>1537955389920</updated>
+    </task>
+    <option name="localTasksCounter" value="255" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1424,12 +1422,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-620">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state relative-caret-position="260">
+          <caret line="99" column="27" lean-forward="false" selection-start-line="99" selection-start-column="27" selection-end-line="99" selection-end-column="27" />
           <folding>
-            <element signature="e#6213#6735#0" expanded="false" />
-            <element signature="e#6739#6763#0" expanded="false" />
-            <marker date="1537955362229" expanded="true" signature="3524:3535" ph="..." />
+            <element signature="e#1485#1778#0" expanded="false" />
+            <element signature="e#6817#6841#0" expanded="false" />
+            <marker date="1537956213759" expanded="true" signature="4074:4085" ph="..." />
           </folding>
         </state>
       </provider>
