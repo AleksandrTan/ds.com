@@ -56,7 +56,7 @@
                       id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
                     <input type="hidden" value="{{ maincategorys.0.sizetable_set.count }}" id="count_sizes"/>
                     <input type="hidden" value="1" id="count_sizes_add"/>
-                    <input type="hidden" value="{ARFDDF:{}}" id="product_data_lists" name="product_data_lists"/>
+                    <input type="hidden" value="" id="product_data_lists" name="product_data_lists"/>
                     <input type="hidden" value="0" id="flag_checked"/>
                     <div class="col-lg-6">
                         <div class="form-group {% if form.errors.modelss %}has-error{% endif %}">

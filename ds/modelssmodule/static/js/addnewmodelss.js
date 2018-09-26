@@ -2,7 +2,6 @@
 * Identifier for debug mode(if true - form submited on server)
 * */
 var product_data={};
-// var flag_checked = 0;
 
 $(document).on('click', '[data-check-product]', function(event) {
                //$('#hellopreloader_preload').css({'display':'block', 'opacity': '0.5'});
@@ -14,7 +13,7 @@ function ValidateProduct(e, obj, but) {
     this.e = e;
     this.obj = obj;
     this.flag_checked = $('#flag_checked');
-    this.product_data_lists = $('#product_data_lists').val();
+    this.product_data_lists = $('#product_data_lists');
     this.articulobj = this.obj.find('[data-articul = "articul"]');
     this.articul = this.obj.find('[data-articul = "articul"]').val();
     this.barcodeobj = this.obj.find('[data-pre-barcode = "pre-barcode"]');
@@ -39,10 +38,18 @@ function ValidateProduct(e, obj, but) {
         if (this.count_sizes > this.count_sizes_add && this.flag_checked.val() == 0){
             this.add_product_button.show();
             but.removeClass('btn-primary').addClass('btn-success');
+            but.text('Проверено');
+            but.removeAttr("data-check-product");
+        }
+        else {
+            but.removeClass('btn-primary').addClass('btn-success');
+            but.text('Проверено');
+            but.removeAttr("data-check-product");
         }
         if (this.flag_checked.val() == 0){
             this.addDataProduct();
-            console.log(product_data);
+            this.product_data_lists.val(JSON.stringify(product_data));
+            console.log(JSON.stringify(product_data));
         }
     };
 
@@ -225,11 +232,15 @@ $(document).ready(function () {
                     optionsElement = optionsElement + '<option name="'+data[i].height+'" value="'+data[i].height+'">'+data[i].height+'</option>';
                 }
 
-                var new_size = '<tr><td><input class="form-control" placeholder="Артикул" name="articul[]" type="text" value="" maxlength="6" required></td><td>' +
-                    '<input class="form-control" placeholder="Штрих-код" name="pre_barcode[]" type="number" value="" maxlength="5" required >' +
-                    '</td><td><div class="form-group"><select class="form-control" name="size">'+optionsElement+'</select></div></td><td><div class="form-group">' +
-                    '<input class="form-control" placeholder="Колличество" name="count_num" value="0"></div></td><td><div class="form-group">' +
-                    '<button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">Удалить</button></div></td></tr>';
+                var new_size = '<tr><td><input class="form-control" placeholder="Артикул" name="articul[]" type="text" value="" data-articul="articul"' +
+                    ' maxlength="6" required></td><td><input class="form-control" placeholder="Штрих-код" name="pre_barcode[]" type="number" value="" ' +
+                    'data-pre-barcode="pre-barcode" maxlength="5" required ></td><td><div class="form-group"><select class="form-control" name="height[]"' +
+                    ' data-height="height" required><option name="" value=""></option>'+optionsElement+'</select></div></td><td style="width: 15%">' +
+                    '<div class="form-group"><input class="form-control"' +
+                    'name="count[]" value="" maxlength="5" type="number" data-count="count" required></div></td><td><div class="form-group">' +
+                    '<button type="button" class="btn btn-sm btn-primary form-control" data-check-product="1">Проверить</button></div></td>' +
+                    '<td><div class="form-group"><button type="button" class="btn btn-sm btn-danger form-control" data-deletes="delete_size">' +
+                    'Удалить</button></div></td></tr>';
 
                 parentElementTable.append(new_size);
                 $('#count_sizes').val(data.length);
@@ -237,6 +248,8 @@ $(document).ready(function () {
                 $('#save_product').show();
             }
         }
+        product_data = {};
+        console.log(product_data);
     });
 
     //Add sizes fields
