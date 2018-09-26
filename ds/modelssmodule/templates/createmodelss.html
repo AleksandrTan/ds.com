@@ -3,7 +3,6 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
 <div class="btn-modal-wrap btn-modal-wrap-1">
-    <!-- Modal Deleted -->
     <div class="modal fade" id="modal_alarm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -57,7 +56,7 @@
                       id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
                     <input type="hidden" value="{{ maincategorys.0.sizetable_set.count }}" id="count_sizes"/>
                     <input type="hidden" value="1" id="count_sizes_add"/>
-                    <input type="hidden" value="{}" id="product_data_lists" name="product_data_lists"/>
+                    <input type="hidden" value="{ARFDDF:{}}" id="product_data_lists" name="product_data_lists"/>
                     <div class="col-lg-6">
                         <div class="form-group {% if form.errors.modelss %}has-error{% endif %}">
                             <label style="color: red;">Модель</label><span style="color: red;">*</span>
@@ -183,6 +182,7 @@
                                         <td>
                                             <div class="form-group">
                                                 <select class="form-control" name="height[]" data-height="height">
+                                                       <option name="" value=""></option>
                                                     {% for height_list in sizes_table %}
                                                         <option name="{{ height_list.height }}" value="{{ height_list.height }}">{{ height_list.height }}</option>
                                                     {% endfor %}
@@ -211,8 +211,7 @@
                             </table>
                         </div>
                         <div class="form-group">
-                            <label>Добавить Товар</label>
-                            <button type="button" class="btn btn-sm btn-success form-control" id="add_size_fields">Добавить</button>
+                            <button type="button" class="btn btn-sm btn-success form-control" id="add_product_fields" style="display: none;">Добавить</button>
                         </div>
                     {% else %}
                         <span style="color: red;">Нет размеров для данной категории </span>
@@ -339,8 +338,8 @@
 </div>
 <script src="{% static "js/fileuploadmodelss.js" %}"></script>
 <script src="{% static "js/addnewmodelss.js" %}"></script>
-    <script type="text/javascript">
-        sizes_model={};
-        console.log(sizes_model);
-    </script>
+{#    <script type="text/javascript">#}
+{#        var product_data={1111:{}};#}
+{#        var flag_checked = 0;#}
+{#    </script>#}
 {% endblock %}

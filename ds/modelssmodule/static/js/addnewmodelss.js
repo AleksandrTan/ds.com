@@ -1,22 +1,110 @@
 /*
 * Identifier for debug mode(if true - form submited on server)
 * */
+var product_data={1111:{}};
+var flag_checked = 0;
+
 $(document).on('click', '[data-check-product]', function(event) {
                var sub = new ValidateProduct(event, $(this).closest("tr"));
-                   sub.validate();
+                   sub.init();
            });
 
 function ValidateProduct(e, obj) {
     this.e = e;
     this.obj = obj;
     this.product_data_lists = $('#product_data_lists').val();
+    this.articulobj = this.obj.find('[data-articul = "articul"]');
     this.articul = this.obj.find('[data-articul = "articul"]').val();
     this.barcode = this.obj.find('[data-pre-barcode = "pre-barcode"]').val();
     this.height = this.obj.find('[data-height="height"]').val();
-    this.count= this.obj.find('[data-count="count"]').val();
+    this.count = this.obj.find('[data-count="count"]').val();
+    this.modal_alarm = $('#modal_alarm');
+    this.alarm_text = $('#modal_content');
+    this.add_product_button = $('#add_product_fields');
+    this.count_sizes = $('#count_sizes').val();
+    this.count_sizes_add = $('#count_sizes_add').val();
+
+    this.init = function () {
+        // if (this.checkFilledData()){
+        //     this.validate();
+        // }
+        flag_checked = 0;
+        console.log(flag_checked);
+        this.validate();
+    };
 
     this.validate = function () {
-        console.log(this.articul);
+        this.checkArticul();
+    };
+
+    this.checkFilledData = function () {
+        if (this.articul != '' && this.barcode != '' && this.height != '' && this.count != ''){
+            return true;
+        }
+        else {
+            this.alarm_text.text('Введите все данные товара!!!');
+            this.modal_alarm.modal();
+            return false;
+        }
+    };
+
+    this.checkArticul = function () {
+        this.checkIssetArticulPrew();
+        this.checkIssetArticulDB();
+    };
+
+    this.checkIssetArticulPrew = function () {
+        if (this.articul in product_data) {
+            this.articulobj.val('');
+            this.alarm_text.text('').text('Введенный артикул уже существует!Выберите другой');
+            this.modal_alarm.modal().modal();
+            flag_checked = 1;
+            console.log(flag_checked);
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+
+    this.checkIssetArticulDB = function () {
+        if (flag_checked == 1){
+            return false;
+        }
+        thet = this;
+        $.get(
+        "/adminnv/products/checkarticul/"+this.articul+"/",
+        onAjaxSuccesss
+        );
+        function onAjaxSuccesss(data) {
+            if(data.status){
+                thet.articulobj.val('');
+                thet.alarm_text.text('').text('Введенный артикул уже существует!Выберите другой');
+                thet.modal_alarm.modal().modal();
+                flag_checked = 1;
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+    }.bind(this);
+
+    this.checkBarcode = function () {
+
+    };
+
+    this.checkIssetBarcode = function () {
+
+    };
+
+    this.checkHeight = function () {
+
+    };
+
+    this.checkCount = function () {
+
     }
 }
 $(document).ready(function () {
