@@ -4,6 +4,7 @@
     <list default="true" id="d038e7be-5329-43d2-b228-19170d0d687e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js" afterPath="$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modelssmodule/templates/createmodelss.html" afterPath="$PROJECT_DIR$/modelssmodule/templates/createmodelss.html" />
     </list>
     <ignored path="handsale/migrations/" />
     <ignored path="handsale/migrations/0001_initial.py" />
@@ -87,10 +88,10 @@
       <file leaf-file-name="createmodelss.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modelssmodule/templates/createmodelss.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="343" column="15" lean-forward="false" selection-start-line="340" selection-start-column="6" selection-end-line="343" selection-end-column="15" />
+            <state relative-caret-position="-2456">
+              <caret line="195" column="68" lean-forward="false" selection-start-line="195" selection-start-column="68" selection-end-line="195" selection-end-column="68" />
               <folding>
-                <element signature="e#14219#14241#0#HTML" expanded="true" />
+                <element signature="e#14258#14280#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -99,12 +100,13 @@
       <file leaf-file-name="addnewmodelss.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="99" column="27" lean-forward="false" selection-start-line="99" selection-start-column="27" selection-end-line="99" selection-end-column="27" />
+            <state relative-caret-position="-152">
+              <caret line="123" column="65" lean-forward="false" selection-start-line="123" selection-start-column="65" selection-end-line="123" selection-end-column="65" />
               <folding>
-                <element signature="e#1485#1778#0" expanded="false" />
-                <element signature="e#6817#6841#0" expanded="false" />
-                <marker date="1537956213759" expanded="true" signature="4074:4085" ph="..." />
+                <element signature="e#1598#1891#0" expanded="false" />
+                <element signature="e#2059#2404#0" expanded="false" />
+                <element signature="e#7951#7975#0" expanded="false" />
+                <marker date="1537981361458" expanded="true" signature="5209:5220" ph="..." />
               </folding>
             </state>
           </provider>
@@ -554,13 +556,6 @@
       <option name="presentableId" value="Default" />
       <updated>1508917586671</updated>
     </task>
-    <task id="LOCAL-00206" summary="Barcode sales">
-      <created>1535967243876</created>
-      <option name="number" value="00206" />
-      <option name="presentableId" value="LOCAL-00206" />
-      <option name="project" value="LOCAL" />
-      <updated>1535967243876</updated>
-    </task>
     <task id="LOCAL-00207" summary="Barcode sales">
       <created>1535968180298</created>
       <option name="number" value="00207" />
@@ -897,7 +892,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537955389920</updated>
     </task>
-    <option name="localTasksCounter" value="255" />
+    <task id="LOCAL-00255" summary="Modelss Module">
+      <created>1537956232330</created>
+      <option name="number" value="00255" />
+      <option name="presentableId" value="LOCAL-00255" />
+      <option name="project" value="LOCAL" />
+      <updated>1537956232330</updated>
+    </task>
+    <option name="localTasksCounter" value="256" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1205,14 +1207,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="307" column="97" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="330" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ds/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="43">
@@ -1410,24 +1404,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dsadminvn/templates/products/createnewproduct.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="63" column="57" lean-forward="true" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modelssmodule/templates/createmodelss.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="343" column="15" lean-forward="false" selection-start-line="340" selection-start-column="6" selection-end-line="343" selection-end-column="15" />
+        <state relative-caret-position="-2456">
+          <caret line="195" column="68" lean-forward="false" selection-start-line="195" selection-start-column="68" selection-end-line="195" selection-end-column="68" />
           <folding>
-            <element signature="e#14219#14241#0#HTML" expanded="true" />
+            <element signature="e#14258#14280#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="99" column="27" lean-forward="false" selection-start-line="99" selection-start-column="27" selection-end-line="99" selection-end-column="27" />
+        <state relative-caret-position="-152">
+          <caret line="123" column="65" lean-forward="false" selection-start-line="123" selection-start-column="65" selection-end-line="123" selection-end-column="65" />
           <folding>
-            <element signature="e#1485#1778#0" expanded="false" />
-            <element signature="e#6817#6841#0" expanded="false" />
-            <marker date="1537956213759" expanded="true" signature="4074:4085" ph="..." />
+            <element signature="e#1598#1891#0" expanded="false" />
+            <element signature="e#2059#2404#0" expanded="false" />
+            <element signature="e#7951#7975#0" expanded="false" />
+            <marker date="1537981361458" expanded="true" signature="5209:5220" ph="..." />
           </folding>
         </state>
       </provider>

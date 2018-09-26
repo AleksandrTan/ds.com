@@ -1,12 +1,14 @@
 /*
 * Identifier for debug mode(if true - form submited on server)
 * */
-var product_data={1111:{articul:1111, barcode:00001}, 2222:{articul:2222, barcode:00001}};
+var product_data={1111:{articul:1111, barcode:'00002'}, 2222:{articul:2222, barcode:'00001'}};
+var barcode_list = {};
 var flag_checked = 0;
 
 $(document).on('click', '[data-check-product]', function(event) {
+               //$('#hellopreloader_preload').css({'display':'block', 'opacity': '0.5'});
                var sub = new ValidateProduct(event, $(this).closest("tr"));
-                   sub.init();
+               sub.init();
            });
 
 function ValidateProduct(e, obj) {
@@ -93,23 +95,53 @@ function ValidateProduct(e, obj) {
 
     this.checkBarcode = function () {
         this.checkIssetBarcodePrew();
+        this.checkIssetBarcodeDB();
     };
 
     this.checkIssetBarcodePrew = function () {
-        if (this.barcode == product_data[this.articul].barcode) {
-            this.barcodeobj.val('');
-            this.alarm_text.text('').text('Введенный штрихкод уже существует!Выберите другой');
-            this.modal_alarm.modal().modal();
-            flag_checked = 1;
-            return false;
-        }
-        else {
-            return true;
+        for (key in product_data){
+            console.log(product_data[key]);
+            if (this.barcode == product_data[key].barcode) {
+                this.barcodeobj.val('');
+                this.alarm_text.text('').text('Введенный штрихкод уже существует!Выберите другой');
+                this.modal_alarm.modal().modal();
+                flag_checked = 1;
+                return false;
+            }
+            else {
+                 continue;
+            }
         }
     };
 
     this.checkIssetBarcodeDB = function () {
-
+        thet = this;
+        if (flag_checked == 1){
+            return false;
+        }
+        if (thet.barcode.length != 5){
+            thet.barcodeobj.val('');
+            thet.alarm_text.text('').text('Штрих-код - 5 цифр!!!!');
+            thet.modal_alarm.modal().modal();
+            flag_checked = 1;
+            return false;
+        }
+        $.get(
+        "/adminnv/products/checkprebarcode/"+this.barcode+"/",
+        onAjaxSuccesss
+        );
+        function onAjaxSuccesss(data) {
+            if(data.status){
+                thet.barcodeobj.val('');
+                thet.alarm_text.text('').text('Введенный штрих-код уже существует!Выберите другой');
+                thet.modal_alarm.modal().modal();
+                flag_checked = 1;
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
     };
 
     this.checkHeight = function () {
@@ -195,7 +227,6 @@ $('#pre_barcode').blur(function () {
            }
        }
    }
-
 });
 
 // //Check isset modelss

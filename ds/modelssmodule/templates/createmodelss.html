@@ -61,7 +61,7 @@
                         <div class="form-group {% if form.errors.modelss %}has-error{% endif %}">
                             <label style="color: red;">Модель</label><span style="color: red;">*</span>
                             <input class="form-control" placeholder="Модель" id="modelss" name="modelss" type="text"
-                                   value="{{ data.modelss }}" maxlength="50">
+                                   value="{{ data.modelss }}" maxlength="50" required>
                             {% if form.errors.modelss %}<label id="modelss-error" class="error" for="modelss">{{ form.errors.modelss.0 }}</label>{% endif %}
                             {% if form.non_field_errors %}<label id="modelss-error" class="error" for="modelss">{{ form.non_field_errors }}</label>{% endif %}
                         </div>
@@ -128,7 +128,8 @@
                          </div>
                          <div class="form-group">
                                 <label style="color: red;">Заголовок товара(Не более 100 символов)</label><span style="color: red;">*</span>
-                                <input class="form-control" id="caption" name="caption" placeholder="Заголовок" value="{{ data.caption }}" maxlength="100">
+                                <input class="form-control" id="caption" name="caption" placeholder="Заголовок"
+                                       value="{{ data.caption }}" maxlength="100" required>
                                 <span data-num="count_simbols" data-count="100"></span><span style="display: none">  - Введено <em></em> символов</span>
                          </div>
                          <div class="form-group">
@@ -173,15 +174,15 @@
                                     <tr>
                                         <td>
                                             <input class="form-control" placeholder="Артикул" name="articul[]"
-                                                   type="text" value="" data-articul="articul">
+                                                   type="text" value="" data-articul="articul" maxlength="6" required>
                                         </td>
                                         <td>
                                              <input class="form-control" placeholder="Штрих-код" name="pre_barcode[]"
-                                                    type="number" value="" data-pre-barcode="pre-barcode" >
+                                                    type="number" value="" data-pre-barcode="pre-barcode" maxlength="5" required>
                                         </td>
                                         <td>
                                             <div class="form-group">
-                                                <select class="form-control" name="height[]" data-height="height">
+                                                <select class="form-control" name="height[]" data-height="height" required>
                                                        <option name="" value=""></option>
                                                     {% for height_list in sizes_table %}
                                                         <option name="{{ height_list.height }}" value="{{ height_list.height }}">{{ height_list.height }}</option>
@@ -192,8 +193,7 @@
                                         <td  style="width: 15%">
                                             <div class="form-group">
                                                <input class="form-control"
-                                                      placeholder="Колличество" name="count[]"
-                                                      value="0" maxlength="5" type="number" data-count="count">
+                                                      name="count[]" value="" maxlength="5" type="number" data-count="count" required>
                                             </div>
                                         </td>
                                         <td>
