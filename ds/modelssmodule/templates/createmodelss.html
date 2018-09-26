@@ -57,6 +57,7 @@
                     <input type="hidden" value="{{ maincategorys.0.sizetable_set.count }}" id="count_sizes"/>
                     <input type="hidden" value="1" id="count_sizes_add"/>
                     <input type="hidden" value="{ARFDDF:{}}" id="product_data_lists" name="product_data_lists"/>
+                    <input type="hidden" value="0" id="flag_checked"/>
                     <div class="col-lg-6">
                         <div class="form-group {% if form.errors.modelss %}has-error{% endif %}">
                             <label style="color: red;">Модель</label><span style="color: red;">*</span>
@@ -198,7 +199,7 @@
                                         </td>
                                         <td>
                                             <div class="form-group">
-                                               <button type="button" class="btn btn-sm bg-info form-control" data-check-product="1">Проверить</button>
+                                               <button type="button" class="btn btn-sm btn-primary form-control" data-check-product="1">Проверить</button>
                                             </div>
                                         </td>
                                         <td>
