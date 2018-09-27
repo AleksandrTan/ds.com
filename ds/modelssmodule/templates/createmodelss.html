@@ -52,7 +52,7 @@
                 {% if not maincategorys or not nameproducts or not brends %}
                     <p>Нет категорий или названий или бренда для отображения.Добавте данные!</p>
                 {% else %}
-                <form class="form form-offer" method="post" name="add_new_product" action="{% url 'createproduct' %}"
+                <form class="form form-offer" method="post" name="add_new_product" action="{% url 'createmodelss' %}"
                       id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
                     <input type="hidden" value="{{ maincategorys.0.sizetable_set.count }}" id="count_sizes"/>
                     <input type="hidden" value="0" id="count_sizes_add"/>
@@ -61,7 +61,7 @@
                     <div class="col-lg-6">
                         <div class="form-group {% if form.errors.modelss %}has-error{% endif %}">
                             <label style="color: red;">Модель</label><span style="color: red;">*</span>
-                            <input class="form-control" placeholder="Модель" id="modelss" name="modelss" type="text"
+                            <input class="form-control" placeholder="Модель" id="name" name="name" type="text"
                                    value="{{ data.modelss }}" maxlength="50" required>
                             {% if form.errors.modelss %}<label id="modelss-error" class="error" for="modelss">{{ form.errors.modelss.0 }}</label>{% endif %}
                             {% if form.non_field_errors %}<label id="modelss-error" class="error" for="modelss">{{ form.non_field_errors }}</label>{% endif %}

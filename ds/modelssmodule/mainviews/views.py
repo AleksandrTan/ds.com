@@ -8,7 +8,7 @@ from django.core.files.storage import FileSystemStorage
 from dsadminvn.mainviews.views import BaseAdminView
 from dsadminvn.mainhelpers.SetBarcode import SetBarcode as SBS
 from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Products,
-                            ProductsForm, ProductsFormEdit, Image)
+                            ModelssForm, ProductsFormEdit, Image)
 
 
 class ModelssWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
@@ -25,7 +25,7 @@ class ModelssWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Li
         context['nameproducts'] = NameProduct.objects.get_active_products()
         context['brends'] = Brends.objects.get_active_brends()
         context['seasons'] = Seasons.objects.get_active_seasons()
-        context['tab_products'] = True
+        context['tab_modelss'] = True
 
         return context
 
@@ -33,7 +33,7 @@ class ModelssWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Li
 class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     login_url = 'login'
     permission_required = "auth.change_user"
-    form_class = ProductsForm
+    form_class = ModelssForm
     template_name = 'createmodelss.html'
     succes_url = '/adminnv/products/'
 
@@ -56,16 +56,14 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         context['nameproducts'] = NameProduct.objects.get_active_products()
         context['brends'] = Brends.objects.get_active_brends()
         context['seasons'] = Seasons.objects.get_active_seasons()
-        context['tab_products'] = True
+        context['tab_modelss'] = True
         return context
 
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.identifier = self.uuid_sentece()
         instance.dirname_img = self.uuid_sentece_user()
-        instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['articul']
-        genbarcode = SBS(form.cleaned_data['pre_barcode'])
-        instance.barcode = genbarcode.generate_barcode()
+        instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['name']
         instance.save()
 
         self.save_other_files(instance, form)
@@ -93,7 +91,7 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
 
     def uuid_sentece_user(self):
         import uuid
-        return 'product_' + str(uuid.uuid4())[:10]
+        return 'modelss_' + str(uuid.uuid4())[:10]
 
     def uuid_sentece(self):
         import uuid

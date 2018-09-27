@@ -151,12 +151,23 @@
                     {% endif %}
                     {% if user.is_staff and user.is_superuser %}
                         <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#products"><i class="fa fa-fw fa-arrows-v"></i> Товары
+                            <a href="javascript:;" data-toggle="collapse" data-target="#modelss"><i class="fa fa-fw fa-arrows-v"></i> Модели
                                 <i class="fa fa-fw fa-caret-down"></i></a>
-                            <ul id="products" class="collapse {% if tab_products %} in {% endif %}">
+                            <ul id="modelss" class="collapse {% if tab_modelss %} in {% endif %}">
                                 <li>
                                     <a href="{% url 'showform_for_add_modelss' %}"><i class="fa fa-cog"></i> Добавить Модель</a>
                                 </li>
+                                <li>
+                                    <a href="{% url 'products' %}"><i class="fa fa-hand-o-right"></i> Все модели</a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                    {% if user.is_staff and user.is_superuser %}
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#products"><i class="fa fa-fw fa-arrows-v"></i> Товары
+                                <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="products" class="collapse {% if tab_products %} in {% endif %}">
                                 <li>
                                     <a href="{% url 'products' %}"><i class="fa fa-hand-o-right"></i> Все товары</a>
                                 </li>

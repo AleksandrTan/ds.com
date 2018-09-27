@@ -242,9 +242,6 @@ class ManageModelss(models.Manager):
 class Modelss(models.Model):
     name = models.CharField(blank=True, default='', max_length=50)
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)
-    articul = models.CharField(unique=True, max_length=10, blank=False)
-    pre_barcode = models.CharField(unique=True, max_length=5, blank=False)
-    barcode = models.CharField(unique=True, max_length=13, blank=False)
     nameproduct = models.ForeignKey(NameProduct, on_delete=models.CASCADE, blank=False)
     brends = models.SmallIntegerField(blank=True, default=0)
     season_id = models.SmallIntegerField(blank=True, default=0)
@@ -300,6 +297,26 @@ class Modelss(models.Model):
     def __str__(self):
         return self.link_name
 
+
+class ModelssForm(ModelForm):
+    """
+        Set request param, param request add  in __init__ like positional argument
+    """
+    def __init__(self, request, *args, **kwargs):
+        self.request = request
+        super(ModelForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Modelss
+        fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'name']
+
+        error_messages = {
+                             'name': {'required': "Пожалуйста введите название",
+                                         'max_length':"Не более 30 символов",
+                                         'unique': "Эта модель уже используетсяб введите другую"
+                                      },
+                          }
 
 """--------------Products Model-------------------------"""
 

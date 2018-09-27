@@ -287,7 +287,7 @@ $(document).ready(function () {
     });
 
 //Check isset modelss
-$('#modelss').blur(function () {
+$('#name').blur(function () {
     if ($(this).val() != ''){
        $.get(
         "/adminnv/products/checkmodelss/"+$(this).val()+"/",
@@ -295,7 +295,7 @@ $('#modelss').blur(function () {
        );
        function onAjaxSuccess(data) {
            if(data.status){
-           	   $('#modelss').val('');
+           	   $('#name').val('');
                $('#modal_content').text('').text('Введенная модель уже существует!Выберите другую');
                $('#modal_alarm').modal();
            }
