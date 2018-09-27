@@ -107,7 +107,7 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
                     fs = FileSystemStorage(location=settings.MEDIA_ROOT + '/images/' + instance.dirname_img,
                                            base_url='media/images/' + instance.dirname_img)
                     filename = fs.save(ifile.name, ifile)
-                    i = Image(products=instance,
+                    i = Image(modelss=instance,
                               img_path=fs.url(filename))
                     i.save()
                 else:
