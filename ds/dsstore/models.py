@@ -182,6 +182,7 @@ class Brends(models.Model):
 
 """--------------------Seasons Model--------------------"""
 
+
 class ManagerSeasons(models.Manager):
     def get_active_seasons(self):
         return Seasons.objects.filter(is_active__exact = True)
@@ -230,7 +231,12 @@ def custom_directory_path(instance, filename):
 
 
 class ManageModelss(models.Manager):
-    pass
+
+    def check_isset_modelss(self, name):
+        if Modelss.objects.only('name').filter(name=name).exists():
+            return True
+        else:
+            return False
 
 
 class Modelss(models.Model):
@@ -298,10 +304,6 @@ class Modelss(models.Model):
 """--------------Products Model-------------------------"""
 
 
-def custom_directory_path(instance, filename):
-    return 'images/{0}/{1}'.format(instance.dirname_img, filename)
-
-
 class ManageProductsModel(models.Manager):
 
     def get_list_products(self):
@@ -325,12 +327,6 @@ class ManageProductsModel(models.Manager):
             else:
                 return True
         except Products.DoesNotExist:
-            return False
-
-    def check_isset_modelss(self, modelss):
-        if Products.objects.only('modelss').filter(modelss=modelss).exists():
-            return True
-        else:
             return False
 
     def found_articul(self, articul):

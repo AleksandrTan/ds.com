@@ -35,6 +35,7 @@ np_patterns = [
 """
 st_patterns = [
     url(r'^ajax/getsizes/(?P<pk>[0-9]+)/$', views.AjaxGetSizes.as_view(), name='ajax_st_get'),
+    url(r'^ajax/getsizes/(?P<pk>[0-9]+)/$', views.AjaxGetSizes.as_view(), name='ajax_st_get'),
     url(r'^addnew/$', views.SizeTableAddNew.as_view(), name='st_add_new'),
     url(r'^delete/(?P<pk>[0-9]+)/$', views.SizeTableDelete.as_view(), name='delete_st'),
     url(r'^$', views.SizeTableWork.as_view(), name='sizetable'),

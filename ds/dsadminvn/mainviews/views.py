@@ -22,7 +22,7 @@ from django.http import QueryDict
 from django.contrib.auth.models import User
 from dsstore.models import (MainCategory, NameProduct, SizeTable,
                             SizeTableForm, Brends, Seasons, Products,
-                            ProductsForm, ProductsFormEdit, Image)
+                            ProductsForm, ProductsFormEdit, Image, Modelss)
 from handsale.models import ProductsSale
 from dsadminvn.forms import FoundArticuls, FilterProducts, FilterSaleProduct, FoundModelss
 from dsadminvn.mainhelpers.SetBarcode import SetBarcode as SBS
@@ -667,7 +667,7 @@ class CheckIssetModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
-            product_result = Products.objects.check_isset_modelss(kwargs['modelss'])
+            product_result = Modelss.objects.check_isset_modelss(kwargs['modelss'])
             return JsonResponse({"status": product_result})
 
 
