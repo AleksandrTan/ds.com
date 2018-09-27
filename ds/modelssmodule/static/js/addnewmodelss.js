@@ -4,7 +4,7 @@
 var product_data={};
 
 $(document).on('click', '[data-check-product]', function(event) {
-               //$('#hellopreloader_preload').css({'display':'block', 'opacity': '0.5'});
+               // $('#hellopreloader_preload').css({'display':'block', 'opacity': '0.5'});
                var sub = new ValidateProduct(event, $(this).closest("tr"), $(this));
                sub.init();
            });
@@ -12,7 +12,6 @@ $(document).on('click', '[data-check-product]', function(event) {
 function ValidateProduct(e, obj, but) {
     this.e = e;
     this.obj = obj;
-    this.flag_checked = $('#flag_checked');
     this.product_data_lists = $('#product_data_lists');
     this.articulobj = this.obj.find('[data-articul = "articul"]');
     this.articul = this.obj.find('[data-articul = "articul"]').val();
@@ -29,17 +28,18 @@ function ValidateProduct(e, obj, but) {
     this.count_sizes_add = $('#count_sizes_add').val();
 
     this.init = function () {
-        this.flag_checked.val(0);
+        $('#flag_checked').val(0);
         if (this.checkFilledData()){
             this.validate();
-            if(this.flag_checked.val() == 1){
+            if($('#flag_checked').val() == 1){
+                // $('#hellopreloader_preload').css({'display':'none'});
                 return false;
             }
         }
         else {
             return false;
         }
-        if (this.count_sizes > this.count_sizes_add && this.flag_checked.val() == 0){
+        if (this.count_sizes > this.count_sizes_add && $('#flag_checked').val() == 0){
             this.add_product_button.show();
             but.removeClass('btn-primary').addClass('btn-success');
             but.text('Проверено');
@@ -50,11 +50,13 @@ function ValidateProduct(e, obj, but) {
             but.text('Проверено');
             but.removeAttr("data-check-product");
         }
-        //add data product in object list
-        if (this.flag_checked.val() == 0){
+        //add data product in object list(validation clear)
+        if ($('#flag_checked').val() == 0){
             this.addDataProduct();
             this.product_data_lists.val(JSON.stringify(product_data));
             this.data_deletes.attr('data-is-delpr', this.articul);
+            $('#save_product').show();
+            // $('#hellopreloader_preload').css({'display':'none'});
             console.log(JSON.stringify(product_data));
         }
     };
@@ -73,7 +75,7 @@ function ValidateProduct(e, obj, but) {
         else {
             this.alarm_text.text('Введите все данные товара!!!');
             this.modal_alarm.modal();
-            this.flag_checked.val(1);
+            $('#flag_checked').val(1);
             return false;
         }
     };
@@ -88,7 +90,7 @@ function ValidateProduct(e, obj, but) {
             this.articulobj.val('');
             this.alarm_text.text('').text('Введенный артикул уже существует!Выберите другой');
             this.modal_alarm.modal().modal();
-            this.flag_checked.val(1);
+            $('#flag_checked').val(1);
             return false;
         }
         else {
@@ -97,7 +99,7 @@ function ValidateProduct(e, obj, but) {
     };
 
     this.checkIssetArticulDB = function () {
-        if (this.flag_checked.val() == 1){
+        if ($('#flag_checked').val() == 1){
             return false;
         }
         thet = this;
@@ -110,7 +112,7 @@ function ValidateProduct(e, obj, but) {
                 thet.articulobj.val('');
                 thet.alarm_text.text('').text('Введенный артикул уже существует!Выберите другой');
                 thet.modal_alarm.modal().modal();
-                thet.flag_checked.val(1);
+                $('#flag_checked').val(1);
                 return false;
             }
             else {
@@ -121,7 +123,7 @@ function ValidateProduct(e, obj, but) {
     }.bind(this);
 
     this.checkBarcode = function () {
-        if (this.flag_checked.val() == 1){
+        if ($('#flag_checked').val() == 1){
             return false;
         }
         this.checkIssetBarcodePrew();
@@ -134,7 +136,7 @@ function ValidateProduct(e, obj, but) {
                 this.barcodeobj.val('');
                 this.alarm_text.text('').text('Введенный штрихкод уже существует!Выберите другой');
                 this.modal_alarm.modal().modal();
-                this.flag_checked.val(1);
+                $('#flag_checked').val(1);
                 return false;
             }
             else {
@@ -145,14 +147,14 @@ function ValidateProduct(e, obj, but) {
 
     this.checkIssetBarcodeDB = function () {
         thet = this;
-        if (this.flag_checked.val() == 1){
+        if ($('#flag_checked').val() == 1){
             return false;
         }
         if (thet.barcode.length != 5){
             thet.barcodeobj.val('');
             thet.alarm_text.text('').text('Штрих-код - 5 цифр!!!!');
             thet.modal_alarm.modal().modal();
-            thet.flag_checked.val(1);
+            $('#flag_checked').val(1);
             return false;
         }
         $.get(
@@ -164,7 +166,7 @@ function ValidateProduct(e, obj, but) {
                 thet.barcodeobj.val('');
                 thet.alarm_text.text('').text('Введенный штрих-код уже существует!Выберите другой');
                 thet.modal_alarm.modal().modal();
-                thet.flag_checked.val(1);
+                $('#flag_checked').val(1);
                 return false;
             }
             else {
@@ -174,7 +176,7 @@ function ValidateProduct(e, obj, but) {
     };
 
     this.checkHeight = function () {
-        if (this.flag_checked.val() == 1){
+        if ($('#flag_checked').val() == 1){
             return false;
         }
         for (key in product_data){
@@ -182,7 +184,7 @@ function ValidateProduct(e, obj, but) {
                 this.heightobj.val('');
                 this.alarm_text.text('').text('Внимание дублирование размера!!! Выберите другой размер!!!');
                 this.modal_alarm.modal().modal();
-                this.flag_checked.val(1);
+                $('#flag_checked').val(1);
                 return false;
             }
             else {
@@ -192,13 +194,13 @@ function ValidateProduct(e, obj, but) {
     };
 
     this.checkCount = function () {
-        if (this.flag_checked.val() == 1){
+        if ($('#flag_checked').val() == 1){
             return false;
         }
         if(this.count == '' || parseInt(this.count) < 0 ){
             this.alarm_text.text('').text('Введите правильное колличество товара!');
             this.modal_alarm.modal().modal();
-            this.flag_checked.val(1);
+            $('#flag_checked').val(1);
             return false;
         }
         else {
@@ -260,7 +262,7 @@ $(document).ready(function () {
                     'Удалить</button></div></td></tr>';
 
                 parentElementTable.append(new_size);
-                $('#save_product').show();
+                $('#save_product').hide();
                 $('#add_product_fields').hide();
             }
         }
@@ -279,6 +281,9 @@ $(document).ready(function () {
     	    return false;
         }
         $('#add_product_fields').show();
+        if ($('#count_sizes').val()>=  $('#count_sizes_add').val()){
+            $('#save_product').show();
+        }
     });
 
 //Check isset modelss

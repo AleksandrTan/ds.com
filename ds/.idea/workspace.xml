@@ -4,7 +4,6 @@
     <list default="true" id="d038e7be-5329-43d2-b228-19170d0d687e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js" afterPath="$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modelssmodule/templates/createmodelss.html" afterPath="$PROJECT_DIR$/modelssmodule/templates/createmodelss.html" />
     </list>
     <ignored path="handsale/migrations/" />
     <ignored path="handsale/migrations/0001_initial.py" />
@@ -75,12 +74,11 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modelssmodule/mainviews/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="32" column="95" lean-forward="false" selection-start-line="32" selection-start-column="95" selection-end-line="32" selection-end-column="95" />
+            <state relative-caret-position="760">
+              <caret line="54" column="28" lean-forward="false" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <element signature="e#662#1342#0" expanded="false" />
-                <element signature="e#1445#5466#0" expanded="false" />
                 <element signature="e#5564#10934#0" expanded="false" />
               </folding>
             </state>
@@ -90,8 +88,8 @@
       <file leaf-file-name="createmodelss.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modelssmodule/templates/createmodelss.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="174" column="0" lean-forward="false" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
+            <state relative-caret-position="244">
+              <caret line="283" column="110" lean-forward="true" selection-start-line="283" selection-start-column="98" selection-end-line="283" selection-end-column="110" />
               <folding />
             </state>
           </provider>
@@ -100,15 +98,33 @@
       <file leaf-file-name="addnewmodelss.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="273" column="8" lean-forward="false" selection-start-line="273" selection-start-column="8" selection-end-line="273" selection-end-column="8" />
+            <state relative-caret-position="160">
+              <caret line="34" column="72" lean-forward="false" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="72" />
               <folding>
-                <element signature="e#7464#9816#0" expanded="false" />
-                <element signature="e#10411#10825#0" expanded="false" />
-                <element signature="e#10905#11573#0" expanded="false" />
-                <marker date="1538035454331" expanded="true" signature="7937:7948" ph="..." />
-                <marker date="1538035454331" expanded="true" signature="8985:8995" ph="..." />
+                <element signature="e#7350#11868#0" expanded="false" />
+                <element signature="e#7419#7565#0" expanded="false" />
+                <element signature="e#7637#9989#0" expanded="false" />
+                <element signature="e#10095#10645#0" expanded="false" />
+                <element signature="e#10702#11116#0" expanded="false" />
+                <element signature="e#11196#11864#0" expanded="false" />
+                <marker date="1538037609537" expanded="true" signature="8110:8121" ph="..." />
+                <marker date="1538037609537" expanded="true" signature="9158:9168" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dsdb.dsstore_products" pinned="false" current-in-tab="false">
+        <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.dsstore_products">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -138,6 +154,7 @@
       <find>reletad_images</find>
       <find>DELETE</find>
       <find>found_articul</find>
+      <find>save_product</find>
     </findStrings>
     <replaceStrings>
       <replace>np_l</replace>
@@ -589,13 +606,6 @@
       <option name="presentableId" value="Default" />
       <updated>1508917586671</updated>
     </task>
-    <task id="LOCAL-00212" summary="Discounts module">
-      <created>1536174863188</created>
-      <option name="number" value="00212" />
-      <option name="presentableId" value="LOCAL-00212" />
-      <option name="project" value="LOCAL" />
-      <updated>1536174863188</updated>
-    </task>
     <task id="LOCAL-00213" summary="Discounts module">
       <created>1536177005980</created>
       <option name="number" value="00213" />
@@ -932,7 +942,14 @@
       <option name="project" value="LOCAL" />
       <updated>1538034362014</updated>
     </task>
-    <option name="localTasksCounter" value="261" />
+    <task id="LOCAL-00261" summary="Modelss Module">
+      <created>1538035479852</created>
+      <option name="number" value="00261" />
+      <option name="presentableId" value="LOCAL-00261" />
+      <option name="project" value="LOCAL" />
+      <updated>1538035479852</updated>
+    </task>
+    <option name="localTasksCounter" value="262" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1044,7 +1061,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="38" />
+      <option name="time" value="39" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1350,19 +1367,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.dsstore_products">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.dsstore_modelss">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1396,19 +1400,6 @@
           <caret line="18" column="1" lean-forward="false" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modelssmodule/mainviews/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="32" column="95" lean-forward="false" selection-start-line="32" selection-start-column="95" selection-end-line="32" selection-end-column="95" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#662#1342#0" expanded="false" />
-            <element signature="e#1445#5466#0" expanded="false" />
-            <element signature="e#5564#10934#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1453,24 +1444,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modelssmodule/mainviews/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="54" column="28" lean-forward="false" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#662#1342#0" expanded="false" />
+            <element signature="e#5564#10934#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modelssmodule/templates/createmodelss.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="174" column="0" lean-forward="false" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
+        <state relative-caret-position="244">
+          <caret line="283" column="110" lean-forward="true" selection-start-line="283" selection-start-column="98" selection-end-line="283" selection-end-column="110" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.dsstore_products">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="273" column="8" lean-forward="false" selection-start-line="273" selection-start-column="8" selection-end-line="273" selection-end-column="8" />
+        <state relative-caret-position="160">
+          <caret line="34" column="72" lean-forward="false" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="72" />
           <folding>
-            <element signature="e#7464#9816#0" expanded="false" />
-            <element signature="e#10411#10825#0" expanded="false" />
-            <element signature="e#10905#11573#0" expanded="false" />
-            <marker date="1538035454331" expanded="true" signature="7937:7948" ph="..." />
-            <marker date="1538035454331" expanded="true" signature="8985:8995" ph="..." />
+            <element signature="e#7350#11868#0" expanded="false" />
+            <element signature="e#7419#7565#0" expanded="false" />
+            <element signature="e#7637#9989#0" expanded="false" />
+            <element signature="e#10095#10645#0" expanded="false" />
+            <element signature="e#10702#11116#0" expanded="false" />
+            <element signature="e#11196#11864#0" expanded="false" />
+            <marker date="1538037609537" expanded="true" signature="8110:8121" ph="..." />
+            <marker date="1538037609537" expanded="true" signature="9158:9168" ph="..." />
           </folding>
         </state>
       </provider>
