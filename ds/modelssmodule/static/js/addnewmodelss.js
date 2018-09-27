@@ -21,6 +21,7 @@ function ValidateProduct(e, obj, but) {
     this.heightobj = this.obj.find('[data-height="height"]');
     this.height = this.obj.find('[data-height="height"]').val();
     this.count = this.obj.find('[data-count="count"]').val();
+    this.data_deletes = this.obj.find('[data-deletes="delete_size"]');
     this.modal_alarm = $('#modal_alarm');
     this.alarm_text = $('#modal_content');
     this.add_product_button = $('#add_product_fields');
@@ -53,6 +54,7 @@ function ValidateProduct(e, obj, but) {
         if (this.flag_checked.val() == 0){
             this.addDataProduct();
             this.product_data_lists.val(JSON.stringify(product_data));
+            this.data_deletes.attr('data-is-delpr', this.articul);
             console.log(JSON.stringify(product_data));
         }
     };
@@ -214,7 +216,7 @@ function ValidateProduct(e, obj, but) {
 }
 $(document).ready(function () {
 
-//Change sizes for select maincategory
+//Changes maincategory
     $('#maincategory' ).change(function () {
     	$('#height_size_id').empty();
         product_data = {};
@@ -222,7 +224,7 @@ $(document).ready(function () {
         console.log(product_data);
     });
 
-    //Add sizes fields
+//Add product fields
     $('#add_product_fields').click(function () {
         if ($('#count_sizes').val() <=  $('#count_sizes_add').val()){
     	    return false;
@@ -265,14 +267,18 @@ $(document).ready(function () {
     	$('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) + 1);
 
     });
-//Remove size field
-    $('#height_size_id').on('click', '[data-deletes=delete_size]', function () {
-        if ($('#height_size_id').children('tr').length == 1){
 
-            return false;
-        }
+//Remove product field
+    $('#height_size_id').on('click', '[data-deletes=delete_size]', function () {
+        delete product_data[$(this).attr('data-is-delpr')];
+        $('#product_data_lists').val(JSON.stringify(product_data));
         $(this).parents('tr').remove();
+        console.log(product_data);
         $('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) - 1);
+        if ($('#count_sizes').val() <=  $('#count_sizes_add').val()){
+    	    return false;
+        }
+        $('#add_product_fields').show();
     });
 
 //Check isset modelss
