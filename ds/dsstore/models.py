@@ -238,6 +238,9 @@ class ManageModelss(models.Manager):
         else:
             return False
 
+    def get_list_products(self):
+        return Modelss.objects.only('id', 'price', 'is_active', 'name')
+
 
 class Modelss(models.Model):
     name = models.CharField(blank=True, default='', max_length=50)

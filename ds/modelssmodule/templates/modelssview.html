@@ -1,0 +1,224 @@
+{% extends "main.html" %}
+{% load staticfiles %}
+{% load customfilters %}
+{% block content %}
+<div id="page-wrapper">
+        <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Товары
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-table"></i> Модели
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                    <label>Поиск товара по фильтру</label>
+                        <form class="form form-offer" method="get" name="filter_product" action="{% url 'filterproduct' %}"
+                              id="filter_product" >{% csrf_token %}
+                        <div class="col-lg-2">
+                            <div class="form-group ">
+                            <label>Категория</label>
+                                <select class="form-control" name="maincategory_id">
+                                    <option name="0" value="">Категория</option>
+                                    {% for mcl in maincategorys %}
+                                        <option name="{{ mcl.id }}" value="{{ mcl.id }}" {% if mcl.id == data_form.maincategory_id|strtoint %} selected {% endif %}>
+                                            {{ mcl.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                             <div class="form-group ">
+                                 <label>Название</label>
+                                     <select class="form-control" name="nameproduct_id">
+                                             <option name="0" value="">Название</option>
+                                         {% for name_product in nameproducts %}
+                                             <option name="{{ name_product.id }}" value="{{ name_product.id }}"
+                                                     {% if name_product.id == data_form.nameproduct_id|strtoint %} selected {% endif %}> {{ name_product.name }}
+                                             </option>
+                                         {% endfor %}
+                                     </select>
+                             </div>
+                        </div>
+                        <div class="col-lg-2">
+                           {% if brends %}
+                               <div class="form-group ">
+                                    <label>Бренд</label>
+                                        <select class="form-control" name="brends">
+                                            <option name="0" value="">Бренд</option>
+                                            {% for brend in brends %}
+                                                <option name="{{ brend.id }}" value="{{ brend.id }}" {% if brend.id == data_form.brends|strtoint %} selected {% endif %}>
+                                                    {{ brend.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                           {% endif %}
+                        </div>
+                        <div class="col-lg-2">
+                           {% if seasons %}
+                                 <div class="form-group ">
+                                    <label>Сезон</label>
+                                        <select class="form-control" name="season_id">
+                                            <option name="0" value="">Сезон</option>
+                                            {% for season in seasons %}
+                                                <option name="{{ season.id }}" value="{{ season.id }}" {% if season.id == data_form.season|strtoint %} selected
+                                                {% endif %}>
+                                                    {{ season.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                 </div>
+                             {% endif %}
+                        </div>
+                        <div class="col-lg-2">
+                        <div class="form-group">
+                              <div class="checkbox">
+                                  <label>
+                                      <input type="checkbox" value="1" name="is_belarus" {% if data_form.is_belarus %} checked {% endif %}>Товар из Беларуси
+                                  </label>
+                              </div>
+                              <div class="checkbox">
+                                  <label>
+                                       <input type="checkbox" value="1" name="is_active" {% if data_form.is_active %} checked {% endif %}>Активные
+                                  </label>
+                              </div>
+                              <div class="checkbox">
+                                  <label>
+                                     <input type="checkbox" value="1" name="is_new" {% if data_form.is_new %} checked {% endif %}>Новый товар
+                                  </label>
+                              </div>
+                         </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-sm btn-success form-control" name="submit" value="1">Найти Товар</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+{#                    <div class="col-lg-2">#}
+{#                        <div class="form-group">#}
+{#                            <label>Добавить новый товар</label>#}
+{#                            <a type="button" class="btn btn-sm btn-primary form-control" href="{% url 'showform_for_add_product' %}">Добавить</a>#}
+{#                         </div>#}
+{#                    </div>#}
+                    <div class="col-lg-2">
+                       <form class="form form-offer" method="post" name="found_product" action="{% url 'foundproduct' %}"
+                              id="found_product">{% csrf_token %}
+                            <div class="form-group">
+                                <label>Поиск по Артикулу</label>
+                                <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" maxlength="6">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-sm btn-success form-control">Найти Товар</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-2">
+                        <form class="form form-offer" method="post" name="found_modelss" action="{% url 'foundmodelss' %}"
+                              id="found_modelss">{% csrf_token %}
+                            <div class="form-group">
+                                <label>Поиск по Модели</label>
+                                <input class="form-control" placeholder="Модель" id="modelss" name="modelss" type="text">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-sm btn-success form-control">Найти Товар</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-12">
+                       <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Модель</th>
+                                        <th class="text-center">Категория</th>
+                                        <th class="text-center">Название</th>
+                                        <th class="text-center">Цена</th>
+                                        <th class="text-center">Скидка</th>
+                                        <th class="text-center">Активен</th>
+                                        <th class="text-center">Добавлен</th>
+                                        <th class="text-center">Просмотр</th>
+                                        <th class="text-center">Редактировать</th>
+                                        <th class="text-center">Удалить</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mc_list">
+                                {% for model_data in modelss_list %}
+                                    <tr>
+                                        <td class="text-center">{{ model_data.name }}</td>
+                                        <td class="text-center">{{ model_data.maincategory.name }}</td>
+                                        <td class="text-center">{{ model_data.nameproduct.name }}</td>
+                                        <td class="text-center">{{ model_data.price }}</td>
+                                        <td class="text-center">{{ model_data.discount }}%</td>
+                                        {% if model_data.is_active %}
+                                            <td class="text-center"> ДА </td>
+                                        {% else %}
+                                            <td class="text-center" style="color: #b52b27"> НЕТ </td>
+                                        {% endif %}
+                                        <td class="text-center">{{ model_data.date_create|date:"d-m-Y" }}</td>
+                                        <td class="text-center"><a type="button"
+                                                                   class="btn btn-sm btn-primary"
+                                                                   href="{% url 'viewproduct' model_data.id %}">Просмотр</a>
+                                        </td>
+                                        <td class="text-center"><a type="button"
+                                                                   class="btn btn-sm btn-success"
+                                                                   href="{% url 'editproduct' model_data.id %}">Редактировать</a>
+                                        </td>
+                                        {#                                        <td class="text-center"><a type="button"#}
+{#                                                                   class="btn btn-sm btn-success"#}
+{#                                                                   href="{% url 'saleproductview' model_data.id %}">Статистика</a>#}
+{#                                        </td>#}
+                                        <td class="text-center"><a type="button"
+                                                                   class="btn btn-sm btn-danger"
+                                                                   href="{% url 'deleteproduct' model_data.id %}">Удалить</a>
+
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                    <tr><td style="color: red">Нет данных для отображения</td></tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+    </div>
+    <!--Pagination-->
+    {% if is_paginated %}
+    <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="/adminnv/products/page/{{ page_obj.previous_page_number }}/?{{ request_get }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="/adminnv/products/page/{{ i }}/?{{ request_get }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="/adminnv/products/page/{{ page_obj.next_page_number }}/?{{ request_get }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+    </ul>
+{% endif %}
+{% endblock %}

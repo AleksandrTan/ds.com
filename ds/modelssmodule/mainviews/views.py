@@ -6,17 +6,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.core.files.storage import FileSystemStorage
 
 from dsadminvn.mainviews.views import BaseAdminView
-from dsadminvn.mainhelpers.SetBarcode import SetBarcode as SBS
-from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Products,
+from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Products, Modelss,
                             ModelssForm, ProductsFormEdit, Image)
 
 
 class ModelssWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
     permission_required = "auth.change_user"
     login_url = 'login'
-    queryset = Products.objects.get_list_products()
-    template_name = 'createmodelss.html'
-    context_object_name = 'products_list'
+    queryset = Modelss.objects.get_list_products()
+    template_name = 'modelssview.html'
+    context_object_name = 'modelss_list'
     paginate_by = 5
 
     def get_context_data(self, **kwargs):
