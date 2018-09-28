@@ -3,6 +3,16 @@
 * */
 var product_data={};
 
+$( "#add_new_modelss" ).submit(function (e) {
+                                  // if ($('#name').val() == '' || $('#caption').val() == ''){
+			                       //   $('#modal_content').text('Введите название или заголовок модели!!!');
+                                  //    $('#modal_alarm').modal();
+                                  //    return false;
+                                  // }
+
+			                      this.submit();
+                            });
+
 $(document).on('click', '[data-check-product]', function(event) {
                // $('#hellopreloader_preload').css({'display':'block', 'opacity': '0.5'});
                var sub = new ValidateProduct(event, $(this).closest("tr"), $(this));
@@ -45,11 +55,7 @@ function ValidateProduct(e, obj, but) {
             but.text('Проверено');
             but.removeAttr("data-check-product");
         }
-        else {
-            but.removeClass('btn-primary').addClass('btn-success');
-            but.text('Проверено');
-            but.removeAttr("data-check-product");
-        }
+       
         //add data product in object list(validation clear)
         if ($('#flag_checked').val() == 0){
             this.addDataProduct();
@@ -103,10 +109,11 @@ function ValidateProduct(e, obj, but) {
             return false;
         }
         thet = this;
-        $.get(
-        "/adminnv/products/checkarticul/"+this.articul+"/",
-        onAjaxSuccesss
-        );
+        $.ajax({
+                url: "/adminnv/products/checkarticul/"+this.articul+"/",
+                success: onAjaxSuccesss,
+                async: false
+            });
         function onAjaxSuccesss(data) {
             if(data.status){
                 thet.articulobj.val('');
@@ -157,9 +164,11 @@ function ValidateProduct(e, obj, but) {
             $('#flag_checked').val(1);
             return false;
         }
-        $.get(
-        "/adminnv/products/checkprebarcode/"+this.barcode+"/",
-        onAjaxSuccesss
+        $.ajax({
+            url:"/adminnv/products/checkprebarcode/"+this.barcode+"/",
+            success: onAjaxSuccesss,
+             async: false
+            }
         );
         function onAjaxSuccesss(data) {
             if(data.status){
@@ -223,6 +232,8 @@ $(document).ready(function () {
     	$('#height_size_id').empty();
         product_data = {};
         $('#product_data_lists').val('');
+        $('#count_sizes_add').val('');
+        $('#add_product_fields').show();
         console.log(product_data);
     });
 

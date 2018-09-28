@@ -52,8 +52,8 @@
                 {% if not maincategorys or not nameproducts or not brends %}
                     <p>Нет категорий или названий или бренда для отображения.Добавте данные!</p>
                 {% else %}
-                <form class="form form-offer" method="post" name="add_new_product" action="{% url 'createmodelss' %}"
-                      id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
+                <form class="form form-offer" method="post" name="add_new_modelss" action="{% url 'createmodelss' %}"
+                      id="add_new_modelss" enctype="multipart/form-data">{% csrf_token %}
                     <input type="hidden" value="{{ maincategorys.0.sizetable_set.count }}" id="count_sizes"/>
                     <input type="hidden" value="0" id="count_sizes_add"/>
                     <input type="hidden" value="" id="product_data_lists" name="product_data_lists"/>
@@ -63,7 +63,7 @@
                             <label style="color: red;">Модель</label><span style="color: red;">*</span>
                             <input class="form-control" placeholder="Модель" id="name" name="name" type="text"
                                    value="{{ data.modelss }}" maxlength="50" required>
-                            {% if form.errors.modelss %}<label id="modelss-error" class="error" for="modelss">{{ form.errors.modelss.0 }}</label>{% endif %}
+                            {% if form.errors.name %}<label id="modelss-error" style="color: red" for="modelss">{{ form.errors.name.0 }}</label>{% endif %}
                             {% if form.non_field_errors %}<label id="modelss-error" class="error" for="modelss">{{ form.non_field_errors }}</label>{% endif %}
                         </div>
                         <div class="form-group ">
@@ -109,17 +109,17 @@
                             <input class="form-control" placeholder="Цвет" id="color" name="color" type="text" value="{{ data.color }}" maxlength="50">
                          </div>
                          <div class="form-group {% if form.errors.price %}has-error{% endif %}">
-                            <label>Цена(В формате 23.56)</label>
+                            <label>Цена</label>
                             <input class="form-control" placeholder="Цена" id="price" name="price" type="number" value="{{ data.price }}">
                             {% if form.errors.price %}<label id="price-error" class="error" for="price">{{ form.errors.price.0 }}</label>{% endif %}
                          </div>
                          <div class="form-group {% if form.errors.wholesale_price %}has-error{% endif %}">
-                            <label>Оптовая Цена(В формате 23.56)</label>
+                            <label>Оптовая Цена</label>
                             <input class="form-control" placeholder="Оптовая Цена" id="wholesale_price" name="wholesale_price" type="number" value="{{ data.wholesale_price }}">
                             {% if form.errors.wholesale_price %}<label id="wholesale_price-error" class="error" for="wholesale_price">{{ form.errors.wholesale_price.0 }}</label>{% endif %}
                          </div>
                          <div class="form-group {% if form.errors.purshase_price %}has-error{% endif %}">
-                            <label>Цена закупки(В формате 23.56)</label>
+                            <label>Цена закупки</label>
                             <input class="form-control" placeholder="Цена закупки" id="purshase_price" name="purshase_price" type="number" value="{{ data.purshase_price }}">
                             {% if form.errors.purshase_price %}<label id="purshase_price-error" class="error" for="purshase_price">{{ form.errors.purshase_price.0 }}</label>{% endif %}
                          </div>
@@ -131,6 +131,8 @@
                                 <label style="color: red;">Заголовок товара(Не более 100 символов)</label><span style="color: red;">*</span>
                                 <input class="form-control" id="caption" name="caption" placeholder="Заголовок"
                                        value="{{ data.caption }}" maxlength="100" required>
+                               {% if form.errors.caption %}<label id="caption-error" style="color: red" for="caption">{{ form.errors.caption.0 }}</label>{% endif %}
+                               {% if form.non_field_errors %}<label id="caption-error" class="error" for="caption">{{ form.non_field_errors }}</label>{% endif %}
                                 <span data-num="count_simbols" data-count="100"></span><span style="display: none">  - Введено <em></em> символов</span>
                          </div>
                          <div class="form-group">

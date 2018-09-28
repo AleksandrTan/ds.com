@@ -243,7 +243,7 @@ class ManageModelss(models.Manager):
 
 
 class Modelss(models.Model):
-    name = models.CharField(blank=True, default='', max_length=50)
+    name = models.CharField(blank=False, default='', max_length=50)
     maincategory = models.ForeignKey(MainCategory, on_delete=models.CASCADE, blank=False)
     nameproduct = models.ForeignKey(NameProduct, on_delete=models.CASCADE, blank=False)
     brends = models.SmallIntegerField(blank=True, default=0)
@@ -316,9 +316,12 @@ class ModelssForm(ModelForm):
 
         error_messages = {
                              'name': {'required': "Пожалуйста введите название",
-                                         'max_length':"Не более 30 символов",
-                                         'unique': "Эта модель уже используетсяб введите другую"
+                                      'max_length':"Не более 30 символов",
+                                      'unique': "Эта модель уже используетсяб введите другую"
                                       },
+                             'caption': {
+                                      'required': "Пожалуйста введите заголовок",
+                             }
                           }
 
 """--------------Products Model-------------------------"""
@@ -482,13 +485,9 @@ class Products(models.Model):
     wholesale_price = models.FloatField(blank=True, default=0)
     purshase_price = models.FloatField(blank=True, default=0)
     modelss = models.ForeignKey(Modelss, on_delete=models.CASCADE, blank=False)
-    # modelss = models.CharField(blank=True, default='', max_length=50)
+    modelss_name = models.CharField(blank=True, default='', max_length=50)
     size = models.SmallIntegerField(blank=True, default=0)
     count_num = models.SmallIntegerField(blank=True, default=0)
-    # main_photo_path = models.ImageField(blank=True, upload_to='images/')
-    # main_photo_path = MI.MainImgTypeField(upload_to=custom_directory_path,
-    #                                       content_types=['image/jpg', 'image/png', 'image/jpeg'],
-    #                                       max_upload_size=5000000, blank=True, default='nophoto.png')
     main_photo_path = models.CharField(max_length=250, blank=True)
     description = models.TextField(blank=True, default='')
     caption = models.CharField(blank=False, default='', max_length=200)
@@ -547,7 +546,8 @@ class ProductsForm(ModelForm):
     class Meta:
         model = Products
         fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
-                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'pre_barcode', 'modelss', 'size', 'count_num']
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'pre_barcode', 'modelss', 'size',
+                  'count_num', 'modelss_name']
 
         error_messages = {
                              'articul': {'required': "Пожалуйста введите артикул",

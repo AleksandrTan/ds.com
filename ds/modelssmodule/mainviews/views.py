@@ -132,13 +132,13 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
             arguments.
         """
         # grab the current set of form #kwargs
-        kwargs = super(EditProduct, self).get_form_kwargs()
+        kwargs = super(EditModelss, self).get_form_kwargs()
         # Update the kwargs with the request
         kwargs['request'] = self.request
         return kwargs
 
     def get_context_data(self, **kwargs):
-        context = super(EditProduct, self).get_context_data(**kwargs)
+        context = super(EditModelss, self).get_context_data(**kwargs)
         context['maincategorys'] = MainCategory.objects.get_active_categories()
         context['nameproducts'] = NameProduct.objects.get_active_products()
         context['brends'] = Brends.objects.get_active_brends()
@@ -164,7 +164,7 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         instance.save()
         self.save_other_files(instance, form)
 
-        return super(EditProduct, self).form_valid(form)
+        return super(EditModelss, self).form_valid(form)
 
     def form_invalid(self, form):
         context = self.get_context_data()
@@ -186,7 +186,7 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
 
     def uuid_sentece_user(self):
         import uuid
-        return 'product_' + str(uuid.uuid4())[:10]
+        return 'modelss_' + str(uuid.uuid4())[:10]
 
     def uuid_sentece(self):
         import uuid
@@ -203,7 +203,7 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
                     fs = FileSystemStorage(location=settings.MEDIA_ROOT + '/images/' + instance.dirname_img,
                                            base_url='media/images/' + instance.dirname_img)
                     filename = fs.save(ifile.name, ifile)
-                    i = Image(products=instance,
+                    i = Image(modelss=instance,
                               img_path=fs.url(filename))
                     i.save()
                 else:
