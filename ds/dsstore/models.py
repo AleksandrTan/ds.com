@@ -618,7 +618,17 @@ class ProductsFormEdit(ModelForm):
 
         return self.cleaned_data
 
-"""--------------SizeCount Model--------------------------"""
+
+class ProductsFormModelss(ModelForm):
+
+    class Meta:
+        model = Products
+        fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
+                  'color', 'seo_attributes', 'is_belarus', 'is_active', 'is_new', 'caption', 'modelss', 'articul', 'pre_barcode',
+                  'size', 'count_num', 'main_photo_path', 'modelss_name', 'dirname_img', 'identifier', 'barcode']
+
+
+""""--------------SizeCount Model--------------------------"""
 
 
 class ManagerSizeCount(models.Manager):

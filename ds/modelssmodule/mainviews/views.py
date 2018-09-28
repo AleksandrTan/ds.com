@@ -8,6 +8,7 @@ from django.core.files.storage import FileSystemStorage
 from dsadminvn.mainviews.views import BaseAdminView
 from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Products, Modelss,
                             ModelssForm, ProductsFormEdit, Image)
+from modelssmodule.mainhelpers.savedproducts import SavedProducts
 
 
 class ModelssWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
@@ -34,7 +35,7 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
     permission_required = "auth.change_user"
     form_class = ModelssForm
     template_name = 'createmodelss.html'
-    succes_url = '/adminnv/products/'
+    succes_url = '/adminnv/products/modelss/'
 
 #Add request in kwargs variable for checked height[] data in clean()  method FormModel ProductsForm
     def get_form_kwargs(self):
@@ -66,7 +67,17 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         instance.save()
 
         self.save_other_files(instance, form)
-        return super(CreateNewModelss, self).form_valid(form)
+        if self.request.POST.getlist('product_data_lists'):
+            result_products = SavedProducts(instance, self.request)
+            result = result_products.saved_products()
+            if result:
+                return super(CreateNewModelss, self).form_valid(form)
+            else:
+                context = self.get_context_data()
+                context['erros_product'] = result
+                return self.render_to_response(context)
+        else:
+            return super(CreateNewModelss, self).form_valid(form)
 
     def form_invalid(self, form):
         context = self.get_context_data()
