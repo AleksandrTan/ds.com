@@ -1,14 +1,20 @@
 import os
+import shutil
+
 from django.conf import settings
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
+from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.files.storage import FileSystemStorage
+from django.shortcuts import redirect, render
+from django.core.urlresolvers import reverse_lazy, reverse
 
 from dsadminvn.mainviews.views import BaseAdminView
 from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Products, Modelss,
-                            ModelssForm, ProductsFormEdit, Image)
+                            ModelssForm, ProductsFormEdit, Image, )
 from modelssmodule.mainhelpers.savedproducts import SavedProducts
+from modelssmodule.forms import FoundModelss
 
 
 class ModelssWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
@@ -70,7 +76,7 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         if self.request.POST.getlist('product_data_lists'):
             result_products = SavedProducts(instance, self.request)
             result = result_products.saved_products()
-            if result:
+            if not result:
                 return super(CreateNewModelss, self).form_valid(form)
             else:
                 context = self.get_context_data()
@@ -242,3 +248,48 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
                 img.delete()
             except OSError:
                pass
+
+
+class FoundsModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    template_name = 'detailmodelss.html'
+
+    def post(self, request):
+        form = FoundModelss(request.POST)
+        if form.is_valid():
+            modelss = form.cleaned_data['name']
+            args = {'tab_modelss': True,
+                    'modelss': Modelss.objects.found_modelss(modelss)}
+            return render(request, self.template_name, args)
+        else:
+            args = {'tab_modelss': True,
+                    'modelss': False}
+            return render(request, self.template_name, args)
+
+
+class DeleteModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    model = Modelss
+    success_url = reverse_lazy('modelss')
+    context_object_name = 'data_modelss_delete'
+    template_name = 'deletemodelss.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DeleteModelss, self).get_context_data(**kwargs)
+        context['tab_modelss'] = True
+        return context
+
+    def delete(self, request, *args, **kwargs):
+        self.delete_images_dir()
+        return super(DeleteModelss, self).delete(self, request, *args, **kwargs)
+
+    def delete_images_dir(self):
+        obj = self.get_object()
+        path = settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+obj.dirname_img
+        #path = settings.MEDIA_ROOT + '\\images\\' + obj.dirname_img
+        shutil.rmtree(path, ignore_errors=True)
+
+    # def get_success_url(self):
+    #     return self.request.POST['next_url']

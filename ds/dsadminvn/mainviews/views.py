@@ -24,7 +24,8 @@ from dsstore.models import (MainCategory, NameProduct, SizeTable,
                             SizeTableForm, Brends, Seasons, Products,
                             ProductsForm, ProductsFormEdit, Image, Modelss)
 from handsale.models import ProductsSale
-from dsadminvn.forms import FoundArticuls, FilterProducts, FilterSaleProduct, FoundModelss
+from dsadminvn.forms import FoundArticuls, FilterProducts, FilterSaleProduct
+from modelssmodule.forms import FoundModelss
 from dsadminvn.mainhelpers.SetBarcode import SetBarcode as SBS
 
 
@@ -628,14 +629,14 @@ class DeleteProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
         return context
 
     def delete(self, request, *args, **kwargs):
-        self.delete_images_dir()
+        # self.delete_images_dir()
         return super(DeleteProduct, self).delete(self, request, *args, **kwargs)
 
-    def delete_images_dir(self):
-        obj = self.get_object()
-        path = settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+obj.dirname_img
-        #path = settings.MEDIA_ROOT + '\\images\\' + obj.dirname_img
-        shutil.rmtree(path, ignore_errors=True)
+    # def delete_images_dir(self):
+    #     obj = self.get_object()
+    #     path = settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+obj.dirname_img
+    #     #path = settings.MEDIA_ROOT + '\\images\\' + obj.dirname_img
+    #     shutil.rmtree(path, ignore_errors=True)
 
     # def get_success_url(self):
     #     return self.request.POST['next_url']
@@ -692,7 +693,7 @@ class FoundArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, T
 class FoundsModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
     permission_required = "auth.change_user"
     login_url = 'login'
-    template_name = 'products/detailmodelss.html'
+    template_name = 'detailmodelss.html'
 
     def post(self, request):
         form = FoundModelss(request.POST)

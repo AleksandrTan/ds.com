@@ -23,7 +23,7 @@ class SavedProducts:
         if self.error_list:
             return self.error_list
         else:
-            return True
+            return False
 
     def save_product(self, product, data):
         data['articul'] = product['articul']

@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Товары
+                            Модели
                         </h1>
                         <ol class="breadcrumb">
                             <li>
@@ -24,7 +24,7 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                    <label>Поиск товара по фильтру</label>
+                    <label>Поиск модели по фильтру</label>
                         <form class="form form-offer" method="get" name="filter_product" action="{% url 'filterproduct' %}"
                               id="filter_product" >{% csrf_token %}
                         <div class="col-lg-2">
@@ -88,7 +88,7 @@
                         <div class="form-group">
                               <div class="checkbox">
                                   <label>
-                                      <input type="checkbox" value="1" name="is_belarus" {% if data_form.is_belarus %} checked {% endif %}>Товар из Беларуси
+                                      <input type="checkbox" value="1" name="is_belarus" {% if data_form.is_belarus %} checked {% endif %}>Из Беларуси
                                   </label>
                               </div>
                               <div class="checkbox">
@@ -98,32 +98,14 @@
                               </div>
                               <div class="checkbox">
                                   <label>
-                                     <input type="checkbox" value="1" name="is_new" {% if data_form.is_new %} checked {% endif %}>Новый товар
+                                     <input type="checkbox" value="1" name="is_new" {% if data_form.is_new %} checked {% endif %}>Новая модель
                                   </label>
                               </div>
                          </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-sm btn-success form-control" name="submit" value="1">Найти Товар</button>
+                                <button type="submit" class="btn btn-sm btn-success form-control" name="submit" value="1">Найти Модель</button>
                             </div>
                         </div>
-                        </form>
-                    </div>
-{#                    <div class="col-lg-2">#}
-{#                        <div class="form-group">#}
-{#                            <label>Добавить новый товар</label>#}
-{#                            <a type="button" class="btn btn-sm btn-primary form-control" href="{% url 'showform_for_add_product' %}">Добавить</a>#}
-{#                         </div>#}
-{#                    </div>#}
-                    <div class="col-lg-2">
-                       <form class="form form-offer" method="post" name="found_product" action="{% url 'foundproduct' %}"
-                              id="found_product">{% csrf_token %}
-                            <div class="form-group">
-                                <label>Поиск по Артикулу</label>
-                                <input class="form-control" placeholder="Артикул" id="articul" name="articul" type="text" maxlength="6">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-sm btn-success form-control">Найти Товар</button>
-                            </div>
                         </form>
                     </div>
                     <div class="col-lg-2">
@@ -131,10 +113,10 @@
                               id="found_modelss">{% csrf_token %}
                             <div class="form-group">
                                 <label>Поиск по Модели</label>
-                                <input class="form-control" placeholder="Модель" id="modelss" name="modelss" type="text">
+                                <input class="form-control" placeholder="Модель" id="name" name="name" type="text">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-sm btn-success form-control">Найти Товар</button>
+                                <button type="submit" class="btn btn-sm btn-success form-control">Найти Модель</button>
                             </div>
                         </form>
                     </div>
@@ -175,15 +157,11 @@
                                         </td>
                                         <td class="text-center"><a type="button"
                                                                    class="btn btn-sm btn-success"
-                                                                   href="{% url 'editproduct' model_data.id %}">Редактировать</a>
+                                                                   href="{% url 'editmodelss' model_data.id %}">Редактировать</a>
                                         </td>
-                                        {#                                        <td class="text-center"><a type="button"#}
-{#                                                                   class="btn btn-sm btn-success"#}
-{#                                                                   href="{% url 'saleproductview' model_data.id %}">Статистика</a>#}
-{#                                        </td>#}
                                         <td class="text-center"><a type="button"
                                                                    class="btn btn-sm btn-danger"
-                                                                   href="{% url 'deleteproduct' model_data.id %}">Удалить</a>
+                                                                   href="{% url 'deletemodelss' model_data.id %}">Удалить</a>
 
                                         </td>
                                     </tr>

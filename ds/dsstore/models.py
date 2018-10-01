@@ -241,6 +241,12 @@ class ManageModelss(models.Manager):
     def get_list_products(self):
         return Modelss.objects.only('id', 'price', 'is_active', 'name')
 
+    def found_modelss(self, name):
+        try:
+            return Modelss.objects.filter(name=name).get()
+        except Products.DoesNotExist:
+            return False
+
 
 class Modelss(models.Model):
     name = models.CharField(blank=False, default='', max_length=50)
@@ -355,12 +361,6 @@ class ManageProductsModel(models.Manager):
     def found_articul(self, articul):
         try:
             return Products.objects.get(articul=articul)
-        except Products.DoesNotExist:
-            return False
-
-    def found_modelss(self, modelss):
-        try:
-            return Products.objects.filter(modelss=modelss).all()
         except Products.DoesNotExist:
             return False
 
