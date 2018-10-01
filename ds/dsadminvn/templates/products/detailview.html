@@ -25,12 +25,6 @@
                 <!-- /.row -->
 
                 <div class="row">
-{#                    <div class="col-lg-2">#}
-{#                        <div class="form-group">#}
-{#                            <label>Добавить новый товар</label>#}
-{#                            <a type="button" class="btn btn-sm btn-primary form-control" href="{% url 'showform_for_add_product' %}">Добавить</a>#}
-{#                         </div>#}
-{#                    </div>#}
                     <div class="col-lg-2">
                        <form class="form form-offer" method="post" name="found_product" action="{% url 'foundproduct' %}"
                               id="found_product">{% csrf_token %}
@@ -79,7 +73,7 @@
                                     <tbody id="mc_list">
 
                                         <tr>
-                                            <td class="text-center">{{ product_data.modelss }}</td>
+                                            <td class="text-center">{{ product_data.modelss.name }}</td>
                                             <td class="text-center">{{ product_data.articul }}</td>
                                             <td class="text-center">{{ product_data.maincategory.name }}</td>
                                             <td class="text-center">{{ product_data.nameproduct.name }}</td>

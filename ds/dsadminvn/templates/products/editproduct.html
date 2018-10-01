@@ -57,11 +57,13 @@
                     <form class="form form-offer" method="post" name="edit_product" action="{{ action }}"
                       id="add_new_product" enctype="multipart/form-data">{% csrf_token %}
                         <input type="hidden" id="articul_product_hidden" name="articul_product_hidden" value="{{ data_product_edit.articul }}">
-                        <input type="hidden" id="is_del_mainphoto" {% if data_product_edit.main_photo_path %} value="1" {% else %} value="0" {% endif %} name="is_del_mainphoto"/>
-                        <input type="hidden" name="is_del_other_photo" value="0" id="is_del_other_photo"/>
-                        <input type="hidden" name="list_del_other_photo" value="{}" id="list_del_other_photo"/>
-                        <input type="hidden" value="{{ maincategorys.0.sizetable_set.count }}" id="count_sizes"/>
-                        <input type="hidden" value="{{ data_product_edit.sizecount.count }}" id="count_sizes_add"/>
+{#                        <input type="hidden" id="is_del_mainphoto" {% if data_product_edit.main_photo_path %} value="1" {% else %} value="0" {% endif %} name="is_del_mainphoto"/>#}
+{#                        <input type="hidden" name="is_del_other_photo" value="0" id="is_del_other_photo"/>#}
+{#                        <input type="hidden" name="list_del_other_photo" value="{}" id="list_del_other_photo"/>#}
+{#                        <input type="hidden" value="{{ maincategorys.0.sizetable_set.count }}" id="count_sizes"/>#}
+{#                        <input type="hidden" value="{{ data_product_edit.sizecount.count }}" id="count_sizes_add"/>#}
+                          <input type="hidden" name="modelss" value="{{ data_product_edit.modelss.id }}">
+                          <input type="hidden" name="main_photo_path" value="{{ data_product_edit.main_photo_path }}">
                         <div class="col-lg-6">
                                 <div class="form-group {% if form.errors.articul %}has-error{% endif %}">
                                     <label style="color: red;">Артикул</label><span style="color: red;">*</span>
@@ -80,8 +82,8 @@
                                 <div class="form-group {% if form.errors.modelss %}has-error{% endif %}">
                                     <label>Модель</label>
                                     <input class="form-control" placeholder="Модель"
-                                           id="modelss" name="modelss" type="text"
-                                           value="{{ data_product_edit.modelss }}" maxlength="50" >
+                                           id="mode" name="mode" type="text"
+                                           value="{{ data_product_edit.modelss.name }}" maxlength="50" readonly>
                                     {% if form.errors.modelss %}<label id="modelss-error" class="error" for="modelss">{{ form.errors.modelss.0 }}</label>{% endif %}
                                 </div>
                                 <div class="form-group ">
@@ -228,89 +230,89 @@
                             {% else %}
                                 <span style="color: red;">Нет размеров для данной категории </span>
                             {% endif %}
-                            {% with reletad_images=data_product_edit.image.all %}
-                            <h2>Добавить Изображения</h2>Допустимые форматы jpeg, png, jpg.Максимальный размер 5МБ.
-                            <div class="table-responsive">
-                                    <table class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Добавить</th>
-                                                <th>Фото</th>
-                                                <th>Удалить</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr  id="main_photo_tr">
-                                                <td>
-                                                    <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                           name="main_photo_path"
-                                                           onchange="handleMainFileImg(this.files)" id="main_photo_path" style="display: none;" value="">
-                                                    <button type="button"
-                                                            class="btn btn-sm btn-success form-control"
-                                                            id="add_main_file_img" {% if data_product_edit.main_photo_path == 'nophoto.png'%}
-                                                            style="display: block" {% else %} style="display: none;" {% endif %}>
-                                                             Добавить заглавное фото</button>
-                                                </td>
-                                                <td>
-                                                    <img {% if data_product_edit.main_photo_path %} src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}"
-                                                         {% else %} src="/media/nophoto.png" {% endif %}
-                                                         width="100px;" height="100px;" alt="" id="main_photo">
-                                                </td>
-                                                <td>
-                                                    <button type="button"
-                                                            class="btn btn-sm btn-danger form-control"
-                                                            id="del_main_photo"
-                                                            {% if data_product_edit.main_photo_path  != 'nophoto.png' %} style="display: block" {% else %} style="display: none;" {% endif %}>
-                                                                    Удалить фото
-                                                    </button>
-                                                </td>
-
-                                            </tr>
-                                        {% for num in image_num %}
-                                            {% with df=reletad_images|strint:num %}
-                                            {% if df %}
-                                            <tr>
-                                                <td>
-                                                    <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                           data-images="imgages-product" name="img_product[]" data-num-img="1" style="display: none;">
-                                                    <button type="button"
-                                                            class="btn btn-sm btn-success form-control"
-                                                            data-anothe="anothe_img" style="display: none;">
-                                                            Добавить фото {{ forloop.counter }}</button>
-                                                </td>
-                                                <td>
-                                                    <img src="/{{ df.img_path }}" width="100px;" height="100px;" alt="">
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-danger form-control"  style="display: block;" data-delete-imgs='delete-imgs' data-photo-id="{{ df.id }}">
-                                                        Удалить фото {{ forloop.counter }} </button>
-                                                </td>
-
-                                            </tr>
-                                            {% else %}
-                                            <tr>
-                                                <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                           data-images="imgages-product" name="img_product[]" style="display: none;">
-                                                    <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото {{ forloop.counter }}</button>
-                                                </td>
-                                                <td>
-                                                    <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;"
-                                                            data-delete-imgs='delete-imgs' data-photo-id='0'>
-                                                            Удалить фото {{ forloop.counter }}
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            {% endif %}
-                                            {% endwith %}
-                                        {% endfor %}
-                                        {% endwith %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+{#                            {% with reletad_images=data_product_edit.image.all %}#}
+{#                            <h2>Добавить Изображения</h2>Допустимые форматы jpeg, png, jpg.Максимальный размер 5МБ.#}
+{#                            <div class="table-responsive">#}
+{#                                    <table class="table table-bordered table-hover">#}
+{#                                        <thead>#}
+{#                                            <tr>#}
+{#                                                <th>Добавить</th>#}
+{#                                                <th>Фото</th>#}
+{#                                                <th>Удалить</th>#}
+{#                                            </tr>#}
+{#                                        </thead>#}
+{#                                        <tbody>#}
+{#                                            <tr  id="main_photo_tr">#}
+{#                                                <td>#}
+{#                                                    <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"#}
+{#                                                           name="main_photo_path"#}
+{#                                                           onchange="handleMainFileImg(this.files)" id="main_photo_path" style="display: none;" value="">#}
+{#                                                    <button type="button"#}
+{#                                                            class="btn btn-sm btn-success form-control"#}
+{#                                                            id="add_main_file_img" {% if data_product_edit.main_photo_path == 'nophoto.png'%}#}
+{#                                                            style="display: block" {% else %} style="display: none;" {% endif %}>#}
+{#                                                             Добавить заглавное фото</button>#}
+{#                                                </td>#}
+{#                                                <td>#}
+{#                                                    <img {% if data_product_edit.main_photo_path %} src="{{ MEDIA_URL }}{{ data_product_edit.main_photo_path }}"#}
+{#                                                         {% else %} src="/media/nophoto.png" {% endif %}#}
+{#                                                         width="100px;" height="100px;" alt="" id="main_photo">#}
+{#                                                </td>#}
+{#                                                <td>#}
+{#                                                    <button type="button"#}
+{#                                                            class="btn btn-sm btn-danger form-control"#}
+{#                                                            id="del_main_photo"#}
+{#                                                            {% if data_product_edit.main_photo_path  != 'nophoto.png' %} style="display: block" {% else %} style="display: none;" {% endif %}>#}
+{#                                                                    Удалить фото#}
+{#                                                    </button>#}
+{#                                                </td>#}
+{##}
+{#                                            </tr>#}
+{#                                        {% for num in image_num %}#}
+{#                                            {% with df=reletad_images|strint:num %}#}
+{#                                            {% if df %}#}
+{#                                            <tr>#}
+{#                                                <td>#}
+{#                                                    <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"#}
+{#                                                           data-images="imgages-product" name="img_product[]" data-num-img="1" style="display: none;">#}
+{#                                                    <button type="button"#}
+{#                                                            class="btn btn-sm btn-success form-control"#}
+{#                                                            data-anothe="anothe_img" style="display: none;">#}
+{#                                                            Добавить фото {{ forloop.counter }}</button>#}
+{#                                                </td>#}
+{#                                                <td>#}
+{#                                                    <img src="/{{ df.img_path }}" width="100px;" height="100px;" alt="">#}
+{#                                                </td>#}
+{#                                                <td>#}
+{#                                                    <button type="button" class="btn btn-sm btn-danger form-control"  style="display: block;" data-delete-imgs='delete-imgs' data-photo-id="{{ df.id }}">#}
+{#                                                        Удалить фото {{ forloop.counter }} </button>#}
+{#                                                </td>#}
+{##}
+{#                                            </tr>#}
+{#                                            {% else %}#}
+{#                                            <tr>#}
+{#                                                <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"#}
+{#                                                           data-images="imgages-product" name="img_product[]" style="display: none;">#}
+{#                                                    <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото {{ forloop.counter }}</button>#}
+{#                                                </td>#}
+{#                                                <td>#}
+{#                                                    <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">#}
+{#                                                </td>#}
+{#                                                <td>#}
+{#                                                    <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;"#}
+{#                                                            data-delete-imgs='delete-imgs' data-photo-id='0'>#}
+{#                                                            Удалить фото {{ forloop.counter }}#}
+{#                                                    </button>#}
+{#                                                </td>#}
+{#                                            </tr>#}
+{#                                            {% endif %}#}
+{#                                            {% endwith %}#}
+{#                                        {% endfor %}#}
+{#                                        {% endwith %}#}
+{#                                        </tbody>#}
+{#                                    </table>#}
+{#                                </div>#}
+{#                            </div>#}
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">Обновить Товар</button>

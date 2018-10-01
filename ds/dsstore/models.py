@@ -338,6 +338,26 @@ class ModelssForm(ModelForm):
                              }
                           }
 
+
+class ModelssFormEdit(ModelForm):
+    """
+        Set request param, param request add  in __init__ like positional argument for clean method
+    """
+    def __init__(self, request, *args, **kwargs):
+        self.request = request
+        super(ModelForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Modelss
+        fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'name']
+
+        error_messages = {
+                             'caption': {
+                                      'required': "Пожалуйста введите заголовок",
+                             }
+                          }
+
 """--------------Products Model-------------------------"""
 
 

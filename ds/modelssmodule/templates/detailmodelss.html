@@ -40,6 +40,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">Модель</th>
+                                        <th class="text-center">Фото</th>
                                         <th class="text-center">Категория</th>
                                         <th class="text-center">Название</th>
                                         <th class="text-center">Цена</th>
@@ -53,6 +54,7 @@
                                 <tbody id="mc_list">
                                     <tr>
                                         <td class="text-center">{{ modelss.name }}</td>
+                                        <td class="text-center"><img src="{{MEDIA_URL}}{{ modelss.main_photo_path }}" width="150px;" height="150px;"></td>
                                         <td class="text-center">{{ modelss.maincategory.name }}</td>
                                         <td class="text-center">{{ modelss.nameproduct.name }}</td>
                                         <td class="text-center">{{ modelss.price }}</td>

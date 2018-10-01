@@ -14,7 +14,7 @@ from django.http import QueryDict
 
 from dsadminvn.mainviews.views import BaseAdminView
 from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Products, Modelss,
-                            ModelssForm, ProductsFormEdit, Image, )
+                            ModelssForm, ModelssFormEdit, Image, )
 from modelssmodule.mainhelpers.savedproducts import SavedProducts
 from modelssmodule.forms import FoundModelss, FilterModel
 
@@ -139,10 +139,10 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
     login_url = 'login'
     permission_required = "auth.change_user"
     model = Products
-    form_class = ProductsFormEdit
-    context_object_name = 'data_product_edit'
-    template_name = 'products/editproduct.html'
-    success_url = '/adminnv/products/'
+    form_class = ModelssFormEdit
+    context_object_name = 'data_modelss_edit'
+    template_name = 'editmodelss.html'
+    success_url = '/adminnv/products/modelss/'
 
     # Add request in kwargs variable for checked height[] data in clean()  method FormModel ProductsForm
     def get_form_kwargs(self):
@@ -193,7 +193,7 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         context['brends'] = Brends.objects.get_active_brends()
         context['seasons'] = Seasons.objects.get_active_seasons()
         context['action'] = reverse('editproduct', kwargs={'pk': self.get_object().id})
-        context['tab_products'] = True
+        context['tab_modelss'] = True
 
         return self.render_to_response(context)
 

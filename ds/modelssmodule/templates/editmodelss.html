@@ -37,7 +37,7 @@
                                 <i class="fa fa-table"></i> <a href="{% url 'modelss' %}">Модели</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Добавить модель
+                                <i class="fa fa-table"></i> Добавить модель{{ erros_product }}
                             </li>
                         </ol>
                     </div>
@@ -282,15 +282,16 @@
                     </div>
                      <div class="col-lg-12">
                         <div class="form-group">
-                            <label>Добавить Модель</label>
-                            <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">
-                                Добавить Модель
+                            <label>Добавить Товар</label>
+                            <button type="submit" class="btn btn-sm btn-success form-control" id="save_modelss" {% if maincategorys.0.sizetable_set.all %}
+                                style="display: block;" {% else %} style="display: none" {% endif %}>
+                                Добавить Товар
                             </button>
                          </div>
                      </div>
                      <div class="col-lg-12">
                             <div class="form-group">
-                                <a type="button" class="btn btn-sm btn-primary form-control" id="save_exit" href="{% url 'products' %}">Отмена</a>
+                                <a type="button" class="btn btn-sm btn-primary form-control" id="save_exit" href="{% url 'modelss' %}">Отмена</a>
                             </div>
                          </div>
                 </form>
@@ -302,6 +303,6 @@
 <div class="hellopreloader">
     <div class="hellopreloader_preload" id="hellopreloader_preload"></div>
 </div>
-<script src="{% static "js/fileuploadmodelss.js" %}"></script>
-<script src="{% static "js/addnewmodelss.js" %}"></script>
+<script src="{% static "js/editmodelss.js" %}"></script>
+<script src="{% static "js/edituploadmodelss.js" %}"></script>
 {% endblock %}
