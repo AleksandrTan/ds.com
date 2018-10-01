@@ -247,6 +247,14 @@ class ManageModelss(models.Manager):
         except Modelss.DoesNotExist:
             return False
 
+    def filter_modelss(self, data):
+        query = Modelss.objects
+        work_dict = {param: data[param] for param in data if data[param]}
+        try:
+            return query.filter(**work_dict)
+        except Modelss.DoesNotExist:
+            return False
+
 
 class Modelss(models.Model):
     name = models.CharField(blank=False, default='', max_length=50)

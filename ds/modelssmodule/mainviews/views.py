@@ -10,12 +10,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import redirect, render
 from django.core.urlresolvers import reverse_lazy, reverse
+from django.http import QueryDict
 
 from dsadminvn.mainviews.views import BaseAdminView
 from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Products, Modelss,
                             ModelssForm, ProductsFormEdit, Image, )
 from modelssmodule.mainhelpers.savedproducts import SavedProducts
-from modelssmodule.forms import FoundModelss
+from modelssmodule.forms import FoundModelss, FilterModel
 
 
 class ModelssWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
@@ -307,3 +308,45 @@ class ViewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, De
         context = super(ViewModelss, self).get_context_data(**kwargs)
         context['tab_modelss'] = True
         return context
+
+
+class FilterModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    template_name = 'filtermodelss.html'
+    context_object_name = 'modelss_list'
+    paginate_by = 2
+
+    def get_context_data(self, **kwargs):
+        context = super(FilterModelss, self).get_context_data(**kwargs)
+        context['maincategorys'] = MainCategory.objects.get_active_categories()
+        context['nameproducts'] = NameProduct.objects.get_active_products()
+        context['brends'] = Brends.objects.get_active_brends()
+        context['seasons'] = Seasons.objects.get_active_seasons()
+        context['tab_modelss'] = True
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        """
+        If submit search form, add more options
+        """
+        form = FilterModel(request.GET)
+        if form.is_valid():
+            self.data = form.cleaned_data
+            self.object_list = self.get_queryset()
+            context = self.get_context_data(object_list=self.object_list)
+            context['data_form'] = form.cleaned_data
+            copy_get = QueryDict(request.GET.copy().urlencode(), mutable=True)
+            copy_get['submit'] = 0
+            context['request_get'] = copy_get.urlencode()
+            return render(request, self.template_name, context)
+        else:
+            self.data = form.cleaned_data
+            self.object_list = self.get_queryset()
+            context = self.get_context_data(object_list=self.object_list)
+            context['form'] = form
+            return render(request, self.template_name, context)
+
+    def get_queryset(self):
+        return Modelss.objects.filter_modelss(self.data)
