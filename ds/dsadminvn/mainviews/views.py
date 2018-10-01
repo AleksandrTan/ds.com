@@ -525,13 +525,13 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
     def form_valid(self, form):
         instance = form.save(commit=False)
         #delete main file photo
-        if int(self.request.POST['is_del_mainphoto']) == 0:
-            instance.main_photo_path = 'nophoto.png'
-        if int(self.request.POST['is_del_other_photo']) == 1:
-            self.delete_related_photo(instance, self.request.POST['list_del_other_photo'])
+        # if int(self.request.POST['is_del_mainphoto']) == 0:
+        #     instance.main_photo_path = 'nophoto.png'
+        # if int(self.request.POST['is_del_other_photo']) == 1:
+        #     self.delete_related_photo(instance, self.request.POST['list_del_other_photo'])
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['articul']
         instance.save()
-        self.save_other_files(instance, form)
+        # self.save_other_files(instance, form)
 
         return super(EditProduct, self).form_valid(form)
 
@@ -561,24 +561,24 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         import uuid
         return str(uuid.uuid4())[:10]
 
-    def save_other_files(self, instance, form):
-        if not os.path.exists(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img) and self.request.FILES.getlist('other_img[]'):
-            os.mkdir(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img, mode=0o777)
-        # https://docs.djangoproject.com/ja/1.11/_modules/django/utils/datastructures/ - look for MultiValueDict(getlist)
-        if self.request.FILES.getlist('img_product[]'):
-            os.chmod(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img, 0o777)
-            for ifile in self.request.FILES.getlist('img_product[]'):
-                if ifile.size < settings.MAX_SIZE_UPLOAD and ifile.content_type in settings.CONTENT_TYPES_FILE:
-                    fs = FileSystemStorage(location=settings.MEDIA_ROOT + '/images/' + instance.dirname_img,
-                                           base_url='media/images/' + instance.dirname_img)
-                    filename = fs.save(ifile.name, ifile)
-                    i = Image(products=instance,
-                              img_path=fs.url(filename))
-                    i.save()
-                else:
-                    # messages.info(self.request, 'Three credits remain in your account.')
-                    continue
-        return True
+    # def save_other_files(self, instance, form):
+    #     if not os.path.exists(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img) and self.request.FILES.getlist('other_img[]'):
+    #         os.mkdir(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img, mode=0o777)
+    #     # https://docs.djangoproject.com/ja/1.11/_modules/django/utils/datastructures/ - look for MultiValueDict(getlist)
+    #     if self.request.FILES.getlist('img_product[]'):
+    #         os.chmod(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img, 0o777)
+    #         for ifile in self.request.FILES.getlist('img_product[]'):
+    #             if ifile.size < settings.MAX_SIZE_UPLOAD and ifile.content_type in settings.CONTENT_TYPES_FILE:
+    #                 fs = FileSystemStorage(location=settings.MEDIA_ROOT + '/images/' + instance.dirname_img,
+    #                                        base_url='media/images/' + instance.dirname_img)
+    #                 filename = fs.save(ifile.name, ifile)
+    #                 i = Image(products=instance,
+    #                           img_path=fs.url(filename))
+    #                 i.save()
+    #             else:
+    #                 # messages.info(self.request, 'Three credits remain in your account.')
+    #                 continue
+    #     return True
 
     # def saved_sizes_count(self, instance):
     #     # map(lambda x: x.save(),
@@ -590,16 +590,16 @@ class EditProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
     #     #delete old data
     #     SizeCount.objects.filter(products_id=None).delete()
 
-    def delete_related_photo(self, instance, file_list):
-        import json
-        data = json.loads(file_list)
-        for imaje in data:
-            img = Image.objects.filter(id=imaje).get()
-            try:
-                os.remove(settings.BASE_DIR + '/' + img.img_path)
-                img.delete()
-            except OSError:
-               pass
+    # def delete_related_photo(self, instance, file_list):
+    #     import json
+    #     data = json.loads(file_list)
+    #     for imaje in data:
+    #         img = Image.objects.filter(id=imaje).get()
+    #         try:
+    #             os.remove(settings.BASE_DIR + '/' + img.img_path)
+    #             img.delete()
+    #         except OSError:
+    #            pass
 
 
 class ViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):
