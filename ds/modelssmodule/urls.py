@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^foundmodelss/$', views.FoundsModelss.as_view(), name='foundmodelss'),
     url(r'^edit/(?P<pk>\d+)/$', views.EditModelss.as_view(), name='editmodelss'),
     url(r'^deletemodelss/(?P<pk>\d+)/$', views.DeleteModelss.as_view(), name='deletemodelss'),
+    url(r'^viewmodelss/(?P<pk>\d+)/$', views.ViewModelss.as_view(), name="viewmodelss"),
     # url(r'^foundproduct/$', views.FoundArticul.as_view(), name='foundproduct'),
     # url(r'^foundmodelss/$', views.FoundsModelss.as_view(), name='foundmodelss'),
     # url(r'^filterproduct/(?:page/(?P<page>\d+)/)?$', views.FilterProduct.as_view(), name='filterproduct'),

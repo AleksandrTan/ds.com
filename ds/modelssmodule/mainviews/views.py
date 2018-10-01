@@ -3,6 +3,7 @@ import shutil
 
 from django.conf import settings
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -293,3 +294,16 @@ class DeleteModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
 
     # def get_success_url(self):
     #     return self.request.POST['next_url']
+
+
+class ViewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+    permission_required = "auth.change_user"
+    login_url = 'login'
+    model = Modelss
+    template_name = 'detailmodelss.html'
+    context_object_name = 'modelss'
+
+    def get_context_data(self, **kwargs):
+        context = super(ViewModelss, self).get_context_data(**kwargs)
+        context['tab_modelss'] = True
+        return context

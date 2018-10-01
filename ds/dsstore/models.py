@@ -244,7 +244,7 @@ class ManageModelss(models.Manager):
     def found_modelss(self, name):
         try:
             return Modelss.objects.filter(name=name).get()
-        except Products.DoesNotExist:
+        except Modelss.DoesNotExist:
             return False
 
 

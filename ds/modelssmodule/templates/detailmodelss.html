@@ -78,7 +78,8 @@
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        {% if modelss.products.all %}
+                        {% if modelss.products_set.all %}
+                            <label>Товары Модели</label>
                            <div class="table-responsive">
                                 <table class="table table-bordered table-hover">
                                     <thead>
@@ -101,7 +102,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="mc_list">
-                                    {% for product_data in models.products.all %}
+                                    {% for product_data in modelss.products_set.all %}
                                         <tr>
                                             <td class="text-center">{{ modelss.name }}</td>
                                             <td class="text-center">{{ product_data.articul }}</td>
