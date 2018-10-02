@@ -1,8 +1,10 @@
 {% extends "main.html" %}
 {% load staticfiles %}
 {% block content %}
+{% load customfilters %}
 <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
 <div class="btn-modal-wrap btn-modal-wrap-1">
+    <!-- Modal Deleted -->
     <div class="modal fade" id="modal_alarm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -15,19 +17,18 @@
                      <h3 style="color: #ff0012" id="modal_content"></h3>
                 </div>
                 <div class="modal-footer">
-{#                    <button type="button" class="btn btn-xs btn-default" id="cancel_type">Cancel</button>#}
                 </div>
             </div>
         </div>
     </div>
 </div>
-    <div id="page-wrapper" class="container-fluid">
+    <div id="page-wrapper">
         <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Добавление Модели
+                            Редактирование Модели
                         </h1>
                         <ol class="breadcrumb">
                             <li>
@@ -37,7 +38,7 @@
                                 <i class="fa fa-table"></i> <a href="{% url 'modelss' %}">Модели</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Добавить модель{{ erros_product }}
+                                <i class="fa fa-table"></i> Редактирование модели
                             </li>
                         </ol>
                     </div>
@@ -49,253 +50,232 @@
                     <strong>Внимание!!!</strong> {{ form.non_field_errors }}
                 </div>
                 {% endif %}
-                {% if not maincategorys or not nameproducts or not brends %}
-                    <p>Нет категорий или названий или бренда для отображения.Добавте данные!</p>
-                {% else %}
-                <form class="form form-offer" method="post" name="add_new_modelss" action="{% url 'createmodelss' %}"
-                      id="add_new_modelss" enctype="multipart/form-data">{% csrf_token %}
-                    <input type="hidden" value="{{ maincategorys.0.sizetable_set.count }}" id="count_sizes"/>
-                    <input type="hidden" value="0" id="count_sizes_add"/>
-                    <input type="hidden" value="" id="product_data_lists" name="product_data_lists"/>
-                    <input type="hidden" value="0" id="flag_checked"/>
-                    <div class="col-lg-6">
-                        <div class="form-group {% if form.errors.modelss %}has-error{% endif %}">
-                            <label style="color: red;">Модель</label><span style="color: red;">*</span>
-                            <input class="form-control" placeholder="Модель" id="name" name="name" type="text"
-                                   value="{{ data.modelss }}" maxlength="50" required>
-                            {% if form.errors.name %}<label id="modelss-error" style="color: red" for="modelss">{{ form.errors.name.0 }}</label>{% endif %}
-                            {% if form.non_field_errors %}<label id="modelss-error" class="error" for="modelss">{{ form.non_field_errors }}</label>{% endif %}
-                        </div>
-                        <div class="form-group ">
-                            <label>Категория</label>
-                                <select class="form-control" name="maincategory" id="maincategory">
-                                    {% for mcl in maincategorys %}
-                                        <option name="{{ mcl.id }}" value="{{ mcl.id }}">{{ mcl.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        <div class="form-group ">
-                            <label>Название</label>
-                                <select class="form-control" name="nameproduct">
-                                    {% for name_product in nameproducts %}
-                                        <option name="{{ name_product.id }}" value="{{ name_product.id }}">{{ name_product.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                       {% if brends %}
-                       <div class="form-group ">
-                            <label>Бренд</label>
-                                <select class="form-control" name="brends">
-                                    <option name="0" value="0">Выберите бренд</option>
-                                    {% for brend in brends %}
-                                        <option name="{{ brend.id }}" value="{{ brend.id }}">{{ brend.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                    {% endif %}
-                    {% if seasons %}
-                         <div class="form-group ">
-                            <label>Сезон</label>
-                                <select class="form-control" name="season_id">
-                                    <option name="0" value="0">Выберите сезон</option>
-                                    {% for season in seasons %}
-                                        <option name="{{ season.id }}" value="{{ season.id }}">{{ season.name }}</option>
-                                    {% endfor %}
-                                </select>
-                         </div>
-                     {% endif %}
-                         <div class="form-group">
-                            <label>Цвет</label>
-                            <input class="form-control" placeholder="Цвет" id="color" name="color" type="text" value="{{ data.color }}" maxlength="50">
-                         </div>
-                         <div class="form-group {% if form.errors.price %}has-error{% endif %}">
-                            <label>Цена</label>
-                            <input class="form-control" placeholder="Цена" id="price" name="price" type="number" value="{{ data.price }}">
-                            {% if form.errors.price %}<label id="price-error" class="error" for="price">{{ form.errors.price.0 }}</label>{% endif %}
-                         </div>
-                         <div class="form-group {% if form.errors.wholesale_price %}has-error{% endif %}">
-                            <label>Оптовая Цена</label>
-                            <input class="form-control" placeholder="Оптовая Цена" id="wholesale_price" name="wholesale_price" type="number" value="{{ data.wholesale_price }}">
-                            {% if form.errors.wholesale_price %}<label id="wholesale_price-error" class="error" for="wholesale_price">{{ form.errors.wholesale_price.0 }}</label>{% endif %}
-                         </div>
-                         <div class="form-group {% if form.errors.purshase_price %}has-error{% endif %}">
-                            <label>Цена закупки</label>
-                            <input class="form-control" placeholder="Цена закупки" id="purshase_price" name="purshase_price" type="number" value="{{ data.purshase_price }}">
-                            {% if form.errors.purshase_price %}<label id="purshase_price-error" class="error" for="purshase_price">{{ form.errors.purshase_price.0 }}</label>{% endif %}
-                         </div>
-                         <div class="form-group">
-                                <label>Описание товара</label>
-                                <textarea class="form-control" rows="3" id="description" name="description">{{ data.description }}</textarea>
-                         </div>
-                         <div class="form-group">
-                                <label style="color: red;">Заголовок товара(Не более 100 символов)</label><span style="color: red;">*</span>
-                                <input class="form-control" id="caption" name="caption" placeholder="Заголовок"
-                                       value="{{ data.caption }}" maxlength="100" required>
-                               {% if form.errors.caption %}<label id="caption-error" style="color: red" for="caption">{{ form.errors.caption.0 }}</label>{% endif %}
-                               {% if form.non_field_errors %}<label id="caption-error" class="error" for="caption">{{ form.non_field_errors }}</label>{% endif %}
-                                <span data-num="count_simbols" data-count="100"></span><span style="display: none">  - Введено <em></em> символов</span>
-                         </div>
-                         <div class="form-group">
-                                <label>Аттрибуты SEO(Для продвижения страницы в поисковых системах)</label>
-                                <textarea class="form-control" rows="3" id="seo_attributes" name="seo_attributes">{{ data.seo_attributes }}</textarea>
-                         </div>
-                         <div class="form-group">
-                              <div class="checkbox">
-                                  <label>
-                                      <input type="checkbox" value="1" name="is_belarus" {% if data.is_belarus %} checked {% endif %}>Товар из Беларуси
-                                  </label>
-                              </div>
-                              <div class="checkbox">
-                                  <label>
-                                       <input type="checkbox" value="1" name="is_active" {% if data.is_active %} checked {% endif %}>Сделать активным(Будет отображен на сайте)
-                                  </label>
-                              </div>
-                              <div class="checkbox">
-                                  <label>
-                                     <input type="checkbox" value="1" name="is_new" {% if data.is_new %} checked {% endif %}>Пометить как новый товар
-                                  </label>
-                              </div>
-                         </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                    <h2>Товары</h2>
-                    {% if sizes_table %}
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Артику(6 символов)</th>
-                                        <th>Штрихкод(5 чисел)</th>
-                                        <th>Размер     </th>
-                                        <th>Колличество</th>
-                                        <th>Проверка</th>
-                                        <th>Удалить</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="height_size_id">
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-sm btn-success form-control" id="add_product_fields" >Добавить</button>
-                        </div>
+                    {% if not maincategorys or not nameproducts %}
+                        <p>Нет категорий или названий для отображения.Добавте данные!</p>
                     {% else %}
-                        <span style="color: red;">Нет размеров для данной категории </span>
-                    {% endif %}
-                         <h2>Изображения</h2>Допустимые форматы jpeg, png, jpg.Максимальный размер 5МБ.
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Добавить</th>
-                                        <th>Фото</th>
-                                        <th>Удалить</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   name="main_photo_path"
-                                                   onchange="handleMainFileImg(this.files)" id="main_photo_path" style="display: none;" value="">
-                                            <button type="button" class="btn btn-sm btn-success form-control" id="add_main_file_img">Добавить заглавное фото</button>
-                                        </td>
-                                        <td class="text-center">
-                                            <img src="{{ MEDIA_URL }}nophoto.png" width="100px;" height="100px;" alt="" id="main_photo">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" id="del_main_photo" style="display: none;">Удалить фото</button>
-                                        </td>
+                    <form class="form form-offer" method="post" name="edit_modelss" action="{{ action }}"
+                      id="edit_modelss" enctype="multipart/form-data">{% csrf_token %}
+                        <input type="hidden" id="is_del_mainphoto" {% if data_modelss_edit.main_photo_path %} value="1" {% else %} 
+                               value="0" {% endif %} name="is_del_mainphoto"/>
+                        <input type="hidden" name="is_del_other_photo" value="0" id="is_del_other_photo"/>
+                        <input type="hidden" name="list_del_other_photo" value="{}" id="list_del_other_photo"/>
+                        <input type="hidden" name="modelss" value="{{ data_modelss_edit.modelss.id }}">
+                        <input type="hidden" name="main_photo_path" value="{{ data_modelss_edit.main_photo_path }}">
+                        <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Модель</label>
+                                    <input class="form-control" placeholder="Модель"
+                                           id="name" name="name" type="text"
+                                           value="{{ data_modelss_edit.name }}" maxlength="50" readonly>
+                                </div>
+                                <div class="form-group ">
+                                    <label>Категория</label>
+                                        <select class="form-control" name="maincategory" id="maincategory">
+                                            {% for mcl in maincategorys %}
+                                                <option name="{{ mcl.id }}" value="{{ mcl.id }}" {% if mcl.id == data_modelss_edit.maincategory_id %} selected {% endif %}>
+                                                    {{ mcl.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                <div class="form-group ">
+                                    <label>Название</label>
+                                        <select class="form-control" name="nameproduct">
+                                            {% for name_product in nameproducts %}
+                                                <option name="{{ name_product.id }}" value="{{ name_product.id }}"
+                                                    {% if name_product.id == data_modelss_edit.nameproduct_id %} selected {% endif %}>
+                                                    {{ name_product.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                               {% if brends %}
+                               <div class="form-group ">
+                                    <label>Бренд</label>
+                                        <select class="form-control" name="brends">
+                                            <option name="0" value="0">Выберите бренд</option>
+                                            {% for brend in brends %}
+                                                <option name="{{ brend.id }}" value="{{ brend.id }}" {% if brend.id == data_modelss_edit.brends %} selected {% endif %}>
+                                                    {{ brend.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                            {% endif %}
+                            {% if seasons %}
+                                 <div class="form-group ">
+                                    <label>Сезон</label>
+                                        <select class="form-control" name="season_id">
+                                            <option name="0" value="0">Выберите сезон</option>
+                                            {% for season in seasons %}
+                                                <option name="{{ season.id }}" value="{{ season.id }}" {% if season.id == data_modelss_edit.season_id %} selected {% endif %}>
+                                                    {{ season.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                 </div>
+                             {% endif %}
+                                 <div class="form-group">
+                                    <label>Цвет</label>
+                                    <input class="form-control" placeholder="Цвет" id="color" name="color" type="text" value="{{ data_modelss_edit.color }}" maxlength="50">
+                                 </div>
+                                 <div class="form-group {% if form.errors.price %}has-error{% endif %}">
+                                    <label>Цена(В формате 23.56)</label>
+                                    <input class="form-control" placeholder="Цена" id="price" name="price" type="number" value="{{ data_modelss_edit.price }}">
+                                    {% if form.errors.price %}<label id="price-error" class="error" for="price">{{ form.errors.price.0 }}</label>{% endif %}
+                                 </div>
+                                 <div class="form-group {% if form.errors.wholesale_price %}has-error{% endif %}">
+                                    <label>Оптовая Цена(В формате 23.56)</label>
+                                    <input class="form-control" placeholder="Оптовая Цена" id="wholesale_price" name="wholesale_price" type="number" value="{{ data_modelss_edit.wholesale_price }}">
+                                    {% if form.errors.wholesale_price %}<label id="wholesale_price-error" class="error" for="wholesale_price">{{ form.errors.wholesale_price.0 }}</label>{% endif %}
+                                 </div>
+                                 <div class="form-group {% if form.errors.purshase_price %}has-error{% endif %}">
+                                    <label>Цена закупки(В формате 23.56)</label>
+                                    <input class="form-control" placeholder="Цена закупки" id="purshase_price" name="purshase_price" type="number" value="{{ data_modelss_edit.purshase_price }}">
+                                    {% if form.errors.purshase_price %}<label id="purshase_price-error" class="error" for="purshase_price">{{ form.errors.purshase_price.0 }}</label>{% endif %}
+                                 </div>
+                                 <div class="form-group">
+                                        <label>Описание</label>
+                                        <textarea class="form-control" rows="3" id="description" name="description">{{ data_modelss_edit.description }}</textarea>
+                                 </div>
+                                 <div class="form-group">
+                                        <label style="color: red;">Заголовок(Не более 100 символов)</label><span style="color: red;">*</span>
+                                        <input class="form-control" id="caption" name="caption" placeholder="Заголовок" value="{{ data_modelss_edit.caption }}" maxlength="100">
+                                        <span data-num="count_simbols" data-count="100"></span><span style="display: none">  - Введено <em></em> символов</span>
+                                 </div>
+                                 <div class="form-group">
+                                        <label>Аттрибуты SEO(Для продвижения страницы в поисковых системах)</label>
+                                        <textarea class="form-control" rows="3" id="seo_attributes" name="seo_attributes">{{ data_modelss_edit.seo_attributes }}</textarea>
+                                 </div>
+                                 <div class="form-group">
+                                      <div class="checkbox">
+                                          <label>
+                                              <input type="checkbox" value="1" name="is_belarus" {% if data_modelss_edit.is_belarus %} checked {% endif %}>Товар из Беларуси
+                                          </label>
+                                      </div>
+                                      <div class="checkbox">
+                                          <label>
+                                               <input type="checkbox" value="1" name="is_active" {% if data_modelss_edit.is_active %} checked {% endif %}>Сделать активным(Будет отображен на сайте)
+                                          </label>
+                                      </div>
+                                      <div class="checkbox">
+                                          <label>
+                                             <input type="checkbox" value="1" name="is_new" {% if data_modelss_edit.is_new %} checked {% endif %}>Пометить как новый товар
+                                          </label>
+                                      </div>
+                                 </div>
+                                 <div class="form-group {% if form.errors.discount %}has-error{% endif %}">
+                                    <label>Скидка(%)</label>
+                                    <input class="form-control" id="discount" name="discount" type="number" value="{{ data_modelss_edit.discount }}">
+                                    {% if form.errors.discount %}<label id="discount-error" class="error" for="discount">{{ form.errors.discount.0 }}</label>{% endif %}
+                                 </div>
+                                 <div class="form-group {% if form.errors.price_down %}has-error{% endif %}">
+                                    <label>Уценка(%)</label>
+                                    <input class="form-control" id="price_down" name="price_down" type="number" value="{{ data_modelss_edit.price_down }}">
+                                    {% if form.errors.price_down %}<label id="price_down-error" class="error" for="price_down">{{ form.errors.price_down.0 }}</label>{% endif %}
+                                 </div>
+                                 <div class="form-group {% if form.errors.sale_price %}has-error{% endif %}">
+                                    <label>Распродажа(%)</label>
+                                    <input class="form-control" id="sale_price" name="sale_price" type="number" value="{{ data_modelss_edit.sale_price }}">
+                                    {% if form.errors.sale_price %}<label id="sale_price-error" class="error" for="sale_price">{{ form.errors.sale_price.0 }}</label>{% endif %}
+                                 </div>
+                            </div>
+                        <div class="col-lg-6">
+                              {% with reletad_images=data_modelss_edit.image.all %}
+                            <h2>Добавить Изображения</h2>Допустимые форматы jpeg, png, jpg.Максимальный размер 5МБ.
+                            <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Добавить</th>
+                                                <th>Фото</th>
+                                                <th>Удалить</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr  id="main_photo_tr">
+                                                <td>
+                                                    <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
+                                                           name="main_photo_path"
+                                                           onchange="handleMainFileImg(this.files)" id="main_photo_path" style="display: none;" value="">
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-success form-control"
+                                                            id="add_main_file_img" {% if data_modelss_edit.main_photo_path == 'nophoto.png'%}
+                                                            style="display: block" {% else %} style="display: none;" {% endif %}>
+                                                             Добавить заглавное фото</button>
+                                                </td>
+                                                <td>
+                                                    <img {% if data_modelss_edit.main_photo_path %} src="{{ MEDIA_URL }}{{ data_modelss_edit.main_photo_path }}"
+                                                         {% else %} src="/media/nophoto.png" {% endif %}
+                                                         width="100px;" height="100px;" alt="" id="main_photo">
+                                                </td>
+                                                <td>
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-danger form-control"
+                                                            id="del_main_photo"
+                                                            {% if data_modelss_edit.main_photo_path  != 'nophoto.png' %} style="display: block" {% else %} style="display: none;" {% endif %}>
+                                                                    Удалить фото
+                                                    </button>
+                                                </td>
 
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="1" style="display: none;">
-                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото</button>
-                                        </td>
-                                        <td class="text-center">
-                                            <img src="{{ MEDIA_URL }}nophoto.png" width="100px;" height="100px;" alt="">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control"  style="display: none;" data-delete-imgs='delete-imgs' >Удалить фото</button>
-                                        </td>
+                                            </tr>
+                                        {% for num in image_num %}
+                                            {% with df=reletad_images|strint:num %}
+                                            {% if df %}
+                                            <tr>
+                                                <td>
+                                                    <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
+                                                           data-images="imgages-product" name="img_product[]" data-num-img="1" style="display: none;">
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-success form-control"
+                                                            data-anothe="anothe_img" style="display: none;">
+                                                            Добавить фото {{ forloop.counter }}</button>
+                                                </td>
+                                                <td>
+                                                    <img src="/{{ df.img_path }}" width="100px;" height="100px;" alt="">
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-danger form-control"  style="display: block;" data-delete-imgs='delete-imgs' data-photo-id="{{ df.id }}">
+                                                        Удалить фото {{ forloop.counter }} </button>
+                                                </td>
 
-                                    </tr>
-                                    <tr>
-                                        <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="2" style="display: none;">
-                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото</button>
-                                        </td>
-                                        <td class="text-center">
-                                            <img src="{{ MEDIA_URL }}nophoto.png" width="100px;" height="100px;" alt="">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;" data-delete-imgs='delete-imgs' >Удалить фото</button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="3" style="display: none;">
-                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото</button>
-                                        </td>
-                                        <td class="text-center">
-                                            <img src="{{ MEDIA_URL }}nophoto.png" width="100px;" height="100px;" alt="">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control"  style="display: none;" data-delete-imgs='delete-imgs'>Удалить фото</button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="4" style="display: none;">
-                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото</button>
-                                        </td>
-                                        <td class="text-center">
-                                            <img src="{{ MEDIA_URL }}nophoto.png" width="100px;" height="100px;" alt="">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control"  style="display: none;" data-delete-imgs='delete-imgs'>Удалить фото</button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
-                                                   data-images="imgages-product" name="img_product[]" data-num-img="5" style="display: none;">
-                                            <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото</button>
-                                        </td>
-                                        <td class="text-center">
-                                            <img src="{{ MEDIA_URL }}nophoto.png" width="100px;" height="100px;" alt="">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;" data-delete-imgs='delete-imgs'>Удалить фото</button>
-                                        </td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
+                                            </tr>
+                                            {% else %}
+                                            <tr>
+                                                <td> <input type="file" accept="image/jpeg, image/png, image/gif, image/jpg"
+                                                           data-images="imgages-product" name="img_product[]" style="display: none;">
+                                                    <button type="button" class="btn btn-sm btn-success form-control" data-anothe="anothe_img">Добавить фото {{ forloop.counter }}</button>
+                                                </td>
+                                                <td>
+                                                    <img src="/media/nophoto.png" width="100px;" height="100px;" alt="">
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-danger form-control" style="display: none;"
+                                                            data-delete-imgs='delete-imgs' data-photo-id='0'>
+                                                            Удалить фото {{ forloop.counter }}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                            {% endwith %}
+                                        {% endfor %}
+                                        {% endwith %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">Обновить Модель</button>
+                            </div>
                         </div>
-                    </div>
-                     <div class="col-lg-12">
-                        <div class="form-group">
-                            <label>Добавить Товар</label>
-                            <button type="submit" class="btn btn-sm btn-success form-control" id="save_modelss" {% if maincategorys.0.sizetable_set.all %}
-                                style="display: block;" {% else %} style="display: none" {% endif %}>
-                                Добавить Товар
-                            </button>
-                         </div>
-                     </div>
-                     <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 <a type="button" class="btn btn-sm btn-primary form-control" id="save_exit" href="{% url 'modelss' %}">Отмена</a>
                             </div>
                          </div>
-                </form>
-                {% endif %}
+                    </form>
+                    {% endif %}
                 </div>
                 <!-- /.row -->
             </div>
@@ -303,6 +283,7 @@
 <div class="hellopreloader">
     <div class="hellopreloader_preload" id="hellopreloader_preload"></div>
 </div>
-<script src="{% static "js/editmodelss.js" %}"></script>
+<script type="text/javascript" src="{% static 'js/validator/jquery.validate.js' %}"></script>
 <script src="{% static "js/edituploadmodelss.js" %}"></script>
+<script src="{% static "js/editmodelss.js" %}"></script>
 {% endblock %}

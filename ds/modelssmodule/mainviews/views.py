@@ -138,7 +138,7 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
 class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     login_url = 'login'
     permission_required = "auth.change_user"
-    model = Products
+    model = Modelss
     form_class = ModelssFormEdit
     context_object_name = 'data_modelss_edit'
     template_name = 'editmodelss.html'
@@ -162,9 +162,9 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         context['nameproducts'] = NameProduct.objects.get_active_products()
         context['brends'] = Brends.objects.get_active_brends()
         context['seasons'] = Seasons.objects.get_active_seasons()
-        context['tab_products'] = True
+        context['tab_modelss'] = True
         context['image_num'] = range(5)
-        context['action'] = reverse('editproduct',
+        context['action'] = reverse('editmodelss',
                                     kwargs={'pk': self.get_object().id})
 
         return context
@@ -179,7 +179,7 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
             instance.main_photo_path = 'nophoto.png'
         if int(self.request.POST['is_del_other_photo']) == 1:
             self.delete_related_photo(instance, self.request.POST['list_del_other_photo'])
-        instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['articul']
+        instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['name']
         instance.save()
         self.save_other_files(instance, form)
 
