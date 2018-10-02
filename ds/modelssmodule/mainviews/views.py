@@ -181,7 +181,7 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
             self.delete_related_photo(instance, self.request.POST['list_del_other_photo'])
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['name']
         instance.save()
-
+        #send signal for update products in modelss
         from modelssmodule.signals.signal import model_update
         model_update.send(sender=Modelss, instance=instance)
         self.save_other_files(instance, form)

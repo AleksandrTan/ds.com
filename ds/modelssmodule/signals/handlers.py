@@ -1,5 +1,5 @@
 from django.dispatch import receiver
-from dsstore.models import Modelss
+from dsstore.models import Modelss, Products
 from .signal import model_update
 
 
@@ -7,5 +7,4 @@ from .signal import model_update
 def update_products(sender, instance, **kwargs):
     products_list = instance.products_set.all()
     for product in products_list:
-        product.discount = instance.discount
-        product.save()
+        Products.objects.update_product(product, instance)

@@ -501,8 +501,25 @@ class ManageProductsModel(models.Manager):
         data_product['size'] = product.size
         return data_product
 
-    def update_product(self, inst_model):
-        pass
+    def update_product(self, product, instance):
+        product.discount = instance.discount
+        product.maincategory = instance.maincategory
+        product.nameproduct = instance.nameproduct
+        product.brends = instance.brends
+        product.season_id = instance.season_id
+        product.wholesale_price = instance.wholesale_price
+        product.purshase_price = instance.purshase_price
+        product.description = instance.description
+        product.color = instance.color
+        product.seo_attributes = instance.seo_attributes
+        product.main_photo_path = instance.main_photo_path
+        product.is_belarus = instance.is_belarus
+        product.is_active = instance.is_active
+        product.is_new = instance.is_new
+        product.caption = instance.caption
+        product.sale_price = instance.sale_price
+        product.price_down = instance.price_down
+        product.save()
 
 
 class Products(models.Model):
