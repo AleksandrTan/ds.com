@@ -43,7 +43,7 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
     permission_required = "auth.change_user"
     form_class = ModelssForm
     template_name = 'createmodelss.html'
-    succes_url = '/adminnv/products/modelss/'
+    succes_url = '/adminnv/products/modelss/viewmodelss/{0}/'
 
 #Add request in kwargs variable for checked height[] data in clean()  method FormModel ProductsForm
     def get_form_kwargs(self):
@@ -99,7 +99,7 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         return self.render_to_response(context)
 
     def get_success_url(self):
-        return self.succes_url
+        return self.succes_url.format(self.get_object().id)
 
     def slugify(self, strg):
         import re
@@ -142,7 +142,7 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
     form_class = ModelssFormEdit
     context_object_name = 'data_modelss_edit'
     template_name = 'editmodelss.html'
-    success_url = '/adminnv/products/modelss/'
+    success_url = '/adminnv/products/modelss/viewmodelss/{0}/'
 
     # Add request in kwargs variable for checked height[] data in clean()  method FormModel ProductsForm
     def get_form_kwargs(self):
@@ -253,6 +253,9 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
                 img.delete()
             except OSError:
                pass
+
+    def get_success_url(self):
+        return self.success_url.format(self.get_object().id)
 
 
 class FoundsModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
