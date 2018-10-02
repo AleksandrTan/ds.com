@@ -350,7 +350,8 @@ class ModelssFormEdit(ModelForm):
     class Meta:
         model = Modelss
         fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
-                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'name']
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'name', 'discount', 'sale_price',
+                  'price_down']
 
         error_messages = {
                              'caption': {
@@ -499,6 +500,9 @@ class ManageProductsModel(models.Manager):
         data_product['name'] = product.nameproduct.name
         data_product['size'] = product.size
         return data_product
+
+    def update_product(self, inst_model):
+        pass
 
 
 class Products(models.Model):
