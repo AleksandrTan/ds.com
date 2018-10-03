@@ -8,7 +8,7 @@ from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.files.storage import FileSystemStorage
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import QueryDict
 
@@ -16,6 +16,7 @@ from dsadminvn.mainviews.views import BaseAdminView
 from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Modelss,
                             ModelssForm, ModelssFormEdit, Image, )
 from modelssmodule.mainhelpers.savedproducts import SavedProducts
+from modelssmodule.mainhelpers.addproducts import AddProducts
 from modelssmodule.forms import FoundModelss, FilterModel
 
 
@@ -370,31 +371,23 @@ class AddProductModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
                 'modelss': Modelss.objects.get_modelss(kwargs['pk']),
                 'action': reverse('addproductsmodelss',
                                             kwargs={'pk': kwargs['pk']})
-
-        }
+                }
         return render(request, self.template_name, args)
 
-    def post(self, request):
-        form = FoundArticuls(request.POST)
-        if form.is_valid():
-            articul = form.cleaned_data['articul']
-            args = {'tab_products': True,
-                    'product_data': Products.objects.found_articul(articul)}
-            return render(request, self.template_name, args)
+    def post(self, request, pk):
+        instance = Modelss.objects.get_modelss(pk)
+        if self.request.POST.getlist('product_data_lists')[0] != '':
+            result_products = AddProducts(instance, self.request.POST.getlist('product_data_lists')[0])
+            result = result_products.saved_products()
+            if not result:
+                return redirect(self.success_url.format(pk))
+            else:
+                args = {'tab_modelss': True,
+                        'modelss': Modelss.objects.get_modelss(pk),
+                        'action': reverse('addproductsmodelss',
+                                          kwargs={'pk': pk}),
+                        'hh': result
+                        }
+                return render(request, self.template_name, args)
         else:
-            args = {'tab_products': True,
-                    'product_data': False}
-            return render(request, self.template_name, args)
-
-    def get_context_data(self, **kwargs):
-        context = super(AddProductModelss, self).get_context_data(**kwargs)
-        context['maincategorys'] = MainCategory.objects.get_active_categories()
-        context['nameproducts'] = NameProduct.objects.get_active_products()
-        context['brends'] = Brends.objects.get_active_brends()
-        context['seasons'] = Seasons.objects.get_active_seasons()
-        context['tab_modelss'] = True
-        context['image_num'] = range(5)
-        context['action'] = reverse('addproductsmodelss',
-                                    kwargs={'pk': self.get_object().id})
-
-        return context
+            return redirect(self.success_url.format(pk))

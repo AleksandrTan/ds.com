@@ -33,7 +33,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Добавить товар для модели
+                                <i class="fa fa-table"></i> Добавить товар для модели{{ hh }}
                             </li>
                         </ol>
                     </div>
@@ -110,6 +110,7 @@
                     <input type="hidden" value="{{ modelss.products_set.count }}" id="count_sizes_add"/>
                     <input type="hidden" value="" id="product_data_lists" name="product_data_lists"/>
                     <input type="hidden" value="{{ modelss.maincategory.id }}" id="maincategory"/>
+                    <input type="hidden" value="{{ modelss.id }}" name="modelss_id"/>
                     <input type="hidden" value="0" id="flag_checked"/>
                     <div class="col-lg-6">
                     {% if modelss.products_set.count < modelss.maincategory.sizetable_set.count %}
@@ -130,13 +131,13 @@
                             </table>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-sm btn-success form-control" id="add_product_fields" >Добавить</button>
+                            <button type="button" class="btn btn-sm btn-success form-control" id="add_product_fields" >Добавить Продукт</button>
                         </div>
                     </div>
                      <div class="col-lg-6">
                         <div class="form-group">
                             <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">
-                                Добавить
+                                Обновить
                             </button>
                          </div>
                      </div>
@@ -158,8 +159,12 @@
 <div class="hellopreloader">
     <div class="hellopreloader_preload" id="hellopreloader_preload"></div>
 </div>
-    <script>
-
-    </script>
+{#    <script>#}
+{#    var product_data=#}
+{#        {{% for data in modelss.products_set.all %}#}
+{#           '{{ data.articul }}' : {'articul':{{ data.articul  }}, 'barcode':{{ data.pre_barcode }}, 'height':{{ data.size }}, 'count':{{ data.count_num }} }#}
+{#        {% endfor %}#}
+{#           };#}
+{#    </script>#}
     <script src="{% static "js/addproductmodelss.js" %}"></script>
 {% endblock %}
