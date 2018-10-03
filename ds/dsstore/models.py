@@ -349,7 +349,7 @@ class ModelssFormEdit(ModelForm):
 
     class Meta:
         model = Modelss
-        fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
+        fields = ['nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
                   'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'name', 'discount', 'sale_price',
                   'price_down']
 
@@ -503,7 +503,6 @@ class ManageProductsModel(models.Manager):
 
     def update_product(self, product, instance):
         product.discount = instance.discount
-        product.maincategory = instance.maincategory
         product.nameproduct = instance.nameproduct
         product.brends = instance.brends
         product.season_id = instance.season_id

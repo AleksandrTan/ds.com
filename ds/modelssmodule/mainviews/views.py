@@ -75,7 +75,7 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         instance.save()
 
         self.save_other_files(instance, form)
-        if self.request.POST.getlist('product_data_lists'):
+        if self.request.POST.getlist('product_data_lists')[0] != '':
             result_products = SavedProducts(instance, self.request)
             result = result_products.saved_products()
             if not result:
@@ -99,7 +99,7 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         return self.render_to_response(context)
 
     def get_success_url(self):
-        return self.succes_url.format(self.get_object().id)
+        return self.succes_url.format(self.object.id)
 
     def slugify(self, strg):
         import re

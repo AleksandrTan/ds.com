@@ -68,16 +68,14 @@
                                            id="name" name="name" type="text"
                                            value="{{ data_modelss_edit.name }}" maxlength="50" readonly>
                                 </div>
-                                <div class="form-group ">
+                                <div class="form-group">
                                     <label>Категория</label>
-                                        <select class="form-control" name="maincategory" id="maincategory">
-                                            {% for mcl in maincategorys %}
-                                                <option name="{{ mcl.id }}" value="{{ mcl.id }}" {% if mcl.id == data_modelss_edit.maincategory_id %} selected {% endif %}>
-                                                    {{ mcl.name }}
-                                                </option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
+                                    <input class="form-control" name="maincategory" id="maincategory" type="text"
+                                           {% for mcl in maincategorys %}
+                                                      {% if mcl.id == data_modelss_edit.maincategory_id %} value="{{ mcl.name }}"{% endif %}
+                                                  {% endfor %}
+                                           maxlength="50" readonly>
+                                </div>
                                 <div class="form-group ">
                                     <label>Название</label>
                                         <select class="form-control" name="nameproduct">

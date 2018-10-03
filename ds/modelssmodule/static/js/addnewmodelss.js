@@ -55,6 +55,11 @@ function ValidateProduct(e, obj, but) {
             but.text('Проверено');
             but.removeAttr("data-check-product");
         }
+        if (this.count_sizes == this.count_sizes_add && $('#flag_checked').val() == 0){
+            but.removeClass('btn-primary').addClass('btn-success');
+            but.text('Проверено');
+            but.removeAttr("data-check-product");
+        }
        
         //add data product in object list(validation clear)
         if ($('#flag_checked').val() == 0){
@@ -232,7 +237,7 @@ $(document).ready(function () {
     	$('#height_size_id').empty();
         product_data = {};
         $('#product_data_lists').val('');
-        $('#count_sizes_add').val('');
+        $('#count_sizes_add').val('0');
         $('#add_product_fields').show();
         console.log(product_data);
     });
@@ -275,6 +280,7 @@ $(document).ready(function () {
                 parentElementTable.append(new_size);
                 $('#save_product').hide();
                 $('#add_product_fields').hide();
+                $('#count_sizes').val(data.length);
             }
         }
     	$('#count_sizes_add').val(parseInt($('#count_sizes_add').val()) + 1);
