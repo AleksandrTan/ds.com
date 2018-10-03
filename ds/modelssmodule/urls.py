@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^edit/(?P<pk>\d+)/$', views.EditModelss.as_view(), name='editmodelss'),
     url(r'^deletemodelss/(?P<pk>\d+)/$', views.DeleteModelss.as_view(), name='deletemodelss'),
     url(r'^viewmodelss/(?P<pk>\d+)/$', views.ViewModelss.as_view(), name="viewmodelss"),
-    url(r'^filtermodelss/(?:page/(?P<page>\d+)/)?$', views.FilterModelss.as_view(), name='filtermodelss')
+    url(r'^filtermodelss/(?:page/(?P<page>\d+)/)?$', views.FilterModelss.as_view(), name='filtermodelss'),
+    url(r'^addproducts/(?P<pk>\d+)/$', views.AddProductModelss.as_view(), name='addproductsmodelss')
     ]

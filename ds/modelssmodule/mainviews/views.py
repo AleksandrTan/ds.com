@@ -8,12 +8,12 @@ from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.files.storage import FileSystemStorage
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import QueryDict
 
 from dsadminvn.mainviews.views import BaseAdminView
-from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Products, Modelss,
+from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Modelss,
                             ModelssForm, ModelssFormEdit, Image, )
 from modelssmodule.mainhelpers.savedproducts import SavedProducts
 from modelssmodule.forms import FoundModelss, FilterModel
@@ -184,6 +184,7 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         #send signal for update products in modelss
         from modelssmodule.signals.signal import model_update
         model_update.send(sender=Modelss, instance=instance)
+
         self.save_other_files(instance, form)
 
         return super(EditModelss, self).form_valid(form)
@@ -356,3 +357,44 @@ class FilterModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
 
     def get_queryset(self):
         return Modelss.objects.filter_modelss(self.data)
+
+
+class AddProductModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
+    login_url = 'login'
+    permission_required = "auth.change_user"
+    template_name = 'addproductmodelss.html'
+    success_url = '/adminnv/products/modelss/viewmodelss/{0}/'
+
+    def get(self, request, **kwargs):
+        args = {'tab_modelss': True,
+                'modelss': Modelss.objects.get_modelss(kwargs['pk']),
+                'action': reverse('addproductsmodelss',
+                                            kwargs={'pk': kwargs['pk']})
+
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request):
+        form = FoundArticuls(request.POST)
+        if form.is_valid():
+            articul = form.cleaned_data['articul']
+            args = {'tab_products': True,
+                    'product_data': Products.objects.found_articul(articul)}
+            return render(request, self.template_name, args)
+        else:
+            args = {'tab_products': True,
+                    'product_data': False}
+            return render(request, self.template_name, args)
+
+    def get_context_data(self, **kwargs):
+        context = super(AddProductModelss, self).get_context_data(**kwargs)
+        context['maincategorys'] = MainCategory.objects.get_active_categories()
+        context['nameproducts'] = NameProduct.objects.get_active_products()
+        context['brends'] = Brends.objects.get_active_brends()
+        context['seasons'] = Seasons.objects.get_active_seasons()
+        context['tab_modelss'] = True
+        context['image_num'] = range(5)
+        context['action'] = reverse('addproductsmodelss',
+                                    kwargs={'pk': self.get_object().id})
+
+        return context

@@ -48,6 +48,7 @@
                                         <th class="text-center">Активен</th>
                                         <th class="text-center">Добавлен</th>
                                         <th class="text-center">Редактировать</th>
+                                        <th class="text-center">Добавить продукт</th>
                                         <th class="text-center">Удалить</th>
                                     </tr>
                                 </thead>
@@ -68,6 +69,10 @@
                                         <td class="text-center"><a type="button"
                                                                    class="btn btn-sm btn-success"
                                                                    href="{% url 'editmodelss' modelss.id %}">Редактировать</a>
+                                        </td>
+                                        <td class="text-center"><a type="button"
+                                                                   class="btn btn-sm btn-success"
+                                                                   href="{% url 'addproductsmodelss' modelss.id %}">Добавить</a>
                                         </td>
                                         <td class="text-center"><a type="button"
                                                                    class="btn btn-sm btn-danger"
@@ -96,7 +101,6 @@
                                             <th class="text-center">Скидка</th>
                                             <th class="text-center">Активен</th>
                                             <th class="text-center">Добавлен</th>
-                                            <th class="text-center">Фото</th>
                                             <th class="text-center">Редактировать</th>
                                             <th class="text-center">Продать</th>
                                             <th class="text-center">Статистика</th>
@@ -116,7 +120,6 @@
                                             <td class="text-center">{{ product_data.discount }}%</td>
                                             <td class="text-center">{% if product_data.is_active %} ДА {% else %} НЕТ {% endif %}</td>
                                             <td class="text-center">{{ product_data.date_create|date:"d-m-Y" }}</td>
-                                            <td class="text-center"><img src="{{MEDIA_URL}}{{ product_data.main_photo_path }}" width="150px;" height="150px;"></td>
                                             <td class="text-center"><a type="button"
                                                                        class="btn btn-sm btn-success"
                                                                        href="{% url 'editproduct' product_data.id %}">Редактировать</a>

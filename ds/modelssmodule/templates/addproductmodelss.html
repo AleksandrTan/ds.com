@@ -1,0 +1,165 @@
+{% extends "main.html" %}
+{% load staticfiles %}
+{% block content %}
+<div id="page-wrapper">
+<div class="btn-modal-wrap btn-modal-wrap-1">
+    <div class="modal fade" id="modal_alarm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="fa fa-times" aria-hidden="true">
+                    </span></button>
+                    <h4 class="modal-title" id="myModalLabel" style="color: #ff0012">Внимание!!!</h4>
+                </div>
+                 <div class="modal-body">
+                     <h3 style="color: #ff0012" id="modal_content"></h3>
+                </div>
+                <div class="modal-footer">
+{#                    <button type="button" class="btn btn-xs btn-default" id="cancel_type">Cancel</button>#}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Добавить товар для модели
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-table"></i> Добавить товар для модели
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                {% if modelss %}
+                    <div class="col-lg-12">
+                    <label>Модель</label>
+                           <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Модель</th>
+                                            <th class="text-center">Фото</th>
+                                            <th class="text-center">Категория</th>
+                                            <th class="text-center">Название</th>
+                                            <th class="text-center">Цена</th>
+                                            <th class="text-center">Скидка</th>
+                                            <th class="text-center">Активен</th>
+                                            <th class="text-center">Добавлен</th>
+                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">{{ modelss.name }}</td>
+                                            <td class="text-center"><img src="{{MEDIA_URL}}{{ modelss.main_photo_path }}" width="150px;" height="150px;"></td>
+                                            <td class="text-center">{{ modelss.maincategory.name }}</td>
+                                            <td class="text-center">{{ modelss.nameproduct.name }}</td>
+                                            <td class="text-center">{{ modelss.price }}</td>
+                                            <td class="text-center">{{ modelss.discount }}%</td>
+                                            {% if modelss.is_active %}
+                                                <td class="text-center"> ДА </td>
+                                            {% else %}
+                                                <td class="text-center" style="color: #b52b27"> НЕТ </td>
+                                            {% endif %}
+                                            <td class="text-center">{{ modelss.date_create|date:"d-m-Y" }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    <div class="col-lg-12">
+                    <label>Товары модели</label>
+                           <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Артикул</th>
+                                            <th class="text-center">Штрихкод</th>
+                                            <th class="text-center">Колличество</th>
+                                            <th class="text-center">Размер</th>
+                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for data in modelss.products_set.all %}
+                                        <tr>
+                                            <td class="text-center">{{ data.articul }}</td>
+                                            <td class="text-center">{{ data.pre_barcode }}</td>
+                                            <td class="text-center">{{ data.count_num }}</td>
+                                            <td class="text-center">{{ data.size }}</td>
+                                        </tr>
+                                    {% empty %}
+                                        <p style="color: red;">Нет товаров для отображения.</p>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                </div>
+                <div class="row">
+                <form class="form form-offer" method="post" name="add_new_productss" action="{{ action }}" id="add_new_productss">{% csrf_token %}
+                    <input type="hidden" value="{{ modelss.maincategory.sizetable_set.count }}" id="count_sizes"/>
+                    <input type="hidden" value="{{ modelss.products_set.count }}" id="count_sizes_add"/>
+                    <input type="hidden" value="" id="product_data_lists" name="product_data_lists"/>
+                    <input type="hidden" value="{{ modelss.maincategory.id }}" id="maincategory"/>
+                    <input type="hidden" value="0" id="flag_checked"/>
+                    <div class="col-lg-6">
+                    {% if modelss.products_set.count < modelss.maincategory.sizetable_set.count %}
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Артику(6 символов)</th>
+                                        <th>Штрихкод(5 чисел)</th>
+                                        <th>Размер     </th>
+                                        <th>Колличество</th>
+                                        <th>Проверка</th>
+                                        <th>Удалить</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="height_size_id">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-sm btn-success form-control" id="add_product_fields" >Добавить</button>
+                        </div>
+                    </div>
+                     <div class="col-lg-6">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-sm btn-success form-control" id="save_product">
+                                Добавить
+                            </button>
+                         </div>
+                     </div>
+                     <div class="col-lg-6">
+                            <div class="form-group">
+                                <a type="button" class="btn btn-sm btn-primary form-control" id="save_exit" href="{% url 'modelss' %}">Отмена</a>
+                            </div>
+                         </div>
+                      {% else %}
+                        <span style="color: red;">Нет размеров для добавления </span>
+                    {% endif %}
+                </form>
+                </div>
+                {% else %}
+                <p style="color: red">Нет Модели!!!</p>
+                {% endif %}
+        </div>
+ </div>
+<div class="hellopreloader">
+    <div class="hellopreloader_preload" id="hellopreloader_preload"></div>
+</div>
+    <script>
+
+    </script>
+    <script src="{% static "js/addproductmodelss.js" %}"></script>
+{% endblock %}

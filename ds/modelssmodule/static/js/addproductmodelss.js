@@ -1,17 +1,7 @@
-/*
-* Identifier for debug mode(if true - form submited on server)
-* */
+/**
+ * Created by user on 03.10.2018.
+ */
 var product_data={};
-
-$( "#add_new_modelss" ).submit(function (e) {
-                                  if ($('#name').val() == '' || $('#caption').val() == ''){
-			                         $('#modal_content').text('Введите название или заголовок модели!!!');
-                                     $('#modal_alarm').modal();
-                                     return false;
-                                  }
-
-			                      this.submit();
-                            });
 
 $(document).on('click', '[data-check-product]', function(event) {
                // $('#hellopreloader_preload').css({'display':'block', 'opacity': '0.5'});
@@ -60,7 +50,7 @@ function ValidateProduct(e, obj, but) {
             but.text('Проверено');
             but.removeAttr("data-check-product");
         }
-       
+
         //add data product in object list(validation clear)
         if ($('#flag_checked').val() == 0){
             this.addDataProduct();
@@ -232,16 +222,6 @@ function ValidateProduct(e, obj, but) {
 }
 $(document).ready(function () {
 
-//Changes maincategory
-    $('#maincategory' ).change(function () {
-    	$('#height_size_id').empty();
-        product_data = {};
-        $('#product_data_lists').val('');
-        $('#count_sizes_add').val('0');
-        $('#add_product_fields').show();
-        console.log(product_data);
-    });
-
 //Add product fields
     $('#add_product_fields').click(function () {
         if ($('#count_sizes').val() <=  $('#count_sizes_add').val()){
@@ -300,37 +280,6 @@ $(document).ready(function () {
         $('#add_product_fields').show();
         if ($('#count_sizes').val()>=  $('#count_sizes_add').val()){
             $('#save_product').show();
-        }
-    });
-
-//Check isset modelss
-$('#name').blur(function () {
-    if ($(this).val() != ''){
-       $.get(
-        "/adminnv/products/checkmodelss/"+$(this).val()+"/",
-        onAjaxSuccess
-       );
-       function onAjaxSuccess(data) {
-           if(data.status){
-           	   $('#name').val('');
-               $('#modal_content').text('').text('Введенная модель уже существует!Выберите другую');
-               $('#modal_alarm').modal();
-           }
-       }
-   }
-});
-
-//Show count entered simbols for input tags
-    $("input").keyup(function() {
-        $(this).next('[data-num = count_simbols]').next('span').css('display', 'block').children('em').text(this.value.length);
-        if (this.value.length > parseInt($(this).next('[data-num = count_simbols]').data( "count" ))){
-            $(this).next('[data-num = count_simbols]').next('span').css('color', 'red').children('em').text(this.value.length);
-        }
-        else{
-            $(this).next('[data-num = count_simbols]').next('span').css('color', 'green').children('em').text(this.value.length);
-        }
-        if(this.value.length == 0){
-            $(this).next('[data-num = count_simbols]').next('span').css('display', 'none');
         }
     });
 });

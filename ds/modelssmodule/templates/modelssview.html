@@ -134,6 +134,7 @@
                                         <th class="text-center">Добавлен</th>
                                         <th class="text-center">Просмотр</th>
                                         <th class="text-center">Редактировать</th>
+                                        <th class="text-center">Добавить продукт</th>
                                         <th class="text-center">Удалить</th>
                                     </tr>
                                 </thead>
@@ -158,6 +159,10 @@
                                         <td class="text-center"><a type="button"
                                                                    class="btn btn-sm btn-success"
                                                                    href="{% url 'editmodelss' model_data.id %}">Редактировать</a>
+                                        </td>
+                                        <td class="text-center"><a type="button"
+                                                                   class="btn btn-sm btn-success"
+                                                                   href="{% url 'addproductsmodelss' model_data.id %}">Добавить</a>
                                         </td>
                                         <td class="text-center"><a type="button"
                                                                    class="btn btn-sm btn-danger"

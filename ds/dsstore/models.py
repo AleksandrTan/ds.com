@@ -255,6 +255,12 @@ class ManageModelss(models.Manager):
         except Modelss.DoesNotExist:
             return False
 
+    def get_modelss(self, pk):
+        try:
+            return Modelss.objects.filter(id=pk).get()
+        except Modelss.DoesNotExist:
+            return False
+
 
 class Modelss(models.Model):
     name = models.CharField(blank=False, default='', max_length=50)
