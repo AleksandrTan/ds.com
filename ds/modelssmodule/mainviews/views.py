@@ -372,6 +372,8 @@ class AddProductModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
                 'action': reverse('addproductsmodelss',
                                             kwargs={'pk': kwargs['pk']})
                 }
+        if args['modelss']:
+            args['isset_sizes'] = args['modelss'].products_set.values_list('size', flat=True)
         return render(request, self.template_name, args)
 
     def post(self, request, pk):

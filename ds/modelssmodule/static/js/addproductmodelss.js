@@ -195,6 +195,18 @@ function ValidateProduct(e, obj, but) {
                  continue;
             }
         }
+        for (var i=0; i<isset_sizes.length; i++){
+            if (this.height == isset_sizes[i]) {
+                this.heightobj.val('');
+                this.alarm_text.text('').text('Внимание дублирование размера!!!! Выберите другой размер!!!');
+                this.modal_alarm.modal().modal();
+                $('#flag_checked').val(1);
+                return false;
+            }
+            else {
+                 continue;
+            }
+        }
     };
 
     this.checkCount = function () {

@@ -33,7 +33,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="{% url 'homeadmin' %}">Главная страница</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Добавить товар для модели{{ hh }}
+                                <i class="fa fa-table"></i> Добавить товар для модели{{ hh }}{{ isset_sizes }}
                             </li>
                         </ol>
                     </div>
@@ -159,12 +159,13 @@
 <div class="hellopreloader">
     <div class="hellopreloader_preload" id="hellopreloader_preload"></div>
 </div>
-{#    <script>#}
+    <script>
 {#    var product_data=#}
 {#        {{% for data in modelss.products_set.all %}#}
 {#           '{{ data.articul }}' : {'articul':{{ data.articul  }}, 'barcode':{{ data.pre_barcode }}, 'height':{{ data.size }}, 'count':{{ data.count_num }} }#}
 {#        {% endfor %}#}
 {#           };#}
-{#    </script>#}
+    var isset_sizes = {{ isset_sizes }}
+    </script>
     <script src="{% static "js/addproductmodelss.js" %}"></script>
 {% endblock %}
