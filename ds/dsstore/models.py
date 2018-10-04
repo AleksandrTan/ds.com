@@ -261,6 +261,37 @@ class ManageModelss(models.Manager):
         except Modelss.DoesNotExist:
             return False
 
+    def get_modelss_id(self, name):
+        try:
+            return Modelss.objects.filter(name=name).values_list('id', flat=True)
+        except Modelss.DoesNotExist:
+            return False
+
+    def set_discount_models(self, data, disco_value):
+        query = Modelss.objects
+        work_dict = {param: data[param] for param in data if data[param]}
+        try:
+            count_record = query.filter(**work_dict).update(discount=disco_value)
+            if count_record > 0:
+                return ','.join([str(i) for i in query.filter(**work_dict).values_list('id', flat=True)])
+            else:
+                return False
+        except Products.DoesNotExist:
+            return False
+
+    def set_discount_model_products(self, name, disco_value):
+        try:
+            count_record = Modelss.objects.filter(name=name).update(discount=disco_value)
+            if count_record > 0:
+                return str(Modelss.objects.get_modelss_id(name)[0])
+            else:
+                return False
+        except Products.DoesNotExist:
+            return False
+
+    def delete_discount(self, id_list):
+        Modelss.objects.filter(id__in=id_list).update(discount=0)
+
 
 class Modelss(models.Model):
     name = models.CharField(blank=False, default='', max_length=50)
@@ -458,27 +489,21 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
-    def set_discount_products(self, data, disco_value):
-        query = Products.objects
-        work_dict = {param: data[param] for param in data if data[param]}
+    def set_discount_products(self, list_mid, disco_value):
         try:
-            count_record = query.filter(**work_dict).update(discount=disco_value)
-            if count_record > 0:
-                return ','.join([str(i) for i in query.filter(**work_dict).values_list('id', flat=True)])
-            else:
-                return False
+            Products.objects.filter(modelss_id__in=list_mid.split(',')).update(discount=disco_value)
         except Products.DoesNotExist:
             return False
 
-    def set_discount_articul_products(self, articul, disco_value):
-        try:
-            count_record = Products.objects.filter(articul=articul).update(discount=disco_value)
-            if count_record > 0:
-                return ','.join([str(i) for i in Products.objects.filter(articul=articul).values_list('id', flat=True)])
-            else:
-                return False
-        except Products.DoesNotExist:
-            return False
+    # def set_discount_articul_products(self, articul, disco_value):
+    #     try:
+    #         count_record = Products.objects.filter(articul=articul).update(discount=disco_value)
+    #         if count_record > 0:
+    #             return ','.join([str(i) for i in Products.objects.filter(articul=articul).values_list('id', flat=True)])
+    #         else:
+    #             return False
+    #     except Products.DoesNotExist:
+    #         return False
 
     def set_discount_model_products(self, modelss, disco_value):
         try:
@@ -490,8 +515,8 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
-    def delete_discount(self, id_list):
-        Products.objects.filter(id__in=id_list).update(discount=0)
+    def delete_discount(self, list_mid):
+        Products.objects.filter(modelss_id__in=list_mid).update(discount=0)
 
     def hm_get_barcode_query(self, product):
         data_product = dict()
@@ -680,6 +705,7 @@ class ProductsFormModelss(ModelForm):
         fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
                   'color', 'seo_attributes', 'is_belarus', 'is_active', 'is_new', 'caption', 'modelss', 'articul', 'pre_barcode',
                   'size', 'count_num', 'main_photo_path', 'modelss_name', 'dirname_img', 'identifier', 'barcode']
+
 
 class ProductsAddFormModelss(ModelForm):
 

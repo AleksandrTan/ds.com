@@ -5,7 +5,7 @@ from django.views.generic.base import TemplateView
 from django.shortcuts import render, redirect
 
 from dsadminvn.mainviews.views import BaseAdminView
-from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Products)
+from dsstore.models import (MainCategory, NameProduct, Brends, Seasons, Products, Modelss)
 from discountmodule.models import Discounts
 from discountmodule.forms import FilterDiscounts, ArticulDiscounts, ModelDiscounts
 
@@ -44,9 +44,10 @@ class SetDiscountFilter(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
             description = form.cleaned_data['description_f']
             form.cleaned_data.pop('disco_value')
             form.cleaned_data.pop('description_f')
-            list_id = Products.objects.set_discount_products(form.cleaned_data, disco_val)
+            list_id = Modelss.objects.set_discount_models(form.cleaned_data, disco_val)
             if list_id:
                 Discounts.objects.save_discount(list_id, description, disco_val)
+                Products.objects.set_discount_products(list_id, disco_val)
                 return redirect('/adminnv/products/discount/discolist/')
             else:
                 return redirect('/adminnv/products/discount/discolist/')
@@ -63,37 +64,37 @@ class SetDiscountFilter(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
             return render(request, 'discountadd.html', context)
 
 
-class SetDiscountArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
-    permission_required = "auth.change_user"
-    login_url = 'login'
-    template_name = 'discountshow.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(SetDiscountArticul, self).get_context_data(**kwargs)
-        context['tab_discounts'] = True
-
-        return context
-
-    def post(self, request, *args, **kwargs):
-        form = ArticulDiscounts(request.POST)
-        if form.is_valid():
-            list_id = Products.objects.set_discount_articul_products(form.cleaned_data['articul'], form.cleaned_data['art_disco'])
-            if list_id:
-                Discounts.objects.save_discount(list_id, form.cleaned_data['description_a'], form.cleaned_data['art_disco'])
-                return redirect('/adminnv/products/discount/discolist/')
-            else:
-                return redirect('/adminnv/products/discount/discolist/')
-        else:
-            self.data = form.cleaned_data
-            context = dict()
-            context['maincategorys'] = MainCategory.objects.get_active_categories()
-            context['nameproducts'] = NameProduct.objects.get_active_products()
-            context['brends'] = Brends.objects.get_active_brends()
-            context['seasons'] = Seasons.objects.get_active_seasons()
-            context['form_data'] = self.data
-            context['form_errors'] = form.errors
-            context['tab_discounts'] = True
-            return render(request, 'discountadd.html', context)
+# class SetDiscountArticul(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+#     permission_required = "auth.change_user"
+#     login_url = 'login'
+#     template_name = 'discountshow.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(SetDiscountArticul, self).get_context_data(**kwargs)
+#         context['tab_discounts'] = True
+#
+#         return context
+#
+#     def post(self, request, *args, **kwargs):
+#         form = ArticulDiscounts(request.POST)
+#         if form.is_valid():
+#             list_id = Products.objects.set_discount_articul_products(form.cleaned_data['articul'], form.cleaned_data['art_disco'])
+#             if list_id:
+#                 Discounts.objects.save_discount(list_id, form.cleaned_data['description_a'], form.cleaned_data['art_disco'])
+#                 return redirect('/adminnv/products/discount/discolist/')
+#             else:
+#                 return redirect('/adminnv/products/discount/discolist/')
+#         else:
+#             self.data = form.cleaned_data
+#             context = dict()
+#             context['maincategorys'] = MainCategory.objects.get_active_categories()
+#             context['nameproducts'] = NameProduct.objects.get_active_products()
+#             context['brends'] = Brends.objects.get_active_brends()
+#             context['seasons'] = Seasons.objects.get_active_seasons()
+#             context['form_data'] = self.data
+#             context['form_errors'] = form.errors
+#             context['tab_discounts'] = True
+#             return render(request, 'discountadd.html', context)
 
 
 class SetDiscountModel(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, CreateView):
@@ -110,10 +111,11 @@ class SetDiscountModel(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
     def post(self, request, *args, **kwargs):
         form = ModelDiscounts(request.POST)
         if form.is_valid():
-            list_id = Products.objects.set_discount_model_products(form.cleaned_data['modelss'], form.cleaned_data['mod_disco'])
+            list_id = Modelss.objects.set_discount_model_products(form.cleaned_data['modelss'], form.cleaned_data['mod_disco'])
             if list_id:
                 Discounts.objects.save_discount(list_id, form.cleaned_data['description_m'],
                                                 form.cleaned_data['mod_disco'])
+                Products.objects.set_discount_products(list_id, form.cleaned_data['mod_disco'])
                 return redirect('/adminnv/products/discount/discolist/')
             else:
                 return redirect('/adminnv/products/discount/discolist/')
@@ -137,6 +139,7 @@ class DeleteDiscounts(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
     def get(self, request, *args, **kwargs):
         discount = Discounts.objects.get(pk=kwargs['pk'])
         if discount.list_id:
+            Modelss.objects.delete_discount(discount.list_id.split(','))
             Products.objects.delete_discount(discount.list_id.split(','))
         discount.delete()
         return redirect('/adminnv/products/discount/discolist/')
