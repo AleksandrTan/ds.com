@@ -1,6 +1,11 @@
+import io
+from django.http import StreamingHttpResponse
+import xlsxwriter
+from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.base import TemplateView
 from django.shortcuts import render
+from django.template import loader, Context
 
 from dsadminvn.mainviews.views import BaseAdminView
 from handsale.models import ProductsSale
@@ -66,3 +71,56 @@ class PeriodStatistics(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
             else:
                 context['clear_sum'] = 0
             return render(request, self.template_name, context)
+
+
+class GetSCVFile(BaseAdminView):
+    def get(self, request):
+        output = io.BytesIO()
+        workbook = xlsxwriter.Workbook(output)
+        worksheet = workbook.add_worksheet()
+        header_format = workbook.add_format({
+            'border': 1,
+            'bg_color': '#C6EFCE',
+            'bold': True,
+            'text_wrap': True,
+            'valign': 'vcenter',
+            'indent': 1,
+        })
+        data = [
+            [1, 10000, 5000, 8000, 6000, 9, 9, 8, 8, 0],
+            [2, 2000, 3000, 4000, 5000, 9, 9, 8, 8, 0],
+            [3, 6000, 6000, 6500, 6000, 9, 9, 8, 8, 0],
+            [4, 500, 300, 200, 700, 9, 9, 8, 8, 0],
+        ]
+        caption = 'Статистика продаж за день.'
+        # Set the columns widths.
+        worksheet.set_column('B:K', 12)
+        # Write the caption.
+        worksheet.write('B1', caption)
+        # Add a table to the worksheet.
+        worksheet.add_table('B3:K7', {'data': data,
+                                      'total_row': 1,
+                                      'columns': [{'header': 'Товар'},
+                                                  {'header': 'Артикул'},
+                                                  {'header': 'Колличество'},
+                                                  {'header': 'Цена'},
+                                                  {'header': 'Скидка'},
+                                                  {'header': 'Уступили'},
+                                                  {'header': 'Итоговая цена'},
+                                                  {'header': 'Место продажи'},
+                                                  {'header': 'Дата продажи'},
+                                                  {'header': 'Описание'}
+                                                  ]
+                                      })
+        workbook.close()
+        output.seek(0)
+
+        # Set up the Http response.
+        filename = 'daystatistics.xlsx'
+        response = HttpResponse(
+            output,
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+        response['Content-Disposition'] = 'attachment; filename=%s' % filename
+
+        return response
