@@ -301,6 +301,16 @@ class ManageModelss(models.Manager):
         except Products.DoesNotExist:
             return False
 
+    def set_sales_model_products(self, name, disco_value):
+        try:
+            count_record = Modelss.objects.filter(name=name).update(discount=disco_value, sale=True, sale_price=F('price') - ((F('price')*disco_value)/100))
+            if count_record > 0:
+                return str(Modelss.objects.get_modelss_id(name)[0])
+            else:
+                return False
+        except Products.DoesNotExist:
+            return False
+
     def delete_discount(self, id_list):
         Modelss.objects.filter(id__in=id_list).update(discount=0, sale=False, sale_price=0)
 
@@ -504,6 +514,13 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
+    def set_sales_products(self, list_mid, disco_value):
+        try:
+            Products.objects.filter(modelss_id__in=list_mid.split(',')).update(discount=disco_value, sale=True,
+                                                                               sale_price=F('price') - ((F('price')*disco_value)/100))
+        except Products.DoesNotExist:
+            return False
+
     def set_discount_model_products(self, modelss, disco_value):
         try:
             count_record = Products.objects.filter(modelss=modelss).update(discount=disco_value)
@@ -514,10 +531,14 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
-    def set_sales_products(self, list_mid, disco_value):
+    def set_sales_model_products(self, modelss, disco_value):
         try:
-            Products.objects.filter(modelss_id__in=list_mid.split(',')).update(discount=disco_value, sale=True,
-                                                                               sale_price=F('price') - ((F('price')*disco_value)/100))
+            count_record = Products.objects.filter(modelss=modelss).update(discount=disco_value, sale=True,
+                                                                           sale_price=F('price') - ((F('price')*disco_value)/100))
+            if count_record > 0:
+                return ','.join([str(i) for i in Products.objects.filter(modelss=modelss).values_list('id', flat=True)])
+            else:
+                return False
         except Products.DoesNotExist:
             return False
 

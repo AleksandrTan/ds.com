@@ -91,14 +91,11 @@ class SetDiscountModel(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
     def post(self, request, *args, **kwargs):
         form = ModelDiscounts(request.POST)
         if form.is_valid():
-            list_id = Modelss.objects.set_discount_model_products(form.cleaned_data['modelss'], form.cleaned_data['mod_disco'])
-            if list_id:
-                Discounts.objects.save_discount(list_id, form.cleaned_data['description_m'],
-                                                form.cleaned_data['mod_disco'])
-                Products.objects.set_discount_products(list_id, form.cleaned_data['mod_disco'])
-                return redirect('/adminnv/products/discount/discolist/')
+            if form.cleaned_data['sale']:
+                self.set_sales_modelss(form)
             else:
-                return redirect('/adminnv/products/discount/discolist/')
+                self.set_discount_modelss(form)
+            return redirect('/adminnv/products/discount/discolist/')
         else:
             self.data = form.cleaned_data
             context = dict()
@@ -110,6 +107,22 @@ class SetDiscountModel(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
             context['form_errors'] = form.errors
             context['tab_discounts'] = True
             return render(request, 'discountadd.html', context)
+
+    def set_discount_modelss(self, form):
+        list_id = Modelss.objects.set_discount_model_products(form.cleaned_data['modelss'],
+                                                              form.cleaned_data['mod_disco'])
+        if list_id:
+            Discounts.objects.save_discount(list_id, form.cleaned_data['description_m'],
+                                            form.cleaned_data['mod_disco'])
+            Products.objects.set_discount_products(list_id, form.cleaned_data['mod_disco'])
+        return True
+
+    def set_sales_modelss(self, form):
+        list_id = Modelss.objects.set_sales_model_products(form.cleaned_data['modelss'], form.cleaned_data['mod_disco'])
+        if list_id:
+            Discounts.objects.save_discount(list_id, form.cleaned_data['description_m'], form.cleaned_data['mod_disco'])
+            Products.objects.set_sales_model_products(list_id, form.cleaned_data['mod_disco'])
+        return True
 
 
 class DeleteDiscounts(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
