@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Редактирование Модели
+                            Редактирование Модели {{ data_modelss_edit.name }}
                         </h1>
                         <ol class="breadcrumb">
                             <li>
@@ -38,7 +38,8 @@
                                 <i class="fa fa-table"></i> <a href="{% url 'modelss' %}">Модели</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Редактирование модели
+                                <i class="fa fa-table"></i> Редактирование модели <a href="{% url 'viewmodelss' pk=data_modelss_edit.id %}">
+                                {{ data_modelss_edit.name }}</a>
                             </li>
                         </ol>
                     </div>
@@ -59,7 +60,7 @@
                                value="0" {% endif %} name="is_del_mainphoto"/>
                         <input type="hidden" name="is_del_other_photo" value="0" id="is_del_other_photo"/>
                         <input type="hidden" name="list_del_other_photo" value="{}" id="list_del_other_photo"/>
-                        <input type="hidden" name="modelss" value="{{ data_modelss_edit.modelss.id }}">
+                        <input type="hidden" name="modelss" value="{{ data_modelss_edit.id }}">
                         <input type="hidden" name="main_photo_path" value="{{ data_modelss_edit.main_photo_path }}">
                         <div class="col-lg-6">
                                 <div class="form-group">
@@ -167,17 +168,7 @@
                                     <input class="form-control" id="discount" name="discount" type="number" value="{{ data_modelss_edit.discount }}">
                                     {% if form.errors.discount %}<label id="discount-error" class="error" for="discount">{{ form.errors.discount.0 }}</label>{% endif %}
                                  </div>
-                                 <div class="form-group {% if form.errors.price_down %}has-error{% endif %}">
-                                    <label>Уценка(%)</label>
-                                    <input class="form-control" id="price_down" name="price_down" type="number" value="{{ data_modelss_edit.price_down }}">
-                                    {% if form.errors.price_down %}<label id="price_down-error" class="error" for="price_down">{{ form.errors.price_down.0 }}</label>{% endif %}
-                                 </div>
-                                 <div class="form-group {% if form.errors.sale_price %}has-error{% endif %}">
-                                    <label>Распродажа(%)</label>
-                                    <input class="form-control" id="sale_price" name="sale_price" type="number" value="{{ data_modelss_edit.sale_price }}">
-                                    {% if form.errors.sale_price %}<label id="sale_price-error" class="error" for="sale_price">{{ form.errors.sale_price.0 }}</label>{% endif %}
-                                 </div>
-                            </div>
+                             </div>
                         <div class="col-lg-6">
                               {% with reletad_images=data_modelss_edit.image.all %}
                             <h2>Добавить Изображения</h2>Допустимые форматы jpeg, png, jpg.Максимальный размер 5МБ.

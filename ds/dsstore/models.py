@@ -310,10 +310,8 @@ class Modelss(models.Model):
     caption = models.CharField(blank=False, default='', max_length=200)
     color = models.CharField(max_length=100, blank=True, default='')
     discount = models.SmallIntegerField(blank=True, default=0)
-    price_down = models.SmallIntegerField(blank=True, default=0)
     sale = models.BooleanField(default=False)
     sale_price = models.FloatField(default=0, blank=True)
-    empty_count = models.BooleanField(default=False)
     seo_attributes = models.TextField(blank=True, default='')
     is_belarus = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
@@ -387,8 +385,7 @@ class ModelssFormEdit(ModelForm):
     class Meta:
         model = Modelss
         fields = ['nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
-                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'name', 'discount', 'sale_price',
-                  'price_down']
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'name', 'discount']
 
         error_messages = {
                              'caption': {
@@ -548,7 +545,6 @@ class ManageProductsModel(models.Manager):
         product.is_new = instance.is_new
         product.caption = instance.caption
         product.sale_price = instance.sale_price
-        product.price_down = instance.price_down
         product.save()
 
 
@@ -572,10 +568,8 @@ class Products(models.Model):
     caption = models.CharField(blank=False, default='', max_length=200)
     color = models.CharField(max_length=100, blank=True, default='')
     discount = models.SmallIntegerField(blank=True, default=0)
-    price_down = models.SmallIntegerField(blank=True, default=0)
     sale = models.BooleanField(default=False)
     sale_price = models.FloatField(default=0, blank=True)
-    empty_count = models.BooleanField(default=False)
     seo_attributes = models.TextField(blank=True, default='')
     is_belarus = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
@@ -670,8 +664,8 @@ class ProductsFormEdit(ModelForm):
     class Meta:
         model = Products
         fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
-                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'discount', 'price_down',
-                  'sale_price', 'pre_barcode', 'modelss', 'size', 'count_num']
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'discount',
+                  'pre_barcode', 'modelss', 'size', 'count_num']
 
         error_messages = {
                              'articul': {'required': "Пожалуйста введите артикул",
@@ -713,7 +707,7 @@ class ProductsAddFormModelss(ModelForm):
         model = Products
         fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
                   'color', 'seo_attributes', 'is_belarus', 'is_active', 'is_new', 'caption', 'modelss', 'articul', 'pre_barcode',
-                  'size', 'count_num', 'main_photo_path', 'modelss_name', 'dirname_img', 'identifier', 'barcode', 'discount', 'sale_price', 'price_down']
+                  'size', 'count_num', 'main_photo_path', 'modelss_name', 'dirname_img', 'identifier', 'barcode', 'discount']
 
 
 """"--------------SizeCount Model--------------------------"""

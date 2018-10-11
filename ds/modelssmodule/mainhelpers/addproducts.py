@@ -46,7 +46,6 @@ class AddProducts:
         data['is_new'] = self.instance.is_new
         data['caption'] = self.instance.caption
         data['sale_price'] = self.instance.sale_price
-        data['price_down'] = self.instance.price_down
         data['price'] = self.instance.price
         form = ProductsAddFormModelss(data)
         if form.is_valid():

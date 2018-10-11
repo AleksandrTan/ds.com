@@ -78,14 +78,11 @@ class GetSCVFile(BaseAdminView):
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output)
         worksheet = workbook.add_worksheet()
-        header_format = workbook.add_format({
-            'border': 1,
-            'bg_color': '#C6EFCE',
-            'bold': True,
-            'text_wrap': True,
-            'valign': 'vcenter',
-            'indent': 1,
-        })
+        header_format = workbook.add_format({'bold': True,
+                                     'align': 'center',
+                                     'valign': 'vcenter',
+                                     'fg_color': '#D7E4BC',
+                                     'border': 1})
         data = [
             [1, 10000, 5000, 8000, 6000, 9, 9, 8, 8, 0],
             [2, 2000, 3000, 4000, 5000, 9, 9, 8, 8, 0],
@@ -93,10 +90,13 @@ class GetSCVFile(BaseAdminView):
             [4, 500, 300, 200, 700, 9, 9, 8, 8, 0],
         ]
         caption = 'Статистика продаж за день.'
+        worksheet.set_row(0, 30)
+        worksheet.set_column('D:H', 12)
+        worksheet.merge_range('D1:H1', caption, header_format)
+        # Write the caption.
+        #worksheet.write('B1', caption, header_format)
         # Set the columns widths.
         worksheet.set_column('B:K', 12)
-        # Write the caption.
-        worksheet.write('B1', caption)
         # Add a table to the worksheet.
         worksheet.add_table('B3:K7', {'data': data,
                                       'total_row': 1,
