@@ -96,6 +96,13 @@
                                                                         for="disco_value">{{ form_errors.0 }}</label>{% endif %}
                             </div>
                             <div class="form-group">
+                              <div class="checkbox">
+                                  <label>
+                                     <input type="checkbox" value="1" name="sale">Распродажа
+                                  </label>
+                              </div>
+                            </div>
+                            <div class="form-group">
                                 <button type="submit" class="btn btn-sm btn-success form-control" name="submit" value="1">Добавить</button>
                             </div>
                         </div>
@@ -143,6 +150,13 @@
                                  <input class="form-control" placeholder="Скидка" id="mod_disco" name="mod_disco" type="number" value="">
                                  {% if form_errors %}<label id="mod_disco-error" style="color: red"
                                                                         for="mod_disco">{{ form_errors.mod_disco.0 }}</label>{% endif %}
+                            </div>
+                            <div class="form-group">
+                              <div class="checkbox">
+                                  <label>
+                                     <input type="checkbox" value="1" name="sale">Распродажа
+                                  </label>
+                              </div>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-sm btn-success form-control">Добавить</button>

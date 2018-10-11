@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d038e7be-5329-43d2-b228-19170d0d687e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/36876ea3-58c9-4bed-b93d-43530f435bf9.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/36876ea3-58c9-4bed-b93d-43530f435bf9.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dsadminvn/templates/products/editproduct.html" afterPath="$PROJECT_DIR$/dsadminvn/templates/products/editproduct.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/discountmodule/forms.py" afterPath="$PROJECT_DIR$/discountmodule/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/discountmodule/mainviews/views.py" afterPath="$PROJECT_DIR$/discountmodule/mainviews/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/discountmodule/templates/discountadd.html" afterPath="$PROJECT_DIR$/discountmodule/templates/discountadd.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dsstore/models.py" afterPath="$PROJECT_DIR$/dsstore/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modelssmodule/mainhelpers/addproducts.py" afterPath="$PROJECT_DIR$/modelssmodule/mainhelpers/addproducts.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modelssmodule/templates/editmodelss.html" afterPath="$PROJECT_DIR$/modelssmodule/templates/editmodelss.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/statisticsmodule/mainviews/views.py" afterPath="$PROJECT_DIR$/statisticsmodule/mainviews/views.py" />
     </list>
     <ignored path="handsale/migrations/" />
     <ignored path="handsale/migrations/0001_initial.py" />
@@ -61,64 +59,49 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dsstore/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="956">
-              <caret line="703" column="40" lean-forward="false" selection-start-line="703" selection-start-column="40" selection-end-line="703" selection-end-column="40" />
+            <state relative-caret-position="311">
+              <caret line="304" column="90" lean-forward="false" selection-start-line="304" selection-start-column="90" selection-end-line="304" selection-end-column="90" />
               <folding>
-                <element signature="e#34#62#0" expanded="true" />
-                <element signature="e#312#1140#0" expanded="false" />
-                <element signature="e#1181#1519#0" expanded="false" />
-                <element signature="e#1627#2281#0" expanded="false" />
-                <element signature="e#2321#2658#0" expanded="false" />
-                <element signature="e#2772#2877#0" expanded="false" />
-                <element signature="e#2915#3272#0" expanded="false" />
-                <element signature="e#3311#4229#0" expanded="false" />
-                <element signature="e#4350#4947#0" expanded="false" />
-                <element signature="e#4982#5313#0" expanded="false" />
-                <element signature="e#5419#6023#0" expanded="false" />
-                <element signature="e#6059#6391#0" expanded="false" />
-                <element signature="e#6665#6787#0" expanded="false" />
-                <element signature="e#6830#6893#0" expanded="false" />
-                <element signature="e#6938#7063#0" expanded="false" />
-                <element signature="e#7109#7326#0" expanded="false" />
-                <element signature="e#7367#7488#0" expanded="false" />
-                <element signature="e#7534#7682#0" expanded="false" />
-                <element signature="e#7746#8187#0" expanded="false" />
-                <element signature="e#8259#8564#0" expanded="false" />
-                <element signature="e#8614#8671#0" expanded="false" />
-                <element signature="e#10507#10582#0" expanded="false" />
-                <element signature="e#11621#12649#0" expanded="false" />
-                <element signature="e#13552#19410#0" expanded="false" />
-                <element signature="e#13589#13656#0" expanded="false" />
-                <element signature="e#13728#13983#0" expanded="false" />
-                <element signature="e#14063#14334#0" expanded="false" />
-                <element signature="e#14382#14506#0" expanded="false" />
-                <element signature="e#14553#14772#0" expanded="false" />
-                <element signature="e#14820#14934#0" expanded="false" />
-                <element signature="e#14988#16018#0" expanded="false" />
-                <element signature="e#16074#16362#0" expanded="false" />
-                <element signature="e#16405#16685#0" expanded="false" />
-                <element signature="e#16755#16929#0" expanded="false" />
-                <element signature="e#17458#17823#0" expanded="false" />
-                <element signature="e#17996#18602#0" expanded="false" />
-                <element signature="e#22514#24945#0" expanded="false" />
-                <element signature="e#24987#27065#0" expanded="false" />
-                <element signature="e#27111#27524#0" expanded="false" />
-                <element signature="e#27573#27998#0" expanded="false" />
-                <element signature="e#28111#28808#0" expanded="false" />
-                <element signature="e#28846#29223#0" expanded="false" />
-                <element signature="e#29323#29529#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addproducts.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modelssmodule/mainhelpers/addproducts.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="48" column="8" lean-forward="false" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#49#0" expanded="true" />
+                <element signature="e#0#30#0" expanded="true" />
+                <element signature="e#309#1137#0" expanded="false" />
+                <element signature="e#1178#1516#0" expanded="false" />
+                <element signature="e#1624#2278#0" expanded="false" />
+                <element signature="e#2318#2655#0" expanded="false" />
+                <element signature="e#2769#2874#0" expanded="false" />
+                <element signature="e#2912#3269#0" expanded="false" />
+                <element signature="e#3308#4226#0" expanded="false" />
+                <element signature="e#4347#4944#0" expanded="false" />
+                <element signature="e#4979#5310#0" expanded="false" />
+                <element signature="e#5416#6020#0" expanded="false" />
+                <element signature="e#6056#6388#0" expanded="false" />
+                <element signature="e#6662#6784#0" expanded="false" />
+                <element signature="e#6827#6890#0" expanded="false" />
+                <element signature="e#6935#7060#0" expanded="false" />
+                <element signature="e#7106#7323#0" expanded="false" />
+                <element signature="e#7531#7679#0" expanded="false" />
+                <element signature="e#7743#8183#0" expanded="false" />
+                <element signature="e#8823#9128#0" expanded="false" />
+                <element signature="e#11097#11172#0" expanded="false" />
+                <element signature="e#12211#13239#0" expanded="false" />
+                <element signature="e#13280#14030#0" expanded="false" />
+                <element signature="e#14179#14246#0" expanded="false" />
+                <element signature="e#14318#14573#0" expanded="false" />
+                <element signature="e#14653#14924#0" expanded="false" />
+                <element signature="e#14972#15096#0" expanded="false" />
+                <element signature="e#15143#15362#0" expanded="false" />
+                <element signature="e#15410#15524#0" expanded="false" />
+                <element signature="e#15578#16608#0" expanded="false" />
+                <element signature="e#16664#16952#0" expanded="false" />
+                <element signature="e#16995#17275#0" expanded="false" />
+                <element signature="e#17588#17953#0" expanded="false" />
+                <element signature="e#18533#19139#0" expanded="false" />
+                <element signature="e#23051#25482#0" expanded="false" />
+                <element signature="e#25524#27602#0" expanded="false" />
+                <element signature="e#27648#28061#0" expanded="false" />
+                <element signature="e#28110#28535#0" expanded="false" />
+                <element signature="e#28648#29345#0" expanded="false" />
+                <element signature="e#29383#29760#0" expanded="false" />
+                <element signature="e#29860#30066#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -127,8 +110,45 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/discountmodule/mainviews/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-53">
-              <caret line="99" column="95" lean-forward="false" selection-start-line="99" selection-start-column="95" selection-end-line="99" selection-end-column="95" />
+            <state relative-caret-position="470">
+              <caret line="75" column="47" lean-forward="false" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#82#0" expanded="true" />
+                <element signature="e#630#1197#0" expanded="false" />
+                <element signature="e#2895#3158#0" expanded="false" />
+                <element signature="e#3583#5161#0" expanded="false" />
+                <element signature="e#5251#5686#0" expanded="false" />
+                <element signature="e#5783#6129#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/discountmodule/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/discountmodule/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="discountadd.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/discountmodule/templates/discountadd.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="153" column="28" lean-forward="false" selection-start-line="153" selection-start-column="28" selection-end-line="153" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -183,7 +203,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/statisticsmodule/templates/datestatistics.html" />
         <option value="$PROJECT_DIR$/modelssmodule/mainviews/__init__.py" />
         <option value="$PROJECT_DIR$/modelssmodule/static/js/createmodelss.html" />
         <option value="$PROJECT_DIR$/ds/settings.py" />
@@ -220,9 +239,7 @@
         <option value="$PROJECT_DIR$/modelssmodule/static/js/addproductmodelss.js" />
         <option value="$PROJECT_DIR$/modelssmodule/templates/createmodelss.html" />
         <option value="$PROJECT_DIR$/discountmodule/signals/__init__.py" />
-        <option value="$PROJECT_DIR$/discountmodule/templates/discountadd.html" />
         <option value="$PROJECT_DIR$/discountmodule/urls.py" />
-        <option value="$PROJECT_DIR$/discountmodule/mainviews/views.py" />
         <option value="$PROJECT_DIR$/modelssmodule/templates/detailmodelss.html" />
         <option value="$PROJECT_DIR$/statisticsmodule/urls.py" />
         <option value="$PROJECT_DIR$/statisticsmodule/templates/stat.css" />
@@ -232,8 +249,11 @@
         <option value="$PROJECT_DIR$/statisticsmodule/mainviews/views.py" />
         <option value="$PROJECT_DIR$/modelssmodule/templates/editmodelss.html" />
         <option value="$PROJECT_DIR$/dsadminvn/templates/products/editproduct.html" />
-        <option value="$PROJECT_DIR$/dsstore/models.py" />
         <option value="$PROJECT_DIR$/modelssmodule/mainhelpers/addproducts.py" />
+        <option value="$PROJECT_DIR$/discountmodule/forms.py" />
+        <option value="$PROJECT_DIR$/discountmodule/templates/discountadd.html" />
+        <option value="$PROJECT_DIR$/discountmodule/mainviews/views.py" />
+        <option value="$PROJECT_DIR$/dsstore/models.py" />
       </list>
     </option>
   </component>
@@ -289,25 +309,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="modelssmodule" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modelssmodule" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mainhelpers" />
+              <option name="myItemId" value="discountmodule" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -619,13 +621,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1508917586671</updated>
-    </task>
-    <task id="LOCAL-00234" summary="Discounts module">
-      <created>1536948240483</created>
-      <option name="number" value="00234" />
-      <option name="presentableId" value="LOCAL-00234" />
-      <option name="project" value="LOCAL" />
-      <updated>1536948240483</updated>
     </task>
     <task id="LOCAL-00235" summary="Discounts module">
       <created>1536999177712</created>
@@ -963,7 +958,14 @@
       <option name="project" value="LOCAL" />
       <updated>1538932349062</updated>
     </task>
-    <option name="localTasksCounter" value="283" />
+    <task id="LOCAL-00283" summary="Modelss Module">
+      <created>1539250872317</created>
+      <option name="number" value="00283" />
+      <option name="presentableId" value="LOCAL-00283" />
+      <option name="project" value="LOCAL" />
+      <updated>1539250872317</updated>
+    </task>
+    <option name="localTasksCounter" value="284" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1080,44 +1082,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dsadminvn/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="70" column="88" lean-forward="true" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.handsale_productssale">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.dsstore_products">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dsadminvn/static/js/products/editpfileupload.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="24" column="38" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dsadminvn/static/js/products/editproduct.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1223,13 +1187,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modelssmodule/templates/modelssview.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="165" column="45" lean-forward="true" selection-start-line="162" selection-start-column="40" selection-end-line="165" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modelssmodule/static/js/addnewmodelss.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -1291,13 +1248,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/discountmodule/templates/discountadd.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="126" column="28" lean-forward="false" selection-start-line="103" selection-start-column="22" selection-end-line="126" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modelssmodule/templates/detailmodelss.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1500">
@@ -1352,19 +1302,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.dsstore_modelss">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modelssmodule/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -1377,14 +1314,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
           <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dsadminvn/mainviews/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3537">
-          <caret line="683" column="41" lean-forward="true" selection-start-line="683" selection-start-column="41" selection-end-line="683" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -1413,14 +1342,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/discountmodule/mainviews/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-53">
-          <caret line="99" column="95" lean-forward="false" selection-start-line="99" selection-start-column="95" selection-end-line="99" selection-end-column="95" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modelssmodule/mainhelpers/addproducts.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="387">
@@ -1431,54 +1352,142 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modelssmodule/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelssmodule/templates/modelssview.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="107" column="30" lean-forward="true" selection-start-line="86" selection-start-column="24" selection-end-line="107" selection-end-column="30" />
+          <folding>
+            <element signature="e#4943#6275#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/discountmodule/templates/discountadd.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="153" column="28" lean-forward="false" selection-start-line="153" selection-start-column="28" selection-end-line="153" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dsadminvn/mainviews/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13100">
+          <caret line="683" column="41" lean-forward="true" selection-start-line="683" selection-start-column="41" selection-end-line="683" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/discountmodule/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/discountmodule/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.dsstore_modelss">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/discountmodule/mainviews/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="75" column="47" lean-forward="false" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#82#0" expanded="true" />
+            <element signature="e#630#1197#0" expanded="false" />
+            <element signature="e#2895#3158#0" expanded="false" />
+            <element signature="e#3583#5161#0" expanded="false" />
+            <element signature="e#5251#5686#0" expanded="false" />
+            <element signature="e#5783#6129#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/1e667874/36876ea3-58c9-4bed-b93d-43530f435bf9/dsdb.dsstore_products">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dsstore/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="956">
-          <caret line="703" column="40" lean-forward="false" selection-start-line="703" selection-start-column="40" selection-end-line="703" selection-end-column="40" />
+        <state relative-caret-position="311">
+          <caret line="304" column="90" lean-forward="false" selection-start-line="304" selection-start-column="90" selection-end-line="304" selection-end-column="90" />
           <folding>
-            <element signature="e#34#62#0" expanded="true" />
-            <element signature="e#312#1140#0" expanded="false" />
-            <element signature="e#1181#1519#0" expanded="false" />
-            <element signature="e#1627#2281#0" expanded="false" />
-            <element signature="e#2321#2658#0" expanded="false" />
-            <element signature="e#2772#2877#0" expanded="false" />
-            <element signature="e#2915#3272#0" expanded="false" />
-            <element signature="e#3311#4229#0" expanded="false" />
-            <element signature="e#4350#4947#0" expanded="false" />
-            <element signature="e#4982#5313#0" expanded="false" />
-            <element signature="e#5419#6023#0" expanded="false" />
-            <element signature="e#6059#6391#0" expanded="false" />
-            <element signature="e#6665#6787#0" expanded="false" />
-            <element signature="e#6830#6893#0" expanded="false" />
-            <element signature="e#6938#7063#0" expanded="false" />
-            <element signature="e#7109#7326#0" expanded="false" />
-            <element signature="e#7367#7488#0" expanded="false" />
-            <element signature="e#7534#7682#0" expanded="false" />
-            <element signature="e#7746#8187#0" expanded="false" />
-            <element signature="e#8259#8564#0" expanded="false" />
-            <element signature="e#8614#8671#0" expanded="false" />
-            <element signature="e#10507#10582#0" expanded="false" />
-            <element signature="e#11621#12649#0" expanded="false" />
-            <element signature="e#13552#19410#0" expanded="false" />
-            <element signature="e#13589#13656#0" expanded="false" />
-            <element signature="e#13728#13983#0" expanded="false" />
-            <element signature="e#14063#14334#0" expanded="false" />
-            <element signature="e#14382#14506#0" expanded="false" />
-            <element signature="e#14553#14772#0" expanded="false" />
-            <element signature="e#14820#14934#0" expanded="false" />
-            <element signature="e#14988#16018#0" expanded="false" />
-            <element signature="e#16074#16362#0" expanded="false" />
-            <element signature="e#16405#16685#0" expanded="false" />
-            <element signature="e#16755#16929#0" expanded="false" />
-            <element signature="e#17458#17823#0" expanded="false" />
-            <element signature="e#17996#18602#0" expanded="false" />
-            <element signature="e#22514#24945#0" expanded="false" />
-            <element signature="e#24987#27065#0" expanded="false" />
-            <element signature="e#27111#27524#0" expanded="false" />
-            <element signature="e#27573#27998#0" expanded="false" />
-            <element signature="e#28111#28808#0" expanded="false" />
-            <element signature="e#28846#29223#0" expanded="false" />
-            <element signature="e#29323#29529#0" expanded="false" />
+            <element signature="e#0#30#0" expanded="true" />
+            <element signature="e#309#1137#0" expanded="false" />
+            <element signature="e#1178#1516#0" expanded="false" />
+            <element signature="e#1624#2278#0" expanded="false" />
+            <element signature="e#2318#2655#0" expanded="false" />
+            <element signature="e#2769#2874#0" expanded="false" />
+            <element signature="e#2912#3269#0" expanded="false" />
+            <element signature="e#3308#4226#0" expanded="false" />
+            <element signature="e#4347#4944#0" expanded="false" />
+            <element signature="e#4979#5310#0" expanded="false" />
+            <element signature="e#5416#6020#0" expanded="false" />
+            <element signature="e#6056#6388#0" expanded="false" />
+            <element signature="e#6662#6784#0" expanded="false" />
+            <element signature="e#6827#6890#0" expanded="false" />
+            <element signature="e#6935#7060#0" expanded="false" />
+            <element signature="e#7106#7323#0" expanded="false" />
+            <element signature="e#7531#7679#0" expanded="false" />
+            <element signature="e#7743#8183#0" expanded="false" />
+            <element signature="e#8823#9128#0" expanded="false" />
+            <element signature="e#11097#11172#0" expanded="false" />
+            <element signature="e#12211#13239#0" expanded="false" />
+            <element signature="e#13280#14030#0" expanded="false" />
+            <element signature="e#14179#14246#0" expanded="false" />
+            <element signature="e#14318#14573#0" expanded="false" />
+            <element signature="e#14653#14924#0" expanded="false" />
+            <element signature="e#14972#15096#0" expanded="false" />
+            <element signature="e#15143#15362#0" expanded="false" />
+            <element signature="e#15410#15524#0" expanded="false" />
+            <element signature="e#15578#16608#0" expanded="false" />
+            <element signature="e#16664#16952#0" expanded="false" />
+            <element signature="e#16995#17275#0" expanded="false" />
+            <element signature="e#17588#17953#0" expanded="false" />
+            <element signature="e#18533#19139#0" expanded="false" />
+            <element signature="e#23051#25482#0" expanded="false" />
+            <element signature="e#25524#27602#0" expanded="false" />
+            <element signature="e#27648#28061#0" expanded="false" />
+            <element signature="e#28110#28535#0" expanded="false" />
+            <element signature="e#28648#29345#0" expanded="false" />
+            <element signature="e#29383#29760#0" expanded="false" />
+            <element signature="e#29860#30066#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -1,4 +1,4 @@
-#from django.conf import settings
+from django.db.models import F
 from django.db import models
 from django.forms import ModelForm
 from django.core.exceptions import ValidationError
@@ -276,7 +276,19 @@ class ManageModelss(models.Manager):
                 return ','.join([str(i) for i in query.filter(**work_dict).values_list('id', flat=True)])
             else:
                 return False
-        except Products.DoesNotExist:
+        except Modelss.DoesNotExist:
+            return False
+
+    def set_sales_models(self, data, disco_value):
+        query = Modelss.objects
+        work_dict = {param: data[param] for param in data if data[param]}
+        try:
+            count_record = query.filter(**work_dict).update(discount=disco_value, sale=True, sale_price=F('price') - ((F('price')*disco_value)/100))
+            if count_record > 0:
+                return ','.join([str(i) for i in query.filter(**work_dict).values_list('id', flat=True)])
+            else:
+                return False
+        except Modelss.DoesNotExist:
             return False
 
     def set_discount_model_products(self, name, disco_value):
@@ -290,7 +302,7 @@ class ManageModelss(models.Manager):
             return False
 
     def delete_discount(self, id_list):
-        Modelss.objects.filter(id__in=id_list).update(discount=0)
+        Modelss.objects.filter(id__in=id_list).update(discount=0, sale=False, sale_price=0)
 
 
 class Modelss(models.Model):
@@ -492,16 +504,6 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
-    # def set_discount_articul_products(self, articul, disco_value):
-    #     try:
-    #         count_record = Products.objects.filter(articul=articul).update(discount=disco_value)
-    #         if count_record > 0:
-    #             return ','.join([str(i) for i in Products.objects.filter(articul=articul).values_list('id', flat=True)])
-    #         else:
-    #             return False
-    #     except Products.DoesNotExist:
-    #         return False
-
     def set_discount_model_products(self, modelss, disco_value):
         try:
             count_record = Products.objects.filter(modelss=modelss).update(discount=disco_value)
@@ -512,8 +514,15 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
+    def set_sales_products(self, list_mid, disco_value):
+        try:
+            Products.objects.filter(modelss_id__in=list_mid.split(',')).update(discount=disco_value, sale=True,
+                                                                               sale_price=F('price') - ((F('price')*disco_value)/100))
+        except Products.DoesNotExist:
+            return False
+
     def delete_discount(self, list_mid):
-        Products.objects.filter(modelss_id__in=list_mid).update(discount=0)
+        Products.objects.filter(modelss_id__in=list_mid).update(discount=0, sale=False, sale_price=0)
 
     def hm_get_barcode_query(self, product):
         data_product = dict()
