@@ -26,7 +26,7 @@ class ModelssWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Li
     queryset = Modelss.objects.get_list_products()
     template_name = 'modelssview.html'
     context_object_name = 'modelss_list'
-    paginate_by = 5
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(ModelssWork, self).get_context_data(**kwargs)
@@ -323,7 +323,7 @@ class FilterModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
     login_url = 'login'
     template_name = 'filtermodelss.html'
     context_object_name = 'modelss_list'
-    paginate_by = 2
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(FilterModelss, self).get_context_data(**kwargs)

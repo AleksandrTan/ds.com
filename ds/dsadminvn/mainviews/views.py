@@ -384,7 +384,7 @@ class ProductsWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, L
     queryset = Products.objects.get_list_products()
     template_name = 'products/productswork.html'
     context_object_name = 'products_list'
-    paginate_by = 5
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(ProductsWork, self).get_context_data(**kwargs)
@@ -713,7 +713,7 @@ class FilterProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
     login_url = 'login'
     template_name = 'products/filterproducts.html'
     context_object_name = 'products_list'
-    paginate_by = 2
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(FilterProduct, self).get_context_data(**kwargs)
@@ -755,7 +755,7 @@ class SaleViewProduct(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin
     login_url = 'login'
     template_name = 'products/saleviewproduct.html'
     context_object_name = 'sale_list'
-    paginate_by = 5
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(SaleViewProduct, self).get_context_data(**kwargs)
