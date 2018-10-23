@@ -221,7 +221,7 @@
                                                             Добавить фото {{ forloop.counter }}</button>
                                                 </td>
                                                 <td>
-                                                    <img src="/{{ df.img_path }}" width="100px;" height="100px;" alt="">
+                                                    <img src="{{ MEDIA_URL }}{{ df.img_path }}" width="100px;" height="100px;" alt="">
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-danger form-control"  style="display: block;" data-delete-imgs='delete-imgs' data-photo-id="{{ df.id }}">

@@ -783,10 +783,15 @@ class SizeCount(models.Model):
 """------------------Images Model---------------------------"""
 
 
+def custom_directory_paths(instance, filename):
+    return 'images/{0}/{1}'.format(instance.modelss.dirname_img, filename)
+
+
 class Image(models.Model):
 
     modelss = models.ForeignKey(Modelss, on_delete=models.CASCADE, related_name='image')
-    img_path = models.CharField(max_length=250, blank=True)
+    # img_path = models.CharField(max_length=250, blank=True)
+    img_path = models.ImageField(blank=True, upload_to=custom_directory_paths)
 
     def get_absolute_url(self):
         return self.img_path

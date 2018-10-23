@@ -124,11 +124,11 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
             os.chmod(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img, 0o777)
             for ifile in self.request.FILES.getlist('img_product[]'):
                 if ifile.size < settings.MAX_SIZE_UPLOAD and ifile.content_type in settings.CONTENT_TYPES_FILE:
-                    fs = FileSystemStorage(location=settings.MEDIA_ROOT + '/images/' + instance.dirname_img,
-                                           base_url='media/images/' + instance.dirname_img)
-                    filename = fs.save(ifile.name, ifile)
+                    # fs = FileSystemStorage(location=settings.MEDIA_ROOT + '/images/' + instance.dirname_img,
+                    #                        base_url='media/images/' + instance.dirname_img)
+                    # filename = fs.save(ifile.name,ifile)
                     i = Image(modelss=instance,
-                              img_path=fs.url(filename))
+                              img_path=ifile)
                     i.save()
                 else:
                     # messages.info(self.request, 'Three credits remain in your account.')
@@ -224,11 +224,11 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
             os.chmod(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img, 0o777)
             for ifile in self.request.FILES.getlist('img_product[]'):
                 if ifile.size < settings.MAX_SIZE_UPLOAD and ifile.content_type in settings.CONTENT_TYPES_FILE:
-                    fs = FileSystemStorage(location=settings.MEDIA_ROOT + '/images/' + instance.dirname_img,
-                                           base_url='media/images/' + instance.dirname_img)
-                    filename = fs.save(ifile.name, ifile)
+                    # fs = FileSystemStorage(location=settings.MEDIA_ROOT + '/images/' + instance.dirname_img,
+                    #                        base_url='media/images/' + instance.dirname_img)
+                    # filename = fs.save(ifile.name,ifile)
                     i = Image(modelss=instance,
-                              img_path=fs.url(filename))
+                              img_path=ifile)
                     i.save()
                 else:
                     # messages.info(self.request, 'Three credits remain in your account.')
