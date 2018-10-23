@@ -2,6 +2,8 @@ from django.db.models import F
 from django.db import models
 from django.forms import ModelForm
 from django.core.exceptions import ValidationError
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 from dsstore.mainhelpers import MainImgTypeField as MI
 
@@ -351,22 +353,22 @@ class Modelss(models.Model):
         from io import BytesIO
         from django.core.files.uploadedfile import InMemoryUploadedFile
         import sys
-        # Opening the uploaded image
+            # Opening the uploaded image
         im = Ima.open(self.main_photo_path)
         output = BytesIO()
-        # Resize/modify the image
+            # Resize/modify the image
         im = im.resize((500, 500))
-        # after modifications, save it to the output
+            # after modifications, save it to the output
         im.save(output, format='JPEG', quality=100)
         output.seek(0)
 
-        # change the main_imgfield value to be the newley modifed image value - png
+            # change the main_imgfield value to be the newley modifed image value - png
         self.main_photo_path = InMemoryUploadedFile(output, 'MI.MainImgTypeField', "%s.jpg" % self.main_photo_path.name.split('.')[0],
-                                             'image/jpg', sys.getsizeof(output), None)
+                                                    'image/jpg', sys.getsizeof(output), None)
         super(Modelss, self).clean()
 
     def get_absolute_url(self):
-         return "products/%s" % self.link_name
+         return "modelss/%s" % self.link_name
 
     def __str__(self):
         return self.link_name
@@ -564,6 +566,7 @@ class ManageProductsModel(models.Manager):
         product.nameproduct = instance.nameproduct
         product.brends = instance.brends
         product.season_id = instance.season_id
+        product.price = instance.price
         product.wholesale_price = instance.wholesale_price
         product.purshase_price = instance.purshase_price
         product.description = instance.description
@@ -793,5 +796,29 @@ class Image(models.Model):
     # img_path = models.CharField(max_length=250, blank=True)
     img_path = models.ImageField(blank=True, upload_to=custom_directory_paths)
 
+    def save(self):
+        from PIL import Image as Ima
+        from io import BytesIO
+        from django.core.files.uploadedfile import InMemoryUploadedFile
+        import sys
+            # Opening the uploaded image
+        im = Ima.open(self.img_path)
+        output = BytesIO()
+            # Resize/modify the image
+        im = im.resize((500, 500))
+            # after modifications, save it to the output
+        im.save(output, format='JPEG', quality=100)
+        output.seek(0)
+
+            # change the main_imgfield value to be the newley modifed image value - png
+        self.img_path = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.img_path.name.split('.')[0],
+                                                    'image/jpg', sys.getsizeof(output), None)
+        super(Image, self).save()
+
     def get_absolute_url(self):
         return self.img_path
+
+
+@receiver(post_delete, sender=Image)
+def submission_delete(sender, instance, **kwargs):
+    instance.img_path.delete(False)

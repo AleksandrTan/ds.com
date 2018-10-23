@@ -24,7 +24,7 @@ class DayStatistics(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
         context['sum_sales_day'] = ProductsSale.objects.sum_sales_day()
         context['sum_returns_day'] = ProductsSale.objects.sum_returns_day()
         if context['sum_sales_day']['price_per_page'] and context['sum_returns_day']['price_per_page']:
-            context['clear_sum'] =int(context['sum_sales_day']['price_per_page']) - int(context['sum_returns_day']['price_per_page'])
+            context['clear_sum'] =int(context['sum_sales_day']['price_per_page'])
         else:
             context['clear_sum'] = '0'
         context['tab_statistics'] = True
@@ -53,7 +53,7 @@ class PeriodStatistics(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
                 context['sum_sales_period'] = ProductsSale.objects.filterstat_date_sales(form.cleaned_data)
                 context['sum_returns_period'] = ProductsSale.objects.filterstat_date_return(form.cleaned_data)
                 if context['sum_sales_period']['price_per_page'] and context['sum_returns_period']['price_per_page']:
-                    context['clear_sum'] = int(context['sum_sales_period']['price_per_page']) - int(context['sum_returns_period']['price_per_page'])
+                    context['clear_sum'] = int(context['sum_sales_period']['price_per_page'])
                 else:
                     context['clear_sum'] = '0'
                 context['data_form'] = form.cleaned_data
@@ -67,7 +67,7 @@ class PeriodStatistics(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
             context['sum_sales_period'] = ProductsSale.objects.filterstat_date_sales()
             context['sum_returns_period'] = ProductsSale.objects.filterstat_date_return()
             if context['sum_sales_period']['price_per_page'] and context['sum_returns_period']['price_per_page']:
-                context['clear_sum'] = int(context['sum_sales_period']['price_per_page']) - int(context['sum_returns_period']['price_per_page'])
+                context['clear_sum'] = int(context['sum_sales_period']['price_per_page'])
             else:
                 context['clear_sum'] = 0
             return render(request, self.template_name, context)

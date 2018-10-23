@@ -251,8 +251,8 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         for imaje in data:
             img = Image.objects.filter(id=imaje).get()
             try:
-                os.remove(settings.BASE_DIR + '/' + img.img_path)
                 img.delete()
+                #os.remove(settings.BASE_DIR + '/' + img.img_path)
             except OSError:
                pass
 
