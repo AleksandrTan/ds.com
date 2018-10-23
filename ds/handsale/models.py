@@ -45,11 +45,24 @@ class ManagerProductSale(models.Manager):
     def day_statistics_returns(self):
         return ProductsSale.objects.filter(date_sale=date.today()).filter(is_return=True)
 
+    def total_sum_day(self):
+        return ProductsSale.objects.filter(date_sale=date.today()).all().aggregate(price_per_page=Sum('true_price'))
+
     def sum_sales_day(self):
-        return ProductsSale.objects.filter(date_sale=date.today()).filter(is_return=False).all().aggregate(price_per_page=Sum('true_price'))
+        return ProductsSale.objects.filter(date_sale=date.today()).filter(is_return=False).all().\
+            aggregate(price_per_page=Sum('true_price'))
 
     def sum_returns_day(self):
-        return ProductsSale.objects.filter(date_sale=date.today()).filter(is_return=True).all().aggregate(price_per_page=Sum('true_price'))
+        return ProductsSale.objects.filter(date_sale=date.today()).filter(is_return=True).all().\
+            aggregate(price_per_page=Sum('true_price'))
+
+    def total_date_sales(self, data=dict()):
+        if data:
+            return ProductsSale.objects.filter(date_sale__gte=data['date_with']).filter(date_sale__lte=data['date_by']).\
+                all().aggregate(price_per_page=Sum('true_price'))
+        else:
+            return ProductsSale.objects.filter(date_sale__gte=date.today()).filter(date_sale__lte=date.today()).\
+                all().aggregate(price_per_page=Sum('true_price'))
 
     def filterstat_date_sales(self, data=dict()):
         if data:

@@ -5,7 +5,6 @@ from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.base import TemplateView
 from django.shortcuts import render
-from django.template import loader, Context
 
 from dsadminvn.mainviews.views import BaseAdminView
 from handsale.models import ProductsSale
@@ -21,6 +20,7 @@ class DayStatistics(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, 
         context = super(DayStatistics, self).get_context_data(**kwargs)
         context['sale_list'] = ProductsSale.objects.day_statistics_sales()
         context['returns_list'] = ProductsSale.objects.day_statistics_returns()
+        context['total_sum'] = ProductsSale.objects.total_sum_day()
         context['sum_sales_day'] = ProductsSale.objects.sum_sales_day()
         context['sum_returns_day'] = ProductsSale.objects.sum_returns_day()
         if context['sum_sales_day']['price_per_page'] and context['sum_returns_day']['price_per_page']:
@@ -52,6 +52,7 @@ class PeriodStatistics(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
                 context = self.get_context_data()
                 context['sum_sales_period'] = ProductsSale.objects.filterstat_date_sales(form.cleaned_data)
                 context['sum_returns_period'] = ProductsSale.objects.filterstat_date_return(form.cleaned_data)
+                context['total_sum'] = ProductsSale.objects.total_date_sales(form.cleaned_data)
                 if context['sum_sales_period']['price_per_page'] and context['sum_returns_period']['price_per_page']:
                     context['clear_sum'] = int(context['sum_sales_period']['price_per_page'])
                 else:
@@ -66,6 +67,7 @@ class PeriodStatistics(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
             context = self.get_context_data()
             context['sum_sales_period'] = ProductsSale.objects.filterstat_date_sales()
             context['sum_returns_period'] = ProductsSale.objects.filterstat_date_return()
+            context['total_sum'] = ProductsSale.objects.total_date_sales()
             if context['sum_sales_period']['price_per_page'] and context['sum_returns_period']['price_per_page']:
                 context['clear_sum'] = int(context['sum_sales_period']['price_per_page'])
             else:
