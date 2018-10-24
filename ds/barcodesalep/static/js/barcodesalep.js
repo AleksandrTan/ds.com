@@ -1,17 +1,17 @@
 $(document).ready(function () {
     $('#barcode_articul').focus();
-})
+});
 
 $( "#found_product" ).submit(function (e) {
-    barcodeGet = new FoundBarcode(e);
+    var barcodeGet = new FoundBarcode(e);
     barcodeGet.init();
 });
 
-$( "#found_product" ).on('input', function (e) {
-    if ($('#barcode_articul').val().length == 13){
-        $(this).submit();
-    }
-});
+// $( "#found_product" ).on('input', function (e) {
+//     if ($('#barcode_articul').val().length == 13){
+//         $(this).submit();
+//     }
+// });
 
 //Add new product
 function FoundBarcode(e){
