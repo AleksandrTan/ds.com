@@ -9,6 +9,7 @@ class FilterDiscounts(forms.Form):
     brends = forms.CharField(required=False)
     season_id = forms.CharField(required=False)
     sale = forms.BooleanField(required=False)
+    sale_date_end = forms.DateTimeField(required=False)
 
 
 class ArticulDiscounts(forms.Form):
@@ -22,3 +23,4 @@ class ModelDiscounts(forms.Form):
     mod_disco = forms.IntegerField(required=True, error_messages={'required': 'Введите скидку'})
     modelss = forms.CharField(required=True, error_messages={'required': 'Введите артикул'})
     sale = forms.BooleanField(required=False)
+    sale_date_end = forms.DateTimeField(required=False)

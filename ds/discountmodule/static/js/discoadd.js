@@ -5,6 +5,23 @@ var is_validate_js = true;
 
 $(document).ready(function () {
 
+$('#sale_m').change(function() {
+    if(this.checked) {
+        $('#sale_date_end_mdiv').show();
+    }
+    else {
+        $('#sale_date_end_mdiv').hide();
+    }
+});
+
+$('#sale_f').change(function() {
+    if(this.checked) {
+        $('#sale_date_end_fdiv').show();
+    }
+    else {
+        $('#sale_date_end_fdiv').hide();
+    }
+});
 //Check isset articul
 $('#articul').blur(function () {
    if ($(this).val() != ''){
@@ -152,4 +169,21 @@ $('#modelss').blur(function () {
 					$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
 				}
 	} );
+});
+
+$(function(){
+    $('#sale_date_end_f').daterangepicker({
+        singleDatePicker: true,
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+    });
+});
+$(function(){
+    $('#sale_date_end_m').daterangepicker({
+        singleDatePicker: true,
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+    });
 });
