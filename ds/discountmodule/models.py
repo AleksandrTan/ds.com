@@ -16,4 +16,5 @@ class Discounts(models.Model):
     description = models.CharField(max_length=2000)
     date_create = models.DateTimeField(auto_now_add=True)
     disco_value = models.SmallIntegerField(blank=True, default=0)
+    sale_date_end = models.DateTimeField()
     objects = DiscountsManager()
