@@ -306,9 +306,12 @@ class ManageModelss(models.Manager):
         except Products.DoesNotExist:
             return False
 
-    def set_sales_model_products(self, name, disco_value):
+    def set_sales_model_products(self, name, disco_value, sale_date_end):
         try:
-            count_record = Modelss.objects.filter(name=name).update(discount=disco_value, sale=True, sale_price=F('price') - ((F('price')*disco_value)/100))
+            count_record = Modelss.objects.filter(name=name).update(discount=disco_value,
+                                                                    sale=True,
+                                                                    sale_price=F('price') - ((F('price')*disco_value)/100),
+                                                                    sale_date_end=sale_date_end)
             if count_record > 0:
                 return str(Modelss.objects.get_modelss_id(name)[0])
             else:
@@ -520,10 +523,11 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
-    def set_sales_products(self, list_mid, disco_value):
+    def set_sales_products(self, list_mid, disco_value, sale_date_end):
         try:
             Products.objects.filter(modelss_id__in=list_mid.split(',')).update(discount=disco_value, sale=True,
-                                                                               sale_price=F('price') - ((F('price')*disco_value)/100))
+                                                                               sale_price=F('price') - ((F('price')*disco_value)/100),
+                                                                               sale_date_end=sale_date_end)
         except Products.DoesNotExist:
             return False
 
@@ -537,19 +541,16 @@ class ManageProductsModel(models.Manager):
         except Products.DoesNotExist:
             return False
 
-    def set_sales_model_products(self, modelss, disco_value):
+    def set_sales_model_products(self, modelss, disco_value, sale_date_end):
         try:
-            count_record = Products.objects.filter(modelss=modelss).update(discount=disco_value, sale=True,
-                                                                           sale_price=F('price') - ((F('price')*disco_value)/100))
-            if count_record > 0:
-                return ','.join([str(i) for i in Products.objects.filter(modelss=modelss).values_list('id', flat=True)])
-            else:
-                return False
+            Products.objects.filter(modelss=modelss).update(discount=disco_value, sale=True,
+                                                                           sale_price=F('price') - ((F('price')*disco_value)/100),
+                                                                           sale_date_end=sale_date_end)
         except Products.DoesNotExist:
             return False
 
     def delete_discount(self, list_mid):
-        Products.objects.filter(modelss_id__in=list_mid).update(discount=0, sale=False, sale_price=0)
+        Products.objects.filter(modelss_id__in=list_mid).update(discount=0, sale=False, sale_price=0, sale_date_end='2000-01-01 00:00:00')
 
     def hm_get_barcode_query(self, product):
         data_product = dict()

@@ -6,8 +6,11 @@ class DiscountsManager(models.Manager):
     def get_list_discounts(self):
         return Discounts.objects.only('id', 'my_description', 'description', 'date_create', 'disco_value')
 
-    def save_discount(self, list_id, description, disco_value, sale_date_end):
-        Discounts(list_id=list_id, my_description='', description=description, disco_value=disco_value, sale_date_end=sale_date_end).save()
+    def save_discount(self, list_id, description, disco_value, sale_date_end=False):
+        if sale_date_end:
+            Discounts(list_id=list_id, my_description='', description=description, disco_value=disco_value, sale_date_end=sale_date_end).save()
+        else:
+            Discounts(list_id=list_id, my_description='', description=description, disco_value=disco_value).save()
 
 
 class Discounts(models.Model):

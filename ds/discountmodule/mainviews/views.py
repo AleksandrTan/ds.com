@@ -75,7 +75,7 @@ class SetDiscountFilter(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
         list_id = Modelss.objects.set_sales_models(form.cleaned_data, disco_val, sale_date_end)
         if list_id:
             Discounts.objects.save_discount(list_id, description, disco_val, sale_date_end)
-            Products.objects.set_sales_products(list_id, disco_val)
+            Products.objects.set_sales_products(list_id, disco_val, sale_date_end)
         return True
 
 
@@ -120,10 +120,13 @@ class SetDiscountModel(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         return True
 
     def set_sales_modelss(self, form):
-        list_id = Modelss.objects.set_sales_model_products(form.cleaned_data['modelss'], form.cleaned_data['mod_disco'])
+        list_id = Modelss.objects.set_sales_model_products(form.cleaned_data['modelss'],
+                                                           form.cleaned_data['mod_disco'],
+                                                           form.cleaned_data['sale_date_end'])
         if list_id:
-            Discounts.objects.save_discount(list_id, form.cleaned_data['description_m'], form.cleaned_data['mod_disco'])
-            Products.objects.set_sales_model_products(list_id, form.cleaned_data['mod_disco'])
+            Discounts.objects.save_discount(list_id, form.cleaned_data['description_m'], form.cleaned_data['mod_disco'],
+                                            form.cleaned_data['sale_date_end'])
+            Products.objects.set_sales_model_products(list_id, form.cleaned_data['mod_disco'], form.cleaned_data['sale_date_end'])
         return True
 
 

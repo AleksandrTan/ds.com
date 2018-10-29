@@ -257,7 +257,8 @@ $(document).ready(function () {
         {
             if (data.length == 0){
                 var trElem = '<tr><td style="color: red;">Нет размеров для отображения!</td></tr>';
-                $('#save_product').hide();
+                $('#add_product_fields').hide();
+                $('#save_product').show();
                 parentElementTable.append(trElem);
             }
             else {
