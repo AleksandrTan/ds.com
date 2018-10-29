@@ -693,6 +693,7 @@ model</ColNames>
     <column id="167" parent="26" name="sale_date_end">
       <Position>26</Position>
       <DataType>datetime|0</DataType>
+      <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
     </column>
     <index id="168" parent="26" name="maincategory_id">
       <ColNames>maincategory_id</ColNames>

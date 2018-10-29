@@ -46,8 +46,10 @@ class SetDiscountFilter(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
             form.cleaned_data.pop('description_f')
             if form.cleaned_data['sale']:
                 form.cleaned_data.pop('sale')
-                self.set_sales(form, disco_val, description)
+                sale_date_end = form.cleaned_data.pop('sale_date_end')
+                self.set_sales(form, disco_val, description, sale_date_end)
             else:
+                form.cleaned_data.pop('sale_date_end')
                 self.set_discount(form, disco_val, description)
             return redirect('/adminnv/products/discount/discolist/')
         else:
@@ -69,10 +71,10 @@ class SetDiscountFilter(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
             Products.objects.set_discount_products(list_id, disco_val)
         return True
 
-    def set_sales(self, form, disco_val, description):
-        list_id = Modelss.objects.set_sales_models(form.cleaned_data, disco_val)
+    def set_sales(self, form, disco_val, description, sale_date_end):
+        list_id = Modelss.objects.set_sales_models(form.cleaned_data, disco_val, sale_date_end)
         if list_id:
-            Discounts.objects.save_discount(list_id, description, disco_val)
+            Discounts.objects.save_discount(list_id, description, disco_val, sale_date_end)
             Products.objects.set_sales_products(list_id, disco_val)
         return True
 

@@ -281,11 +281,14 @@ class ManageModelss(models.Manager):
         except Modelss.DoesNotExist:
             return False
 
-    def set_sales_models(self, data, disco_value):
+    def set_sales_models(self, data, disco_value, sale_date_end):
         query = Modelss.objects
         work_dict = {param: data[param] for param in data if data[param]}
         try:
-            count_record = query.filter(**work_dict).update(discount=disco_value, sale=True, sale_price=F('price') - ((F('price')*disco_value)/100))
+            count_record = query.filter(**work_dict).update(discount=disco_value,
+                                                            sale=True,
+                                                            sale_price=F('price') - ((F('price')*disco_value)/100),
+                                                            sale_date_end=sale_date_end)
             if count_record > 0:
                 return ','.join([str(i) for i in query.filter(**work_dict).values_list('id', flat=True)])
             else:
@@ -314,7 +317,7 @@ class ManageModelss(models.Manager):
             return False
 
     def delete_discount(self, id_list):
-        Modelss.objects.filter(id__in=id_list).update(discount=0, sale=False, sale_price=0)
+        Modelss.objects.filter(id__in=id_list).update(discount=0, sale=False, sale_price=0, sale_date_end='2000-01-01 00:00:00')
 
 
 class Modelss(models.Model):

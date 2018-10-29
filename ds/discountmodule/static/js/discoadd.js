@@ -23,25 +23,25 @@ $('#sale_f').change(function() {
     }
 });
 //Check isset articul
-$('#articul').blur(function () {
-   if ($(this).val() != ''){
-       $.get(
-        "/adminnv/products/checkarticul/"+$(this).val()+"/",
-        onAjaxSuccess
-       );
-       function onAjaxSuccess(data) {
-           if(!data.status){
-           	   $('#articul').val('');
-               $('#modal_content').text('').text('Такого артикула не существует!Выберите другой');
-               $('#modal_alarm').modal();
-           }
-       }
-   }
-
-});
+// $('#articul').blur(function () {
+//    if ($(this).val() != ''){
+//        $.get(
+//         "/adminnv/products/checkarticul/"+$(this).val()+"/",
+//         onAjaxSuccess
+//        );
+//        function onAjaxSuccess(data) {
+//            if(!data.status){
+//            	   $('#articul').val('');
+//                $('#modal_content').text('').text('Такого артикула не существует!Выберите другой');
+//                $('#modal_alarm').modal();
+//            }
+//        }
+//    }
+//
+// });
 
 //Check isset modelss
-$('#modelss').blur(function () {
+$('#modelsss').blur(function () {
     if ($(this).val() != ''){
        $.get(
         "/adminnv/products/checkmodelss/"+$(this).val()+"/",
@@ -49,13 +49,12 @@ $('#modelss').blur(function () {
        );
        function onAjaxSuccess(data) {
            if(!data.status){
-           	   $('#modelss').val('');
+           	   $('#modelsss').val('');
                $('#modal_content').text('').text('Такой модели не существует!Выберите другую');
                $('#modal_alarm').modal();
            }
        }
    }
-
 });
 //Show count entered simbols for input tags
     $("input").keyup(function() {
@@ -101,39 +100,39 @@ $('#modelss').blur(function () {
 				}
 			} );
 
-    $( "#articul_disco" ).validate( {
-				rules: {
-					art_disco: {
-						required: true,
-						maxlength: 6,
-						number: true,
-                        min: 0
-					},
-                    articul:{
-					    required: true
-                    }
-				},
-				messages: {
-					art_disco: {
-						required: "Пожалуйста введите скидку",
-						maxlength: "Не более 6 символов",
-                        number: 'Должно быть числом!',
-                        min: 'Блять больше 0!!!!'
-					},
-                    articul: {
-					    required: "Пожалуйста введите Артикул",
-                    }
-				},
-                errorClass: "alert-danger",
-				highlight: function ( element, errorClass, validClass ) {
-					$( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
-					$( element ).next( "label" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
-				},
-				unhighlight: function ( element, errorClass, validClass ) {
-					$( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
-					$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
-				}
-	} );
+    // $( "#articul_disco" ).validate( {
+	// 			rules: {
+	// 				art_disco: {
+	// 					required: true,
+	// 					maxlength: 6,
+	// 					number: true,
+     //                    min: 0
+	// 				},
+     //                articul:{
+	// 				    required: true
+     //                }
+	// 			},
+	// 			messages: {
+	// 				art_disco: {
+	// 					required: "Пожалуйста введите скидку",
+	// 					maxlength: "Не более 6 символов",
+     //                    number: 'Должно быть числом!',
+     //                    min: 'Блять больше 0!!!!'
+	// 				},
+     //                articul: {
+	// 				    required: "Пожалуйста введите Артикул",
+     //                }
+	// 			},
+     //            errorClass: "alert-danger",
+	// 			highlight: function ( element, errorClass, validClass ) {
+	// 				$( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
+	// 				$( element ).next( "label" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+	// 			},
+	// 			unhighlight: function ( element, errorClass, validClass ) {
+	// 				$( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
+	// 				$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+	// 			}
+	// } );
 
     $( "#model_disco" ).validate( {
 				rules: {
