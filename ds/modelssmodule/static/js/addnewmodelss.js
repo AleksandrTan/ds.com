@@ -239,6 +239,7 @@ $(document).ready(function () {
         $('#product_data_lists').val('');
         $('#count_sizes_add').val('0');
         $('#add_product_fields').show();
+        $('#save_product').show();
         console.log(product_data);
     });
 

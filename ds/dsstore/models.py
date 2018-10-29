@@ -533,19 +533,15 @@ class ManageProductsModel(models.Manager):
 
     def set_discount_model_products(self, modelss, disco_value):
         try:
-            count_record = Products.objects.filter(modelss=modelss).update(discount=disco_value)
-            if count_record > 0:
-                return ','.join([str(i) for i in Products.objects.filter(modelss=modelss).values_list('id', flat=True)])
-            else:
-                return False
+            Products.objects.filter(modelss=modelss).update(discount=disco_value)
         except Products.DoesNotExist:
             return False
 
     def set_sales_model_products(self, modelss, disco_value, sale_date_end):
         try:
             Products.objects.filter(modelss=modelss).update(discount=disco_value, sale=True,
-                                                                           sale_price=F('price') - ((F('price')*disco_value)/100),
-                                                                           sale_date_end=sale_date_end)
+                                                            sale_price=F('price') - ((F('price')*disco_value)/100),
+                                                            sale_date_end=sale_date_end)
         except Products.DoesNotExist:
             return False
 

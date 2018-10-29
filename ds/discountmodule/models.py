@@ -8,7 +8,8 @@ class DiscountsManager(models.Manager):
 
     def save_discount(self, list_id, description, disco_value, sale_date_end=False):
         if sale_date_end:
-            Discounts(list_id=list_id, my_description='', description=description, disco_value=disco_value, sale_date_end=sale_date_end).save()
+            Discounts(list_id=list_id, my_description='', description=description,
+                      disco_value=disco_value, sale_date_end=sale_date_end, sale=True).save()
         else:
             Discounts(list_id=list_id, my_description='', description=description, disco_value=disco_value).save()
 
@@ -19,5 +20,6 @@ class Discounts(models.Model):
     description = models.CharField(max_length=2000)
     date_create = models.DateTimeField(auto_now_add=True)
     disco_value = models.SmallIntegerField(blank=True, default=0)
+    sale = models.BooleanField(default=False)
     sale_date_end = models.DateTimeField()
     objects = DiscountsManager()

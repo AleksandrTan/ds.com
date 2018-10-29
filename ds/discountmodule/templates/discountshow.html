@@ -49,6 +49,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">№</th>
+                                        <th class="text-center">Тип</th>
                                         <th class="text-center">Описание</th>
                                         <th class="text-center">Дата создания</th>
                                         <th class="text-center">Значение%</th>
@@ -59,6 +60,10 @@
                                 {% for disco in discounts_list %}
                                     <tr>
                                         <td class="text-center">{{ forloop.counter }}</td>
+                                        <td class="text-center">
+                                            {% if disco.sale %} Распродажа до {{ disco.sale_date_end|date:"d-m-Y" }} {% else %}
+                                                Скидка {% endif %}
+                                        </td>
                                         <td class="text-center">{{ disco.description }}</td>
                                         <td class="text-center">{{ disco.date_create|date:"d-m-Y" }}</td>
                                         <td class="text-center">{{ disco.disco_value }}</td>
