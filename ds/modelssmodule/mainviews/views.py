@@ -1,5 +1,6 @@
 import os
 import shutil
+from datetime import datetime, timedelta, date
 
 from django.conf import settings
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -7,7 +8,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.core.files.storage import FileSystemStorage
+#from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import QueryDict
@@ -73,6 +74,7 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         instance.identifier = self.uuid_sentece()
         instance.dirname_img = self.uuid_sentece_user()
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['name']
+        instance.is_new_date_end = date.today() + timedelta(days=settings.DNP) if instance.is_new else date.today()
         instance.save()
 
         self.save_other_files(instance, form)
@@ -181,6 +183,7 @@ class EditModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, Up
         if int(self.request.POST['is_del_other_photo']) == 1:
             self.delete_related_photo(instance, self.request.POST['list_del_other_photo'])
         instance.link_name = self.slugify(form.cleaned_data['caption']) + '_' + instance.identifier + '_' + form.cleaned_data['name']
+        instance.is_new_date_end = date.today() + timedelta(days=settings.DNP) if instance.is_new else date.today()
         instance.save()
         #send signal for update products in modelss
         from modelssmodule.signals.signal import model_update

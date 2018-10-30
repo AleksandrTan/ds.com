@@ -47,6 +47,7 @@ class AddProducts:
         data['caption'] = self.instance.caption
         data['sale_price'] = self.instance.sale_price
         data['price'] = self.instance.price
+        data['is_new_date_end'] = self.instance.is_new_date_end
         form = ProductsAddFormModelss(data)
         if form.is_valid():
            form.save()

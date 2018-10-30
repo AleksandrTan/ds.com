@@ -36,6 +36,7 @@ class SavedProducts:
         data['modelss_name'] = self.request.POST.getlist('name')[0]
         data['dirname_img'] = self.instance.dirname_img
         data['identifier'] = self.uuid_sentece_user()
+        data['is_new_date_end'] = self.instance.is_new_date_end
         form = ProductsFormModelss(data)
         if form.is_valid():
            form.save()

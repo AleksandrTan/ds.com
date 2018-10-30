@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db.models import F
 from django.db import models
 from django.forms import ModelForm
@@ -320,7 +322,8 @@ class ManageModelss(models.Manager):
             return False
 
     def delete_discount(self, id_list):
-        Modelss.objects.filter(id__in=id_list).update(discount=0, sale=False, sale_price=0, sale_date_end='2000-01-01 00:00:00')
+        Modelss.objects.filter(id__in=id_list).update(discount=0, sale=False, sale_price=0,
+                                                      sale_date_end=datetime.now())
 
 
 class Modelss(models.Model):
@@ -347,7 +350,7 @@ class Modelss(models.Model):
     is_belarus = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     is_new = models.BooleanField(default=False)
-    is_new_date_end = models.DateField(auto_now_add=True)
+    is_new_date_end = models.DateField()
     link_name = models.CharField(max_length=550)
     identifier = models.CharField(max_length=20)
     dirname_img = models.CharField(max_length=25, default='', blank=True)
@@ -546,7 +549,7 @@ class ManageProductsModel(models.Manager):
             return False
 
     def delete_discount(self, list_mid):
-        Products.objects.filter(modelss_id__in=list_mid).update(discount=0, sale=False, sale_price=0, sale_date_end='2000-01-01 00:00:00')
+        Products.objects.filter(modelss_id__in=list_mid).update(discount=0, sale=False, sale_price=0, sale_date_end=datetime.now())
 
     def hm_get_barcode_query(self, product):
         data_product = dict()
@@ -579,6 +582,7 @@ class ManageProductsModel(models.Manager):
         product.is_new = instance.is_new
         product.caption = instance.caption
         product.sale_price = instance.sale_price
+        product.is_new_date_end = instance.is_new_date_end
         product.save()
 
 
@@ -609,7 +613,7 @@ class Products(models.Model):
     is_belarus = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     is_new = models.BooleanField(default=False)
-    is_new_date_end = models.DateField(auto_now_add=True)
+    is_new_date_end = models.DateField()
     link_name = models.CharField(max_length=550)
     identifier = models.CharField(max_length=20)
     dirname_img = models.CharField(max_length=25, default='', blank=True)
@@ -733,7 +737,7 @@ class ProductsFormModelss(ModelForm):
         model = Products
         fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
                   'color', 'seo_attributes', 'is_belarus', 'is_active', 'is_new', 'caption', 'modelss', 'articul', 'pre_barcode',
-                  'size', 'count_num', 'main_photo_path', 'modelss_name', 'dirname_img', 'identifier', 'barcode']
+                  'size', 'count_num', 'main_photo_path', 'modelss_name', 'dirname_img', 'identifier', 'barcode', 'is_new_date_end']
 
 
 class ProductsAddFormModelss(ModelForm):
@@ -742,7 +746,7 @@ class ProductsAddFormModelss(ModelForm):
         model = Products
         fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
                   'color', 'seo_attributes', 'is_belarus', 'is_active', 'is_new', 'caption', 'modelss', 'articul', 'pre_barcode',
-                  'size', 'count_num', 'main_photo_path', 'modelss_name', 'dirname_img', 'identifier', 'barcode', 'discount']
+                  'size', 'count_num', 'main_photo_path', 'modelss_name', 'dirname_img', 'identifier', 'barcode', 'discount', 'is_new_date_end']
 
 
 """"--------------SizeCount Model--------------------------"""
