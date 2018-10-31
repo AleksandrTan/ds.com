@@ -325,6 +325,9 @@ class ManageModelss(models.Manager):
         Modelss.objects.filter(id__in=id_list).update(discount=0, sale=False, sale_price=0,
                                                       sale_date_end=datetime.now())
 
+    def check_new_modelss(self):
+        Modelss.objects.filter(is_new_date_end__lte=datetime.now()).update(is_new_date_end=datetime.now())
+
 
 class Modelss(models.Model):
     name = models.CharField(blank=False, default='', max_length=50)
