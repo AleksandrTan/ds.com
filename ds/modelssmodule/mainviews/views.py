@@ -1,6 +1,6 @@
 import os
 import shutil
-from datetime import datetime, timedelta, date
+from datetime import timedelta, date
 
 from django.conf import settings
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -8,7 +8,6 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-#from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import QueryDict
