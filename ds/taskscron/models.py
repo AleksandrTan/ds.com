@@ -59,4 +59,18 @@ class Products(Model):
     link_name = CharField(max_length=550)
     identifier = CharField(max_length=20)
     dirname_img = CharField(max_length=25, default='')
+    modelss_id = IntegerField(default=0)
     date_create = DateTimeField()
+
+
+class Discounts(Model):
+    class Meta:
+        database = dbhandle
+        db_table = "discountmodule_discounts"
+    list_id = TextField()
+    my_description = CharField(max_length=2000)
+    description = CharField(max_length=2000)
+    date_create = DateTimeField()
+    disco_value = SmallIntegerField(default=0)
+    sale = BooleanField(default=False)
+    sale_date_end = DateTimeField()

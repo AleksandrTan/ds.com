@@ -1,29 +1,47 @@
 from peewee import *
 from datetime import datetime
-from taskscron.models import Modelss, Products
+from taskscron.models import Modelss, Products, Discounts, DoesNotExist
 
 
 class CheckSales:
 
-    def check_sales(self):
-        self.check_sales_modelss()
-        self.check_sales_products()
+    def __init__(self):
+        self.endtime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    def check_sales_modelss(self):
+    def get_sales(self):
         try:
-            Modelss.update(is_new_date_end=datetime.now(), is_new=False).\
-                where(Modelss.is_new_date_end <= datetime.now()).execute()
+            id_list = Discounts.select().where((Discounts.sale_date_end < self.endtime) & (Discounts.sale == 1))
+            if id_list:
+                self.check_discounts(id_list)
+        except DoesNotExist:
+            pass
+
+    def check_discounts(self, id_list):
+        for records in id_list:
+            # print(records.id)
+            if records.list_id:
+                id_models = records.list_id.split(',')
+                self.check_sales_modelss(id_models)
+                self.check_sales_products(id_models)
+                records.delete().execute()
+            else:
+                continue
+
+    def check_sales_modelss(self, list_id):
+        try:
+            Modelss.update(discount=0, sale=False, sale_price=0, sale_date_end=datetime.now()).\
+                where(Modelss.id.in_(list_id)).execute()
         except DataError:
             pass
 
-    def check_sales_products(self):
+    def check_sales_products(self, list_id):
         try:
-            Products.update(is_new_date_end=datetime.now(), is_new=False).\
-                where(Products.is_new_date_end <= datetime.now()).execute()
+            Products.update(discount=0, sale=False, sale_price=0, sale_date_end=datetime.now()).\
+                where(Products.modelss_id.in_(list_id)).execute()
         except DataError:
             pass
 
 if __name__ == '__main__':
 
     data_check = CheckSales()
-    data_check.check_sales()
+    data_check.get_sales()
