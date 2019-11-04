@@ -1,4 +1,5 @@
 from datetime import datetime
+from PIL import Image as Ima
 
 from django.db.models import F
 from django.db import models
@@ -362,7 +363,7 @@ class Modelss(models.Model):
 
     # change the main_imgfield value to be the newley modifed image value - png
     def clean(self):
-        from PIL import Image as Ima
+        #from PIL import Image as Ima
         from io import BytesIO
         from django.core.files.uploadedfile import InMemoryUploadedFile
         import sys
@@ -806,7 +807,7 @@ class Image(models.Model):
     img_path = models.ImageField(blank=True, upload_to=custom_directory_paths)
 
     def save(self):
-        from PIL import Image as Ima
+        #from PIL import Image as Ima
         from io import BytesIO
         from django.core.files.uploadedfile import InMemoryUploadedFile
         import sys

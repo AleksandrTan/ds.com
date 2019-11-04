@@ -35,6 +35,7 @@ class BaseAdminView(View):
     Look in Python3\Lib\site-packages\django\contrib\admin\views\decorators.py
             Python3\Lib\site-packages\django\contrib\auth\decorators.py
             Python3\Lib\site-packages\django\contrib\admindocs\views.py
+            https://djbook.ru/rel1.9/ref/contrib/admin/index.html#the-staff-member-required-decorator
     """
     @method_decorator(staff_member_required(login_url='login'))
     def dispatch(self, request, *args, **kwargs):
@@ -133,6 +134,7 @@ class MainCategoryDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMi
         MainCategory.objects.get(pk=kwargs['pk']).delete()
         return redirect('/adminnv/maincategory/')
 
+
 """
     Work with Name Product
 """
@@ -163,7 +165,7 @@ class AjaxNameProductNew(BaseAdminView, LoginRequiredMixin, PermissionRequiredMi
             name_url = self.slugify(request.GET['name'])
             new_np = NameProduct.objects.save_new_nameproduct(request.GET['name'], name_url)
 
-            return JsonResponse({"status": True, 'id':new_np.id, 'name_url':name_url})
+            return JsonResponse({"status": True, 'id':new_np.id, 'name_url': name_url})
 
     def slugify(self, strg):
         import re
@@ -261,6 +263,7 @@ class AjaxGetSizes(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
             data = SizeTable.objects.get_size_data(kwargs['pk'])
             return JsonResponse(list(data), safe=False)
 
+
 """---------------Work with Brends -------------------------------"""
 
 
@@ -317,6 +320,7 @@ class BrendDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
         redirect_url = '/adminnv/brends/'
         return redirect(redirect_url)
 
+
 """----------------Work with seasons---------------------------------"""
 
 
@@ -372,6 +376,7 @@ class SeasonDelete(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin):
         Seasons.objects.get(pk=kwargs['pk']).delete()
         redirect_url = '/adminnv/seasons/'
         return redirect(redirect_url)
+
 
 """---------------Work with Products-------------------------------"""
 
