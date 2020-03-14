@@ -17,7 +17,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from django.http import QueryDict
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from dsstore.models import (MainCategory, NameProduct, SizeTable,
                             SizeTableForm, Brends, Seasons, Products,
                             ProductsForm, ProductsFormEdit, Image, Modelss)
@@ -66,6 +66,11 @@ class UsersWork(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, List
    queryset = User.objects.all()
    context_object_name = 'users_list' #or for custom paginate page_obj in template
    paginate_by = 10
+
+   def get_context_data(self, **kwargs):
+       context = super(UsersWork, self).get_context_data(**kwargs)
+       context['groups'] = Group.objects.all()
+       return context
 
 
 class UserDetailView(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixin, DetailView):

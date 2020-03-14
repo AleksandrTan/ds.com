@@ -118,7 +118,7 @@ class CreateNewModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMixi
         return str(uuid.uuid4())[:10]
 
     def save_other_files(self, instance, form):
-        if not os.path.exists(settings.BASE_DIR + '/ '+ settings.TEST_MEDIA_IMAGES+instance.dirname_img) and self.request.FILES.getlist('other_img[]'):
+        if not os.path.exists(settings.BASE_DIR + '/ ' + settings.TEST_MEDIA_IMAGES+instance.dirname_img) and self.request.FILES.getlist('other_img[]'):
             os.mkdir(settings.BASE_DIR + '/' + settings.TEST_MEDIA_IMAGES+instance.dirname_img, mode=0o777)
         # https://docs.djangoproject.com/ja/1.11/_modules/django/utils/datastructures/ - look for MultiValueDict(getlist)
         if self.request.FILES.getlist('img_product[]'):
@@ -371,8 +371,7 @@ class AddProductModelss(BaseAdminView, LoginRequiredMixin, PermissionRequiredMix
     def get(self, request, **kwargs):
         args = {'tab_modelss': True,
                 'modelss': Modelss.objects.get_modelss(kwargs['pk']),
-                'action': reverse('addproductsmodelss',
-                                            kwargs={'pk': kwargs['pk']})
+                'action': reverse('addproductsmodelss', kwargs={'pk': kwargs['pk']})
                 }
         if args['modelss']:
             args['isset_sizes'] = args['modelss'].products_set.values_list('size', flat=True)

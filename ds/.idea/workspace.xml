@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d038e7be-5329-43d2-b228-19170d0d687e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/36876ea3-58c9-4bed-b93d-43530f435bf9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/36876ea3-58c9-4bed-b93d-43530f435bf9.xml" afterDir="false" />
+    <list default="true" id="d038e7be-5329-43d2-b228-19170d0d687e" name="Default" comment="Peewee crontasks">
       <change beforePath="$PROJECT_DIR$/.idea/ds.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ds.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/discountmodule/templates/med.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dsadminvn/mainviews/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dsadminvn/mainviews/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dsadminvn/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/dsadminvn/templates/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dsadminvn/templates/users/users.html" beforeDir="false" afterPath="$PROJECT_DIR$/dsadminvn/templates/users/users.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dsstore/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/dsstore/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modelssmodule/mainviews/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/modelssmodule/mainviews/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -122,22 +118,22 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Шаблоны NV/WorkVariant/list-product-hot-deal.html" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Шаблоны BFG/Nemplates admin/startbootstrap-sb-admin-1.0.4/index.html" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\WebProjects\ds.com\ds\discountmodule\static\js" />
-      <recent name="E:\WebProjects\ds.com\ds\barcodesalep\static\js" />
-      <recent name="E:\WebProjects\ds.com\ds\dsadminvn\static\js" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\WebProjects\ds.com\ds\modelssmodule\templates" />
       <recent name="E:\WebProjects\ds.com\ds\modelssmodule\static\js" />
       <recent name="E:\WebProjects\ds.com\ds\dsadminvn" />
       <recent name="E:\WebProjects\ds.com\ds\dsadminvn\static\js\products" />
       <recent name="E:\WebProjects\ds.com\ds\dsadminvn\templates\products" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\WebProjects\ds.com\ds\discountmodule\static\js" />
+      <recent name="E:\WebProjects\ds.com\ds\barcodesalep\static\js" />
+      <recent name="E:\WebProjects\ds.com\ds\dsadminvn\static\js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -283,6 +279,17 @@
       <option name="presentableId" value="Default" />
       <updated>1508917586671</updated>
       <workItem from="1572854345284" duration="2066000" />
+      <workItem from="1572887015405" duration="1856000" />
+      <workItem from="1572892880236" duration="699000" />
+      <workItem from="1572946170571" duration="2036000" />
+      <workItem from="1573635987114" duration="3103000" />
+      <workItem from="1575451782367" duration="1869000" />
+      <workItem from="1582118091248" duration="3074000" />
+      <workItem from="1582177645691" duration="617000" />
+      <workItem from="1582182636213" duration="4725000" />
+      <workItem from="1582909406586" duration="1222000" />
+      <workItem from="1583960311473" duration="1037000" />
+      <workItem from="1584174495742" duration="7027000" />
     </task>
     <task id="LOCAL-00256" summary="Modelss Module">
       <created>1537981456663</created>

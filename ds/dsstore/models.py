@@ -14,7 +14,7 @@ from dsstore.mainhelpers import MainImgTypeField as MI
 
 
 class ManagerMainCategories(models.Manager):
-#Get active Categories
+    # Get active Categories
     def get_active_categories(self):
         return MainCategory.objects.filter(is_active__exact=True)
 
@@ -59,13 +59,14 @@ class MainCategory(models.Model):
     class Meta:
         ordering = ['id']
 
+
 """----------- Name Producn model -----------------------"""
 
 
 class ManagerNameProducts(models.Manager):
-#Get active Categories
+    # Get active Categories
     def get_active_products(self):
-        return NameProduct.objects.filter(is_active__exact = True)
+        return NameProduct.objects.filter(is_active__exact=True)
 
     def get_all_products(self):
         return NameProduct.objects.all()
@@ -102,6 +103,7 @@ class NameProduct(models.Model):
     class Meta:
         ordering = ['id']
 
+
 """------------ SizeTable Model-------------------------------"""
 
 
@@ -128,19 +130,20 @@ class SizeTableForm(ModelForm):
         model = SizeTable
         fields = ['age', 'height', 'chest', 'waist', 'maincategory']
         error_messages = {
-                            'age': {'required': "Пожалуйста введите возраст",
-                                    'max_length': "Не более 10 символов"
-                                      },
-                            'height': {'required': "Пожалуйста введите рост",
-                                       'max_length': "Не более 10 символов"
-                                        },
-                            'chest': {'required': "Пожалуйста введите обхват груди",
-                                      'max_length': "Не более 10 символов"
-                                            },
-                            'waist': {'required': "Пожалуйста введите обхват талии",
-                                      'max_length': "Не более 10 символов"},
+            'age': {'required': "Пожалуйста введите возраст",
+                    'max_length': "Не более 10 символов"
+                    },
+            'height': {'required': "Пожалуйста введите рост",
+                       'max_length': "Не более 10 символов"
+                       },
+            'chest': {'required': "Пожалуйста введите обхват груди",
+                      'max_length': "Не более 10 символов"
+                      },
+            'waist': {'required': "Пожалуйста введите обхват талии",
+                      'max_length': "Не более 10 символов"},
 
-                        }
+        }
+
 
 """-------------------Brends Model ------------------------------------"""
 
@@ -148,7 +151,7 @@ class SizeTableForm(ModelForm):
 class ManagerBrends(models.Manager):
 
     def get_active_brends(self):
-        return Brends.objects.filter(is_active__exact = True)
+        return Brends.objects.filter(is_active__exact=True)
 
     def get_all_brends(self):
         return Brends.objects.all()
@@ -185,12 +188,13 @@ class Brends(models.Model):
     class Meta:
         ordering = ['id']
 
+
 """--------------------Seasons Model--------------------"""
 
 
 class ManagerSeasons(models.Manager):
     def get_active_seasons(self):
-        return Seasons.objects.filter(is_active__exact = True)
+        return Seasons.objects.filter(is_active__exact=True)
 
     def get_all_seasons(self):
         return Seasons.objects.all()
@@ -290,7 +294,7 @@ class ManageModelss(models.Manager):
         try:
             count_record = query.filter(**work_dict).update(discount=disco_value,
                                                             sale=True,
-                                                            sale_price=F('price') - ((F('price')*disco_value)/100),
+                                                            sale_price=F('price') - ((F('price') * disco_value) / 100),
                                                             sale_date_end=sale_date_end)
             if count_record > 0:
                 return ','.join([str(i) for i in query.filter(**work_dict).values_list('id', flat=True)])
@@ -313,7 +317,8 @@ class ManageModelss(models.Manager):
         try:
             count_record = Modelss.objects.filter(name=name).update(discount=disco_value,
                                                                     sale=True,
-                                                                    sale_price=F('price') - ((F('price')*disco_value)/100),
+                                                                    sale_price=F('price') - (
+                                                                                (F('price') * disco_value) / 100),
                                                                     sale_date_end=sale_date_end)
             if count_record > 0:
                 return str(Modelss.objects.get_modelss_id(name)[0])
@@ -363,26 +368,27 @@ class Modelss(models.Model):
 
     # change the main_imgfield value to be the newley modifed image value - png
     def clean(self):
-        #from PIL import Image as Ima
+        # from PIL import Image as Ima
         from io import BytesIO
         from django.core.files.uploadedfile import InMemoryUploadedFile
         import sys
-            # Opening the uploaded image
+        # Opening the uploaded image
         im = Ima.open(self.main_photo_path)
         output = BytesIO()
-            # Resize/modify the image
+        # Resize/modify the image
         im = im.resize((500, 500))
-            # after modifications, save it to the output
+        # after modifications, save it to the output
         im.save(output, format='JPEG', quality=100)
         output.seek(0)
 
-            # change the main_imgfield value to be the newley modifed image value - png
-        self.main_photo_path = InMemoryUploadedFile(output, 'MI.MainImgTypeField', "%s.jpg" % self.main_photo_path.name.split('.')[0],
+        # change the main_imgfield value to be the newley modifed image value - png
+        self.main_photo_path = InMemoryUploadedFile(output, 'MI.MainImgTypeField',
+                                                    "%s.jpg" % self.main_photo_path.name.split('.')[0],
                                                     'image/jpg', sys.getsizeof(output), None)
         super(Modelss, self).clean()
 
     def get_absolute_url(self):
-         return "modelss/%s" % self.link_name
+        return "modelss/%s" % self.link_name
 
     def __str__(self):
         return self.link_name
@@ -392,30 +398,33 @@ class ModelssForm(ModelForm):
     """
         Set request param, param request add  in __init__ like positional argument
     """
+
     def __init__(self, request, *args, **kwargs):
         self.request = request
         super(ModelForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Modelss
-        fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
+        fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price',
+                  'description',
                   'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'name']
 
         error_messages = {
-                             'name': {'required': "Пожалуйста введите название",
-                                      'max_length':"Не более 30 символов",
-                                      'unique': "Эта модель уже используетсяб введите другую"
-                                      },
-                             'caption': {
-                                      'required': "Пожалуйста введите заголовок",
-                             }
-                          }
+            'name': {'required': "Пожалуйста введите название",
+                     'max_length': "Не более 30 символов",
+                     'unique': "Эта модель уже используетсяб введите другую"
+                     },
+            'caption': {
+                'required': "Пожалуйста введите заголовок",
+            }
+        }
 
 
 class ModelssFormEdit(ModelForm):
     """
         Set request param, param request add  in __init__ like positional argument for clean method
     """
+
     def __init__(self, request, *args, **kwargs):
         self.request = request
         super(ModelForm, self).__init__(*args, **kwargs)
@@ -423,13 +432,15 @@ class ModelssFormEdit(ModelForm):
     class Meta:
         model = Modelss
         fields = ['nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
-                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'name', 'discount']
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'name',
+                  'discount']
 
         error_messages = {
-                             'caption': {
-                                      'required': "Пожалуйста введите заголовок",
-                             }
-                          }
+            'caption': {
+                'required': "Пожалуйста введите заголовок",
+            }
+        }
+
 
 """--------------Products Model-------------------------"""
 
@@ -483,7 +494,8 @@ class ManageProductsModel(models.Manager):
         # if get articul
         if len(barcode) < 13 and len(barcode) != 0:
             try:
-                product = Products.objects.filter(articul=barcode).only('articul', 'barcode', 'price', 'discount', 'size').get()
+                product = Products.objects.filter(articul=barcode).only('articul', 'barcode', 'price', 'discount',
+                                                                        'size').get()
                 if product.price:
                     return {'status': True, 'data_product': self.hm_get_barcode_query(product)}
                 else:
@@ -494,7 +506,8 @@ class ManageProductsModel(models.Manager):
         # if get barcode
         elif len(barcode) == 13:
             try:
-                product = Products.objects.filter(barcode=barcode).only('articul', 'barcode', 'price', 'discount', 'size').get()
+                product = Products.objects.filter(barcode=barcode).only('articul', 'barcode', 'price', 'discount',
+                                                                        'size').get()
                 if product.price:
                     return {'status': True, 'data_product': self.hm_get_barcode_query(product)}
                 else:
@@ -533,7 +546,8 @@ class ManageProductsModel(models.Manager):
     def set_sales_products(self, list_mid, disco_value, sale_date_end):
         try:
             Products.objects.filter(modelss_id__in=list_mid.split(',')).update(discount=disco_value, sale=True,
-                                                                               sale_price=F('price') - ((F('price')*disco_value)/100),
+                                                                               sale_price=F('price') - ((F(
+                                                                                   'price') * disco_value) / 100),
                                                                                sale_date_end=sale_date_end)
         except Products.DoesNotExist:
             return False
@@ -547,13 +561,14 @@ class ManageProductsModel(models.Manager):
     def set_sales_model_products(self, modelss, disco_value, sale_date_end):
         try:
             Products.objects.filter(modelss=modelss).update(discount=disco_value, sale=True,
-                                                            sale_price=F('price') - ((F('price')*disco_value)/100),
+                                                            sale_price=F('price') - ((F('price') * disco_value) / 100),
                                                             sale_date_end=sale_date_end)
         except Products.DoesNotExist:
             return False
 
     def delete_discount(self, list_mid):
-        Products.objects.filter(modelss_id__in=list_mid).update(discount=0, sale=False, sale_price=0, sale_date_end=datetime.now())
+        Products.objects.filter(modelss_id__in=list_mid).update(discount=0, sale=False, sale_price=0,
+                                                                sale_date_end=datetime.now())
 
     def hm_get_barcode_query(self, product):
         data_product = dict()
@@ -645,7 +660,7 @@ class Products(models.Model):
     #     super(Products, self).clean()
 
     def get_absolute_url(self):
-         return "products/%s" % self.link_name
+        return "products/%s" % self.link_name
 
     def __str__(self):
         return self.link_name
@@ -655,26 +670,29 @@ class ProductsForm(ModelForm):
     """
         Set request param, param request add  in __init__ like positional argument
     """
+
     def __init__(self, request, *args, **kwargs):
         self.request = request
         super(ProductsForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Products
-        fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
-                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'pre_barcode', 'modelss', 'size',
+        fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price',
+                  'purshase_price', 'description',
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption',
+                  'pre_barcode', 'modelss', 'size',
                   'count_num', 'modelss_name']
 
         error_messages = {
-                             'articul': {'required': "Пожалуйста введите артикул",
-                                         'max_length':"Не более 30 символов",
-                                         'unique': "Этот артикул уже используетсяб введите другой"
-                                         },
-                             'pre_barcode': {'required': "Пожалуйста введите Штрих-код",
-                                             'max_length': "Не более 5 символов",
-                                             'unique': "Этот штрих-код уже используетсяб введите другой"
-                                             },
-                         }
+            'articul': {'required': "Пожалуйста введите артикул",
+                        'max_length': "Не более 30 символов",
+                        'unique': "Этот артикул уже используетсяб введите другой"
+                        },
+            'pre_barcode': {'required': "Пожалуйста введите Штрих-код",
+                            'max_length': "Не более 5 символов",
+                            'unique': "Этот штрих-код уже используетсяб введите другой"
+                            },
+        }
 
     def clean(self):
         # check if count height's not moore sizes num for maincategory
@@ -682,12 +700,12 @@ class ProductsForm(ModelForm):
         maincategory = cleaned_data['maincategory']
         if len(self.request.POST.getlist('height[]')) > maincategory.sizetable_set.count():
             raise ValidationError('Колличество введенных размеров больше чем размеров категории', code='invalid')
-        #check isset articul
+        # check isset articul
         if Products.objects.check_isset_articul(cleaned_data['articul']):
             raise ValidationError('Введенный артикул уже существует!Выберите другой', code='invalid')
-        #check 5 num in pre_barcode
+        # check 5 num in pre_barcode
         if len(cleaned_data['pre_barcode']) < 5:
-            raise ValidationError ('Штрих-код должен содержать 5 цифр!!!')
+            raise ValidationError('Штрих-код должен содержать 5 цифр!!!')
         if not type(int(cleaned_data['pre_barcode'])) is int:
             raise ValidationError('Должны быть только цифры')
         # check isset pre_barcode
@@ -700,26 +718,29 @@ class ProductsFormEdit(ModelForm):
     """
         set request param, param request add  in __init__ like positional argument for check in clean method
         """
+
     def __init__(self, request, *args, **kwargs):
         self.request = request
         super(ProductsFormEdit, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Products
-        fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
-                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption', 'discount',
+        fields = ['maincategory', 'articul', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price',
+                  'purshase_price', 'description',
+                  'color', 'seo_attributes', 'main_photo_path', 'is_belarus', 'is_active', 'is_new', 'caption',
+                  'discount',
                   'pre_barcode', 'modelss', 'size', 'count_num']
 
         error_messages = {
-                             'articul': {'required': "Пожалуйста введите артикул",
-                                         'max_length':"Не более 30 символов",
-                                         'unique': "Этот артикул уже используетсяб введите другой"
-                                         },
-                             'pre_barcode': {'required': "Пожалуйста введите Штрих-код",
-                                             'max_length': "Не более 5 символов",
-                                             'unique': "Этот штрих-код уже используетсяб введите другой"
-                                             },
-                         }
+            'articul': {'required': "Пожалуйста введите артикул",
+                        'max_length': "Не более 30 символов",
+                        'unique': "Этот артикул уже используетсяб введите другой"
+                        },
+            'pre_barcode': {'required': "Пожалуйста введите Штрих-код",
+                            'max_length': "Не более 5 символов",
+                            'unique': "Этот штрих-код уже используетсяб введите другой"
+                            },
+        }
 
     def clean(self):
         # check if count height's not moore sizes num for maincategory
@@ -727,7 +748,7 @@ class ProductsFormEdit(ModelForm):
         maincategory = cleaned_data['maincategory']
         if len(self.request.POST.getlist('height[]')) > maincategory.sizetable_set.count():
             raise ValidationError('Колличество введенных размеров больше чем размеров категории', code='invalid')
-        #check isset articul
+        # check isset articul
         if self.request.POST.getlist('articul_product_hidden')[0] != cleaned_data['articul']:
             cleaned_data['articul'] = self.request.POST.getlist('articul_product_hidden')[0]
             raise ValidationError('Вы изменили существующий артикул!!!Нельзя так делать!!!', code='invalid')
@@ -736,21 +757,25 @@ class ProductsFormEdit(ModelForm):
 
 
 class ProductsFormModelss(ModelForm):
-
     class Meta:
         model = Products
-        fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
-                  'color', 'seo_attributes', 'is_belarus', 'is_active', 'is_new', 'caption', 'modelss', 'articul', 'pre_barcode',
-                  'size', 'count_num', 'main_photo_path', 'modelss_name', 'dirname_img', 'identifier', 'barcode', 'is_new_date_end']
+        fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price',
+                  'description',
+                  'color', 'seo_attributes', 'is_belarus', 'is_active', 'is_new', 'caption', 'modelss', 'articul',
+                  'pre_barcode',
+                  'size', 'count_num', 'main_photo_path', 'modelss_name', 'dirname_img', 'identifier', 'barcode',
+                  'is_new_date_end']
 
 
 class ProductsAddFormModelss(ModelForm):
-
     class Meta:
         model = Products
-        fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price', 'description',
-                  'color', 'seo_attributes', 'is_belarus', 'is_active', 'is_new', 'caption', 'modelss', 'articul', 'pre_barcode',
-                  'size', 'count_num', 'main_photo_path', 'modelss_name', 'dirname_img', 'identifier', 'barcode', 'discount', 'is_new_date_end']
+        fields = ['maincategory', 'nameproduct', 'brends', 'season_id', 'price', 'wholesale_price', 'purshase_price',
+                  'description',
+                  'color', 'seo_attributes', 'is_belarus', 'is_active', 'is_new', 'caption', 'modelss', 'articul',
+                  'pre_barcode',
+                  'size', 'count_num', 'main_photo_path', 'modelss_name', 'dirname_img', 'identifier', 'barcode',
+                  'discount', 'is_new_date_end']
 
 
 """"--------------SizeCount Model--------------------------"""
@@ -793,6 +818,7 @@ class SizeCount(models.Model):
     class Meta:
         ordering = ['size']
 
+
 """------------------Images Model---------------------------"""
 
 
@@ -801,28 +827,27 @@ def custom_directory_paths(instance, filename):
 
 
 class Image(models.Model):
-
     modelss = models.ForeignKey(Modelss, on_delete=models.CASCADE, related_name='image')
     # img_path = models.CharField(max_length=250, blank=True)
     img_path = models.ImageField(blank=True, upload_to=custom_directory_paths)
 
     def save(self):
-        #from PIL import Image as Ima
+        # from PIL import Image as Ima
         from io import BytesIO
         from django.core.files.uploadedfile import InMemoryUploadedFile
         import sys
-            # Opening the uploaded image
+        # Opening the uploaded image
         im = Ima.open(self.img_path)
         output = BytesIO()
-            # Resize/modify the image
+        # Resize/modify the image
         im = im.resize((500, 500))
-            # after modifications, save it to the output
+        # after modifications, save it to the output
         im.save(output, format='JPEG', quality=100)
         output.seek(0)
 
-            # change the main_imgfield value to be the newley modifed image value - png
+        # change the main_imgfield value to be the newley modifed image value - png
         self.img_path = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.img_path.name.split('.')[0],
-                                                    'image/jpg', sys.getsizeof(output), None)
+                                             'image/jpg', sys.getsizeof(output), None)
         super(Image, self).save()
 
     def get_absolute_url(self):
